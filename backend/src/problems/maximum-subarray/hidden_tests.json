@@ -1,0 +1,20 @@
+{
+  "tests": [
+    {
+      "input": "nums = [-1]",
+      "expectedOutput": {
+        "javascript": "-1",
+        "python": "-1",
+        "java": "-1"
+      }
+    },
+    {
+      "input": "nums = [-2,-1]",
+      "expectedOutput": {
+        "javascript": "-1",
+        "python": "-1",
+        "java": "-1"
+      }
+    }
+  ]
+}

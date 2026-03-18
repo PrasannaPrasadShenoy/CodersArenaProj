@@ -1,0 +1,20 @@
+{
+  "tests": [
+    {
+      "input": "nums = [1,2,3,4,5], target = 9",
+      "expectedOutput": {
+        "javascript": "[3,4]",
+        "python": "[3, 4]",
+        "java": "[3, 4]"
+      }
+    },
+    {
+      "input": "nums = [0,4,3,0], target = 0",
+      "expectedOutput": {
+        "javascript": "[0,3]",
+        "python": "[0, 3]",
+        "java": "[0, 3]"
+      }
+    }
+  ]
+}
