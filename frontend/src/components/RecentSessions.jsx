@@ -49,15 +49,24 @@ function RecentSessions({ sessions, isLoading }) {
                       <Code2 className="w-6 h-6 text-white" />
                     </div>
                     <div className="flex-1 min-w-0">
-                      <h3 className="font-bold text-base mb-1 truncate">{session.problem}</h3>
-                      <span
-                        className={`badge badge-sm ${getDifficultyBadgeClass(session.difficulty)}`}
-                      >
-                        {session.difficulty
-                          ? session.difficulty.slice(0, 1).toUpperCase() +
-                            session.difficulty.slice(1)
-                          : ""}
-                      </span>
+                      {session.sessionType === "discussion" ? (
+                        <>
+                          <h3 className="font-bold text-base mb-1 truncate">{session.topic || "Discussion"}</h3>
+                          <span className="badge badge-sm badge-primary">Discussion</span>
+                        </>
+                      ) : (
+                        <>
+                          <h3 className="font-bold text-base mb-1 truncate">{session.problem}</h3>
+                          <span
+                            className={`badge badge-sm ${getDifficultyBadgeClass(session.difficulty)}`}
+                          >
+                            {session.difficulty
+                              ? session.difficulty.slice(0, 1).toUpperCase() +
+                                session.difficulty.slice(1)
+                              : ""}
+                          </span>
+                        </>
+                      )}
                     </div>
                   </div>
 
@@ -73,8 +82,10 @@ function RecentSessions({ sessions, isLoading }) {
                     <div className="flex items-center gap-2">
                       <Users className="w-4 h-4" />
                       <span>
-                        {session.participant ? "2" : "1"} participant
-                        {session.participant ? "s" : ""}
+                        {(() => {
+                          const total = 1 + Number(!!session.participant) + Number(!!session.participant2);
+                          return `${total} member${total === 1 ? "" : "s"}`;
+                        })()}
                       </span>
                     </div>
                   </div>

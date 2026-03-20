@@ -38,6 +38,9 @@ function ActiveSessions({ sessions, isLoading, isUserInSession }) {
             </div>
           ) : sessions.length > 0 ? (
             sessions.map((session) => (
+              // Coding sessions: host + 1 participant (max 2 total)
+              // Discussion sessions: host + 2 participants (max 3 total)
+              // We store participant1 in `session.participant` and participant2 in `session.participant2`.
               <div
                 key={session._id}
                 className="card bg-base-200 border-2 border-base-300 hover:border-primary/50"
@@ -51,17 +54,24 @@ function ActiveSessions({ sessions, isLoading, isUserInSession }) {
                     </div>
 
                     <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-2 mb-2">
-                        <h3 className="font-bold text-lg truncate">{session.problem}</h3>
-                        <span
-                          className={`badge badge-sm ${getDifficultyBadgeClass(
-                            session.difficulty
-                          )}`}
-                        >
-                          {session.difficulty.slice(0, 1).toUpperCase() +
-                            session.difficulty.slice(1)}
-                        </span>
-                      </div>
+                      {session.sessionType === "discussion" ? (
+                        <div className="flex items-center gap-2 mb-2">
+                          <h3 className="font-bold text-lg truncate">{session.topic || "Discussion"}</h3>
+                          <span className="badge badge-sm badge-primary">Discussion</span>
+                        </div>
+                      ) : (
+                        <div className="flex items-center gap-2 mb-2">
+                          <h3 className="font-bold text-lg truncate">{session.problem}</h3>
+                          <span
+                            className={`badge badge-sm ${getDifficultyBadgeClass(
+                              session.difficulty
+                            )}`}
+                          >
+                            {session.difficulty.slice(0, 1).toUpperCase() +
+                              session.difficulty.slice(1)}
+                          </span>
+                        </div>
+                      )}
 
                       <div className="flex items-center gap-4 text-sm opacity-80">
                         <div className="flex items-center gap-1.5">
@@ -70,25 +80,49 @@ function ActiveSessions({ sessions, isLoading, isUserInSession }) {
                         </div>
                         <div className="flex items-center gap-1.5">
                           <UsersIcon className="size-4" />
-                          <span className="text-xs">{session.participant ? "2/2" : "1/2"}</span>
+                          {(() => {
+                            const p1 = !!session.participant;
+                            const p2 = !!session.participant2;
+                            const total = 1 + Number(p1) + Number(p2);
+                            const maxTotal = session.sessionType === "discussion" ? 3 : 2;
+                            return <span className="text-xs">{`${total}/${maxTotal}`}</span>;
+                          })()}
                         </div>
-                        {session.participant && !isUserInSession(session) ? (
-                          <span className="badge badge-error badge-sm">FULL</span>
-                        ) : (
-                          <span className="badge badge-success badge-sm">OPEN</span>
-                        )}
+                        {(() => {
+                          const p1 = !!session.participant;
+                          const p2 = !!session.participant2;
+                          const total = 1 + Number(p1) + Number(p2);
+                          const maxTotal = session.sessionType === "discussion" ? 3 : 2;
+                          const isFull = total >= maxTotal;
+                          return isFull && !isUserInSession(session) ? (
+                            <span className="badge badge-error badge-sm">FULL</span>
+                          ) : (
+                            <span className="badge badge-success badge-sm">OPEN</span>
+                          );
+                        })()}
                       </div>
                     </div>
                   </div>
 
-                  {session.participant && !isUserInSession(session) ? (
-                    <button className="btn btn-disabled btn-sm">Full</button>
-                  ) : (
-                    <Link to={`/session/${session._id}`} className="btn btn-primary btn-sm gap-2">
-                      {isUserInSession(session) ? "Rejoin" : "Join"}
-                      <ArrowRightIcon className="size-4" />
-                    </Link>
-                  )}
+                  {(() => {
+                    const p1 = !!session.participant;
+                    const p2 = !!session.participant2;
+                    const total = 1 + Number(p1) + Number(p2);
+                    const maxTotal = session.sessionType === "discussion" ? 3 : 2;
+                    const isFull = total >= maxTotal;
+                    if (isFull && !isUserInSession(session)) {
+                      return <button className="btn btn-disabled btn-sm">Full</button>;
+                    }
+                    return (
+                      <Link
+                        to={`/session/${session._id}`}
+                        className="btn btn-primary btn-sm gap-2"
+                      >
+                        {isUserInSession(session) ? "Rejoin" : "Join"}
+                        <ArrowRightIcon className="size-4" />
+                      </Link>
+                    );
+                  })()}
                 </div>
               </div>
             ))

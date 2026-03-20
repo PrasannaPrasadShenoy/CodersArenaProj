@@ -47,6 +47,24 @@ function Navbar() {
 
           {/* DASHBORD PAGE LINK */}
           <Link
+            to={"/excalidraw"}
+            className={`px-4 py-2.5 rounded-lg transition-all duration-200 
+              ${
+                isActive("/excalidraw")
+                  ? "bg-primary text-primary-content"
+                  : "hover:bg-base-200 text-base-content/70 hover:text-base-content"
+              }
+              
+              `}
+          >
+            <div className="flex items-center gap-x-2.5">
+              <SparklesIcon className="size-4" />
+              <span className="font-medium hidden sm:inline">Excalidraw</span>
+            </div>
+          </Link>
+
+          {/* DASHBORD PAGE LINK */}
+          <Link
             to={"/dashboard"}
             className={`px-4 py-2.5 rounded-lg transition-all duration-200 
               ${

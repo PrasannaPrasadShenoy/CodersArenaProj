@@ -31,10 +31,11 @@ function CreateSessionModal({
               value={roomConfig.problem}
               onChange={(e) => {
                 const selectedProblem = problemsList.find((p) => p.title === e.target.value);
-                setRoomConfig({
+                setRoomConfig((prev) => ({
+                  ...prev,
                   difficulty: selectedProblem.difficulty,
                   problem: e.target.value,
-                });
+                }));
               }}
             >
               <option value="" disabled>
