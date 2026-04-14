@@ -1,0 +1,12 @@
+{
+  "tests": [
+    {
+      "name": "Output shape",
+      "code": "\nimport torch, torch.nn as nn\ntorch.manual_seed(0)\nblock = {fn}(d_model=64, num_heads=4)\nassert isinstance(block, nn.Module), 'GPT2Block should inherit from nn.Module'\nout = block(torch.randn(2, 8, 64))\nassert out.shape == (2, 8, 64), f'Shape mismatch: {out.shape}'\n"
+    },
+    {
+      "name": "Has LayerNorm (pre-norm architecture)",
+      "code": "\nimport torch, torch.nn as nn\nblock = {fn}(d_model=32, num_heads=4)\nassert hasattr(block, 'ln1') and isinstance(block.ln1, nn.LayerNorm), 'Need self.ln1 = nn.LayerNorm'\nassert hasattr(block, 'ln2') and isinstance(block.ln2, nn.LayerNorm), 'Need self.ln2 = nn.LayerNorm'\n"
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "id": "lora",
+  "title": "LoRA (Low-Rank Adaptation)",
+  "difficulty": "Medium",
+  "track": "ml",
+  "category": "TorchCode",
+  "functionName": "LoRALinear",
+  "hint": "Freeze base linear. Add lora_A (rank, in) and lora_B (out, rank) as Parameters. B init to zeros. output = linear(x) + (x @ A^T @ B^T) * (alpha/rank).",
+  "description": {
+    "text": "Implement LoRALinear using PyTorch primitives.",
+    "notes": []
+  },
+  "examples": [],
+  "constraints": [
+    "Use PyTorch only unless task says otherwise."
+  ]
+}

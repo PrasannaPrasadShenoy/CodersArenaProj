@@ -1,0 +1,17 @@
+{
+  "id": "moe",
+  "title": "Mixture of Experts (MoE)",
+  "difficulty": "Hard",
+  "track": "ml",
+  "category": "TorchCode",
+  "functionName": "MixtureOfExperts",
+  "hint": "Router: Linear(d, num_experts) -> topk -> softmax. Each expert: Linear->ReLU->Linear. Weighted sum of top-k expert outputs per token.",
+  "description": {
+    "text": "Implement MixtureOfExperts using PyTorch primitives.",
+    "notes": []
+  },
+  "examples": [],
+  "constraints": [
+    "Use PyTorch only unless task says otherwise."
+  ]
+}

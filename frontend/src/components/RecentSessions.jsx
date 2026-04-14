@@ -57,13 +57,16 @@ function RecentSessions({ sessions, isLoading }) {
                       ) : (
                         <>
                           <h3 className="font-bold text-base mb-1 truncate">{session.problem}</h3>
+                          <span className="badge badge-sm badge-outline uppercase mr-2">
+                            {session.problemTrack || "dsa"}
+                          </span>
                           <span
                             className={`badge badge-sm ${getDifficultyBadgeClass(session.difficulty)}`}
                           >
                             {session.difficulty
                               ? session.difficulty.slice(0, 1).toUpperCase() +
                                 session.difficulty.slice(1)
-                              : ""}
+                              : "—"}
                           </span>
                         </>
                       )}

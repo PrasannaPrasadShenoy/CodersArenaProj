@@ -1,0 +1,22 @@
+{
+  "id": "design-add-and-search-words-data-structure",
+  "title": "Design Add and Search Words Data Structure",
+  "difficulty": "Medium",
+  "track": "dsa",
+  "category": "Tries",
+  "description": {
+    "text": "Design a data structure that supports adding new words and finding if a string matches any previously added string.\n\nImplement the WordDictionary class:\n\n- WordDictionary() Initializes the object.\n- void addWord(word) Adds word to the data structure, it can be matched later.\n- bool search(word) Returns true if there is any string in the data structure that matches word or false otherwise. word may contain dots '.' where dots can be matched with any letter.",
+    "notes": [
+      "Source: https://neetcode.io/problems/design-word-search-data-structure?list=neetcode150",
+      "Imported automatically from third-party problem datasets."
+    ]
+  },
+  "examples": [],
+  "constraints": [
+    "`1 <= word.length <= 25`",
+    "`word` in `addWord` consists of lowercase English letters.",
+    "`word` in `search` consist of `'.'` or lowercase English letters.",
+    "There will be at most `2` dots in `word` for `search` queries.",
+    "At most `10^4` calls will be made to `addWord` and `search`."
+  ]
+}

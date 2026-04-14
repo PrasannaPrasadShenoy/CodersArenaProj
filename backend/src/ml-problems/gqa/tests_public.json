@@ -1,0 +1,12 @@
+{
+  "tests": [
+    {
+      "name": "Output shape",
+      "code": "\nimport torch\ntorch.manual_seed(0)\ngqa = {fn}(d_model=32, num_heads=8, num_kv_heads=2)\nout = gqa.forward(torch.randn(2, 6, 32))\nassert out.shape == (2, 6, 32), f'Shape mismatch: {out.shape}'\n"
+    },
+    {
+      "name": "nn.Linear with correct shapes",
+      "code": "\nimport torch, torch.nn as nn\ngqa = {fn}(d_model=32, num_heads=8, num_kv_heads=2)\nd_k = 32 // 8\nassert isinstance(gqa.W_q, nn.Linear) and gqa.W_q.weight.shape == (32, 32), f'W_q wrong'\nassert isinstance(gqa.W_k, nn.Linear) and gqa.W_k.weight.shape == (2 * d_k, 32), f'W_k shape: {gqa.W_k.weight.shape}'\nassert isinstance(gqa.W_v, nn.Linear) and gqa.W_v.weight.shape == (2 * d_k, 32), f'W_v shape: {gqa.W_v.weight.shape}'\nassert isinstance(gqa.W_o, nn.Linear), 'W_o should be nn.Linear'\n"
+    }
+  ]
+}

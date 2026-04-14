@@ -1,0 +1,12 @@
+{
+  "tests": [
+    {
+      "name": "First position only sees itself",
+      "code": "\nimport torch\ntorch.manual_seed(0)\nQ = torch.randn(1, 4, 8)\nK = torch.randn(1, 4, 8)\nV = torch.randn(1, 4, 8)\nout = {fn}(Q, K, V)\nassert torch.allclose(out[:, 0], V[:, 0], atol=1e-5), 'Position 0 should output V[0]'\n"
+    },
+    {
+      "name": "Gradient flow",
+      "code": "\nimport torch\nQ = torch.randn(2, 4, 8, requires_grad=True)\nK = torch.randn(2, 4, 8, requires_grad=True)\nV = torch.randn(2, 4, 8, requires_grad=True)\nout = {fn}(Q, K, V)\nout.sum().backward()\nassert Q.grad is not None and K.grad is not None and V.grad is not None, 'Missing gradients'\n"
+    }
+  ]
+}

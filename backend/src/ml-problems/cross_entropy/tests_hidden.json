@@ -1,0 +1,12 @@
+{
+  "tests": [
+    {
+      "name": "Scalar output",
+      "code": "\nimport torch\nout = {fn}(torch.randn(8, 5), torch.randint(0, 5, (8,)))\nassert out.dim() == 0, 'Loss must be a scalar'\n"
+    },
+    {
+      "name": "Gradient flow",
+      "code": "\nimport torch\nlogits = torch.randn(8, 5, requires_grad=True)\ntargets = torch.randint(0, 5, (8,))\n{fn}(logits, targets).backward()\nassert logits.grad is not None, 'logits.grad is None'\n"
+    }
+  ]
+}

@@ -1,0 +1,76 @@
+{
+  "tests": [
+    {
+      "input": "args = [[[\"a\"]],[\"b\"]]",
+      "expectedOutput": {
+        "javascript": "[]",
+        "python": "[]",
+        "java": "[]"
+      }
+    },
+    {
+      "input": "args = [[[\"a\",\"a\"],[\"a\",\"a\"]],[\"aaaa\"]]",
+      "expectedOutput": {
+        "javascript": "[\"aaaa\"]",
+        "python": "[\"aaaa\"]",
+        "java": "[\"aaaa\"]"
+      }
+    },
+    {
+      "input": "args = [[[\"a\",\"a\"],[\"a\",\"a\"]],[\"aa\"]]",
+      "expectedOutput": {
+        "javascript": "[\"aa\"]",
+        "python": "[\"aa\"]",
+        "java": "[\"aa\"]"
+      }
+    },
+    {
+      "input": "args = [[[\"a\",\"b\"],[\"c\",\"d\"]],[\"ab\",\"cd\",\"ac\",\"bd\"]]",
+      "expectedOutput": {
+        "javascript": "[\"ab\",\"cd\",\"ac\",\"bd\"]",
+        "python": "[\"ab\", \"cd\", \"ac\", \"bd\"]",
+        "java": "[\"ab\", \"cd\", \"ac\", \"bd\"]"
+      }
+    },
+    {
+      "input": "args = [[[\"a\",\"b\"],[\"c\",\"d\"]],[\"abcd\"]]",
+      "expectedOutput": {
+        "javascript": "[]",
+        "python": "[]",
+        "java": "[]"
+      }
+    },
+    {
+      "input": "args = [[[\"o\",\"a\",\"a\",\"n\"],[\"e\",\"t\",\"a\",\"e\"],[\"i\",\"h\",\"k\",\"r\"],[\"i\",\"f\",\"l\",\"v\"]],[\"oath\",\"pea\",\"eat\",\"rain\",\"oathf\"]]",
+      "expectedOutput": {
+        "javascript": "[\"oath\",\"oathf\",\"eat\"]",
+        "python": "[\"oath\", \"oathf\", \"eat\"]",
+        "java": "[\"oath\", \"oathf\", \"eat\"]"
+      }
+    },
+    {
+      "input": "args = [[[\"a\",\"b\",\"c\"],[\"a\",\"e\",\"d\"],[\"a\",\"f\",\"g\"]],[\"abcdefg\",\"gfedcbaaa\",\"eaabcdgfa\",\"befa\",\"dgc\",\"ade\"]]",
+      "expectedOutput": {
+        "javascript": "[\"abcdefg\",\"befa\",\"eaabcdgfa\",\"gfedcbaaa\"]",
+        "python": "[\"abcdefg\", \"befa\", \"eaabcdgfa\", \"gfedcbaaa\"]",
+        "java": "[\"abcdefg\", \"befa\", \"eaabcdgfa\", \"gfedcbaaa\"]"
+      }
+    },
+    {
+      "input": "args = [[[\"a\",\"b\"],[\"c\",\"d\"]],[\"abdc\"]]",
+      "expectedOutput": {
+        "javascript": "[\"abdc\"]",
+        "python": "[\"abdc\"]",
+        "java": "[\"abdc\"]"
+      }
+    },
+    {
+      "input": "args = [[[\"a\",\"a\",\"a\",\"a\",\"a\",\"a\",\"a\",\"a\",\"a\",\"a\",\"a\",\"a\"],[\"a\",\"a\",\"a\",\"a\",\"a\",\"a\",\"a\",\"a\",\"a\",\"a\",\"a\",\"a\"],[\"a\",\"a\",\"a\",\"a\",\"a\",\"a\",\"a\",\"a\",\"a\",\"a\",\"a\",\"a\"],[\"a\",\"a\",\"a\",\"a\",\"a\",\"a\",\"a\",\"a\",\"a\",\"a\",\"a\",\"a\"],[\"a\",\"a\",\"a\",\"a\",\"a\",\"a\",\"a\",\"a\",\"a\",\"a\",\"a\",\"a\"],[\"a\",\"a\",\"a\",\"a\",\"a\",\"a\",\"a\",\"a\",\"a\",\"a\",\"a\",\"a\"],[\"a\",\"a\",\"a\",\"a\",\"a\",\"a\",\"a\",\"a\",\"a\",\"a\",\"a\",\"a\"],[\"a\",\"a\",\"a\",\"a\",\"a\",\"a\",\"a\",\"a\",\"a\",\"a\",\"a\",\"a\"],[\"a\",\"a\",\"a\",\"a\",\"a\",\"a\",\"a\",\"a\",\"a\",\"a\",\"a\",\"a\"],[\"a\",\"a\",\"a\",\"a\",\"a\",\"a\",\"a\",\"a\",\"a\",\"a\",\"a\",\"a\"],[\"a\",\"a\",\"a\",\"a\",\"a\",\"a\",\"a\",\"a\",\"a\",\"a\",\"a\",\"a\"],[\"a\",\"a\",\"a\",\"a\",\"a\",\"a\",\"a\",\"a\",\"a\",\"a\",\"a\",\"a\"]],[\"a\",\"aa\",\"aaa\",\"aaaa\",\"aaaaa\",\"aaaaaa\",\"aaaaaaa\",\"aaaaaaaa\",\"aaaaaaaaa\",\"aaaaaaaaaa\"]]",
+      "expectedOutput": {
+        "javascript": "[\"a\",\"aa\",\"aaa\",\"aaaa\",\"aaaaa\",\"aaaaaa\",\"aaaaaaa\",\"aaaaaaaa\",\"aaaaaaaaa\",\"aaaaaaaaaa\"]",
+        "python": "[\"a\", \"aa\", \"aaa\", \"aaaa\", \"aaaaa\", \"aaaaaa\", \"aaaaaaa\", \"aaaaaaaa\", \"aaaaaaaaa\", \"aaaaaaaaaa\"]",
+        "java": "[\"a\", \"aa\", \"aaa\", \"aaaa\", \"aaaaa\", \"aaaaaa\", \"aaaaaaa\", \"aaaaaaaa\", \"aaaaaaaaa\", \"aaaaaaaaaa\"]"
+      }
+    }
+  ]
+}

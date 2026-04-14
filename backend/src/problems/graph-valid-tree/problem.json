@@ -1,0 +1,34 @@
+{
+  "id": "graph-valid-tree",
+  "title": "Graph Valid Tree",
+  "difficulty": "Medium",
+  "track": "dsa",
+  "category": "Graphs",
+  "description": {
+    "text": "Given n nodes labeled from 0 to n-1 and a list of undirected edges (each edge is a pair of nodes), write a function to check whether these edges make up a valid tree.",
+    "notes": [
+      "Source: https://neetcode.io/problems/valid-tree?list=neetcode150",
+      "Imported automatically from third-party problem datasets."
+    ]
+  },
+  "examples": [
+    {
+      "input": "n = 5, and edges = [[0,1], [0,2], [0,3], [1,4]]",
+      "output": "true",
+      "explanation": ""
+    },
+    {
+      "input": "n = 5, and edges = [[0,1], [1,2], [2,3], [1,3], [1,4]]",
+      "output": "false",
+      "explanation": ""
+    }
+  ],
+  "constraints": [
+    "0 <= n <= 2000",
+    "0 <= edges.length <= 5000",
+    "edges[i].length == 2",
+    "0 <= ai, bi < n",
+    "ai != bi",
+    "There are no self-loops or repeated edges."
+  ]
+}

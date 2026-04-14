@@ -1,0 +1,16 @@
+{
+  "id": "subsets-ii",
+  "title": "Subsets II",
+  "difficulty": "Medium",
+  "track": "dsa",
+  "category": "Backtracking",
+  "description": {
+    "text": "Solve Subsets II.",
+    "notes": [
+      "Source: https://neetcode.io/problems/subsets-ii?list=neetcode150",
+      "Imported automatically from third-party problem datasets."
+    ]
+  },
+  "examples": [],
+  "constraints": []
+}

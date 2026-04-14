@@ -1,0 +1,30 @@
+{
+  "id": "permutation-in-string",
+  "title": "Permutation in String",
+  "difficulty": "Medium",
+  "track": "dsa",
+  "category": "Sliding Window",
+  "description": {
+    "text": "Given two strings s1 and s2, return true if s2 contains a permutation of s1, or false otherwise.\n\nIn other words, return true if one of s1's permutations is the substring of s2.",
+    "notes": [
+      "Source: https://neetcode.io/problems/permutation-string?list=neetcode150",
+      "Imported automatically from third-party problem datasets."
+    ]
+  },
+  "examples": [
+    {
+      "input": "s1 = \"ab\", s2 = \"eidbaooo\"",
+      "output": "true",
+      "explanation": ""
+    },
+    {
+      "input": "s1 = \"ab\", s2 = \"eidboaoo\"",
+      "output": "false",
+      "explanation": ""
+    }
+  ],
+  "constraints": [
+    "1 <= s1.length, s2.length <= 10^4",
+    "s1 and s2 consist of lowercase English letters."
+  ]
+}

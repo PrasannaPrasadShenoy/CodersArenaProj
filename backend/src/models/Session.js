@@ -16,6 +16,15 @@ const sessionSchema = new mongoose.Schema(
       type: String,
       default: "",
     },
+    problemId: {
+      type: String,
+      default: "",
+    },
+    problemTrack: {
+      type: String,
+      enum: ["dsa", "ml"],
+      default: "dsa",
+    },
     difficulty: {
       type: String,
       enum: ["easy", "medium", "hard"],

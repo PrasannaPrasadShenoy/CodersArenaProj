@@ -1,0 +1,25 @@
+{
+  "id": "relu",
+  "title": "Implement ReLU",
+  "difficulty": "Easy",
+  "track": "ml",
+  "category": "ML Fundamentals",
+  "functionName": "relu",
+  "hint": "ReLU(x) = max(0, x). Think about element-wise comparison with zero.",
+  "description": {
+    "text": "Implement the ReLU (rectified linear unit) activation: ReLU(x) = max(0, x) element-wise. Use basic PyTorch operations so gradients can flow during training.",
+    "notes": []
+  },
+  "examples": [
+    {
+      "input": "x = tensor([-2., -1., 0., 1., 2.])",
+      "output": "tensor([0., 0., 0., 1., 2.])",
+      "explanation": "Negative values become 0; nonnegative values are unchanged."
+    }
+  ],
+  "constraints": [
+    "Return a tensor with the same shape as x.",
+    "Do not use torch.relu, F.relu, or torch.clamp.",
+    "The implementation must support autograd."
+  ]
+}

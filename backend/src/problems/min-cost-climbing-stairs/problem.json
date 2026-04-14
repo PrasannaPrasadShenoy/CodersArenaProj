@@ -1,0 +1,16 @@
+{
+  "id": "min-cost-climbing-stairs",
+  "title": "Min Cost Climbing Stairs",
+  "difficulty": "Easy",
+  "track": "dsa",
+  "category": "1-D Dynamic Programming",
+  "description": {
+    "text": "Solve Min Cost Climbing Stairs.",
+    "notes": [
+      "Source: https://neetcode.io/problems/min-cost-climbing-stairs?list=neetcode150",
+      "Imported automatically from third-party problem datasets."
+    ]
+  },
+  "examples": [],
+  "constraints": []
+}

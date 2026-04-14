@@ -1,0 +1,12 @@
+{
+  "tests": [
+    {
+      "name": "Beam finds better path than greedy",
+      "code": "\nimport torch\ndef tricky(tokens):\n    lp = torch.full((6,), -100.0)\n    if len(tokens) == 1:\n        lp[1] = -1.0; lp[2] = -0.5\n    elif tokens[-1] == 1:\n        lp[5] = 0.0\n    elif tokens[-1] == 2:\n        lp[5] = -10.0\n    else:\n        lp[5] = 0.0\n    return lp\nseq = {fn}(tricky, start_token=0, max_len=5, beam_width=2, eos_token=5)\nassert seq == [0, 1, 5], f'Beam should find [0,1,5], got {seq}'\n"
+    },
+    {
+      "name": "Stops at eos",
+      "code": "\nimport torch\ndef eos_fn(tokens):\n    lp = torch.zeros(4); lp[3] = 10.0; return lp\nseq = {fn}(eos_fn, start_token=0, max_len=100, beam_width=2, eos_token=3)\nassert seq[-1] == 3 and len(seq) == 2, f'Should be [0,3], got {seq}'\n"
+    }
+  ]
+}

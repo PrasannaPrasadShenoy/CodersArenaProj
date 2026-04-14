@@ -1,0 +1,33 @@
+{
+  "tests": [
+    {
+      "input": "args = [[[0,30],[5,10],[15,20]]]",
+      "expectedOutput": {
+        "javascript": "false",
+        "python": "False",
+        "java": "false"
+      }
+    },
+    {
+      "input": "args = [[[7,10],[2,4]]]",
+      "expectedOutput": {
+        "javascript": "true",
+        "python": "True",
+        "java": "true"
+      }
+    },
+    {
+      "input": "args = [[]]",
+      "expectedOutput": {
+        "javascript": "true",
+        "python": "True",
+        "java": "true"
+      }
+    }
+  ],
+  "combinedExpectedOutput": {
+    "javascript": "false\ntrue\ntrue",
+    "python": "False\nTrue\nTrue",
+    "java": "false\ntrue\ntrue"
+  }
+}

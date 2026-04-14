@@ -1,0 +1,16 @@
+{
+  "tests": [
+    {
+      "name": "MLP has 4x expansion with GELU",
+      "code": "\nimport torch, torch.nn as nn\nblock = {fn}(d_model=32, num_heads=4)\nassert hasattr(block, 'mlp'), 'Need self.mlp'\nlinears = [m for m in block.mlp.modules() if isinstance(m, nn.Linear)]\nassert len(linears) >= 2, f'MLP needs >= 2 Linear layers, got {len(linears)}'\nassert linears[0].weight.shape == (128, 32), f'MLP first layer: {linears[0].weight.shape}, expected (128, 32)'\nassert linears[-1].weight.shape == (32, 128), f'MLP last layer: {linears[-1].weight.shape}, expected (32, 128)'\n"
+    },
+    {
+      "name": "Causal masking â€” future doesn't affect past",
+      "code": "\nimport torch\ntorch.manual_seed(0)\nblock = {fn}(d_model=32, num_heads=4)\nx = torch.randn(1, 8, 32)\nout1 = block(x)\nx2 = x.clone()\nx2[:, 4:] = torch.randn(1, 4, 32)\nout2 = block(x2)\nassert torch.allclose(out1[:, :4], out2[:, :4], atol=1e-5), 'Future tokens affected past â€” not causal'\n"
+    },
+    {
+      "name": "Gradient flow to all parameters",
+      "code": "\nimport torch\ntorch.manual_seed(0)\nblock = {fn}(d_model=32, num_heads=4)\nx = torch.randn(1, 4, 32, requires_grad=True)\nblock(x).sum().backward()\nassert x.grad is not None, 'x.grad is None'\nn_total = sum(1 for p in block.parameters())\nn_grad = sum(1 for p in block.parameters() if p.grad is not None)\nassert n_grad == n_total, f'Only {n_grad}/{n_total} params got gradients'\n"
+    }
+  ]
+}

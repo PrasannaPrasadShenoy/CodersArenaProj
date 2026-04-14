@@ -1,0 +1,25 @@
+{
+  "id": "cross_entropy",
+  "title": "Cross-Entropy Loss",
+  "difficulty": "Easy",
+  "track": "ml",
+  "category": "ML Fundamentals",
+  "functionName": "cross_entropy_loss",
+  "hint": "log_probs = logits - logsumexp(logits, dim=-1, keepdim=True). Loss = -log_probs[arange(B), targets].mean(). Subtract max for stability (logsumexp handles this).",
+  "description": {
+    "text": "Implement cross-entropy loss for multi-class classification from logits. For each row, CE = -log(exp(logits[y]) / sum_c exp(logits[c])). Return the mean over the batch.",
+    "notes": []
+  },
+  "examples": [
+    {
+      "input": "logits = [[2.0, 0.5], [0.1, 1.0]]; targets = [0, 1]",
+      "output": "Scalar loss ≈ negative mean of log-softmax at correct class (use log-sum-exp for stability).",
+      "explanation": "Apply the log-sum-exp trick so large logits do not overflow."
+    }
+  ],
+  "constraints": [
+    "Return a scalar tensor (mean over batch).",
+    "Numerically stable implementation required (log-sum-exp).",
+    "Do not use F.cross_entropy or nn.CrossEntropyLoss."
+  ]
+}

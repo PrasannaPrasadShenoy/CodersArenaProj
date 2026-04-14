@@ -1,5 +1,5 @@
 import Editor from "@monaco-editor/react";
-import { Loader2Icon, PlayIcon } from "lucide-react";
+import { Loader2Icon, PlayIcon, SendIcon } from "lucide-react";
 import { LANGUAGE_CONFIG } from "../data/problems";
 
 function CodeEditorPanel({
@@ -9,7 +9,17 @@ function CodeEditorPanel({
   onLanguageChange,
   onCodeChange,
   onRunCode,
+  languageOptions,
+  disableLanguageSelect = false,
+  actionLabel = "Run Code",
+  runningLabel = "Running...",
+  secondaryActionLabel,
+  secondaryRunningLabel = "Submitting...",
+  onSecondaryAction,
+  isSecondaryRunning = false,
 }) {
+  const options = languageOptions || Object.keys(LANGUAGE_CONFIG);
+
   return (
     <div className="h-full bg-base-300 flex flex-col">
       <div className="flex items-center justify-between px-4 py-3 bg-base-100 border-t border-base-300">
@@ -19,28 +29,57 @@ function CodeEditorPanel({
             alt={LANGUAGE_CONFIG[selectedLanguage].name}
             className="size-6"
           />
-          <select className="select select-sm" value={selectedLanguage} onChange={onLanguageChange}>
-            {Object.entries(LANGUAGE_CONFIG).map(([key, lang]) => (
-              <option key={key} value={key}>
-                {lang.name}
-              </option>
-            ))}
+          <select
+            className="select select-sm"
+            value={selectedLanguage}
+            onChange={onLanguageChange}
+            disabled={disableLanguageSelect}
+          >
+            {options
+              .filter((key) => !!LANGUAGE_CONFIG[key])
+              .map((key) => (
+                <option key={key} value={key}>
+                  {LANGUAGE_CONFIG[key].name}
+                </option>
+              ))}
           </select>
         </div>
 
-        <button className="btn btn-primary btn-sm gap-2" disabled={isRunning} onClick={onRunCode}>
-          {isRunning ? (
-            <>
-              <Loader2Icon className="size-4 animate-spin" />
-              Running...
-            </>
-          ) : (
-            <>
-              <PlayIcon className="size-4" />
-              Run Code
-            </>
-          )}
-        </button>
+        <div className="flex items-center gap-2">
+          {secondaryActionLabel && onSecondaryAction ? (
+            <button
+              type="button"
+              className="btn btn-outline btn-sm gap-2"
+              disabled={isRunning || isSecondaryRunning}
+              onClick={onSecondaryAction}
+            >
+              {isSecondaryRunning ? (
+                <>
+                  <Loader2Icon className="size-4 animate-spin" />
+                  {secondaryRunningLabel}
+                </>
+              ) : (
+                <>
+                  <SendIcon className="size-4" />
+                  {secondaryActionLabel}
+                </>
+              )}
+            </button>
+          ) : null}
+          <button className="btn btn-primary btn-sm gap-2" disabled={isRunning || isSecondaryRunning} onClick={onRunCode}>
+            {isRunning ? (
+              <>
+                <Loader2Icon className="size-4 animate-spin" />
+                {runningLabel}
+              </>
+            ) : (
+              <>
+                <PlayIcon className="size-4" />
+                {actionLabel}
+              </>
+            )}
+          </button>
+        </div>
       </div>
 
       <div className="flex-1">

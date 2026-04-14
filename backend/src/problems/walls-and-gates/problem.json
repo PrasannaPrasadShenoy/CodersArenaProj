@@ -1,0 +1,16 @@
+{
+  "id": "walls-and-gates",
+  "title": "Walls And Gates",
+  "difficulty": "Medium",
+  "track": "dsa",
+  "category": "Graphs",
+  "description": {
+    "text": "Solve Walls And Gates.",
+    "notes": [
+      "Source: https://neetcode.io/problems/islands-and-treasure?list=neetcode150",
+      "Imported automatically from third-party problem datasets."
+    ]
+  },
+  "examples": [],
+  "constraints": []
+}

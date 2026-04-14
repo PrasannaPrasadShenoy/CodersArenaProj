@@ -1,0 +1,12 @@
+{
+  "tests": [
+    {
+      "name": "Output shape",
+      "code": "\nimport torch\nout = {fn}(torch.randn(2, 6, 16), torch.randn(2, 6, 16), torch.randn(2, 6, 16))\nassert out.shape == (2, 6, 16), f'Shape mismatch: {out.shape}'\n"
+    },
+    {
+      "name": "Future tokens don't affect past",
+      "code": "\nimport torch\ntorch.manual_seed(0)\nB, S, D = 1, 8, 16\nQ = torch.randn(B, S, D)\nK = torch.randn(B, S, D)\nV = torch.randn(B, S, D)\nout1 = {fn}(Q, K, V)\nK2, V2 = K.clone(), V.clone()\nK2[:, 4:] = torch.randn(B, 4, D)\nV2[:, 4:] = torch.randn(B, 4, D)\nout2 = {fn}(Q, K2, V2)\nassert torch.allclose(out1[:, :4], out2[:, :4], atol=1e-5), 'Changing future K/V affected past outputs'\n"
+    }
+  ]
+}

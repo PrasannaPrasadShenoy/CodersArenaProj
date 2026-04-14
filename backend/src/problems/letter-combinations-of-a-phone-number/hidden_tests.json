@@ -1,0 +1,76 @@
+{
+  "tests": [
+    {
+      "input": "args = [\"234\"]",
+      "expectedOutput": {
+        "javascript": "[\"adg\",\"adh\",\"adi\",\"aeg\",\"aeh\",\"aei\",\"afg\",\"afh\",\"afi\",\"bdg\",\"bdh\",\"bdi\",\"beg\",\"beh\",\"bei\",\"bfg\",\"bfh\",\"bfi\",\"cdg\",\"cdh\",\"cdi\",\"ceg\",\"ceh\",\"cei\",\"cfg\",\"cfh\",\"cfi\"]",
+        "python": "[\"adg\", \"adh\", \"adi\", \"aeg\", \"aeh\", \"aei\", \"afg\", \"afh\", \"afi\", \"bdg\", \"bdh\", \"bdi\", \"beg\", \"beh\", \"bei\", \"bfg\", \"bfh\", \"bfi\", \"cdg\", \"cdh\", \"cdi\", \"ceg\", \"ceh\", \"cei\", \"cfg\", \"cfh\", \"cfi\"]",
+        "java": "[\"adg\", \"adh\", \"adi\", \"aeg\", \"aeh\", \"aei\", \"afg\", \"afh\", \"afi\", \"bdg\", \"bdh\", \"bdi\", \"beg\", \"beh\", \"bei\", \"bfg\", \"bfh\", \"bfi\", \"cdg\", \"cdh\", \"cdi\", \"ceg\", \"ceh\", \"cei\", \"cfg\", \"cfh\", \"cfi\"]"
+      }
+    },
+    {
+      "input": "args = [\"7\"]",
+      "expectedOutput": {
+        "javascript": "[\"p\",\"q\",\"r\",\"s\"]",
+        "python": "[\"p\", \"q\", \"r\", \"s\"]",
+        "java": "[\"p\", \"q\", \"r\", \"s\"]"
+      }
+    },
+    {
+      "input": "args = [\"9\"]",
+      "expectedOutput": {
+        "javascript": "[\"w\",\"x\",\"y\",\"z\"]",
+        "python": "[\"w\", \"x\", \"y\", \"z\"]",
+        "java": "[\"w\", \"x\", \"y\", \"z\"]"
+      }
+    },
+    {
+      "input": "args = [\"79\"]",
+      "expectedOutput": {
+        "javascript": "[\"pw\",\"px\",\"py\",\"pz\",\"qw\",\"qx\",\"qy\",\"qz\",\"rw\",\"rx\",\"ry\",\"rz\",\"sw\",\"sx\",\"sy\",\"sz\"]",
+        "python": "[\"pw\", \"px\", \"py\", \"pz\", \"qw\", \"qx\", \"qy\", \"qz\", \"rw\", \"rx\", \"ry\", \"rz\", \"sw\", \"sx\", \"sy\", \"sz\"]",
+        "java": "[\"pw\", \"px\", \"py\", \"pz\", \"qw\", \"qx\", \"qy\", \"qz\", \"rw\", \"rx\", \"ry\", \"rz\", \"sw\", \"sx\", \"sy\", \"sz\"]"
+      }
+    },
+    {
+      "input": "args = [\"22\"]",
+      "expectedOutput": {
+        "javascript": "[\"aa\",\"ab\",\"ac\",\"ba\",\"bb\",\"bc\",\"ca\",\"cb\",\"cc\"]",
+        "python": "[\"aa\", \"ab\", \"ac\", \"ba\", \"bb\", \"bc\", \"ca\", \"cb\", \"cc\"]",
+        "java": "[\"aa\", \"ab\", \"ac\", \"ba\", \"bb\", \"bc\", \"ca\", \"cb\", \"cc\"]"
+      }
+    },
+    {
+      "input": "args = [\"3456\"]",
+      "expectedOutput": {
+        "javascript": "[\"dgjm\",\"dgjn\",\"dgjo\",\"dgkm\",\"dgkn\",\"dgko\",\"dglm\",\"dgln\",\"dglo\",\"dhjm\",\"dhjn\",\"dhjo\",\"dhkm\",\"dhkn\",\"dhko\",\"dhlm\",\"dhln\",\"dhlo\",\"dijm\",\"dijn\",\"dijo\",\"dikm\",\"dikn\",\"diko\",\"dilm\",\"diln\",\"dilo\",\"egjm\",\"egjn\",\"egjo\",\"egkm\",\"egkn\",\"egko\",\"eglm\",\"egln\",\"eglo\",\"ehjm\",\"ehjn\",\"ehjo\",\"ehkm\",\"ehkn\",\"ehko\",\"ehlm\",\"ehln\",\"ehlo\",\"eijm\",\"eijn\",\"eijo\",\"eikm\",\"eikn\",\"eiko\",\"eilm\",\"eiln\",\"eilo\",\"fgjm\",\"fgjn\",\"fgjo\",\"fgkm\",\"fgkn\",\"fgko\",\"fglm\",\"fgln\",\"fglo\",\"fhjm\",\"fhjn\",\"fhjo\",\"fhkm\",\"fhkn\",\"fhko\",\"fhlm\",\"fhln\",\"fhlo\",\"fijm\",\"fijn\",\"fijo\",\"fikm\",\"fikn\",\"fiko\",\"film\",\"filn\",\"filo\"]",
+        "python": "[\"dgjm\", \"dgjn\", \"dgjo\", \"dgkm\", \"dgkn\", \"dgko\", \"dglm\", \"dgln\", \"dglo\", \"dhjm\", \"dhjn\", \"dhjo\", \"dhkm\", \"dhkn\", \"dhko\", \"dhlm\", \"dhln\", \"dhlo\", \"dijm\", \"dijn\", \"dijo\", \"dikm\", \"dikn\", \"diko\", \"dilm\", \"diln\", \"dilo\", \"egjm\", \"egjn\", \"egjo\", \"egkm\", \"egkn\", \"egko\", \"eglm\", \"egln\", \"eglo\", \"ehjm\", \"ehjn\", \"ehjo\", \"ehkm\", \"ehkn\", \"ehko\", \"ehlm\", \"ehln\", \"ehlo\", \"eijm\", \"eijn\", \"eijo\", \"eikm\", \"eikn\", \"eiko\", \"eilm\", \"eiln\", \"eilo\", \"fgjm\", \"fgjn\", \"fgjo\", \"fgkm\", \"fgkn\", \"fgko\", \"fglm\", \"fgln\", \"fglo\", \"fhjm\", \"fhjn\", \"fhjo\", \"fhkm\", \"fhkn\", \"fhko\", \"fhlm\", \"fhln\", \"fhlo\", \"fijm\", \"fijn\", \"fijo\", \"fikm\", \"fikn\", \"fiko\", \"film\", \"filn\", \"filo\"]",
+        "java": "[\"dgjm\", \"dgjn\", \"dgjo\", \"dgkm\", \"dgkn\", \"dgko\", \"dglm\", \"dgln\", \"dglo\", \"dhjm\", \"dhjn\", \"dhjo\", \"dhkm\", \"dhkn\", \"dhko\", \"dhlm\", \"dhln\", \"dhlo\", \"dijm\", \"dijn\", \"dijo\", \"dikm\", \"dikn\", \"diko\", \"dilm\", \"diln\", \"dilo\", \"egjm\", \"egjn\", \"egjo\", \"egkm\", \"egkn\", \"egko\", \"eglm\", \"egln\", \"eglo\", \"ehjm\", \"ehjn\", \"ehjo\", \"ehkm\", \"ehkn\", \"ehko\", \"ehlm\", \"ehln\", \"ehlo\", \"eijm\", \"eijn\", \"eijo\", \"eikm\", \"eikn\", \"eiko\", \"eilm\", \"eiln\", \"eilo\", \"fgjm\", \"fgjn\", \"fgjo\", \"fgkm\", \"fgkn\", \"fgko\", \"fglm\", \"fgln\", \"fglo\", \"fhjm\", \"fhjn\", \"fhjo\", \"fhkm\", \"fhkn\", \"fhko\", \"fhlm\", \"fhln\", \"fhlo\", \"fijm\", \"fijn\", \"fijo\", \"fikm\", \"fikn\", \"fiko\", \"film\", \"filn\", \"filo\"]"
+      }
+    },
+    {
+      "input": "args = [\"25\"]",
+      "expectedOutput": {
+        "javascript": "[\"aj\",\"ak\",\"al\",\"bj\",\"bk\",\"bl\",\"cj\",\"ck\",\"cl\"]",
+        "python": "[\"aj\", \"ak\", \"al\", \"bj\", \"bk\", \"bl\", \"cj\", \"ck\", \"cl\"]",
+        "java": "[\"aj\", \"ak\", \"al\", \"bj\", \"bk\", \"bl\", \"cj\", \"ck\", \"cl\"]"
+      }
+    },
+    {
+      "input": "args = [\"78\"]",
+      "expectedOutput": {
+        "javascript": "[\"pt\",\"pu\",\"pv\",\"qt\",\"qu\",\"qv\",\"rt\",\"ru\",\"rv\",\"st\",\"su\",\"sv\"]",
+        "python": "[\"pt\", \"pu\", \"pv\", \"qt\", \"qu\", \"qv\", \"rt\", \"ru\", \"rv\", \"st\", \"su\", \"sv\"]",
+        "java": "[\"pt\", \"pu\", \"pv\", \"qt\", \"qu\", \"qv\", \"rt\", \"ru\", \"rv\", \"st\", \"su\", \"sv\"]"
+      }
+    },
+    {
+      "input": "args = [\"89\"]",
+      "expectedOutput": {
+        "javascript": "[\"tw\",\"tx\",\"ty\",\"tz\",\"uw\",\"ux\",\"uy\",\"uz\",\"vw\",\"vx\",\"vy\",\"vz\"]",
+        "python": "[\"tw\", \"tx\", \"ty\", \"tz\", \"uw\", \"ux\", \"uy\", \"uz\", \"vw\", \"vx\", \"vy\", \"vz\"]",
+        "java": "[\"tw\", \"tx\", \"ty\", \"tz\", \"uw\", \"ux\", \"uy\", \"uz\", \"vw\", \"vx\", \"vy\", \"vz\"]"
+      }
+    }
+  ]
+}

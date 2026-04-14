@@ -1,0 +1,17 @@
+{
+  "id": "bpe",
+  "title": "Byte-Pair Encoding (BPE)",
+  "difficulty": "Hard",
+  "track": "ml",
+  "category": "TorchCode",
+  "functionName": "SimpleBPE",
+  "hint": "train: split words into chars + </w>. Iteratively find most frequent adjacent pair, merge it. encode: apply learned merges in order to split text into subwords.",
+  "description": {
+    "text": "Implement SimpleBPE using PyTorch primitives.",
+    "notes": []
+  },
+  "examples": [],
+  "constraints": [
+    "Use PyTorch only unless task says otherwise."
+  ]
+}

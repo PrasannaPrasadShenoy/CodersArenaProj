@@ -1,0 +1,16 @@
+{
+  "tests": [
+    {
+      "name": "Decode step appends to cache",
+      "code": "\nimport torch\ntorch.manual_seed(0)\nattn = {fn}(d_model=32, num_heads=2)\nx = torch.randn(1, 4, 32)\n_, cache = attn(x)\nnew_token = torch.randn(1, 1, 32)\nout, new_cache = attn(new_token, cache=cache)\nassert out.shape == (1, 1, 32), f'Decode output shape: {out.shape}'\nk_cache, v_cache = new_cache\nassert k_cache.shape[2] == 5, f'Cache should grow: K has {k_cache.shape[2]} positions, expected 5'\nassert v_cache.shape[2] == 5, f'Cache should grow: V has {v_cache.shape[2]} positions, expected 5'\n"
+    },
+    {
+      "name": "Incremental decode matches full forward",
+      "code": "\nimport torch\ntorch.manual_seed(42)\nattn = {fn}(d_model=32, num_heads=2)\nx = torch.randn(1, 6, 32)\nfull_out, _ = attn(x)\nout1, cache = attn(x[:, :4])\nout2, cache = attn(x[:, 4:5], cache=cache)\nout3, cache = attn(x[:, 5:6], cache=cache)\ninc_out = torch.cat([out1, out2, out3], dim=1)\nassert torch.allclose(full_out, inc_out, atol=1e-5), 'Incremental decode must match full forward'\n"
+    },
+    {
+      "name": "Gradient flow",
+      "code": "\nimport torch\ntorch.manual_seed(0)\nattn = {fn}(d_model=32, num_heads=2)\nx = torch.randn(1, 4, 32, requires_grad=True)\nout, cache = attn(x)\nout.sum().backward()\nassert x.grad is not None, 'x.grad is None'\nn_total = sum(1 for p in attn.parameters())\nn_grad = sum(1 for p in attn.parameters() if p.grad is not None)\nassert n_grad == n_total, f'Only {n_grad}/{n_total} params got gradients'\n"
+    }
+  ]
+}

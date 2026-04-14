@@ -1,0 +1,33 @@
+{
+  "tests": [
+    {
+      "input": "args = [\"ADOBECODEBANC\",\"ABC\"]",
+      "expectedOutput": {
+        "javascript": "\"BANC\"",
+        "python": "\"BANC\"",
+        "java": "\"BANC\""
+      }
+    },
+    {
+      "input": "args = [\"a\",\"a\"]",
+      "expectedOutput": {
+        "javascript": "\"a\"",
+        "python": "\"a\"",
+        "java": "\"a\""
+      }
+    },
+    {
+      "input": "args = [\"a\",\"aa\"]",
+      "expectedOutput": {
+        "javascript": "\"\"",
+        "python": "\"\"",
+        "java": "\"\""
+      }
+    }
+  ],
+  "combinedExpectedOutput": {
+    "javascript": "\"BANC\"\n\"a\"\n\"\"",
+    "python": "\"BANC\"\n\"a\"\n\"\"",
+    "java": "\"BANC\"\n\"a\"\n\"\""
+  }
+}

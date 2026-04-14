@@ -1,0 +1,12 @@
+{
+  "tests": [
+    {
+      "name": "Basic 1-D",
+      "code": "\nimport torch\nx = torch.tensor([1.0, 2.0, 3.0])\nout = {fn}(x, dim=-1)\nexpected = torch.softmax(x, dim=-1)\nassert torch.allclose(out, expected, atol=1e-5), f'{out} vs {expected}'\n"
+    },
+    {
+      "name": "2-D along dim=-1",
+      "code": "\nimport torch\nx = torch.randn(4, 8)\nout = {fn}(x, dim=-1)\nexpected = torch.softmax(x, dim=-1)\nassert out.shape == expected.shape, f'Shape mismatch'\nassert torch.allclose(out, expected, atol=1e-5), 'Values differ'\nassert torch.allclose(out.sum(dim=-1), torch.ones(4), atol=1e-5), 'Rows must sum to 1'\n"
+    }
+  ]
+}

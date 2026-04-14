@@ -1,0 +1,12 @@
+{
+  "tests": [
+    {
+      "name": "Basic behavior",
+      "code": "\nimport torch\nx = torch.randn(2, 8)\nweight = torch.ones(8)\nout = {fn}(x, weight)\nassert out.shape == x.shape, f'Shape mismatch: {out.shape}'\nrms = torch.sqrt(x.pow(2).mean(dim=-1, keepdim=True) + 1e-6)\nref = x / rms * weight\nassert torch.allclose(out, ref, atol=1e-5), 'Value mismatch'\n"
+    },
+    {
+      "name": "With learned weight",
+      "code": "\nimport torch\nx = torch.randn(4, 16)\nweight = torch.randn(16)\nout = {fn}(x, weight)\nrms = torch.sqrt(x.pow(2).mean(dim=-1, keepdim=True) + 1e-6)\nref = x / rms * weight\nassert torch.allclose(out, ref, atol=1e-5), 'Value mismatch with non-trivial weight'\n"
+    }
+  ]
+}

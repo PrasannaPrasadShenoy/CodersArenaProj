@@ -1,0 +1,68 @@
+{
+  "tests": [
+    {
+      "input": "args = [[[0]]]",
+      "expectedOutput": {
+        "javascript": "0",
+        "python": "0",
+        "java": "0"
+      }
+    },
+    {
+      "input": "args = [[[1]]]",
+      "expectedOutput": {
+        "javascript": "-1",
+        "python": "-1",
+        "java": "-1"
+      }
+    },
+    {
+      "input": "args = [[[2]]]",
+      "expectedOutput": {
+        "javascript": "0",
+        "python": "0",
+        "java": "0"
+      }
+    },
+    {
+      "input": "args = [[[1,2]]]",
+      "expectedOutput": {
+        "javascript": "1",
+        "python": "1",
+        "java": "1"
+      }
+    },
+    {
+      "input": "args = [[[2,1]]]",
+      "expectedOutput": {
+        "javascript": "1",
+        "python": "1",
+        "java": "1"
+      }
+    },
+    {
+      "input": "args = [[[0,1,2]]]",
+      "expectedOutput": {
+        "javascript": "1",
+        "python": "1",
+        "java": "1"
+      }
+    },
+    {
+      "input": "args = [[[2,2],[1,1],[0,0]]]",
+      "expectedOutput": {
+        "javascript": "1",
+        "python": "1",
+        "java": "1"
+      }
+    },
+    {
+      "input": "args = [[[2,1,1],[1,1,1],[0,1,2]]]",
+      "expectedOutput": {
+        "javascript": "2",
+        "python": "2",
+        "java": "2"
+      }
+    }
+  ]
+}

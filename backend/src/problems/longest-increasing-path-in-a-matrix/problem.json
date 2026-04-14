@@ -1,0 +1,37 @@
+{
+  "id": "longest-increasing-path-in-a-matrix",
+  "title": "Longest Increasing Path in a Matrix",
+  "difficulty": "Hard",
+  "track": "dsa",
+  "category": "2-D Dynamic Programming",
+  "description": {
+    "text": "Given an m x n integers matrix, return *the length of the longest increasing path in* matrix.\n\nFrom each cell, you can either move in four directions: left, right, up, or down. You may not move diagonally or move outside the boundary (i.e., wrap-around is not allowed).",
+    "notes": [
+      "Source: https://neetcode.io/problems/longest-increasing-path-in-matrix?list=neetcode150",
+      "Imported automatically from third-party problem datasets."
+    ]
+  },
+  "examples": [
+    {
+      "input": "matrix = [[9,9,4],[6,6,8],[2,1,1]]",
+      "output": "4",
+      "explanation": "The longest increasing path is [1, 2, 6, 9]."
+    },
+    {
+      "input": "matrix = [[3,4,5],[3,2,6],[2,2,1]]",
+      "output": "4",
+      "explanation": "The longest increasing path is [3, 4, 5, 6]. Moving diagonally is not allowed."
+    },
+    {
+      "input": "matrix = [[1]]",
+      "output": "1",
+      "explanation": ""
+    }
+  ],
+  "constraints": [
+    "m == matrix.length",
+    "n == matrix[i].length",
+    "1 <= m, n <= 200",
+    "0 <= matrix[i][j] <= 2^31 - 1"
+  ]
+}

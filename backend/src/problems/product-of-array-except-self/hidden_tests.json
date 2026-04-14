@@ -1,0 +1,100 @@
+{
+  "tests": [
+    {
+      "input": "args = [[1,1]]",
+      "expectedOutput": {
+        "javascript": "[1,1]",
+        "python": "[1, 1]",
+        "java": "[1, 1]"
+      }
+    },
+    {
+      "input": "args = [[5,2]]",
+      "expectedOutput": {
+        "javascript": "[2,5]",
+        "python": "[2, 5]",
+        "java": "[2, 5]"
+      }
+    },
+    {
+      "input": "args = [[0,1,2,3]]",
+      "expectedOutput": {
+        "javascript": "[6,0,0,0]",
+        "python": "[6, 0, 0, 0]",
+        "java": "[6, 0, 0, 0]"
+      }
+    },
+    {
+      "input": "args = [[1,0,3,4]]",
+      "expectedOutput": {
+        "javascript": "[0,12,0,0]",
+        "python": "[0, 12, 0, 0]",
+        "java": "[0, 12, 0, 0]"
+      }
+    },
+    {
+      "input": "args = [[-1,-2,-3]]",
+      "expectedOutput": {
+        "javascript": "[6,3,2]",
+        "python": "[6, 3, 2]",
+        "java": "[6, 3, 2]"
+      }
+    },
+    {
+      "input": "args = [[2,2,2]]",
+      "expectedOutput": {
+        "javascript": "[4,4,4]",
+        "python": "[4, 4, 4]",
+        "java": "[4, 4, 4]"
+      }
+    },
+    {
+      "input": "args = [[10,3,5,6,2]]",
+      "expectedOutput": {
+        "javascript": "[180,600,360,300,900]",
+        "python": "[180, 600, 360, 300, 900]",
+        "java": "[180, 600, 360, 300, 900]"
+      }
+    },
+    {
+      "input": "args = [[0,0]]",
+      "expectedOutput": {
+        "javascript": "[0,0]",
+        "python": "[0, 0]",
+        "java": "[0, 0]"
+      }
+    },
+    {
+      "input": "args = [[1,2,0,4]]",
+      "expectedOutput": {
+        "javascript": "[0,0,8,0]",
+        "python": "[0, 0, 8, 0]",
+        "java": "[0, 0, 8, 0]"
+      }
+    },
+    {
+      "input": "args = [[-2,0,-3,4]]",
+      "expectedOutput": {
+        "javascript": "[0,24,0,0]",
+        "python": "[0, 24, 0, 0]",
+        "java": "[0, 24, 0, 0]"
+      }
+    },
+    {
+      "input": "args = [[7,1,3]]",
+      "expectedOutput": {
+        "javascript": "[3,21,7]",
+        "python": "[3, 21, 7]",
+        "java": "[3, 21, 7]"
+      }
+    },
+    {
+      "input": "args = [[4,5,1,8,2]]",
+      "expectedOutput": {
+        "javascript": "[80,64,320,40,160]",
+        "python": "[80, 64, 320, 40, 160]",
+        "java": "[80, 64, 320, 40, 160]"
+      }
+    }
+  ]
+}

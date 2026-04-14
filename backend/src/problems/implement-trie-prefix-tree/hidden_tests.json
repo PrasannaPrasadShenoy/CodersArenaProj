@@ -1,0 +1,76 @@
+{
+  "tests": [
+    {
+      "input": "args = [[\"Trie\",\"insert\",\"search\",\"search\",\"insert\",\"search\",\"search\"],[[],[\"abc\"],[\"abc\"],[\"ab\"],[\"ab\"],[\"ab\"],[\"abc\"]]]",
+      "expectedOutput": {
+        "javascript": "[null,null,true,false,null,true,true]",
+        "python": "[None, None, True, False, None, True, True]",
+        "java": "[null, null, true, false, null, true, true]"
+      }
+    },
+    {
+      "input": "args = [[\"Trie\",\"insert\",\"search\",\"starts_with\"],[[],[\"a\"],[\"a\"],[\"a\"]]]",
+      "expectedOutput": {
+        "javascript": "[null,null,true,true]",
+        "python": "[None, None, True, True]",
+        "java": "[null, null, true, true]"
+      }
+    },
+    {
+      "input": "args = [[\"Trie\",\"search\",\"starts_with\"],[[],[\"empty\"],[\"empty\"]]]",
+      "expectedOutput": {
+        "javascript": "[null,false,false]",
+        "python": "[None, False, False]",
+        "java": "[null, false, false]"
+      }
+    },
+    {
+      "input": "args = [[\"Trie\",\"insert\",\"insert\",\"search\",\"search\",\"starts_with\",\"starts_with\"],[[],[\"word\"],[\"world\"],[\"word\"],[\"world\"],[\"wor\"],[\"wo\"]]]",
+      "expectedOutput": {
+        "javascript": "[null,null,null,true,true,true,true]",
+        "python": "[None, None, None, True, True, True, True]",
+        "java": "[null, null, null, true, true, true, true]"
+      }
+    },
+    {
+      "input": "args = [[\"Trie\",\"insert\",\"insert\",\"insert\",\"search\",\"search\",\"search\",\"starts_with\"],[[],[\"aa\"],[\"aaa\"],[\"aaaa\"],[\"aa\"],[\"aaa\"],[\"aaaa\"],[\"a\"]]]",
+      "expectedOutput": {
+        "javascript": "[null,null,null,null,true,true,true,true]",
+        "python": "[None, None, None, None, True, True, True, True]",
+        "java": "[null, null, null, null, true, true, true, true]"
+      }
+    },
+    {
+      "input": "args = [[\"Trie\",\"insert\",\"search\",\"search\",\"starts_with\",\"starts_with\"],[[],[\"hello\"],[\"hello\"],[\"hell\"],[\"hello\"],[\"hel\"]]]",
+      "expectedOutput": {
+        "javascript": "[null,null,true,false,true,true]",
+        "python": "[None, None, True, False, True, True]",
+        "java": "[null, null, true, false, true, true]"
+      }
+    },
+    {
+      "input": "args = [[\"Trie\",\"insert\",\"insert\",\"insert\",\"search\",\"search\",\"search\",\"starts_with\",\"starts_with\"],[[],[\"she\"],[\"sells\"],[\"sea\"],[\"she\"],[\"shells\"],[\"sea\"],[\"se\"],[\"s\"]]]",
+      "expectedOutput": {
+        "javascript": "[null,null,null,null,true,false,true,true,true]",
+        "python": "[None, None, None, None, True, False, True, True, True]",
+        "java": "[null, null, null, null, true, false, true, true, true]"
+      }
+    },
+    {
+      "input": "args = [[\"Trie\",\"insert\",\"insert\",\"search\",\"search\",\"starts_with\",\"starts_with\",\"starts_with\"],[[],[\"programming\"],[\"program\"],[\"programming\"],[\"program\"],[\"prog\"],[\"programming\"],[\"programm\"]]]",
+      "expectedOutput": {
+        "javascript": "[null,null,null,true,true,true,true,true]",
+        "python": "[None, None, None, True, True, True, True, True]",
+        "java": "[null, null, null, true, true, true, true, true]"
+      }
+    },
+    {
+      "input": "args = [[\"Trie\",\"insert\",\"search\",\"starts_with\",\"insert\",\"search\",\"starts_with\"],[[],[\"z\"],[\"z\"],[\"z\"],[\"zzz\"],[\"zzz\"],[\"zz\"]]]",
+      "expectedOutput": {
+        "javascript": "[null,null,true,true,null,true,true]",
+        "python": "[None, None, True, True, None, True, True]",
+        "java": "[null, null, true, true, null, true, true]"
+      }
+    }
+  ]
+}

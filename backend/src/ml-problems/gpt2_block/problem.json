@@ -1,0 +1,17 @@
+{
+  "id": "gpt2_block",
+  "title": "GPT-2 Transformer Block",
+  "difficulty": "Hard",
+  "track": "ml",
+  "category": "TorchCode",
+  "functionName": "GPT2Block",
+  "hint": "Pre-norm: x = x + attn(ln1(x)), x = x + mlp(ln2(x)). MLP: Linear(d, 4d) -> GELU -> Linear(4d, d). Attention must be causal. Inherit from nn.Module.",
+  "description": {
+    "text": "Implement GPT2Block using PyTorch primitives.",
+    "notes": []
+  },
+  "examples": [],
+  "constraints": [
+    "Use PyTorch only unless task says otherwise."
+  ]
+}

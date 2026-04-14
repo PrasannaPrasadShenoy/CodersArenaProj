@@ -1,0 +1,30 @@
+{
+  "id": "reorder-list",
+  "title": "Reorder List",
+  "difficulty": "Medium",
+  "track": "dsa",
+  "category": "Linked List",
+  "description": {
+    "text": "You are given the head of a singly linked-list. The list can be represented as:\n\nL0 → L1 → … → Ln - 1 → Ln\n\n*Reorder the list to be on the following form:*\n\nL0 → Ln → L1 → Ln - 1 → L2 → Ln - 2 → …\n\nYou may not modify the values in the list's nodes. Only nodes themselves may be changed.",
+    "notes": [
+      "Source: https://neetcode.io/problems/reorder-linked-list?list=neetcode150",
+      "Imported automatically from third-party problem datasets."
+    ]
+  },
+  "examples": [
+    {
+      "input": "head = [1,2,3,4]",
+      "output": "[1,4,2,3]",
+      "explanation": ""
+    },
+    {
+      "input": "head = [1,2,3,4,5]",
+      "output": "[1,5,2,4,3]",
+      "explanation": ""
+    }
+  ],
+  "constraints": [
+    "The number of nodes in the list is in the range [1, 5 * 10^4].",
+    "1 <= Node.val <= 1000"
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "id": "cross_attention",
+  "title": "Multi-Head Cross-Attention",
+  "difficulty": "Medium",
+  "track": "ml",
+  "category": "ML Attention",
+  "functionName": "MultiHeadCrossAttention",
+  "hint": "Q from decoder (x_q), K/V from encoder (x_kv). Project, reshape to multi-head, compute scaled dot-product attention (no causal mask). Concat heads and project output.",
+  "description": {
+    "text": "Implement multi-head cross-attention for encoder–decoder models: queries from the decoder sequence, keys and values from the encoder. Use Q/K/V projections, scaled dot-product attention without a causal mask, then an output projection—typical of transformer decoders.",
+    "notes": []
+  },
+  "examples": [],
+  "constraints": [
+    "Use PyTorch only unless task says otherwise."
+  ]
+}

@@ -10,15 +10,22 @@ function useStreamClient(session, loadingSession, isHost, isParticipant) {
   const [chatClient, setChatClient] = useState(null);
   const [channel, setChannel] = useState(null);
   const [isInitializingCall, setIsInitializingCall] = useState(true);
+  const [streamConnectFailed, setStreamConnectFailed] = useState(false);
+  const [retryNonce, setRetryNonce] = useState(0);
 
   useEffect(() => {
     let videoCall = null;
     let chatClientInstance = null;
 
     const initCall = async () => {
-      if (!session?.callId) return;
-      if (!isHost && !isParticipant) return;
-      if (session.status === "completed") return;
+      if (!session?.callId || (!isHost && !isParticipant) || session.status === "completed") {
+        setIsInitializingCall(false);
+        setStreamConnectFailed(false);
+        return;
+      }
+
+      setStreamConnectFailed(false);
+      setIsInitializingCall(true);
 
       try {
         const { token, userId, userName, userImage } = await sessionApi.getStreamToken();
@@ -55,6 +62,11 @@ function useStreamClient(session, loadingSession, isHost, isParticipant) {
         await chatChannel.watch();
         setChannel(chatChannel);
       } catch (error) {
+        setStreamClient(null);
+        setCall(null);
+        setChatClient(null);
+        setChannel(null);
+        setStreamConnectFailed(true);
         toast.error("Failed to join video call");
         console.error("Error init call", error);
       } finally {
@@ -77,7 +89,11 @@ function useStreamClient(session, loadingSession, isHost, isParticipant) {
         }
       })();
     };
-  }, [session, loadingSession, isHost, isParticipant]);
+  }, [session, loadingSession, isHost, isParticipant, retryNonce]);
+
+  const retryStreamConnect = () => {
+    setRetryNonce((n) => n + 1);
+  };
 
   return {
     streamClient,
@@ -85,6 +101,8 @@ function useStreamClient(session, loadingSession, isHost, isParticipant) {
     chatClient,
     channel,
     isInitializingCall,
+    streamConnectFailed,
+    retryStreamConnect,
   };
 }
 

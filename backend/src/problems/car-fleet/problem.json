@@ -1,0 +1,16 @@
+{
+  "id": "car-fleet",
+  "title": "Car Fleet",
+  "difficulty": "Medium",
+  "track": "dsa",
+  "category": "Stack",
+  "description": {
+    "text": "Solve Car Fleet.",
+    "notes": [
+      "Source: https://neetcode.io/problems/car-fleet?list=neetcode150",
+      "Imported automatically from third-party problem datasets."
+    ]
+  },
+  "examples": [],
+  "constraints": []
+}

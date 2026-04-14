@@ -5,6 +5,8 @@ export async function createSession(req, res) {
   try {
     const {
       problem,
+      problemId = "",
+      problemTrack = "dsa",
       difficulty,
       sessionType = "coding",
       topic = "",
@@ -20,8 +22,11 @@ export async function createSession(req, res) {
     });
 
     if (sessionType === "coding") {
-      if (!problem || !difficulty) {
-        return res.status(400).json({ message: "Problem and difficulty are required" });
+      if (!problem || !difficulty || !problemTrack) {
+        return res.status(400).json({ message: "Problem, track, and difficulty are required" });
+      }
+      if (!["dsa", "ml"].includes(problemTrack)) {
+        return res.status(400).json({ message: "Invalid problem track" });
       }
     }
 
@@ -39,6 +44,8 @@ export async function createSession(req, res) {
       sessionType,
       topic: typeof topic === "string" ? topic.trim() : "",
       problem,
+      problemId,
+      problemTrack,
       difficulty,
       host: userId,
       callId,
@@ -46,7 +53,7 @@ export async function createSession(req, res) {
 
     // Always derive a unique whiteboard room id from the session id.
     // This guarantees every new session gets a separate board instance.
-    session.whiteboardRoomId = `talent-iq-whiteboard-${session._id.toString()}`;
+    session.whiteboardRoomId = `neurohire-whiteboard-${session._id.toString()}`;
     await session.save();
 
     // create stream video call
@@ -55,7 +62,13 @@ export async function createSession(req, res) {
         created_by_id: clerkId,
         custom:
           sessionType === "coding"
-            ? { problem, difficulty, sessionId: session._id.toString() }
+            ? {
+                problem,
+                problemId,
+                problemTrack,
+                difficulty,
+                sessionId: session._id.toString(),
+              }
             : { topic: session.topic, sessionId: session._id.toString() },
       },
     });

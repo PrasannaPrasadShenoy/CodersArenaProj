@@ -2,10 +2,14 @@
   "id": "maximum-subarray",
   "title": "Maximum Subarray",
   "difficulty": "Medium",
-  "category": "Array • Dynamic Programming",
+  "track": "dsa",
+  "category": "Greedy",
   "description": {
     "text": "Given an integer array nums, find the subarray with the largest sum, and return its sum.",
-    "notes": []
+    "notes": [
+      "Source: https://neetcode.io/problems/maximum-subarray?list=neetcode150",
+      "Imported automatically from third-party problem datasets."
+    ]
   },
   "examples": [
     {
@@ -25,7 +29,7 @@
     }
   ],
   "constraints": [
-    "1 ≤ nums.length ≤ 10⁵",
-    "-10⁴ ≤ nums[i] ≤ 10⁴"
+    "`1 <= nums.length <= 10^5`",
+    "`-10^4 <= nums[i] <= 10^4`"
   ]
 }

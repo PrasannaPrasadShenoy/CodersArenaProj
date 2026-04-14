@@ -1,0 +1,84 @@
+{
+  "tests": [
+    {
+      "input": "args = [\"0\"]",
+      "expectedOutput": {
+        "javascript": "0",
+        "python": "0",
+        "java": "0"
+      }
+    },
+    {
+      "input": "args = [\"10\"]",
+      "expectedOutput": {
+        "javascript": "1",
+        "python": "1",
+        "java": "1"
+      }
+    },
+    {
+      "input": "args = [\"27\"]",
+      "expectedOutput": {
+        "javascript": "1",
+        "python": "1",
+        "java": "1"
+      }
+    },
+    {
+      "input": "args = [\"101\"]",
+      "expectedOutput": {
+        "javascript": "1",
+        "python": "1",
+        "java": "1"
+      }
+    },
+    {
+      "input": "args = [\"100\"]",
+      "expectedOutput": {
+        "javascript": "0",
+        "python": "0",
+        "java": "0"
+      }
+    },
+    {
+      "input": "args = [\"110\"]",
+      "expectedOutput": {
+        "javascript": "1",
+        "python": "1",
+        "java": "1"
+      }
+    },
+    {
+      "input": "args = [\"2101\"]",
+      "expectedOutput": {
+        "javascript": "1",
+        "python": "1",
+        "java": "1"
+      }
+    },
+    {
+      "input": "args = [\"2611055971756562\"]",
+      "expectedOutput": {
+        "javascript": "4",
+        "python": "4",
+        "java": "4"
+      }
+    },
+    {
+      "input": "args = [\"1\"]",
+      "expectedOutput": {
+        "javascript": "1",
+        "python": "1",
+        "java": "1"
+      }
+    },
+    {
+      "input": "args = [\"30\"]",
+      "expectedOutput": {
+        "javascript": "0",
+        "python": "0",
+        "java": "0"
+      }
+    }
+  ]
+}

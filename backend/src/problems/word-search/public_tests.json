@@ -1,0 +1,33 @@
+{
+  "tests": [
+    {
+      "input": "args = [[[\"A\",\"B\",\"C\",\"E\"],[\"S\",\"F\",\"C\",\"S\"],[\"A\",\"D\",\"E\",\"E\"]],\"ABCCED\"]",
+      "expectedOutput": {
+        "javascript": "true",
+        "python": "True",
+        "java": "true"
+      }
+    },
+    {
+      "input": "args = [[[\"A\",\"B\",\"C\",\"E\"],[\"S\",\"F\",\"C\",\"S\"],[\"A\",\"D\",\"E\",\"E\"]],\"SEE\"]",
+      "expectedOutput": {
+        "javascript": "true",
+        "python": "True",
+        "java": "true"
+      }
+    },
+    {
+      "input": "args = [[[\"A\",\"B\",\"C\",\"E\"],[\"S\",\"F\",\"C\",\"S\"],[\"A\",\"D\",\"E\",\"E\"]],\"ABCB\"]",
+      "expectedOutput": {
+        "javascript": "false",
+        "python": "False",
+        "java": "false"
+      }
+    }
+  ],
+  "combinedExpectedOutput": {
+    "javascript": "true\ntrue\nfalse",
+    "python": "True\nTrue\nFalse",
+    "java": "true\ntrue\nfalse"
+  }
+}

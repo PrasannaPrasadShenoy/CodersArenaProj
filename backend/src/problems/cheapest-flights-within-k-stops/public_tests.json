@@ -1,0 +1,33 @@
+{
+  "tests": [
+    {
+      "input": "args = [4,[[0,1,100],[1,2,100],[2,0,100],[1,3,600],[2,3,200]],0,3,1]",
+      "expectedOutput": {
+        "javascript": "700",
+        "python": "700",
+        "java": "700"
+      }
+    },
+    {
+      "input": "args = [3,[[0,1,100],[1,2,100],[0,2,500]],0,2,1]",
+      "expectedOutput": {
+        "javascript": "200",
+        "python": "200",
+        "java": "200"
+      }
+    },
+    {
+      "input": "args = [3,[[0,1,100],[1,2,100],[0,2,500]],0,2,0]",
+      "expectedOutput": {
+        "javascript": "500",
+        "python": "500",
+        "java": "500"
+      }
+    }
+  ],
+  "combinedExpectedOutput": {
+    "javascript": "700\n200\n500",
+    "python": "700\n200\n500",
+    "java": "700\n200\n500"
+  }
+}

@@ -1,0 +1,108 @@
+{
+  "tests": [
+    {
+      "input": "args = []",
+      "expectedOutput": {
+        "javascript": "3",
+        "python": "3",
+        "java": "3"
+      }
+    },
+    {
+      "input": "args = []",
+      "expectedOutput": {
+        "javascript": "4",
+        "python": "4",
+        "java": "4"
+      }
+    },
+    {
+      "input": "args = []",
+      "expectedOutput": {
+        "javascript": "null",
+        "python": "None",
+        "java": "null"
+      }
+    },
+    {
+      "input": "args = []",
+      "expectedOutput": {
+        "javascript": "1",
+        "python": "1",
+        "java": "1"
+      }
+    },
+    {
+      "input": "args = []",
+      "expectedOutput": {
+        "javascript": "1",
+        "python": "1",
+        "java": "1"
+      }
+    },
+    {
+      "input": "args = []",
+      "expectedOutput": {
+        "javascript": "null",
+        "python": "None",
+        "java": "null"
+      }
+    },
+    {
+      "input": "args = []",
+      "expectedOutput": {
+        "javascript": "null",
+        "python": "None",
+        "java": "null"
+      }
+    },
+    {
+      "input": "args = []",
+      "expectedOutput": {
+        "javascript": "1",
+        "python": "1",
+        "java": "1"
+      }
+    },
+    {
+      "input": "args = []",
+      "expectedOutput": {
+        "javascript": "1",
+        "python": "1",
+        "java": "1"
+      }
+    },
+    {
+      "input": "args = []",
+      "expectedOutput": {
+        "javascript": "1",
+        "python": "1",
+        "java": "1"
+      }
+    },
+    {
+      "input": "args = []",
+      "expectedOutput": {
+        "javascript": "3",
+        "python": "3",
+        "java": "3"
+      }
+    },
+    {
+      "input": "args = []",
+      "expectedOutput": {
+        "javascript": "4",
+        "python": "4",
+        "java": "4"
+      }
+    },
+    {
+      "input": "args = []",
+      "expectedOutput": {
+        "javascript": "5",
+        "python": "5",
+        "java": "5"
+      }
+    }
+  ]
+}

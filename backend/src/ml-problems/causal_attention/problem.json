@@ -1,0 +1,17 @@
+{
+  "id": "causal_attention",
+  "title": "Causal Self-Attention",
+  "difficulty": "Hard",
+  "track": "ml",
+  "category": "ML Attention",
+  "functionName": "causal_attention",
+  "hint": "Same as softmax attention but mask future positions with -inf before softmax. torch.triu(..., diagonal=1) gives the upper triangle.",
+  "description": {
+    "text": "Implement causal (masked) self-attention for autoregressive models: each position may attend only to itself and previous positions (GPT-style). Apply an additive mask before softmax so future positions contribute zero probability mass.",
+    "notes": []
+  },
+  "examples": [],
+  "constraints": [
+    "Use PyTorch only unless task says otherwise."
+  ]
+}

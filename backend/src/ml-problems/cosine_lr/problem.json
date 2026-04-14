@@ -1,0 +1,17 @@
+{
+  "id": "cosine_lr",
+  "title": "Cosine LR Scheduler with Warmup",
+  "difficulty": "Medium",
+  "track": "ml",
+  "category": "TorchCode",
+  "functionName": "cosine_lr_schedule",
+  "hint": "Warmup: linear ramp from 0 to max_lr over warmup_steps. Then cosine decay: min_lr + 0.5*(max_lr-min_lr)*(1+cos(pi*progress)).",
+  "description": {
+    "text": "Implement cosine_lr_schedule using PyTorch primitives.",
+    "notes": []
+  },
+  "examples": [],
+  "constraints": [
+    "Use PyTorch only unless task says otherwise."
+  ]
+}

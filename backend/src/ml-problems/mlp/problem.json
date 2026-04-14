@@ -1,0 +1,25 @@
+{
+  "id": "mlp",
+  "title": "SwiGLU MLP",
+  "difficulty": "Medium",
+  "track": "ml",
+  "category": "ML Fundamentals",
+  "functionName": "SwiGLUMLP",
+  "hint": "Three nn.Linear layers: gate_proj(d, d_ff), up_proj(d, d_ff), down_proj(d_ff, d). forward(x) = down_proj(silu(gate_proj(x)) * up_proj(x)). SiLU(x) = x * sigmoid(x).",
+  "description": {
+    "text": "Implement a SwiGLU feed-forward block: out = down_proj( SiLU(gate_proj(x)) * up_proj(x) ), where SiLU(x) = x * sigmoid(x). This is the FFN style used in LLaMA and similar models.",
+    "notes": []
+  },
+  "examples": [
+    {
+      "input": "x shape (batch, seq, d_model)",
+      "output": "Same shape as x after down_proj.",
+      "explanation": "Intermediate is (batch, seq, d_ff) after gate/up and element-wise product."
+    }
+  ],
+  "constraints": [
+    "Use nn.Linear for gate_proj, up_proj, down_proj.",
+    "Forward: down_proj(silu(gate_proj(x)) * up_proj(x)).",
+    "Do not replace the block with a single Linear."
+  ]
+}

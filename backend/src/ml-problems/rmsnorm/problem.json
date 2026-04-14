@@ -1,0 +1,26 @@
+{
+  "id": "rmsnorm",
+  "title": "Implement RMSNorm",
+  "difficulty": "Medium",
+  "track": "ml",
+  "category": "ML Fundamentals",
+  "functionName": "rms_norm",
+  "hint": "RMS(x) = sqrt(mean(x^2) + eps). RMSNorm(x) = x / RMS(x) * weight. Simpler than LayerNorm â€” no mean subtraction.",
+  "description": {
+    "text": "Implement RMSNorm: scale the input by the RMS (root-mean-square) over the last dimension, then multiply by a learnable weight. No mean centering (unlike LayerNorm).",
+    "notes": []
+  },
+  "examples": [
+    {
+      "input": "x shape (B, T, D); weight shape (D,)",
+      "output": "x / RMS(x) * weight per last-dim slice; same shape as x.",
+      "explanation": "Used in LLaMA-style architectures."
+    }
+  ],
+  "constraints": [
+    "Normalize over dim=-1.",
+    "weight broadcasts like the last dim of x.",
+    "Do not use nn.LayerNorm, nn.RMSNorm, or F.normalize shortcuts for the full op.",
+    "Support autograd."
+  ]
+}

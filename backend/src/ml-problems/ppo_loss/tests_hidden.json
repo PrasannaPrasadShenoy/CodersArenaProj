@@ -1,0 +1,8 @@
+{
+  "tests": [
+    {
+      "name": "Gradient flows to new_logps only",
+      "code": "\nimport torch\nnew_logps = torch.randn(8, requires_grad=True)\nold_logps = torch.randn(8, requires_grad=True)\nadvantages = torch.randn(8, requires_grad=True)\nloss = {fn}(new_logps, old_logps, advantages)\nloss.backward()\nassert new_logps.grad is not None, 'Gradients should flow through new_logps'\nassert old_logps.grad is None, 'Gradients should not flow through old_logps (treat as constant baseline)'\nassert advantages.grad is None, 'Gradients should not flow through advantages (treat as constant advantages)'\n"
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "id": "decode-ways",
+  "title": "Decode Ways",
+  "difficulty": "Medium",
+  "track": "dsa",
+  "category": "1-D Dynamic Programming",
+  "description": {
+    "text": "You have intercepted a secret message encoded as a string of numbers. The message is decoded via the mapping: \"1\" -> 'A', \"2\" -> 'B', ..., \"26\" -> 'Z'. Given a string s containing only digits, return the number of ways to decode it. Return 0 if it cannot be decoded.",
+    "notes": [
+      "Source: https://neetcode.io/problems/decode-ways?list=neetcode150",
+      "Imported automatically from third-party problem datasets."
+    ]
+  },
+  "examples": [
+    {
+      "input": "s = \"12\"",
+      "output": "2",
+      "explanation": ""
+    },
+    {
+      "input": "s = \"226\"",
+      "output": "3",
+      "explanation": ""
+    },
+    {
+      "input": "s = \"06\"",
+      "output": "0",
+      "explanation": ""
+    }
+  ],
+  "constraints": [
+    "1 <= s.length <= 100",
+    "s contains only digits and may contain leading zero(s)"
+  ]
+}

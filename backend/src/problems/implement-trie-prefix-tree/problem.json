@@ -1,0 +1,20 @@
+{
+  "id": "implement-trie-prefix-tree",
+  "title": "Implement Trie (Prefix Tree)",
+  "difficulty": "Medium",
+  "track": "dsa",
+  "category": "Tries",
+  "description": {
+    "text": "A trie (pronounced as \"try\") or prefix tree is a tree data structure used to efficiently store and retrieve keys in a dataset of strings. There are various applications of this data structure, such as autocomplete and spellchecker.\n\nImplement the Trie class:\n\n- Trie() Initializes the trie object.\n- void insert(String word) Inserts the string word into the trie.\n- boolean search(String word) Returns true if the string word is in the trie (i.e., was inserted before), and false otherwise.\n- boolean startsWith(String prefix) Returns true if there is a previously inserted string word that has the prefix prefix, and false otherwise.",
+    "notes": [
+      "Source: https://neetcode.io/problems/implement-prefix-tree?list=neetcode150",
+      "Imported automatically from third-party problem datasets."
+    ]
+  },
+  "examples": [],
+  "constraints": [
+    "`1 <= word.length, prefix.length <= 2000`",
+    "`word` and `prefix` consist only of lowercase English letters.",
+    "At most `3 * 10^4` calls **in total** will be made to `insert`, `search`, and `starts_with`."
+  ]
+}

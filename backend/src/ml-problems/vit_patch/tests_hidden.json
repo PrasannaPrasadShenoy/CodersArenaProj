@@ -1,0 +1,12 @@
+{
+  "tests": [
+    {
+      "name": "Different image sizes",
+      "code": "\nimport torch\npe = {fn}(img_size=64, patch_size=16, in_channels=1, embed_dim=32)\nout = pe(torch.randn(1, 1, 64, 64))\nassert out.shape == (1, 16, 32), f'Shape: {out.shape}'\n"
+    },
+    {
+      "name": "Gradient flow",
+      "code": "\nimport torch\npe = {fn}(img_size=32, patch_size=8, in_channels=3, embed_dim=64)\nx = torch.randn(1, 3, 32, 32, requires_grad=True)\npe(x).sum().backward()\nassert x.grad is not None, 'x.grad is None'\n"
+    }
+  ]
+}

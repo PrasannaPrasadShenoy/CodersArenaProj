@@ -1,0 +1,92 @@
+{
+  "tests": [
+    {
+      "input": "args = [[1],[2]]",
+      "expectedOutput": {
+        "javascript": "false",
+        "python": "False",
+        "java": "false"
+      }
+    },
+    {
+      "input": "args = [[1,2,3],[2]]",
+      "expectedOutput": {
+        "javascript": "true",
+        "python": "True",
+        "java": "true"
+      }
+    },
+    {
+      "input": "args = [[1,2,3],[2,4]]",
+      "expectedOutput": {
+        "javascript": "false",
+        "python": "False",
+        "java": "false"
+      }
+    },
+    {
+      "input": "args = [[1,2,3,4,5],[2,4,5]]",
+      "expectedOutput": {
+        "javascript": "true",
+        "python": "True",
+        "java": "true"
+      }
+    },
+    {
+      "input": "args = [[1,2,3,4,5],[2,4,6]]",
+      "expectedOutput": {
+        "javascript": "false",
+        "python": "False",
+        "java": "false"
+      }
+    },
+    {
+      "input": "args = [[1,2,3,4,5,6,7],[2,4,5]]",
+      "expectedOutput": {
+        "javascript": "true",
+        "python": "True",
+        "java": "true"
+      }
+    },
+    {
+      "input": "args = [[1,2,3,4,5,6,7],[3,6,7]]",
+      "expectedOutput": {
+        "javascript": "true",
+        "python": "True",
+        "java": "true"
+      }
+    },
+    {
+      "input": "args = [[1,2,3,4,5,6,7],[2,4,6]]",
+      "expectedOutput": {
+        "javascript": "false",
+        "python": "False",
+        "java": "false"
+      }
+    },
+    {
+      "input": "args = [[1,2,3,4,5,6,7],[1,2,4]]",
+      "expectedOutput": {
+        "javascript": "false",
+        "python": "False",
+        "java": "false"
+      }
+    },
+    {
+      "input": "args = [[1,2,3,4,5,6,7],[4,5,6,7]]",
+      "expectedOutput": {
+        "javascript": "false",
+        "python": "False",
+        "java": "false"
+      }
+    },
+    {
+      "input": "args = [[1,2,3,4,5,6,7],[1,2,3,4,5,6,7]]",
+      "expectedOutput": {
+        "javascript": "true",
+        "python": "True",
+        "java": "true"
+      }
+    }
+  ]
+}

@@ -1,0 +1,116 @@
+{
+  "tests": [
+    {
+      "input": "args = [4]",
+      "expectedOutput": {
+        "javascript": "5",
+        "python": "5",
+        "java": "5"
+      }
+    },
+    {
+      "input": "args = [5]",
+      "expectedOutput": {
+        "javascript": "8",
+        "python": "8",
+        "java": "8"
+      }
+    },
+    {
+      "input": "args = [6]",
+      "expectedOutput": {
+        "javascript": "13",
+        "python": "13",
+        "java": "13"
+      }
+    },
+    {
+      "input": "args = [7]",
+      "expectedOutput": {
+        "javascript": "21",
+        "python": "21",
+        "java": "21"
+      }
+    },
+    {
+      "input": "args = [8]",
+      "expectedOutput": {
+        "javascript": "34",
+        "python": "34",
+        "java": "34"
+      }
+    },
+    {
+      "input": "args = [9]",
+      "expectedOutput": {
+        "javascript": "55",
+        "python": "55",
+        "java": "55"
+      }
+    },
+    {
+      "input": "args = [10]",
+      "expectedOutput": {
+        "javascript": "89",
+        "python": "89",
+        "java": "89"
+      }
+    },
+    {
+      "input": "args = [15]",
+      "expectedOutput": {
+        "javascript": "987",
+        "python": "987",
+        "java": "987"
+      }
+    },
+    {
+      "input": "args = [20]",
+      "expectedOutput": {
+        "javascript": "10946",
+        "python": "10946",
+        "java": "10946"
+      }
+    },
+    {
+      "input": "args = [25]",
+      "expectedOutput": {
+        "javascript": "121393",
+        "python": "121393",
+        "java": "121393"
+      }
+    },
+    {
+      "input": "args = [30]",
+      "expectedOutput": {
+        "javascript": "1346269",
+        "python": "1346269",
+        "java": "1346269"
+      }
+    },
+    {
+      "input": "args = [35]",
+      "expectedOutput": {
+        "javascript": "14930352",
+        "python": "14930352",
+        "java": "14930352"
+      }
+    },
+    {
+      "input": "args = [40]",
+      "expectedOutput": {
+        "javascript": "165580141",
+        "python": "165580141",
+        "java": "165580141"
+      }
+    },
+    {
+      "input": "args = [45]",
+      "expectedOutput": {
+        "javascript": "1836311903",
+        "python": "1836311903",
+        "java": "1836311903"
+      }
+    }
+  ]
+}

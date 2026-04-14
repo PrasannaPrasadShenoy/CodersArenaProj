@@ -20,6 +20,16 @@ const userSchema = new mongoose.Schema(
       required: true,
       unique: true,
     },
+    /** Full DSA pass (all tests): `dsa:<problemId>` — updated on successful submit only. */
+    solvedProblemKeys: {
+      type: [String],
+      default: [],
+    },
+    /** Problem IDs where the user passed all public DSA tests (Run), for practice badges. */
+    dsaPublicClearedIds: {
+      type: [String],
+      default: [],
+    },
   },
   { timestamps: true } // createdAt, updatedAt
 );

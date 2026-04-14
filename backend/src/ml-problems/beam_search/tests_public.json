@@ -1,0 +1,12 @@
+{
+  "tests": [
+    {
+      "name": "Returns list starting with start_token",
+      "code": "\nimport torch\ndef dummy(tokens): return torch.zeros(10)\nseq = {fn}(dummy, start_token=0, max_len=5, beam_width=3, eos_token=9)\nassert isinstance(seq, list), 'Must return a list'\nassert seq[0] == 0, f'First token: {seq[0]}'\n"
+    },
+    {
+      "name": "Greedy path (beam=1)",
+      "code": "\nimport torch\ndef greedy_fn(tokens):\n    lp = torch.full((5,), -10.0)\n    lp[min(len(tokens), 4)] = 0.0\n    return lp\nseq = {fn}(greedy_fn, start_token=0, max_len=5, beam_width=1, eos_token=4)\nassert seq == [0, 1, 2, 3, 4], f'Greedy: {seq}'\n"
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "id": "maximum-product-subarray",
+  "title": "Maximum Product Subarray",
+  "difficulty": "Medium",
+  "track": "dsa",
+  "category": "1-D Dynamic Programming",
+  "description": {
+    "text": "Given an integer array nums, find a subarray that has the largest product, and return the product.\n\nThe test cases are generated so that the answer will fit in a 32-bit integer.",
+    "notes": [
+      "Source: https://neetcode.io/problems/maximum-product-subarray?list=neetcode150",
+      "Imported automatically from third-party problem datasets."
+    ]
+  },
+  "examples": [
+    {
+      "input": "nums = [2,3,-2,4]",
+      "output": "6",
+      "explanation": ""
+    },
+    {
+      "input": "nums = [-2,0,-1]",
+      "output": "0",
+      "explanation": ""
+    }
+  ],
+  "constraints": [
+    "`1 <= nums.length <= 2 * 10^4`",
+    "`-10 <= nums[i] <= 10`",
+    "The product of any subarray of `nums` is **guaranteed** to fit in a **32-bit** integer."
+  ]
+}

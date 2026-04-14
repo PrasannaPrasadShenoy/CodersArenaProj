@@ -1,0 +1,25 @@
+{
+  "id": "linear",
+  "title": "Simple Linear Layer",
+  "difficulty": "Medium",
+  "track": "ml",
+  "category": "ML Fundamentals",
+  "functionName": "SimpleLinear",
+  "hint": "y = x @ W^T + b. Initialize weight with Kaiming scaling: randn * (1/sqrt(in_features)).",
+  "description": {
+    "text": "Implement a fully-connected layer y = x @ W^T + b without torch.nn.Linear. Store weight (out_features, in_features) and bias (out_features), both trainable.",
+    "notes": []
+  },
+  "examples": [
+    {
+      "input": "in_features=4, out_features=2; x shape (batch, 4)",
+      "output": "y shape (batch, 2) matching manual matmul with stored W and b.",
+      "explanation": "Matches the standard affine map used inside nn.Linear."
+    }
+  ],
+  "constraints": [
+    "weight shape (out_features, in_features); bias shape (out_features,).",
+    "Weight init: randn scaled by 1/sqrt(in_features); bias zeros.",
+    "Do not use nn.Linear."
+  ]
+}

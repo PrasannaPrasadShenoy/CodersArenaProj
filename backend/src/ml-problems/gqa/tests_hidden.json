@@ -1,0 +1,16 @@
+{
+  "tests": [
+    {
+      "name": "Degenerates to MHA when kv_heads == heads",
+      "code": "\nimport torch\ntorch.manual_seed(42)\ngqa = {fn}(d_model=16, num_heads=4, num_kv_heads=4)\nout = gqa.forward(torch.randn(1, 4, 16))\nassert out.shape == (1, 4, 16)\nassert gqa.W_k.weight.shape == (16, 16), 'Full KV when kv_heads == heads'\n"
+    },
+    {
+      "name": "KV heads are shared correctly",
+      "code": "\nimport torch\ntorch.manual_seed(0)\nD, H, KV = 16, 4, 2\nd_k = D // H\ngqa = {fn}(d_model=D, num_heads=H, num_kv_heads=KV)\nx = torch.randn(1, 4, D)\nk = gqa.W_k(x).view(1, 4, KV, d_k).transpose(1, 2)\nk_exp = k.repeat_interleave(H // KV, dim=1)\nassert torch.equal(k_exp[:, 0], k_exp[:, 1]), 'Heads 0,1 should share same K'\nassert not torch.equal(k_exp[:, 0], k_exp[:, 2]), 'Different groups need different K'\n"
+    },
+    {
+      "name": "Gradient flow",
+      "code": "\nimport torch\ntorch.manual_seed(0)\ngqa = {fn}(d_model=16, num_heads=4, num_kv_heads=2)\nx = torch.randn(1, 4, 16, requires_grad=True)\ngqa.forward(x).sum().backward()\nassert x.grad is not None, 'x.grad is None'\nassert gqa.W_q.weight.grad is not None and gqa.W_k.weight.grad is not None, 'Missing weight gradients'\n"
+    }
+  ]
+}

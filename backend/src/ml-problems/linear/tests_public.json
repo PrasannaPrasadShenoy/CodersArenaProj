@@ -1,0 +1,12 @@
+{
+  "tests": [
+    {
+      "name": "Weight & bias shape",
+      "code": "\nimport torch\nlayer = {fn}(8, 4)\nassert layer.weight.shape == (4, 8), f'Weight shape: {layer.weight.shape}'\nassert layer.bias.shape == (4,), f'Bias shape: {layer.bias.shape}'\nassert layer.weight.requires_grad, 'weight must require grad'\nassert layer.bias.requires_grad, 'bias must require grad'\n"
+    },
+    {
+      "name": "Forward pass",
+      "code": "\nimport torch\nlayer = {fn}(8, 4)\nx = torch.randn(2, 8)\ny = layer.forward(x)\nassert y.shape == (2, 4), f'Output shape: {y.shape}'\nexpected = x @ layer.weight.T + layer.bias\nassert torch.allclose(y, expected, atol=1e-5), 'Forward != x @ W^T + b'\n"
+    }
+  ]
+}

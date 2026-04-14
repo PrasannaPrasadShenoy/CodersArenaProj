@@ -1,0 +1,33 @@
+{
+  "tests": [
+    {
+      "input": "args = [\"Hello\"]",
+      "expectedOutput": {
+        "javascript": "\"World\"",
+        "python": "\"World\"",
+        "java": "\"World\""
+      }
+    },
+    {
+      "input": "args = [\"abc\"]",
+      "expectedOutput": {
+        "javascript": "\"def\"",
+        "python": "\"def\"",
+        "java": "\"def\""
+      }
+    },
+    {
+      "input": "args = []",
+      "expectedOutput": {
+        "javascript": "\"\"",
+        "python": "\"\"",
+        "java": "\"\""
+      }
+    }
+  ],
+  "combinedExpectedOutput": {
+    "javascript": "\"World\"\n\"def\"\n\"\"",
+    "python": "\"World\"\n\"def\"\n\"\"",
+    "java": "\"World\"\n\"def\"\n\"\""
+  }
+}

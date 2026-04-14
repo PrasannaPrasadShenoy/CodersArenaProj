@@ -1,0 +1,30 @@
+{
+  "id": "largest-rectangle-in-histogram",
+  "title": "Largest Rectangle in Histogram",
+  "difficulty": "Hard",
+  "track": "dsa",
+  "category": "Stack",
+  "description": {
+    "text": "Given an array of integers heights representing the histogram's bar height where the width of each bar is 1, return the area of the largest rectangle in the histogram.",
+    "notes": [
+      "Source: https://neetcode.io/problems/largest-rectangle-in-histogram?list=neetcode150",
+      "Imported automatically from third-party problem datasets."
+    ]
+  },
+  "examples": [
+    {
+      "input": "heights = [2,1,5,6,2,3]",
+      "output": "10",
+      "explanation": "The above is a histogram where width of each bar is 1. The largest rectangle is shown in the red area, which has an area = 10 units."
+    },
+    {
+      "input": "heights = [2,4]",
+      "output": "4",
+      "explanation": ""
+    }
+  ],
+  "constraints": [
+    "`1 <= heights.length <= 10^5`",
+    "`0 <= heights[i] <= 10^4`"
+  ]
+}

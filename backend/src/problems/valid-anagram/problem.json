@@ -1,0 +1,30 @@
+{
+  "id": "valid-anagram",
+  "title": "Valid Anagram",
+  "difficulty": "Easy",
+  "track": "dsa",
+  "category": "Arrays & Hashing",
+  "description": {
+    "text": "Given two strings s and t, return true if t is an anagram of s, and false otherwise.",
+    "notes": [
+      "Source: https://neetcode.io/problems/is-anagram?list=neetcode150",
+      "Imported automatically from third-party problem datasets."
+    ]
+  },
+  "examples": [
+    {
+      "input": "s = \"anagram\", t = \"nagaram\"",
+      "output": "true",
+      "explanation": ""
+    },
+    {
+      "input": "s = \"rat\", t = \"car\"",
+      "output": "false",
+      "explanation": ""
+    }
+  ],
+  "constraints": [
+    "1 <= s.length, t.length <= 5 * 10^4",
+    "s and t consist of lowercase English letters."
+  ]
+}

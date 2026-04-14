@@ -1,0 +1,45 @@
+{
+  "id": "valid-parentheses",
+  "title": "Valid Parentheses",
+  "difficulty": "Easy",
+  "track": "dsa",
+  "category": "Stack",
+  "description": {
+    "text": "Given a string s containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid.\n\nAn input string is valid if:\n\n1. Open brackets must be closed by the same type of brackets.\n2. Open brackets must be closed in the correct order.\n3. Every close bracket has a corresponding open bracket of the same type.",
+    "notes": [
+      "Source: https://neetcode.io/problems/validate-parentheses?list=neetcode150",
+      "Imported automatically from third-party problem datasets."
+    ]
+  },
+  "examples": [
+    {
+      "input": "s = \"()\"",
+      "output": "true",
+      "explanation": ""
+    },
+    {
+      "input": "s = \"()[]{}\"",
+      "output": "true",
+      "explanation": ""
+    },
+    {
+      "input": "s = \"(]\"",
+      "output": "false",
+      "explanation": ""
+    },
+    {
+      "input": "s = \"([])\"",
+      "output": "true",
+      "explanation": ""
+    },
+    {
+      "input": "s = \"([)]\"",
+      "output": "false",
+      "explanation": ""
+    }
+  ],
+  "constraints": [
+    "`1 <= s.length <= 10^4`",
+    "`s` consists of parentheses only `'()[]{}'`."
+  ]
+}

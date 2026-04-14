@@ -1,0 +1,16 @@
+{
+  "id": "target-sum",
+  "title": "Target Sum",
+  "difficulty": "Medium",
+  "track": "dsa",
+  "category": "2-D Dynamic Programming",
+  "description": {
+    "text": "Solve Target Sum.",
+    "notes": [
+      "Source: https://neetcode.io/problems/target-sum?list=neetcode150",
+      "Imported automatically from third-party problem datasets."
+    ]
+  },
+  "examples": [],
+  "constraints": []
+}

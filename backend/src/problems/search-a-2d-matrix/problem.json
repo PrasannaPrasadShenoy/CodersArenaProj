@@ -1,0 +1,16 @@
+{
+  "id": "search-a-2d-matrix",
+  "title": "Search a 2D Matrix",
+  "difficulty": "Medium",
+  "track": "dsa",
+  "category": "Binary Search",
+  "description": {
+    "text": "Solve Search a 2D Matrix.",
+    "notes": [
+      "Source: https://neetcode.io/problems/search-2d-matrix?list=neetcode150",
+      "Imported automatically from third-party problem datasets."
+    ]
+  },
+  "examples": [],
+  "constraints": []
+}

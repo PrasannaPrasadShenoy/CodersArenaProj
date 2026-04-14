@@ -1,0 +1,17 @@
+{
+  "id": "kv_cache",
+  "title": "KV Cache Attention",
+  "difficulty": "Hard",
+  "track": "ml",
+  "category": "ML Attention",
+  "functionName": "KVCacheAttention",
+  "hint": "Project Q/K/V, reshape to (B, num_heads, S, d_k). If cache exists, concat new K/V with cached along dim=2. Apply causal mask during prefill. Return (output, (K_all, V_all)). Cache tensors: (B, num_heads, S_total, d_k).",
+  "description": {
+    "text": "Implement attention with a KV cache for incremental decoding: store past keys and values, concatenate new projections for each step, and return updated cache tensors—core to efficient LLM inference (prefill vs single-token decode).",
+    "notes": []
+  },
+  "examples": [],
+  "constraints": [
+    "Use PyTorch only unless task says otherwise."
+  ]
+}

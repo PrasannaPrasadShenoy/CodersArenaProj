@@ -1,0 +1,17 @@
+{
+  "id": "dpo_loss",
+  "title": "DPO (Direct Preference Optimization) Loss",
+  "difficulty": "Hard",
+  "track": "ml",
+  "category": "TorchCode",
+  "functionName": "dpo_loss",
+  "hint": "L = -log(sigmoid(beta * ((pi_chosen - ref_chosen) - (pi_rejected - ref_rejected)))). Mean over batch.",
+  "description": {
+    "text": "Implement dpo_loss using PyTorch primitives.",
+    "notes": []
+  },
+  "examples": [],
+  "constraints": [
+    "Use PyTorch only unless task says otherwise."
+  ]
+}

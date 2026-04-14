@@ -1,0 +1,33 @@
+{
+  "tests": [
+    {
+      "input": "args = [[\"Trie\",\"insert\",\"insert\",\"search\",\"search\",\"search\"],[[],[\"app\"],[\"apple\"],[\"app\"],[\"apple\"],[\"appl\"]]]",
+      "expectedOutput": {
+        "javascript": "[null,null,null,true,true,false]",
+        "python": "[None, None, None, True, True, False]",
+        "java": "[null, null, null, true, true, false]"
+      }
+    },
+    {
+      "input": "args = [[\"Trie\",\"insert\",\"insert\",\"insert\",\"search\",\"search\",\"search\"],[[],[\"cat\"],[\"car\"],[\"card\"],[\"cat\"],[\"car\"],[\"care\"]]]",
+      "expectedOutput": {
+        "javascript": "[null,null,null,null,true,true,false]",
+        "python": "[None, None, None, None, True, True, False]",
+        "java": "[null, null, null, null, true, true, false]"
+      }
+    },
+    {
+      "input": "args = [[\"Trie\",\"insert\",\"insert\",\"starts_with\",\"starts_with\",\"starts_with\"],[[],[\"test\"],[\"testing\"],[\"test\"],[\"testing\"],[\"te\"]]]",
+      "expectedOutput": {
+        "javascript": "[null,null,null,true,true,true]",
+        "python": "[None, None, None, True, True, True]",
+        "java": "[null, null, null, true, true, true]"
+      }
+    }
+  ],
+  "combinedExpectedOutput": {
+    "javascript": "[null,null,null,true,true,false]\n[null,null,null,null,true,true,false]\n[null,null,null,true,true,true]",
+    "python": "[None, None, None, True, True, False]\n[None, None, None, None, True, True, False]\n[None, None, None, True, True, True]",
+    "java": "[null, null, null, true, true, false]\n[null, null, null, null, true, true, false]\n[null, null, null, true, true, true]"
+  }
+}

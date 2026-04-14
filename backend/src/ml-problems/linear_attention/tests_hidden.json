@@ -1,0 +1,12 @@
+{
+  "tests": [
+    {
+      "name": "Gradient flow",
+      "code": "\nimport torch\nQ = torch.randn(1, 4, 8, requires_grad=True)\nK = torch.randn(1, 4, 8, requires_grad=True)\nV = torch.randn(1, 4, 8, requires_grad=True)\n{fn}(Q, K, V).sum().backward()\nassert Q.grad is not None and K.grad is not None and V.grad is not None, 'Missing gradients'\n"
+    },
+    {
+      "name": "Runs fast on long sequences (linear complexity)",
+      "code": "\nimport torch, time\ntorch.manual_seed(0)\nQ = torch.randn(1, 2048, 64)\nK = torch.randn(1, 2048, 64)\nV = torch.randn(1, 2048, 64)\nt0 = time.perf_counter()\nfor _ in range(10):\n    {fn}(Q, K, V)\nelapsed = time.perf_counter() - t0\nassert elapsed < 5.0, f'Too slow: {elapsed:.2f}s â€” should be O(S*D^2) not O(S^2*D)'\n"
+    }
+  ]
+}

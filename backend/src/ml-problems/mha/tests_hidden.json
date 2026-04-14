@@ -1,0 +1,20 @@
+{
+  "tests": [
+    {
+      "name": "Numerical correctness vs reference",
+      "code": "\nimport torch, torch.nn as nn, math\ntorch.manual_seed(0)\nD, H = 16, 2\nd_k = D // H\nmha = {fn}(d_model=D, num_heads=H)\nQ = torch.randn(1, 4, D)\nK = torch.randn(1, 4, D)\nV = torch.randn(1, 4, D)\nout = mha.forward(Q, K, V)\nq = mha.W_q(Q).view(1, 4, H, d_k).transpose(1, 2)\nk = mha.W_k(K).view(1, 4, H, d_k).transpose(1, 2)\nv = mha.W_v(V).view(1, 4, H, d_k).transpose(1, 2)\nscores = torch.matmul(q, k.transpose(-2, -1)) / math.sqrt(d_k)\nweights = torch.softmax(scores, dim=-1)\nattn = torch.matmul(weights, v)\nref = mha.W_o(attn.transpose(1, 2).contiguous().view(1, 4, D))\nassert torch.allclose(out, ref, atol=1e-5), 'Output does not match reference'\n"
+    },
+    {
+      "name": "Gradient flow",
+      "code": "\nimport torch\ntorch.manual_seed(0)\nmha = {fn}(d_model=16, num_heads=2)\nx = torch.randn(1, 4, 16, requires_grad=True)\nout = mha.forward(x, x, x)\nout.sum().backward()\nassert x.grad is not None, 'x.grad is None'\nassert mha.W_q.weight.grad is not None, 'W_q.weight.grad is None'\nassert mha.W_o.weight.grad is not None, 'W_o.weight.grad is None'\n"
+    },
+    {
+      "name": "Cross-attention (seq_q != seq_k)",
+      "code": "\nimport torch\nmha = {fn}(d_model=32, num_heads=4)\nQ = torch.randn(1, 3, 32)\nK = torch.randn(1, 7, 32)\nV = torch.randn(1, 7, 32)\nout = mha.forward(Q, K, V)\nassert out.shape == (1, 3, 32), f'Cross-attention shape: {out.shape}'\n"
+    },
+    {
+      "name": "Different heads give different outputs",
+      "code": "\nimport torch\ntorch.manual_seed(42)\nD, H = 16, 4\nd_k = D // H\nmha = {fn}(d_model=D, num_heads=H)\nx = torch.randn(1, 4, D)\nq = mha.W_q(x).view(1, 4, H, d_k).transpose(1, 2)\nassert not torch.allclose(q[:, 0], q[:, 1], atol=1e-3), 'Heads produce identical queries'\n"
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "id": "counting-bits",
+  "title": "Counting Bits",
+  "difficulty": "Easy",
+  "track": "dsa",
+  "category": "Bit Manipulation",
+  "description": {
+    "text": "Given an integer n, return *an array* ans *of length* n + 1 *such that for each* i *(0 <= i <= n),* ans[i] *is the number of* 1*'s in the binary representation of* i.",
+    "notes": [
+      "Source: https://neetcode.io/problems/counting-bits?list=neetcode150",
+      "Imported automatically from third-party problem datasets."
+    ]
+  },
+  "examples": [
+    {
+      "input": "n = 2",
+      "output": "[0,1,1]",
+      "explanation": ""
+    },
+    {
+      "input": "n = 5",
+      "output": "[0,1,1,2,1,2]",
+      "explanation": ""
+    }
+  ],
+  "constraints": [
+    "0 <= n <= 10^5"
+  ]
+}

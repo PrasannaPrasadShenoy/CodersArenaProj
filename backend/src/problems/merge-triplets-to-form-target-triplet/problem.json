@@ -1,0 +1,16 @@
+{
+  "id": "merge-triplets-to-form-target-triplet",
+  "title": "Merge Triplets to Form Target Triplet",
+  "difficulty": "Medium",
+  "track": "dsa",
+  "category": "Greedy",
+  "description": {
+    "text": "Solve Merge Triplets to Form Target Triplet.",
+    "notes": [
+      "Source: https://neetcode.io/problems/merge-triplets-to-form-target?list=neetcode150",
+      "Imported automatically from third-party problem datasets."
+    ]
+  },
+  "examples": [],
+  "constraints": []
+}

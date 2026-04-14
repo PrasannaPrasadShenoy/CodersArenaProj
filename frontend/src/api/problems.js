@@ -8,23 +8,57 @@ import { PROBLEMS as STATIC_PROBLEMS } from "../data/problems";
 
 const API_URL = import.meta.env.VITE_API_URL || "";
 
+function withDefaultTrack(problem) {
+  return {
+    ...problem,
+    track: problem?.track || "dsa",
+  };
+}
+
+function normalizedStaticProblems() {
+  const out = {};
+  for (const [id, problem] of Object.entries(STATIC_PROBLEMS)) {
+    out[id] = withDefaultTrack(problem);
+  }
+  return out;
+}
+
 /**
  * Fetch list of problems (metadata only) in legacy shape: { [id]: { id, title, difficulty, category, description, examples, constraints } }
  * Merges with static PROBLEMS so unmigrated problems still appear.
  */
-export async function getProblemsList() {
+export async function getProblemsList(track = "") {
   try {
     if (API_URL) {
-      const res = await axiosInstance.get("/problems?legacy=1");
+      const params = new URLSearchParams({ legacy: "1" });
+      if (track) params.set("track", track);
+      const res = await axiosInstance.get(`/problems?${params.toString()}`);
       const apiList = res.data && typeof res.data === "object" ? res.data : {};
-      const merged = { ...STATIC_PROBLEMS };
+      const merged = normalizedStaticProblems();
       for (const [id, meta] of Object.entries(apiList)) {
-        merged[id] = { ...(STATIC_PROBLEMS[id] || {}), ...meta };
+        merged[id] = withDefaultTrack({ ...(STATIC_PROBLEMS[id] || {}), ...meta });
+      }
+      if (track) {
+        const filtered = {};
+        for (const [id, problem] of Object.entries(merged)) {
+          if ((problem.track || "dsa") === track) {
+            filtered[id] = problem;
+          }
+        }
+        return filtered;
       }
       return merged;
     }
-  } catch (_) {}
-  return { ...STATIC_PROBLEMS };
+  } catch (error) {
+    void error;
+  }
+  const fallback = normalizedStaticProblems();
+  if (!track) return fallback;
+  const filtered = {};
+  for (const [id, problem] of Object.entries(fallback)) {
+    if (problem.track === track) filtered[id] = problem;
+  }
+  return filtered;
 }
 
 /**
@@ -35,8 +69,10 @@ export async function getProblemById(id) {
   try {
     if (API_URL && id) {
       const res = await axiosInstance.get(`/problems/${encodeURIComponent(id)}`);
-      if (res.data && res.data.id) return res.data;
+      if (res.data && res.data.id) return withDefaultTrack(res.data);
     }
-  } catch (_) {}
-  return STATIC_PROBLEMS[id] || null;
+  } catch (error) {
+    void error;
+  }
+  return STATIC_PROBLEMS[id] ? withDefaultTrack(STATIC_PROBLEMS[id]) : null;
 }

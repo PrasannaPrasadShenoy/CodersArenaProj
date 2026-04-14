@@ -1,0 +1,31 @@
+{
+  "id": "kth-smallest-element-in-a-bst",
+  "title": "Kth Smallest Element in a BST",
+  "difficulty": "Medium",
+  "track": "dsa",
+  "category": "Trees",
+  "description": {
+    "text": "Given the root of a binary search tree, and an integer k, return the kth smallest value (1-indexed) of all the values of the nodes in the tree.",
+    "notes": [
+      "Source: https://neetcode.io/problems/kth-smallest-integer-in-bst?list=neetcode150",
+      "Imported automatically from third-party problem datasets."
+    ]
+  },
+  "examples": [
+    {
+      "input": "root = [3,1,4,null,2], k = 1",
+      "output": "1",
+      "explanation": ""
+    },
+    {
+      "input": "root = [5,3,6,2,4,null,null,1], k = 3",
+      "output": "3",
+      "explanation": ""
+    }
+  ],
+  "constraints": [
+    "The number of nodes in the tree is `n`.",
+    "`1 <= k <= n <= 10^4`",
+    "`0 <= Node.val <= 10^4`"
+  ]
+}

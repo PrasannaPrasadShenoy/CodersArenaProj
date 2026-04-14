@@ -1,0 +1,33 @@
+{
+  "tests": [
+    {
+      "input": "args = [[\"wrt\",\"wrf\",\"er\",\"ett\",\"rftt\"]]",
+      "expectedOutput": {
+        "javascript": "\"wertf\"",
+        "python": "\"wertf\"",
+        "java": "\"wertf\""
+      }
+    },
+    {
+      "input": "args = [[\"z\",\"x\"]]",
+      "expectedOutput": {
+        "javascript": "\"zx\"",
+        "python": "\"zx\"",
+        "java": "\"zx\""
+      }
+    },
+    {
+      "input": "args = [[\"z\",\"x\",\"z\"]]",
+      "expectedOutput": {
+        "javascript": "\"\"",
+        "python": "\"\"",
+        "java": "\"\""
+      }
+    }
+  ],
+  "combinedExpectedOutput": {
+    "javascript": "\"wertf\"\n\"zx\"\n\"\"",
+    "python": "\"wertf\"\n\"zx\"\n\"\"",
+    "java": "\"wertf\"\n\"zx\"\n\"\""
+  }
+}

@@ -1,0 +1,76 @@
+{
+  "tests": [
+    {
+      "input": "args = [[2,1],1,2]",
+      "expectedOutput": {
+        "javascript": "2",
+        "python": "2",
+        "java": "2"
+      }
+    },
+    {
+      "input": "args = [[6,2,8,0,4,7,9],0,4]",
+      "expectedOutput": {
+        "javascript": "2",
+        "python": "2",
+        "java": "2"
+      }
+    },
+    {
+      "input": "args = [[6,2,8,0,4,7,9],7,9]",
+      "expectedOutput": {
+        "javascript": "8",
+        "python": "8",
+        "java": "8"
+      }
+    },
+    {
+      "input": "args = [[5,3,6,2,4,null,null,1],1,4]",
+      "expectedOutput": {
+        "javascript": "3",
+        "python": "3",
+        "java": "3"
+      }
+    },
+    {
+      "input": "args = [[10,5,15,3,7,12,20],3,7]",
+      "expectedOutput": {
+        "javascript": "5",
+        "python": "5",
+        "java": "5"
+      }
+    },
+    {
+      "input": "args = [[1,null,2],1,2]",
+      "expectedOutput": {
+        "javascript": "1",
+        "python": "1",
+        "java": "1"
+      }
+    },
+    {
+      "input": "args = [[3,1,4,null,2],1,2]",
+      "expectedOutput": {
+        "javascript": "1",
+        "python": "1",
+        "java": "1"
+      }
+    },
+    {
+      "input": "args = [[20,8,22,4,12,null,null,null,null,10,14],10,14]",
+      "expectedOutput": {
+        "javascript": "12",
+        "python": "12",
+        "java": "12"
+      }
+    },
+    {
+      "input": "args = [[50,30,70,20,40,60,80],20,40]",
+      "expectedOutput": {
+        "javascript": "30",
+        "python": "30",
+        "java": "30"
+      }
+    }
+  ]
+}

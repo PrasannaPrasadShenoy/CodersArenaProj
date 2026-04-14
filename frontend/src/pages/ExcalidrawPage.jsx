@@ -5,6 +5,7 @@ import Navbar from "../components/Navbar";
 import TldrawWhiteboard from "../components/TldrawWhiteboard";
 import { useCreateSession } from "../hooks/useSessions";
 import CreateDiscussionModal from "../components/CreateDiscussionModal";
+import toast from "react-hot-toast";
 
 function ExcalidrawPage() {
   const { user, isLoaded } = useUser();
@@ -13,7 +14,7 @@ function ExcalidrawPage() {
 
   const privateRoomStorageKey = useMemo(() => {
     if (!user?.id) return null;
-    return `talent-iq-whiteboard-room-${user.id}`;
+    return `neurohire-whiteboard-room-${user.id}`;
   }, [user?.id]);
 
   const [privateRoomId, setPrivateRoomId] = useState(null);
@@ -37,7 +38,7 @@ function ExcalidrawPage() {
 
     // Create a private room id for this user.
     // This avoids "global" collisions and keeps the board separate by default.
-    const newRoomId = `talent-iq-${crypto.randomUUID()}`;
+    const newRoomId = `neurohire-${crypto.randomUUID()}`;
     localStorage.setItem(privateRoomStorageKey, newRoomId);
     setPrivateRoomId(newRoomId);
     setActiveRoomId(newRoomId);
@@ -70,7 +71,12 @@ function ExcalidrawPage() {
               className="btn btn-sm btn-primary"
               onClick={async () => {
                 if (!activeRoomId) return;
-                await navigator.clipboard.writeText(activeRoomId);
+                try {
+                  await navigator.clipboard.writeText(activeRoomId);
+                  toast.success("Invite code copied");
+                } catch {
+                  toast.error("Could not copy — check browser permissions");
+                }
               }}
               disabled={!activeRoomId}
             >

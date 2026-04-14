@@ -1,0 +1,123 @@
+{
+  "tests": [
+    {
+      "input": "args = [\"a\",\"b\"]",
+      "expectedOutput": {
+        "javascript": "\"c\"",
+        "python": "\"c\"",
+        "java": "\"c\""
+      }
+    },
+    {
+      "input": "args = [\"\",\"\"]",
+      "expectedOutput": {
+        "javascript": "\"\"",
+        "python": "\"\"",
+        "java": "\"\""
+      }
+    },
+    {
+      "input": "args = [\"hello\",\"\"]",
+      "expectedOutput": {
+        "javascript": "\"world\"",
+        "python": "\"world\"",
+        "java": "\"world\""
+      }
+    },
+    {
+      "input": "args = [\"a#b\"]",
+      "expectedOutput": {
+        "javascript": "\"c#d\"",
+        "python": "\"c#d\"",
+        "java": "\"c#d\""
+      }
+    },
+    {
+      "input": "args = [\"4#3hello\"]",
+      "expectedOutput": {
+        "javascript": "\"world\"",
+        "python": "\"world\"",
+        "java": "\"world\""
+      }
+    },
+    {
+      "input": "args = [\"#\",\"##\"]",
+      "expectedOutput": {
+        "javascript": "\"###\"",
+        "python": "\"###\"",
+        "java": "\"###\""
+      }
+    },
+    {
+      "input": "args = [\"abc123\",\"def456\"]",
+      "expectedOutput": {
+        "javascript": "\"ghi789\"",
+        "python": "\"ghi789\"",
+        "java": "\"ghi789\""
+      }
+    },
+    {
+      "input": "args = []",
+      "expectedOutput": {
+        "javascript": "\"special!@#$%^&*()\"",
+        "python": "\"special!@#$%^&*()\"",
+        "java": "\"special!@#$%^&*()\""
+      }
+    },
+    {
+      "input": "args = [\"with spaces\",\"and tabs\\t\"]",
+      "expectedOutput": {
+        "javascript": "\"and newlines\\n\"",
+        "python": "\"and newlines\\n\"",
+        "java": "\"and newlines\n\""
+      }
+    },
+    {
+      "input": "args = [\"unicodeæµ‹è¯•\"]",
+      "expectedOutput": {
+        "javascript": "\"emojiðŸ˜€\"",
+        "python": "\"emojiðŸ˜€\"",
+        "java": "\"emojiðŸ˜€\""
+      }
+    },
+    {
+      "input": "args = []",
+      "expectedOutput": {
+        "python": "None",
+        "java": "null"
+      }
+    },
+    {
+      "input": "args = []",
+      "expectedOutput": {
+        "javascript": "\"single\"",
+        "python": "\"single\"",
+        "java": "\"single\""
+      }
+    },
+    {
+      "input": "args = [\"comma,separated\"]",
+      "expectedOutput": {
+        "javascript": "\"values,here\"",
+        "python": "\"values,here\"",
+        "java": "\"values,here\""
+      }
+    },
+    {
+      "input": "args = [\"pipe|separated\"]",
+      "expectedOutput": {
+        "javascript": "\"values|here\"",
+        "python": "\"values|here\"",
+        "java": "\"values|here\""
+      }
+    },
+    {
+      "input": "args = [\"colon:separated\"]",
+      "expectedOutput": {
+        "javascript": "\"values:here\"",
+        "python": "\"values:here\"",
+        "java": "\"values:here\""
+      }
+    }
+  ]
+}

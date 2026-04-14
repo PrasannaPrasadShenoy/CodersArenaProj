@@ -1,0 +1,17 @@
+{
+  "id": "int8_quantization",
+  "title": "INT8 Quantized Linear",
+  "difficulty": "Hard",
+  "track": "ml",
+  "category": "TorchCode",
+  "functionName": "Int8Linear",
+  "hint": "Per-channel scale = abs(weight).max(dim=1) / 127. Quantize: round(weight/scale).clamp(-128,127).to(int8). Forward: dequantize and matmul.",
+  "description": {
+    "text": "Implement Int8Linear using PyTorch primitives.",
+    "notes": []
+  },
+  "examples": [],
+  "constraints": [
+    "Use PyTorch only unless task says otherwise."
+  ]
+}

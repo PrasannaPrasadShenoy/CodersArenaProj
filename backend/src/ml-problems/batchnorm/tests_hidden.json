@@ -1,0 +1,12 @@
+{
+  "tests": [
+    {
+      "name": "Inference mode â€” uses running statistics",
+      "code": "\nimport torch\ntorch.manual_seed(0)\nx = torch.randn(4, 8)\ngamma = torch.randn(8)\nbeta = torch.randn(8)\n\n# Pretend these came from previous training\nrunning_mean = torch.randn(8)\nrunning_var = torch.rand(8) + 0.5  # positive\n\nout = {fn}(x, gamma, beta, running_mean.clone(), running_var.clone(), training=False)\nref = gamma * (x - running_mean) / torch.sqrt(running_var + 1e-5) + beta\nassert torch.allclose(out, ref, atol=1e-4), 'Inference should use running stats'\n"
+    },
+    {
+      "name": "Gradient flow w.r.t inputs and affine params",
+      "code": "\nimport torch\nx = torch.randn(4, 8, requires_grad=True)\ngamma = torch.ones(8, requires_grad=True)\nbeta = torch.zeros(8, requires_grad=True)\nrunning_mean = torch.zeros(8)\nrunning_var = torch.ones(8)\nout = {fn}(x, gamma, beta, running_mean, running_var, training=True)\nout.sum().backward()\nassert x.grad is not None, 'x.grad is None'\nassert gamma.grad is not None, 'gamma.grad is None'\nassert beta.grad is not None, 'beta.grad is None'\n"
+    }
+  ]
+}

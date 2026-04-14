@@ -1,0 +1,30 @@
+{
+  "id": "meeting-rooms-ii",
+  "title": "Meeting Rooms II",
+  "difficulty": "Medium",
+  "track": "dsa",
+  "category": "Intervals",
+  "description": {
+    "text": "Given an array of meeting time intervals consisting of start and end times [[s1,e1],[s2,e2],...] (si < ei), find the minimum number of conference rooms required.",
+    "notes": [
+      "Source: https://neetcode.io/problems/meeting-schedule-ii?list=neetcode150",
+      "Imported automatically from third-party problem datasets."
+    ]
+  },
+  "examples": [
+    {
+      "input": "[[0,30],[5,10],[15,20]]",
+      "output": "2",
+      "explanation": ""
+    },
+    {
+      "input": "[[7,10],[2,4]]",
+      "output": "1",
+      "explanation": ""
+    }
+  ],
+  "constraints": [
+    "1 <= intervals.length <= 10^4",
+    "0 <= starti < endi <= 10^6"
+  ]
+}

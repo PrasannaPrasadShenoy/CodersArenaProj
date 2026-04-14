@@ -1,0 +1,16 @@
+{
+  "id": "edit-distance",
+  "title": "Edit Distance",
+  "difficulty": "Medium",
+  "track": "dsa",
+  "category": "2-D Dynamic Programming",
+  "description": {
+    "text": "Solve Edit Distance.",
+    "notes": [
+      "Source: https://neetcode.io/problems/edit-distance?list=neetcode150",
+      "Imported automatically from third-party problem datasets."
+    ]
+  },
+  "examples": [],
+  "constraints": []
+}

@@ -1,0 +1,100 @@
+{
+  "tests": [
+    {
+      "input": "args = [[\"abc\",\"bca\",\"cab\",\"xyz\"]]",
+      "expectedOutput": {
+        "javascript": "[[\"abc\",\"bca\",\"cab\"],[\"xyz\"]]",
+        "python": "[[\"abc\", \"bca\", \"cab\"], [\"xyz\"]]",
+        "java": "[[\"abc\", \"bca\", \"cab\"], [\"xyz\"]]"
+      }
+    },
+    {
+      "input": "args = [[\"ab\",\"ba\"]]",
+      "expectedOutput": {
+        "javascript": "[[\"ab\",\"ba\"]]",
+        "python": "[[\"ab\", \"ba\"]]",
+        "java": "[[\"ab\", \"ba\"]]"
+      }
+    },
+    {
+      "input": "args = [[\"abc\"]]",
+      "expectedOutput": {
+        "javascript": "[[\"abc\"]]",
+        "python": "[[\"abc\"]]",
+        "java": "[[\"abc\"]]"
+      }
+    },
+    {
+      "input": "args = [[\"listen\",\"silent\",\"hello\"]]",
+      "expectedOutput": {
+        "javascript": "[[\"listen\",\"silent\"],[\"hello\"]]",
+        "python": "[[\"listen\", \"silent\"], [\"hello\"]]",
+        "java": "[[\"listen\", \"silent\"], [\"hello\"]]"
+      }
+    },
+    {
+      "input": "args = [[\"aab\",\"aba\",\"baa\"]]",
+      "expectedOutput": {
+        "javascript": "[[\"aab\",\"aba\",\"baa\"]]",
+        "python": "[[\"aab\", \"aba\", \"baa\"]]",
+        "java": "[[\"aab\", \"aba\", \"baa\"]]"
+      }
+    },
+    {
+      "input": "args = [[\"race\",\"care\",\"acre\"]]",
+      "expectedOutput": {
+        "javascript": "[[\"race\",\"care\",\"acre\"]]",
+        "python": "[[\"race\", \"care\", \"acre\"]]",
+        "java": "[[\"race\", \"care\", \"acre\"]]"
+      }
+    },
+    {
+      "input": "args = [[\"\",\"b\"]]",
+      "expectedOutput": {
+        "javascript": "[[\"\"],[\"b\"]]",
+        "python": "[[\"\"], [\"b\"]]",
+        "java": "[[\"\"], [\"b\"]]"
+      }
+    },
+    {
+      "input": "args = [[\"a\",\"aa\",\"aaa\"]]",
+      "expectedOutput": {
+        "javascript": "[[\"a\"],[\"aa\"],[\"aaa\"]]",
+        "python": "[[\"a\"], [\"aa\"], [\"aaa\"]]",
+        "java": "[[\"a\"], [\"aa\"], [\"aaa\"]]"
+      }
+    },
+    {
+      "input": "args = [[\"abc\",\"def\",\"ghi\"]]",
+      "expectedOutput": {
+        "javascript": "[[\"abc\"],[\"def\"],[\"ghi\"]]",
+        "python": "[[\"abc\"], [\"def\"], [\"ghi\"]]",
+        "java": "[[\"abc\"], [\"def\"], [\"ghi\"]]"
+      }
+    },
+    {
+      "input": "args = [[\"abcd\",\"dcba\",\"lls\",\"sll\"]]",
+      "expectedOutput": {
+        "javascript": "[[\"abcd\",\"dcba\"],[\"lls\",\"sll\"]]",
+        "python": "[[\"abcd\", \"dcba\"], [\"lls\", \"sll\"]]",
+        "java": "[[\"abcd\", \"dcba\"], [\"lls\", \"sll\"]]"
+      }
+    },
+    {
+      "input": "args = [[\"ac\",\"c\"]]",
+      "expectedOutput": {
+        "javascript": "[[\"ac\"],[\"c\"]]",
+        "python": "[[\"ac\"], [\"c\"]]",
+        "java": "[[\"ac\"], [\"c\"]]"
+      }
+    },
+    {
+      "input": "args = [[\"huh\",\"tit\"]]",
+      "expectedOutput": {
+        "javascript": "[[\"huh\"],[\"tit\"]]",
+        "python": "[[\"huh\"], [\"tit\"]]",
+        "java": "[[\"huh\"], [\"tit\"]]"
+      }
+    }
+  ]
+}

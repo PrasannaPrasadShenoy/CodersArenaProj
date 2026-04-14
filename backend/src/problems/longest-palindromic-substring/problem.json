@@ -1,0 +1,30 @@
+{
+  "id": "longest-palindromic-substring",
+  "title": "Longest Palindromic Substring",
+  "difficulty": "Medium",
+  "track": "dsa",
+  "category": "1-D Dynamic Programming",
+  "description": {
+    "text": "Given a string s, return the longest palindromic substring in s.",
+    "notes": [
+      "Source: https://neetcode.io/problems/longest-palindromic-substring?list=neetcode150",
+      "Imported automatically from third-party problem datasets."
+    ]
+  },
+  "examples": [
+    {
+      "input": "s = \"babad\"",
+      "output": "\"bab\"",
+      "explanation": "\"aba\" is also a valid answer."
+    },
+    {
+      "input": "s = \"cbbd\"",
+      "output": "\"bb\"",
+      "explanation": ""
+    }
+  ],
+  "constraints": [
+    "`1 <= s.length <= 1000`",
+    "`s` consist of only digits and English letters."
+  ]
+}

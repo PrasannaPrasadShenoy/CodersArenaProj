@@ -1,0 +1,76 @@
+{
+  "tests": [
+    {
+      "input": "args = [[2,3],1]",
+      "expectedOutput": {
+        "javascript": "[]",
+        "python": "[]",
+        "java": "[]"
+      }
+    },
+    {
+      "input": "args = [[3,5],3]",
+      "expectedOutput": {
+        "javascript": "[[3]]",
+        "python": "[[3]]",
+        "java": "[[3]]"
+      }
+    },
+    {
+      "input": "args = [[2,4],6]",
+      "expectedOutput": {
+        "javascript": "[[2,2,2],[2,4]]",
+        "python": "[[2, 2, 2], [2, 4]]",
+        "java": "[[2, 2, 2], [2, 4]]"
+      }
+    },
+    {
+      "input": "args = [[5],5]",
+      "expectedOutput": {
+        "javascript": "[[5]]",
+        "python": "[[5]]",
+        "java": "[[5]]"
+      }
+    },
+    {
+      "input": "args = [[2,3,4],6]",
+      "expectedOutput": {
+        "javascript": "[[2,2,2],[2,4],[3,3]]",
+        "python": "[[2, 2, 2], [2, 4], [3, 3]]",
+        "java": "[[2, 2, 2], [2, 4], [3, 3]]"
+      }
+    },
+    {
+      "input": "args = [[4,2,8],8]",
+      "expectedOutput": {
+        "javascript": "[[2,2,2,2],[2,2,4],[4,4],[8]]",
+        "python": "[[2, 2, 2, 2], [2, 2, 4], [4, 4], [8]]",
+        "java": "[[2, 2, 2, 2], [2, 2, 4], [4, 4], [8]]"
+      }
+    },
+    {
+      "input": "args = [[3,4,5],9]",
+      "expectedOutput": {
+        "javascript": "[[3,3,3],[4,5]]",
+        "python": "[[3, 3, 3], [4, 5]]",
+        "java": "[[3, 3, 3], [4, 5]]"
+      }
+    },
+    {
+      "input": "args = [[6,3,2],6]",
+      "expectedOutput": {
+        "javascript": "[[2,2,2],[3,3],[6]]",
+        "python": "[[2, 2, 2], [3, 3], [6]]",
+        "java": "[[2, 2, 2], [3, 3], [6]]"
+      }
+    },
+    {
+      "input": "args = [[2,7],9]",
+      "expectedOutput": {
+        "javascript": "[[2,7]]",
+        "python": "[[2, 7]]",
+        "java": "[[2, 7]]"
+      }
+    }
+  ]
+}

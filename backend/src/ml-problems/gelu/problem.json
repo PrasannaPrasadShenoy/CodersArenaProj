@@ -1,0 +1,25 @@
+{
+  "id": "gelu",
+  "title": "GELU Activation",
+  "difficulty": "Easy",
+  "track": "ml",
+  "category": "ML Fundamentals",
+  "functionName": "my_gelu",
+  "hint": "Exact: x * 0.5 * (1 + erf(x / sqrt(2))). Or approximate: 0.5*x*(1+tanh(sqrt(2/pi)*(x+0.044715*x^3))).",
+  "description": {
+    "text": "Implement GELU (Gaussian Error Linear Unit): GELU(x) = x * Phi(x) = x * 0.5 * (1 + erf(x / sqrt(2))), where Phi is the standard normal CDF.",
+    "notes": []
+  },
+  "examples": [
+    {
+      "input": "x = tensor([0., 1., -1.])",
+      "output": "Smooth, nonlinear activations (0 at 0, positive for x > 0, negative for x < 0 but bounded).",
+      "explanation": "Matches the standard erf-based GELU used in many transformers."
+    }
+  ],
+  "constraints": [
+    "Element-wise on arbitrary tensor shapes.",
+    "Do not use F.gelu or nn.GELU.",
+    "Use torch.erf for the exact version."
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "id": "swim-in-rising-water",
+  "title": "Swim In Rising Water",
+  "difficulty": "Hard",
+  "track": "dsa",
+  "category": "Advanced Graphs",
+  "description": {
+    "text": "Solve Swim In Rising Water.",
+    "notes": [
+      "Source: https://neetcode.io/problems/swim-in-rising-water?list=neetcode150",
+      "Imported automatically from third-party problem datasets."
+    ]
+  },
+  "examples": [],
+  "constraints": []
+}

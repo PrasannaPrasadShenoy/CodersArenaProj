@@ -1,0 +1,33 @@
+{
+  "tests": [
+    {
+      "input": "args = [\"hit\",\"cog\",[\"hot\",\"dot\",\"dog\",\"lot\",\"log\",\"cog\"]]",
+      "expectedOutput": {
+        "javascript": "5",
+        "python": "5",
+        "java": "5"
+      }
+    },
+    {
+      "input": "args = [\"hit\",\"cog\",[\"hot\",\"dot\",\"dog\",\"lot\",\"log\"]]",
+      "expectedOutput": {
+        "javascript": "0",
+        "python": "0",
+        "java": "0"
+      }
+    },
+    {
+      "input": "args = [\"a\",\"c\",[\"a\",\"b\",\"c\"]]",
+      "expectedOutput": {
+        "javascript": "2",
+        "python": "2",
+        "java": "2"
+      }
+    }
+  ],
+  "combinedExpectedOutput": {
+    "javascript": "5\n0\n2",
+    "python": "5\n0\n2",
+    "java": "5\n0\n2"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "id": "count-good-nodes-in-binary-tree",
+  "title": "Count Good Nodes In Binary Tree",
+  "difficulty": "Medium",
+  "track": "dsa",
+  "category": "Trees",
+  "description": {
+    "text": "Solve Count Good Nodes In Binary Tree.",
+    "notes": [
+      "Source: https://neetcode.io/problems/count-good-nodes-in-binary-tree?list=neetcode150",
+      "Imported automatically from third-party problem datasets."
+    ]
+  },
+  "examples": [],
+  "constraints": []
+}

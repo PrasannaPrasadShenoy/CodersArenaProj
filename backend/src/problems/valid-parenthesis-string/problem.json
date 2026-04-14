@@ -1,0 +1,16 @@
+{
+  "id": "valid-parenthesis-string",
+  "title": "Valid Parenthesis String",
+  "difficulty": "Medium",
+  "track": "dsa",
+  "category": "Greedy",
+  "description": {
+    "text": "Solve Valid Parenthesis String.",
+    "notes": [
+      "Source: https://neetcode.io/problems/valid-parenthesis-string?list=neetcode150",
+      "Imported automatically from third-party problem datasets."
+    ]
+  },
+  "examples": [],
+  "constraints": []
+}

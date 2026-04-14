@@ -1,0 +1,100 @@
+{
+  "tests": [
+    {
+      "input": "args = [\"hot\",\"dog\",[\"hot\",\"dog\"]]",
+      "expectedOutput": {
+        "javascript": "0",
+        "python": "0",
+        "java": "0"
+      }
+    },
+    {
+      "input": "args = [\"hot\",\"dog\",[\"hot\",\"hog\",\"dog\"]]",
+      "expectedOutput": {
+        "javascript": "3",
+        "python": "3",
+        "java": "3"
+      }
+    },
+    {
+      "input": "args = [\"red\",\"tax\",[\"ted\",\"tex\",\"red\",\"tax\",\"tad\",\"den\",\"rex\",\"pee\"]]",
+      "expectedOutput": {
+        "javascript": "4",
+        "python": "4",
+        "java": "4"
+      }
+    },
+    {
+      "input": "args = [\"talk\",\"tail\",[\"talk\",\"tons\",\"fall\",\"tail\",\"gale\",\"hall\",\"negs\"]]",
+      "expectedOutput": {
+        "javascript": "0",
+        "python": "0",
+        "java": "0"
+      }
+    },
+    {
+      "input": "args = [\"qa\",\"sq\",[\"si\",\"go\",\"se\",\"cm\",\"so\",\"ph\",\"mt\",\"db\",\"mb\",\"sb\",\"kr\",\"ln\",\"tm\",\"le\",\"av\",\"sm\",\"ar\",\"ci\",\"ca\",\"br\",\"ti\",\"ba\",\"to\",\"ra\",\"fa\",\"yo\",\"ow\",\"sn\",\"ya\",\"cr\",\"po\",\"fe\",\"ho\",\"ma\",\"re\",\"or\",\"rn\",\"au\",\"ur\",\"rh\",\"sr\",\"tc\",\"lt\",\"lo\",\"as\",\"fr\",\"nb\",\"yb\",\"if\",\"pb\",\"ge\",\"th\",\"pm\",\"rb\",\"sh\",\"co\",\"ga\",\"li\",\"ha\",\"hz\",\"no\",\"bi\",\"di\",\"hi\",\"qa\",\"pi\",\"os\",\"uh\",\"wm\",\"an\",\"me\",\"mo\",\"na\",\"la\",\"st\",\"er\",\"sc\",\"ne\",\"mn\",\"mi\",\"am\",\"ex\",\"pt\",\"io\",\"be\",\"fm\",\"ta\",\"tb\",\"ni\",\"mr\",\"pa\",\"he\",\"lr\",\"sq\",\"ye\"]]",
+      "expectedOutput": {
+        "javascript": "5",
+        "python": "5",
+        "java": "5"
+      }
+    },
+    {
+      "input": "args = [\"cet\",\"ism\",[\"kid\",\"tag\",\"pup\",\"ail\",\"tun\",\"woo\"]]",
+      "expectedOutput": {
+        "javascript": "0",
+        "python": "0",
+        "java": "0"
+      }
+    },
+    {
+      "input": "args = [\"lost\",\"miss\",[\"most\",\"mist\",\"miss\",\"lost\",\"fist\",\"fish\"]]",
+      "expectedOutput": {
+        "javascript": "4",
+        "python": "4",
+        "java": "4"
+      }
+    },
+    {
+      "input": "args = [\"cat\",\"dog\",[\"bat\",\"bag\",\"dag\",\"dog\",\"cat\"]]",
+      "expectedOutput": {
+        "javascript": "5",
+        "python": "5",
+        "java": "5"
+      }
+    },
+    {
+      "input": "args = [\"game\",\"thee\",[\"frye\",\"heat\",\"tree\",\"thee\",\"game\",\"free\"]]",
+      "expectedOutput": {
+        "javascript": "0",
+        "python": "0",
+        "java": "0"
+      }
+    },
+    {
+      "input": "args = [\"teach\",\"place\",[\"peale\",\"wilts\",\"place\",\"fetch\"]]",
+      "expectedOutput": {
+        "javascript": "0",
+        "python": "0",
+        "java": "0"
+      }
+    },
+    {
+      "input": "args = [\"sail\",\"boat\",[\"bail\",\"foil\",\"coat\",\"boat\",\"sail\"]]",
+      "expectedOutput": {
+        "javascript": "0",
+        "python": "0",
+        "java": "0"
+      }
+    },
+    {
+      "input": "args = [\"cold\",\"warm\",[\"cold\",\"cord\",\"word\",\"ward\",\"warm\"]]",
+      "expectedOutput": {
+        "javascript": "5",
+        "python": "5",
+        "java": "5"
+      }
+    }
+  ]
+}

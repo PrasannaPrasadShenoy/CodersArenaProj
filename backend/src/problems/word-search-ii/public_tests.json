@@ -1,0 +1,33 @@
+{
+  "tests": [
+    {
+      "input": "args = [[[\"o\",\"a\",\"a\",\"n\"],[\"e\",\"t\",\"a\",\"e\"],[\"i\",\"h\",\"k\",\"r\"],[\"i\",\"f\",\"l\",\"v\"]],[\"oath\",\"pea\",\"eat\",\"rain\"]]",
+      "expectedOutput": {
+        "javascript": "[\"eat\",\"oath\"]",
+        "python": "[\"eat\", \"oath\"]",
+        "java": "[\"eat\", \"oath\"]"
+      }
+    },
+    {
+      "input": "args = [[[\"a\",\"b\"],[\"c\",\"d\"]],[\"abcb\"]]",
+      "expectedOutput": {
+        "javascript": "[]",
+        "python": "[]",
+        "java": "[]"
+      }
+    },
+    {
+      "input": "args = [[[\"a\"]],[\"a\"]]",
+      "expectedOutput": {
+        "javascript": "[\"a\"]",
+        "python": "[\"a\"]",
+        "java": "[\"a\"]"
+      }
+    }
+  ],
+  "combinedExpectedOutput": {
+    "javascript": "[\"eat\",\"oath\"]\n[]\n[\"a\"]",
+    "python": "[\"eat\", \"oath\"]\n[]\n[\"a\"]",
+    "java": "[\"eat\", \"oath\"]\n[]\n[\"a\"]"
+  }
+}

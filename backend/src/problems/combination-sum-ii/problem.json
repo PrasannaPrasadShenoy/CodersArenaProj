@@ -1,0 +1,16 @@
+{
+  "id": "combination-sum-ii",
+  "title": "Combination Sum II",
+  "difficulty": "Medium",
+  "track": "dsa",
+  "category": "Backtracking",
+  "description": {
+    "text": "Solve Combination Sum II.",
+    "notes": [
+      "Source: https://neetcode.io/problems/combination-target-sum-ii?list=neetcode150",
+      "Imported automatically from third-party problem datasets."
+    ]
+  },
+  "examples": [],
+  "constraints": []
+}

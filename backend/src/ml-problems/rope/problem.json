@@ -1,0 +1,17 @@
+{
+  "id": "rope",
+  "title": "Rotary Position Embedding (RoPE)",
+  "difficulty": "Hard",
+  "track": "ml",
+  "category": "ML Attention",
+  "functionName": "apply_rope",
+  "hint": "Split into pairs (x_even, x_odd). Compute angles = pos * 1/(10000^(2i/d)). Rotate: [x_e*cos - x_o*sin, x_e*sin + x_o*cos]. Stack and flatten.",
+  "description": {
+    "text": "Implement rotary position embedding (RoPE): rotate pairs of dimensions in Q and K by position-dependent angles so relative positions are encoded—standard in many modern LLMs.",
+    "notes": []
+  },
+  "examples": [],
+  "constraints": [
+    "Use PyTorch only unless task says otherwise."
+  ]
+}

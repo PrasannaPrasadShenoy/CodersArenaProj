@@ -1,0 +1,12 @@
+{
+  "tests": [
+    {
+      "name": "3-D input",
+      "code": "\nimport torch\nx = torch.randn(2, 4, 32)\nweight = torch.ones(32)\nout = {fn}(x, weight)\nassert out.shape == x.shape, f'Shape mismatch on 3-D: {out.shape}'\nrms = torch.sqrt(x.pow(2).mean(dim=-1, keepdim=True) + 1e-6)\nref = x / rms * weight\nassert torch.allclose(out, ref, atol=1e-5), 'Value mismatch on 3-D'\n"
+    },
+    {
+      "name": "Gradient flow",
+      "code": "\nimport torch\nx = torch.randn(2, 8, requires_grad=True)\nweight = torch.ones(8, requires_grad=True)\nout = {fn}(x, weight)\nout.sum().backward()\nassert x.grad is not None, 'x.grad is None'\nassert weight.grad is not None, 'weight.grad is None'\n"
+    }
+  ]
+}

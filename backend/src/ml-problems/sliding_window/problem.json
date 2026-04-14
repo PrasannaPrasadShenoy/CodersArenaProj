@@ -1,0 +1,17 @@
+{
+  "id": "sliding_window",
+  "title": "Sliding Window Attention",
+  "difficulty": "Hard",
+  "track": "ml",
+  "category": "ML Attention",
+  "functionName": "sliding_window_attention",
+  "hint": "Like softmax attention but position i only attends to positions j where |i-j| <= window_size. Mask the rest with -inf.",
+  "description": {
+    "text": "Implement sliding-window (local) self-attention: each token attends only within a fixed window of width w along the sequence (Mistral-style), giving O(n·w) complexity instead of dense O(n²) attention.",
+    "notes": []
+  },
+  "examples": [],
+  "constraints": [
+    "Use PyTorch only unless task says otherwise."
+  ]
+}

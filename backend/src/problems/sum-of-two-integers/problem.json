@@ -1,0 +1,29 @@
+{
+  "id": "sum-of-two-integers",
+  "title": "Sum of Two Integers",
+  "difficulty": "Medium",
+  "track": "dsa",
+  "category": "Bit Manipulation",
+  "description": {
+    "text": "Given two integers a and b, return the sum of the two integers without using the operators + and -.",
+    "notes": [
+      "Source: https://neetcode.io/problems/sum-of-two-integers?list=neetcode150",
+      "Imported automatically from third-party problem datasets."
+    ]
+  },
+  "examples": [
+    {
+      "input": "a = 1, b = 2",
+      "output": "3",
+      "explanation": ""
+    },
+    {
+      "input": "a = 2, b = 3",
+      "output": "5",
+      "explanation": ""
+    }
+  ],
+  "constraints": [
+    "1000 <= a, b <= 1000"
+  ]
+}

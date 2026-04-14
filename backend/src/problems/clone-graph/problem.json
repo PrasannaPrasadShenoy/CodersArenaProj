@@ -1,0 +1,38 @@
+{
+  "id": "clone-graph",
+  "title": "Clone Graph",
+  "difficulty": "Medium",
+  "track": "dsa",
+  "category": "Graphs",
+  "description": {
+    "text": "Given a reference of a node in a connected undirected graph.\n\nReturn a deep copy (clone) of the graph.\n\nEach node in the graph contains a value (int) and a list (List[Node]) of its neighbors.\n\n\nclass Node {\n    public int val;\n    public List<Node> neighbors;\n}\n\n\nTest case format:\n\nFor simplicity, each node's value is the same as the node's index (1-indexed). For example, the first node with val == 1, the second node with val == 2, and so on. The graph is represented in the test case using an adjacency list.\n\nAn adjacency list is a collection of unordered lists used to represent a finite graph. Each list describes the set of neighbors of a node in the graph.\n\nThe given node will always be the first node with val = 1. You must return the copy of the given node as a reference to the cloned graph.",
+    "notes": [
+      "Source: https://neetcode.io/problems/clone-graph?list=neetcode150",
+      "Imported automatically from third-party problem datasets."
+    ]
+  },
+  "examples": [
+    {
+      "input": "adjList = [[2,4],[1,3],[2,4],[1,3]]",
+      "output": "[[2,4],[1,3],[2,4],[1,3]]",
+      "explanation": "There are 4 nodes in the graph."
+    },
+    {
+      "input": "adjList = [[]]",
+      "output": "[[]]",
+      "explanation": "Note that the input contains one empty list. The graph consists of only one node with val = 1 and it does not have any neighbors."
+    },
+    {
+      "input": "adjList = []",
+      "output": "[]",
+      "explanation": "This an empty graph, it does not have any nodes."
+    }
+  ],
+  "constraints": [
+    "The number of nodes in the graph is in the range `[0, 100]`.",
+    "`1 <= Node.val <= 100`",
+    "`Node.val` is unique for each node.",
+    "There are no repeated edges and no self-loops in the graph.",
+    "The Graph is connected and all nodes can be visited starting from the given node."
+  ]
+}

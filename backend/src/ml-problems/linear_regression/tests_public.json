@@ -1,0 +1,12 @@
+{
+  "tests": [
+    {
+      "name": "Closed-form returns correct shapes",
+      "code": "\nimport torch\ntorch.manual_seed(42)\nX = torch.randn(50, 3)\ny = X @ torch.tensor([2.0, -1.0, 0.5]) + 3.0 + torch.randn(50) * 0.01\nmodel = {fn}()\nw, b = model.closed_form(X, y)\nassert w.shape == (3,), f'w shape: {w.shape}, expected (3,)'\nassert b.shape == (), f'b shape: {b.shape}, expected scalar'\n"
+    },
+    {
+      "name": "Closed-form finds correct weights",
+      "code": "\nimport torch\ntorch.manual_seed(42)\ntrue_w = torch.tensor([2.0, -1.0, 0.5])\ntrue_b = 3.0\nX = torch.randn(100, 3)\ny = X @ true_w + true_b\nmodel = {fn}()\nw, b = model.closed_form(X, y)\nassert torch.allclose(w, true_w, atol=1e-4), f'w: {w} vs true: {true_w}'\nassert torch.allclose(b, torch.tensor(true_b), atol=1e-4), f'b: {b.item():.4f} vs true: {true_b}'\n"
+    }
+  ]
+}

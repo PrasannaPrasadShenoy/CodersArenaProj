@@ -1,0 +1,12 @@
+{
+  "tests": [
+    {
+      "name": "Basic shape & type",
+      "code": "\nimport torch\nfrom torch import Tensor\nnew_logps = torch.randn(16, requires_grad=True)\nold_logps = torch.randn(16)\nadvantages = torch.randn(16)\nloss = {fn}(new_logps, old_logps, advantages)\nassert isinstance(loss, Tensor) and loss.dim() == 0, 'Loss must be scalar Tensor'\n"
+    },
+    {
+      "name": "Numeric check vs fixed value",
+      "code": "\nimport torch\nnew_logps = torch.tensor([0.0, -0.2, -0.4, -0.6])\nold_logps = torch.tensor([0.0, -0.1, -0.5, -0.5])\nadvantages = torch.tensor([1.0, -1.0, 0.5, -0.5])\nloss = {fn}(new_logps, old_logps, advantages, clip_ratio=0.2)\nexpected = torch.tensor(-0.0488)\nassert torch.allclose(loss, expected, atol=1e-4, rtol=0), 'Loss should match the expected numeric value on the fixed example'\n"
+    }
+  ]
+}

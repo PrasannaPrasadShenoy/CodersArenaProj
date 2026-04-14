@@ -1,0 +1,12 @@
+{
+  "tests": [
+    {
+      "name": "Gradient check",
+      "code": "\nimport torch\nx = torch.tensor([-1., 0., 1., 2.], requires_grad=True)\nout = {fn}(x)\nout.sum().backward()\nassert x.grad is not None, 'Gradient not computed'\nassert x.grad[0] == 0., f'grad at x=-1 should be 0, got {x.grad[0]}'\nassert x.grad[2] == 1., f'grad at x=1 should be 1, got {x.grad[2]}'\nassert x.grad[3] == 1., f'grad at x=2 should be 1, got {x.grad[3]}'\nassert x.grad[1] in (0., 1.), f'grad at x=0 should be 0 or 1, got {x.grad[1]}'\n"
+    },
+    {
+      "name": "Performance",
+      "code": "\nimport torch, time\nbig = torch.randn(1024, 1024)\nt0 = time.perf_counter()\nfor _ in range(100):\n    {fn}(big)\nelapsed = time.perf_counter() - t0\nassert elapsed < 5.0, f'Too slow: {elapsed:.2f}s for 100 iterations'\n"
+    }
+  ]
+}

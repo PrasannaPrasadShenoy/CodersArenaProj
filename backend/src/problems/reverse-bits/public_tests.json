@@ -1,0 +1,33 @@
+{
+  "tests": [
+    {
+      "input": "args = [43261596]",
+      "expectedOutput": {
+        "javascript": "964176192",
+        "python": "964176192",
+        "java": "964176192"
+      }
+    },
+    {
+      "input": "args = [2147483644]",
+      "expectedOutput": {
+        "javascript": "1073741822",
+        "python": "1073741822",
+        "java": "1073741822"
+      }
+    },
+    {
+      "input": "args = [0]",
+      "expectedOutput": {
+        "javascript": "0",
+        "python": "0",
+        "java": "0"
+      }
+    }
+  ],
+  "combinedExpectedOutput": {
+    "javascript": "964176192\n1073741822\n0",
+    "python": "964176192\n1073741822\n0",
+    "java": "964176192\n1073741822\n0"
+  }
+}

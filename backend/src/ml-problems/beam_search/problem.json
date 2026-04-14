@@ -1,0 +1,17 @@
+{
+  "id": "beam_search",
+  "title": "Beam Search Decoding",
+  "difficulty": "Medium",
+  "track": "ml",
+  "category": "TorchCode",
+  "functionName": "beam_search",
+  "hint": "Maintain beam_width hypotheses. Each step: expand each hypothesis with all tokens, keep top beam_width by total score. Stop when all beams end with eos or max_len reached.",
+  "description": {
+    "text": "Implement beam_search using PyTorch primitives.",
+    "notes": []
+  },
+  "examples": [],
+  "constraints": [
+    "Use PyTorch only unless task says otherwise."
+  ]
+}

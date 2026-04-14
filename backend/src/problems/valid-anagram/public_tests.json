@@ -1,0 +1,33 @@
+{
+  "tests": [
+    {
+      "input": "args = [\"anagram\",\"nagaram\"]",
+      "expectedOutput": {
+        "javascript": "true",
+        "python": "True",
+        "java": "true"
+      }
+    },
+    {
+      "input": "args = [\"rat\",\"car\"]",
+      "expectedOutput": {
+        "javascript": "false",
+        "python": "False",
+        "java": "false"
+      }
+    },
+    {
+      "input": "args = [\"listen\",\"silent\"]",
+      "expectedOutput": {
+        "javascript": "true",
+        "python": "True",
+        "java": "true"
+      }
+    }
+  ],
+  "combinedExpectedOutput": {
+    "javascript": "true\nfalse\ntrue",
+    "python": "True\nFalse\nTrue",
+    "java": "true\nfalse\ntrue"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "id": "softmax",
+  "title": "Implement Softmax",
+  "difficulty": "Easy",
+  "track": "ml",
+  "category": "ML Fundamentals",
+  "functionName": "my_softmax",
+  "hint": "softmax(x)_i = exp(x_i) / sum(exp(x_j)). Subtract max(x) first for numerical stability.",
+  "description": {
+    "text": "Implement softmax along a dimension: softmax(x_i) = exp(x_i) / sum_j exp(x_j). Subtract the max along dim before exp for numerical stability.",
+    "notes": []
+  },
+  "examples": [
+    {
+      "input": "x = tensor([1., 2., 3.]), dim=-1",
+      "output": "tensor([~0.090, ~0.245, ~0.665]); values sum to 1.0",
+      "explanation": "Each entry is proportional to exp(x_i) after stabilizing by subtracting max(x)."
+    }
+  ],
+  "constraints": [
+    "Normalize along the given dim so probabilities sum to 1 on that dim.",
+    "Must be numerically stable (avoid exp of large positive values).",
+    "Do not use torch.softmax, F.softmax, or nn.Softmax."
+  ]
+}

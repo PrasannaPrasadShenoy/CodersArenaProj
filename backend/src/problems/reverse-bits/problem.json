@@ -1,0 +1,30 @@
+{
+  "id": "reverse-bits",
+  "title": "Reverse Bits",
+  "difficulty": "Easy",
+  "track": "dsa",
+  "category": "Bit Manipulation",
+  "description": {
+    "text": "Reverse bits of a given 32 bits signed integer.",
+    "notes": [
+      "Source: https://neetcode.io/problems/reverse-bits?list=neetcode150",
+      "Imported automatically from third-party problem datasets."
+    ]
+  },
+  "examples": [
+    {
+      "input": "n = 43261596",
+      "output": "964176192",
+      "explanation": ""
+    },
+    {
+      "input": "n = 2147483644",
+      "output": "1073741822",
+      "explanation": ""
+    }
+  ],
+  "constraints": [
+    "0 <= n <= 2^31 - 2",
+    "n is even."
+  ]
+}

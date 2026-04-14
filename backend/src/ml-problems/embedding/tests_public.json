@@ -1,0 +1,12 @@
+{
+  "tests": [
+    {
+      "name": "Weight shape",
+      "code": "\nimport torch, torch.nn as nn\nemb = {fn}(100, 32)\nassert isinstance(emb, nn.Module), 'Must inherit from nn.Module'\nassert hasattr(emb, 'weight'), 'Need self.weight'\nassert emb.weight.shape == (100, 32), f'Weight shape: {emb.weight.shape}'\nassert emb.weight.requires_grad, 'weight must require grad'\n"
+    },
+    {
+      "name": "Lookup correctness",
+      "code": "\nimport torch\nemb = {fn}(10, 4)\nidx = torch.tensor([0, 3, 7])\nout = emb(idx)\nassert out.shape == (3, 4), f'Output shape: {out.shape}'\nassert torch.equal(out[0], emb.weight[0]), 'Mismatch at index 0'\nassert torch.equal(out[1], emb.weight[3]), 'Mismatch at index 3'\n"
+    }
+  ]
+}

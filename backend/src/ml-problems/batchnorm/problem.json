@@ -1,0 +1,26 @@
+{
+  "id": "batchnorm",
+  "title": "Implement BatchNorm",
+  "difficulty": "Medium",
+  "track": "ml",
+  "category": "ML Fundamentals",
+  "functionName": "my_batch_norm",
+  "hint": "Implement train/eval BatchNorm: in training, use batch stats over dim=0 and update running_mean/running_var with momentum; in inference, normalize using the running statistics only.",
+  "description": {
+    "text": "Implement batch normalization for 2D input (N, D): normalize each feature across the batch (dim=0). In training, use batch statistics and update running_mean/running_var in-place with momentum. In inference, normalize using the running statistics.",
+    "notes": []
+  },
+  "examples": [
+    {
+      "input": "x (N, D), training=True",
+      "output": "Normalized using batch mean/var; running buffers updated.",
+      "explanation": "When training=False, use running_mean and running_var instead of batch stats."
+    }
+  ],
+  "constraints": [
+    "x is (N, D); gamma, beta, running_mean, running_var shape (D,).",
+    "Batch mean/var over dim=0, unbiased=False.",
+    "Running updates: (1-momentum)*running + momentum*stat.",
+    "Do not use F.batch_norm or nn.BatchNorm1d."
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "id": "ppo_loss",
+  "title": "PPO (Proximal Policy Optimization) Clipped Loss",
+  "difficulty": "Hard",
+  "track": "ml",
+  "category": "TorchCode",
+  "functionName": "ppo_loss",
+  "hint": "Compute ratio r = exp(new_logps - old_logps_detached). Form unclipped = r * adv_detached and clipped = clamp(r, 1-clip, 1+clip) * adv_detached. Return the negative mean of min(unclipped, clipped). Gradients should flow only through new_logps.",
+  "description": {
+    "text": "Implement ppo_loss using PyTorch primitives.",
+    "notes": []
+  },
+  "examples": [],
+  "constraints": [
+    "Use PyTorch only unless task says otherwise."
+  ]
+}

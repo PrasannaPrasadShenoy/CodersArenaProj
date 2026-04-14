@@ -1,0 +1,16 @@
+{
+  "id": "kth-largest-element-in-an-array",
+  "title": "Kth Largest Element In An Array",
+  "difficulty": "Medium",
+  "track": "dsa",
+  "category": "Heap / Priority Queue",
+  "description": {
+    "text": "Solve Kth Largest Element In An Array.",
+    "notes": [
+      "Source: https://neetcode.io/problems/kth-largest-element-in-an-array?list=neetcode150",
+      "Imported automatically from third-party problem datasets."
+    ]
+  },
+  "examples": [],
+  "constraints": []
+}

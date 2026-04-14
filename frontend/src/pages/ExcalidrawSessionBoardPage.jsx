@@ -62,7 +62,7 @@ function ExcalidrawSessionBoardPage() {
     );
   }
 
-  const roomId = session.whiteboardRoomId || `talent-iq-whiteboard-${session._id}`;
+  const roomId = session.whiteboardRoomId || `neurohire-whiteboard-${session._id}`;
 
   return (
     <div className="h-screen bg-base-200 flex flex-col">

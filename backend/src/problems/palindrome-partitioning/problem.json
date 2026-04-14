@@ -1,0 +1,30 @@
+{
+  "id": "palindrome-partitioning",
+  "title": "Palindrome Partitioning",
+  "difficulty": "Medium",
+  "track": "dsa",
+  "category": "Backtracking",
+  "description": {
+    "text": "Given a string s, partition s such that every substring of the partition is a palindrome. Return *all possible palindrome partitioning of s*.",
+    "notes": [
+      "Source: https://neetcode.io/problems/palindrome-partitioning?list=neetcode150",
+      "Imported automatically from third-party problem datasets."
+    ]
+  },
+  "examples": [
+    {
+      "input": "s = \"aab\"",
+      "output": "[[\"a\",\"a\",\"b\"],[\"aa\",\"b\"]]",
+      "explanation": ""
+    },
+    {
+      "input": "s = \"a\"",
+      "output": "[[\"a\"]]",
+      "explanation": ""
+    }
+  ],
+  "constraints": [
+    "`1 <= s.length <= 16`",
+    "`s` contains only lowercase English letters."
+  ]
+}

@@ -3,19 +3,20 @@ import path from "path";
 import cors from "cors";
 import http from "http";
 import { Server as SocketIOServer } from "socket.io";
-import { serve } from "inngest/express";
 import { clerkMiddleware } from "@clerk/express";
 
 import { ENV } from "./lib/env.js";
 import { connectDB } from "./lib/db.js";
-import { inngest, functions } from "./lib/inngest.js";
 import { initWhiteboardSocket } from "./lib/whiteboardSocket.js";
 
+import inngestRouter from "./routes/inngest.js";
 import chatRoutes from "./routes/chatRoutes.js";
 import sessionRoutes from "./routes/sessionRoute.js";
 import executeRoutes from "./routes/executeRoute.js";
 import problemRoutes from "./api/problems.js";
 import whiteboardRoutes from "./routes/whiteboardRoutes.js";
+import submissionRoutes from "./routes/submissionRoutes.js";
+import progressRoutes from "./routes/progressRoutes.js";
 
 const app = express();
 const server = http.createServer(app);
@@ -30,17 +31,19 @@ initWhiteboardSocket(io);
 const __dirname = path.resolve();
 
 // middleware
-app.use(express.json());
+app.use(express.json({ limit: ENV.EXECUTE_MAX_BODY_BYTES }));
 // credentials:true meaning?? => server allows a browser to include cookies on request
 app.use(cors({ origin: ENV.CLIENT_URL, credentials: true }));
 app.use(clerkMiddleware()); // this adds auth field to request object: req.auth()
 
-app.use("/api/inngest", serve({ client: inngest, functions }));
 app.use("/api/chat", chatRoutes);
 app.use("/api/sessions", sessionRoutes);
 app.use("/api/execute", executeRoutes);
 app.use("/api/problems", problemRoutes);
 app.use("/api/whiteboards", whiteboardRoutes);
+app.use("/api/submissions", submissionRoutes);
+app.use("/api/progress", progressRoutes);
+app.use("/api/inngest", inngestRouter);
 
 app.get("/health", (req, res) => {
   res.status(200).json({ msg: "api is up and running" });
@@ -57,7 +60,19 @@ if (ENV.NODE_ENV === "production") {
 
 const startServer = async () => {
   try {
-    await connectDB();
+    try {
+      await connectDB();
+    } catch (dbError) {
+      if (ENV.NODE_ENV === "development") {
+        console.warn(
+          "⚠️ MongoDB unavailable in development. Starting API without DB-dependent features."
+        );
+        console.warn(dbError?.message || dbError);
+      } else {
+        throw dbError;
+      }
+    }
+
     server.listen(ENV.PORT, () => console.log("Server is running on port:", ENV.PORT));
   } catch (error) {
     console.error("💥 Error starting the server", error);

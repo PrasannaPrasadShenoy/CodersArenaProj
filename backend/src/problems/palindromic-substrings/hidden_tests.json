@@ -1,0 +1,100 @@
+{
+  "tests": [
+    {
+      "input": "args = [\"aa\"]",
+      "expectedOutput": {
+        "javascript": "3",
+        "python": "3",
+        "java": "3"
+      }
+    },
+    {
+      "input": "args = [\"aba\"]",
+      "expectedOutput": {
+        "javascript": "4",
+        "python": "4",
+        "java": "4"
+      }
+    },
+    {
+      "input": "args = [\"abccba\"]",
+      "expectedOutput": {
+        "javascript": "9",
+        "python": "9",
+        "java": "9"
+      }
+    },
+    {
+      "input": "args = [\"racecar\"]",
+      "expectedOutput": {
+        "javascript": "10",
+        "python": "10",
+        "java": "10"
+      }
+    },
+    {
+      "input": "args = [\"abcdef\"]",
+      "expectedOutput": {
+        "javascript": "6",
+        "python": "6",
+        "java": "6"
+      }
+    },
+    {
+      "input": "args = [\"aab\"]",
+      "expectedOutput": {
+        "javascript": "4",
+        "python": "4",
+        "java": "4"
+      }
+    },
+    {
+      "input": "args = [\"ababa\"]",
+      "expectedOutput": {
+        "javascript": "9",
+        "python": "9",
+        "java": "9"
+      }
+    },
+    {
+      "input": "args = [\"aaaaa\"]",
+      "expectedOutput": {
+        "javascript": "15",
+        "python": "15",
+        "java": "15"
+      }
+    },
+    {
+      "input": "args = [\"ab\"]",
+      "expectedOutput": {
+        "javascript": "2",
+        "python": "2",
+        "java": "2"
+      }
+    },
+    {
+      "input": "args = [\"abcba\"]",
+      "expectedOutput": {
+        "javascript": "7",
+        "python": "7",
+        "java": "7"
+      }
+    },
+    {
+      "input": "args = [\"abacaba\"]",
+      "expectedOutput": {
+        "javascript": "12",
+        "python": "12",
+        "java": "12"
+      }
+    },
+    {
+      "input": "args = [\"xyz\"]",
+      "expectedOutput": {
+        "javascript": "3",
+        "python": "3",
+        "java": "3"
+      }
+    }
+  ]
+}

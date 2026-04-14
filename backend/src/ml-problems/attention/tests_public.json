@@ -1,0 +1,12 @@
+{
+  "tests": [
+    {
+      "name": "Output shape",
+      "code": "\nimport torch, math\ntorch.manual_seed(42)\nB, S, D = 2, 4, 8\nQ = torch.randn(B, S, D)\nK = torch.randn(B, S, D)\nV = torch.randn(B, S, D)\nout = {fn}(Q, K, V)\nassert out.shape == (B, S, D), f'Shape mismatch: {out.shape} vs {(B, S, D)}'\n"
+    },
+    {
+      "name": "Numerical correctness",
+      "code": "\nimport torch, math\ntorch.manual_seed(42)\nB, S, D = 2, 4, 8\nQ = torch.randn(B, S, D)\nK = torch.randn(B, S, D)\nV = torch.randn(B, S, D)\nout = {fn}(Q, K, V)\nscores = torch.bmm(Q, K.transpose(1, 2)) / math.sqrt(D)\nweights = torch.softmax(scores, dim=-1)\nref = torch.bmm(weights, V)\nassert torch.allclose(out, ref, atol=1e-5), 'Value mismatch vs reference'\n"
+    }
+  ]
+}

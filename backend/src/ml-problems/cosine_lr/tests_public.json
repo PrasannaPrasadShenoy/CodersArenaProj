@@ -1,0 +1,12 @@
+{
+  "tests": [
+    {
+      "name": "Start of warmup",
+      "code": "\nlr = {fn}(step=0, total_steps=100, warmup_steps=10, max_lr=0.001, min_lr=0.0)\nassert abs(lr) < 1e-8, f'lr at step 0: {lr}'\n"
+    },
+    {
+      "name": "End of warmup",
+      "code": "\nlr = {fn}(step=10, total_steps=100, warmup_steps=10, max_lr=0.001)\nassert abs(lr - 0.001) < 1e-8, f'lr at warmup end: {lr}'\n"
+    }
+  ]
+}

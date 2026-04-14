@@ -1,0 +1,108 @@
+{
+  "tests": [
+    {
+      "input": "args = [1]",
+      "expectedOutput": {
+        "javascript": "2147483648",
+        "python": "2147483648",
+        "java": "2147483648"
+      }
+    },
+    {
+      "input": "args = [2]",
+      "expectedOutput": {
+        "javascript": "1073741824",
+        "python": "1073741824",
+        "java": "1073741824"
+      }
+    },
+    {
+      "input": "args = [3]",
+      "expectedOutput": {
+        "javascript": "3221225472",
+        "python": "3221225472",
+        "java": "3221225472"
+      }
+    },
+    {
+      "input": "args = [4]",
+      "expectedOutput": {
+        "javascript": "536870912",
+        "python": "536870912",
+        "java": "536870912"
+      }
+    },
+    {
+      "input": "args = [5]",
+      "expectedOutput": {
+        "javascript": "2684354560",
+        "python": "2684354560",
+        "java": "2684354560"
+      }
+    },
+    {
+      "input": "args = [6]",
+      "expectedOutput": {
+        "javascript": "1610612736",
+        "python": "1610612736",
+        "java": "1610612736"
+      }
+    },
+    {
+      "input": "args = [7]",
+      "expectedOutput": {
+        "javascript": "3758096384",
+        "python": "3758096384",
+        "java": "3758096384"
+      }
+    },
+    {
+      "input": "args = [8]",
+      "expectedOutput": {
+        "javascript": "268435456",
+        "python": "268435456",
+        "java": "268435456"
+      }
+    },
+    {
+      "input": "args = [9]",
+      "expectedOutput": {
+        "javascript": "2415919104",
+        "python": "2415919104",
+        "java": "2415919104"
+      }
+    },
+    {
+      "input": "args = [10]",
+      "expectedOutput": {
+        "javascript": "1342177280",
+        "python": "1342177280",
+        "java": "1342177280"
+      }
+    },
+    {
+      "input": "args = [11]",
+      "expectedOutput": {
+        "javascript": "3489660928",
+        "python": "3489660928",
+        "java": "3489660928"
+      }
+    },
+    {
+      "input": "args = [12]",
+      "expectedOutput": {
+        "javascript": "805306368",
+        "python": "805306368",
+        "java": "805306368"
+      }
+    },
+    {
+      "input": "args = [13]",
+      "expectedOutput": {
+        "javascript": "2952790016",
+        "python": "2952790016",
+        "java": "2952790016"
+      }
+    }
+  ]
+}

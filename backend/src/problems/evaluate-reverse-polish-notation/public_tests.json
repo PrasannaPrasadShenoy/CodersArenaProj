@@ -1,0 +1,33 @@
+{
+  "tests": [
+    {
+      "input": "args = [[\"2\",\"1\",\"+\",\"3\",\"*\"]]",
+      "expectedOutput": {
+        "javascript": "9",
+        "python": "9",
+        "java": "9"
+      }
+    },
+    {
+      "input": "args = [[\"4\",\"13\",\"5\",\"/\",\"+\"]]",
+      "expectedOutput": {
+        "javascript": "6",
+        "python": "6",
+        "java": "6"
+      }
+    },
+    {
+      "input": "args = [[\"10\",\"6\",\"9\",\"3\",\"+\",\"-11\",\"*\",\"/\",\"*\",\"17\",\"+\",\"5\",\"+\"]]",
+      "expectedOutput": {
+        "javascript": "22",
+        "python": "22",
+        "java": "22"
+      }
+    }
+  ],
+  "combinedExpectedOutput": {
+    "javascript": "9\n6\n22",
+    "python": "9\n6\n22",
+    "java": "9\n6\n22"
+  }
+}

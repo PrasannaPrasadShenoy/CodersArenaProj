@@ -1,0 +1,26 @@
+{
+  "id": "layernorm",
+  "title": "Implement LayerNorm",
+  "difficulty": "Medium",
+  "track": "ml",
+  "category": "ML Fundamentals",
+  "functionName": "my_layer_norm",
+  "hint": "Normalize over the last dim: (x - mean) / sqrt(var + eps), then scale by gamma and shift by beta.",
+  "description": {
+    "text": "Implement layer normalization over the last dimension: normalize x using mean and variance along dim=-1, then apply learnable scale gamma and shift beta.",
+    "notes": []
+  },
+  "examples": [
+    {
+      "input": "x shape (B, T, D); gamma, beta shape (D,)",
+      "output": "Last dim zero-mean unit-var (before gamma/beta); same outer shape as x.",
+      "explanation": "Mean/variance computed over the last axis only."
+    }
+  ],
+  "constraints": [
+    "Normalize over the last dimension only.",
+    "Use epsilon inside the sqrt for variance.",
+    "Do not use F.layer_norm or nn.LayerNorm.",
+    "Must support autograd."
+  ]
+}

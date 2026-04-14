@@ -1,0 +1,12 @@
+{
+  "tests": [
+    {
+      "name": "Output shape (no cache)",
+      "code": "\nimport torch, torch.nn as nn\ntorch.manual_seed(0)\nattn = {fn}(d_model=64, num_heads=4)\nassert isinstance(attn, nn.Module), 'Must inherit from nn.Module'\nx = torch.randn(2, 8, 64)\nout, cache = attn(x)\nassert out.shape == (2, 8, 64), f'Output shape: {out.shape}'\n"
+    },
+    {
+      "name": "Cache structure",
+      "code": "\nimport torch\ntorch.manual_seed(0)\nattn = {fn}(d_model=64, num_heads=4)\nx = torch.randn(2, 8, 64)\nout, cache = attn(x)\nassert isinstance(cache, tuple) and len(cache) == 2, 'Cache must be a (K, V) tuple'\nk_cache, v_cache = cache\nassert k_cache.shape == (2, 4, 8, 16), f'K cache shape: {k_cache.shape}, expected (2, 4, 8, 16)'\nassert v_cache.shape == (2, 4, 8, 16), f'V cache shape: {v_cache.shape}, expected (2, 4, 8, 16)'\n"
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "id": "gradient_accumulation",
+  "title": "Gradient Accumulation",
+  "difficulty": "Easy",
+  "track": "ml",
+  "category": "ML Fundamentals",
+  "functionName": "accumulated_step",
+  "hint": "Zero grads once. For each micro-batch: forward, loss/n_batches, backward. Then optimizer.step(). The loss scaling ensures accumulated grads match a single large batch.",
+  "description": {
+    "text": "Implement one optimizer step that matches a single large batch by accumulating gradients over micro-batches. For each micro-batch, compute loss / n and call backward; then optimizer.step(). Return the total accumulated loss as a float (tests expect a positive float).",
+    "notes": []
+  },
+  "examples": [
+    {
+      "input": "Two micro-batches of the same model; same weights as one step on concatenated batch",
+      "output": "Updated weights match reference full-batch SGD; returned float loss > 0.",
+      "explanation": "Dividing each micro-loss by n makes summed gradients equal to one full-batch backward."
+    }
+  ],
+  "constraints": [
+    "Call optimizer.zero_grad() once at the start.",
+    "Each micro-batch backward uses loss divided by len(micro_batches).",
+    "Return a float (total or average loss per tests)."
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "id": "linear_regression",
+  "title": "Linear Regression",
+  "difficulty": "Medium",
+  "track": "ml",
+  "category": "ML Fundamentals",
+  "functionName": "LinearRegression",
+  "hint": "Closed-form: augment X with ones column, solve w = (X^T X)^{-1} X^T y via torch.linalg.lstsq. Gradient descent: grad_w = (2/N) * X^T @ (pred - y), update w -= lr * grad_w. nn.Linear: create nn.Linear(D, 1), use MSELoss + optimizer.step() loop.",
+  "description": {
+    "text": "Implement linear regression y_hat = X @ w + b for X of shape (N, D) and y of shape (N,) using three methods: closed-form normal equations, manual gradient descent without autograd, and nn.Linear with an optimizer.",
+    "notes": []
+  },
+  "examples": [
+    {
+      "input": "N=100, D=3, synthetic X and y = X @ w_true + b_true + noise",
+      "output": "All three methods return (w, b) close to the true coefficients.",
+      "explanation": "Closed form is exact for noiseless full-rank data; GD and nn_linear converge with enough steps."
+    }
+  ],
+  "constraints": [
+    "All values are PyTorch tensors.",
+    "closed_form must not use iterative optimization.",
+    "gradient_descent must not use autograd for the manual loop.",
+    "nn_linear must use nn.Linear and autograd."
+  ]
+}

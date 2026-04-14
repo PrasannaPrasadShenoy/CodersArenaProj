@@ -1,0 +1,31 @@
+{
+  "id": "min-cost-to-connect-all-points",
+  "title": "Min Cost to Connect All Points",
+  "difficulty": "Medium",
+  "track": "dsa",
+  "category": "Advanced Graphs",
+  "description": {
+    "text": "You are given an array points representing integer coordinates of some points on a 2D-plane, where points[i] = [xi, yi].\n\nThe cost of connecting two points [xi, yi] and [xj, yj] is the manhattan distance between them: |xi - xj| + |yi - yj|, where |val| denotes the absolute value of val.\n\nReturn *the minimum cost to make all points connected*. All points are connected if there is exactly one simple path between any two points.",
+    "notes": [
+      "Source: https://neetcode.io/problems/min-cost-to-connect-points?list=neetcode150",
+      "Imported automatically from third-party problem datasets."
+    ]
+  },
+  "examples": [
+    {
+      "input": "points = [[0,0],[2,2],[3,10],[5,2],[7,0]]",
+      "output": "20",
+      "explanation": ""
+    },
+    {
+      "input": "points = [[3,12],[-2,5],[-4,1]]",
+      "output": "18",
+      "explanation": ""
+    }
+  ],
+  "constraints": [
+    "1 <= points.length <= 1000",
+    "-10^6 <= xi, yi <= 10^6",
+    "All pairs (xi, yi) are distinct."
+  ]
+}

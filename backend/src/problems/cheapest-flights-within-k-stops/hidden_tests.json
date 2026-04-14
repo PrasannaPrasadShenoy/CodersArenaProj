@@ -1,0 +1,84 @@
+{
+  "tests": [
+    {
+      "input": "args = [5,[[0,1,100],[0,2,500],[1,2,100],[1,3,600],[2,3,200],[3,4,100]],0,4,2]",
+      "expectedOutput": {
+        "javascript": "800",
+        "python": "800",
+        "java": "800"
+      }
+    },
+    {
+      "input": "args = [4,[[0,1,1],[0,2,5],[1,2,1],[2,3,1]],0,3,1]",
+      "expectedOutput": {
+        "javascript": "6",
+        "python": "6",
+        "java": "6"
+      }
+    },
+    {
+      "input": "args = [3,[[0,1,100],[1,2,100]],0,2,0]",
+      "expectedOutput": {
+        "javascript": "-1",
+        "python": "-1",
+        "java": "-1"
+      }
+    },
+    {
+      "input": "args = [2,[[0,1,100]],0,1,0]",
+      "expectedOutput": {
+        "javascript": "100",
+        "python": "100",
+        "java": "100"
+      }
+    },
+    {
+      "input": "args = [3,[[0,1,100],[1,2,100],[0,2,500]],0,2,2]",
+      "expectedOutput": {
+        "javascript": "200",
+        "python": "200",
+        "java": "200"
+      }
+    },
+    {
+      "input": "args = [4,[[0,1,100],[1,2,100],[2,3,100],[0,3,500]],0,3,1]",
+      "expectedOutput": {
+        "javascript": "500",
+        "python": "500",
+        "java": "500"
+      }
+    },
+    {
+      "input": "args = [5,[[0,1,100],[1,2,100],[2,3,100],[3,4,100],[0,4,1000]],0,4,0]",
+      "expectedOutput": {
+        "javascript": "1000",
+        "python": "1000",
+        "java": "1000"
+      }
+    },
+    {
+      "input": "args = [3,[[0,1,100],[1,2,100],[2,0,100]],0,2,1]",
+      "expectedOutput": {
+        "javascript": "200",
+        "python": "200",
+        "java": "200"
+      }
+    },
+    {
+      "input": "args = [4,[[0,1,100],[1,2,100],[2,3,100]],0,3,10]",
+      "expectedOutput": {
+        "javascript": "300",
+        "python": "300",
+        "java": "300"
+      }
+    },
+    {
+      "input": "args = [3,[[0,1,200],[1,2,200],[0,2,500]],0,2,1]",
+      "expectedOutput": {
+        "javascript": "400",
+        "python": "400",
+        "java": "400"
+      }
+    }
+  ]
+}

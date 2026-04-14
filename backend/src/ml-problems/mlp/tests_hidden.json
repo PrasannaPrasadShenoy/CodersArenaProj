@@ -1,0 +1,16 @@
+{
+  "tests": [
+    {
+      "name": "Numerical correctness",
+      "code": "\nimport torch, torch.nn.functional as F\ntorch.manual_seed(0)\nmlp = {fn}(d_model=16, d_ff=32)\nx = torch.randn(1, 4, 16)\nout = mlp(x)\ngate = mlp.gate_proj(x)\nup = mlp.up_proj(x)\nref = mlp.down_proj(F.silu(gate) * up)\nassert torch.allclose(out, ref, atol=1e-5), 'Output != down(silu(gate(x)) * up(x))'\n"
+    },
+    {
+      "name": "2-D input",
+      "code": "\nimport torch\nmlp = {fn}(d_model=32, d_ff=64)\nx = torch.randn(4, 32)\nout = mlp(x)\nassert out.shape == (4, 32), f'2-D output shape: {out.shape}'\n"
+    },
+    {
+      "name": "Gradient flow",
+      "code": "\nimport torch\nmlp = {fn}(d_model=32, d_ff=64)\nx = torch.randn(2, 4, 32, requires_grad=True)\nmlp(x).sum().backward()\nassert x.grad is not None, 'x.grad is None'\nn_total = sum(1 for p in mlp.parameters())\nn_grad = sum(1 for p in mlp.parameters() if p.grad is not None)\nassert n_grad == n_total, f'Only {n_grad}/{n_total} params got gradients'\n"
+    }
+  ]
+}

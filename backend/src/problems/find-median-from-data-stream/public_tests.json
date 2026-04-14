@@ -1,0 +1,33 @@
+{
+  "tests": [
+    {
+      "input": "args = [[\"MedianFinder\",\"addNum\",\"addNum\",\"findMedian\",\"addNum\",\"findMedian\"],[[],[1],[2],[],[3],[]]]",
+      "expectedOutput": {
+        "javascript": "[null,null,null,1.5,null,2]",
+        "python": "[None, None, None, 1.5, None, 2]",
+        "java": "[null, null, null, 1.5, null, 2]"
+      }
+    },
+    {
+      "input": "args = [[\"MedianFinder\",\"addNum\",\"findMedian\"],[[],[1],[]]]",
+      "expectedOutput": {
+        "javascript": "[null,null,1]",
+        "python": "[None, None, 1]",
+        "java": "[null, null, 1]"
+      }
+    },
+    {
+      "input": "args = [[\"MedianFinder\",\"addNum\",\"addNum\",\"addNum\",\"findMedian\"],[[],[1],[1],[1],[]]]",
+      "expectedOutput": {
+        "javascript": "[null,null,null,null,1]",
+        "python": "[None, None, None, None, 1]",
+        "java": "[null, null, null, null, 1]"
+      }
+    }
+  ],
+  "combinedExpectedOutput": {
+    "javascript": "[null,null,null,1.5,null,2]\n[null,null,1]\n[null,null,null,null,1]",
+    "python": "[None, None, None, 1.5, None, 2]\n[None, None, 1]\n[None, None, None, None, 1]",
+    "java": "[null, null, null, 1.5, null, 2]\n[null, null, 1]\n[null, null, null, null, 1]"
+  }
+}

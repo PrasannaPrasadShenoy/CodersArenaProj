@@ -1,0 +1,33 @@
+{
+  "tests": [
+    {
+      "input": "args = [[\"TimeMap\",\"set\",\"get\",\"get\",\"set\",\"get\",\"get\"],[[],[\"foo\",\"bar\",1],[\"foo\",1],[\"foo\",3],[\"foo\",\"bar2\",4],[\"foo\",4],[\"foo\",5]]]",
+      "expectedOutput": {
+        "javascript": "[null,null,\"bar\",\"bar\",null,\"bar2\",\"bar2\"]",
+        "python": "[None, None, \"bar\", \"bar\", None, \"bar2\", \"bar2\"]",
+        "java": "[null, null, \"bar\", \"bar\", null, \"bar2\", \"bar2\"]"
+      }
+    },
+    {
+      "input": "args = [[\"TimeMap\",\"get\"],[[],[\"key\",1]]]",
+      "expectedOutput": {
+        "javascript": "[null,\"\"]",
+        "python": "[None, \"\"]",
+        "java": "[null, \"\"]"
+      }
+    },
+    {
+      "input": "args = [[\"TimeMap\",\"set\",\"get\"],[[],[\"a\",\"val\",1],[\"a\",1]]]",
+      "expectedOutput": {
+        "javascript": "[null,null,\"val\"]",
+        "python": "[None, None, \"val\"]",
+        "java": "[null, null, \"val\"]"
+      }
+    }
+  ],
+  "combinedExpectedOutput": {
+    "javascript": "[null,null,\"bar\",\"bar\",null,\"bar2\",\"bar2\"]\n[null,\"\"]\n[null,null,\"val\"]",
+    "python": "[None, None, \"bar\", \"bar\", None, \"bar2\", \"bar2\"]\n[None, \"\"]\n[None, None, \"val\"]",
+    "java": "[null, null, \"bar\", \"bar\", null, \"bar2\", \"bar2\"]\n[null, \"\"]\n[null, null, \"val\"]"
+  }
+}

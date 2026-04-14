@@ -1,0 +1,16 @@
+{
+  "tests": [
+    {
+      "name": "Gradient flow",
+      "code": "\nimport torch\nc = torch.randn(4, requires_grad=True)\nr = torch.randn(4, requires_grad=True)\n{fn}(c, r, torch.randn(4), torch.randn(4)).backward()\nassert c.grad is not None and r.grad is not None, 'Missing gradients'\n"
+    },
+    {
+      "name": "Mathematical correctness",
+      "code": "\nimport torch\ntorch.manual_seed(0)\nc, r, rc, rr = torch.randn(3), torch.randn(3), torch.randn(3), torch.randn(3)\nbeta = 0.5\nloss = {fn}(c, r, rc, rr, beta=beta)\nref = -torch.log(torch.sigmoid(beta * ((c - rc) - (r - rr)))).mean()\nassert torch.allclose(loss, ref, atol=1e-5), f'{loss.item():.6f} vs {ref.item():.6f}'\n"
+    },
+    {
+      "name": "Beta scaling",
+      "code": "\nimport torch\ntorch.manual_seed(0)\nc, r, rc, rr = torch.randn(4), torch.randn(4), torch.randn(4), torch.randn(4)\nl1 = {fn}(c, r, rc, rr, beta=0.1)\nl2 = {fn}(c, r, rc, rr, beta=1.0)\nassert not torch.allclose(l1, l2), 'Different beta should give different loss'\n"
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "tests": [
+    {
+      "name": "Eval mode is identity",
+      "code": "\nimport torch, torch.nn as nn\nd = {fn}(p=0.5)\nassert isinstance(d, nn.Module), 'Must inherit from nn.Module'\nd.eval()\nx = torch.randn(4, 8)\nassert torch.equal(d(x), x), 'eval mode should return input unchanged'\n"
+    },
+    {
+      "name": "Training: zeros and scaling",
+      "code": "\nimport torch\ntorch.manual_seed(42)\nd = {fn}(p=0.5)\nd.train()\nx = torch.ones(1000)\nout = d(x)\nassert (out == 0).any(), 'No zeros found during training'\nnon_zero = out[out != 0]\nassert torch.allclose(non_zero, torch.full_like(non_zero, 2.0), atol=1e-5), 'Non-zeros should be scaled by 1/(1-p)=2.0'\n"
+    }
+  ]
+}

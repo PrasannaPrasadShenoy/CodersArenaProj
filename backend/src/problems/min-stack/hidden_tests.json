@@ -1,0 +1,76 @@
+{
+  "tests": [
+    {
+      "input": "args = [[\"MinStack\",\"push\",\"getMin\",\"top\"],[[],[0],[],[]]]",
+      "expectedOutput": {
+        "javascript": "[null,null,0,0]",
+        "python": "[None, None, 0, 0]",
+        "java": "[null, null, 0, 0]"
+      }
+    },
+    {
+      "input": "args = [[\"MinStack\",\"push\",\"push\",\"getMin\",\"push\",\"getMin\",\"pop\",\"getMin\"],[[],[2],[1],[],[0],[],[],[]]]",
+      "expectedOutput": {
+        "javascript": "[null,null,null,1,null,0,null,1]",
+        "python": "[None, None, None, 1, None, 0, None, 1]",
+        "java": "[null, null, null, 1, null, 0, null, 1]"
+      }
+    },
+    {
+      "input": "args = [[\"MinStack\",\"push\",\"push\",\"push\",\"top\",\"getMin\",\"pop\",\"pop\",\"top\",\"getMin\"],[[],[3],[1],[4],[],[],[],[],[],[]]]",
+      "expectedOutput": {
+        "javascript": "[null,null,null,null,4,1,null,null,3,3]",
+        "python": "[None, None, None, None, 4, 1, None, None, 3, 3]",
+        "java": "[null, null, null, null, 4, 1, null, null, 3, 3]"
+      }
+    },
+    {
+      "input": "args = [[\"MinStack\",\"push\",\"push\",\"getMin\",\"pop\",\"push\",\"getMin\"],[[],[-1],[-2],[],[],[0],[]]]",
+      "expectedOutput": {
+        "javascript": "[null,null,null,-2,null,null,-1]",
+        "python": "[None, None, None, -2, None, None, -1]",
+        "java": "[null, null, null, -2, null, null, -1]"
+      }
+    },
+    {
+      "input": "args = [[\"MinStack\",\"push\",\"push\",\"push\",\"push\",\"getMin\",\"pop\",\"pop\",\"getMin\"],[[],[5],[3],[7],[2],[],[],[],[]]]",
+      "expectedOutput": {
+        "javascript": "[null,null,null,null,null,2,null,null,3]",
+        "python": "[None, None, None, None, None, 2, None, None, 3]",
+        "java": "[null, null, null, null, null, 2, null, null, 3]"
+      }
+    },
+    {
+      "input": "args = [[\"MinStack\",\"push\",\"push\",\"push\",\"getMin\",\"pop\",\"getMin\",\"pop\",\"getMin\",\"pop\",\"push\",\"getMin\"],[[],[10],[5],[15],[],[],[],[],[],[],[8],[]]]",
+      "expectedOutput": {
+        "javascript": "[null,null,null,null,5,null,5,null,10,null,null,8]",
+        "python": "[None, None, None, None, 5, None, 5, None, 10, None, None, 8]",
+        "java": "[null, null, null, null, 5, null, 5, null, 10, null, null, 8]"
+      }
+    },
+    {
+      "input": "args = [[\"MinStack\",\"push\",\"push\",\"push\",\"push\",\"push\",\"getMin\",\"pop\",\"getMin\",\"pop\",\"getMin\"],[[],[1],[2],[0],[3],[4],[],[],[],[],[]]]",
+      "expectedOutput": {
+        "javascript": "[null,null,null,null,null,null,0,null,0,null,0]",
+        "python": "[None, None, None, None, None, None, 0, None, 0, None, 0]",
+        "java": "[null, null, null, null, null, null, 0, null, 0, null, 0]"
+      }
+    },
+    {
+      "input": "args = [[\"MinStack\",\"push\",\"getMin\",\"push\",\"getMin\",\"push\",\"getMin\",\"top\"],[[],[2147483647],[],[-2147483648],[],[0],[],[]]]",
+      "expectedOutput": {
+        "javascript": "[null,null,2147483647,null,-2147483648,null,-2147483648,0]",
+        "python": "[None, None, 2147483647, None, -2147483648, None, -2147483648, 0]",
+        "java": "[null, null, 2147483647, null, -2147483648, null, -2147483648, 0]"
+      }
+    },
+    {
+      "input": "args = [[\"MinStack\",\"push\",\"push\",\"push\",\"push\",\"push\",\"top\",\"getMin\",\"pop\",\"top\",\"getMin\",\"pop\",\"getMin\"],[[],[1],[1],[1],[1],[1],[],[],[],[],[],[],[]]]",
+      "expectedOutput": {
+        "javascript": "[null,null,null,null,null,null,1,1,null,1,1,null,1]",
+        "python": "[None, None, None, None, None, None, 1, 1, None, 1, 1, None, 1]",
+        "java": "[null, null, null, null, null, null, 1, 1, null, 1, 1, null, 1]"
+      }
+    }
+  ]
+}

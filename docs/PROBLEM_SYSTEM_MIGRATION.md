@@ -74,6 +74,12 @@ Once a problem is in the new system and the API returns it correctly, you can re
 - Use `publicTests` for “Run code” in the UI (and for `combinedExpectedOutput` in the legacy response).
 - Use `hiddenTests` in your judge to run additional cases after the user submits.
 
+### DSA “Run Code” (server harness)
+
+For problems under `backend/src/problems/`, **Run Code** sends `POST /api/execute` with `mode: "dsa_public"` and `problemId`. The server runs the **same per-test harness** as the full judge, scoped to **public** cases only. Legacy/static-only problems fall back to a plain run plus client-side `combinedExpectedOutput` comparison.
+
+**Progress:** All public tests passed → **public cleared**; **Submit** with all tests passed → **fully solved** (stored separately).
+
 ---
 
 ## Scalability summary

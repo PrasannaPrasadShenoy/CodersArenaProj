@@ -1,14 +1,15 @@
-// Code execution via backend (no external Piston API required)
+// Code execution via backend (uses axios + Clerk token; requires signed-in user)
+
+import axiosInstance from "./axios";
 
 const SUPPORTED_LANGUAGES = ["javascript", "python", "java"];
-const API_URL = import.meta.env.VITE_API_URL || "";
 
 /**
- * @param {string} language - programming language (javascript, python, java)
- * @param {string} code - source code to execute
- * @returns {Promise<{success:boolean, output?:string, error?: string}>}
+ * @param {string} language
+ * @param {string} code
+ * @param {{ problemId?: string; mode?: "dsa_public" }} [options]
  */
-export async function executeCode(language, code) {
+export async function executeCode(language, code, options = {}) {
   try {
     if (!SUPPORTED_LANGUAGES.includes(language)) {
       return {
@@ -17,23 +18,36 @@ export async function executeCode(language, code) {
       };
     }
 
-    if (!API_URL) {
+    if (!import.meta.env.VITE_API_URL) {
       return { success: false, error: "VITE_API_URL is not set. Check your .env file." };
     }
 
-    const url = `${API_URL.replace(/\/$/, "")}/execute`;
-    const response = await fetch(url, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ language, code }),
-    });
+    const body = { language, code };
+    if (options.problemId && options.mode === "dsa_public") {
+      body.problemId = options.problemId;
+      body.mode = "dsa_public";
+    }
 
-    const data = await response.json().catch(() => ({}));
+    const response = await axiosInstance.post("/execute", body);
+    const data = response.data || {};
 
-    if (!response.ok) {
+    if (data.mode === "dsa_public") {
       return {
-        success: false,
-        error: data.error || `Request failed (${response.status})`,
+        success: !!data.success,
+        mode: "dsa_public",
+        summary: data.summary,
+        testResults: data.testResults || [],
+        runtimeMs: data.runtimeMs,
+        error: data.error || "",
+      };
+    }
+
+    if (data.legacyFallback) {
+      return {
+        success: !!data.success,
+        output: data.output,
+        error: data.error,
+        legacyFallback: true,
       };
     }
 
@@ -43,10 +57,18 @@ export async function executeCode(language, code) {
       error: data.error,
     };
   } catch (error) {
-    const message = error.message || "Network error";
+    const status = error?.response?.status;
+    const data = error?.response?.data || {};
+    const message = data.error || data.message || error.message || "Network error";
+    if (status === 401) {
+      return { success: false, error: "Sign in required to run code." };
+    }
+    if (status === 429) {
+      return { success: false, error: message || "Too many runs. Try again shortly." };
+    }
     return {
       success: false,
-      error: message.includes("fetch") ? "Cannot reach backend. Is the server running on the correct port?" : `Failed to execute code: ${message}`,
+      error: message.includes("Network") ? "Cannot reach backend. Is the server running?" : message,
     };
   }
 }

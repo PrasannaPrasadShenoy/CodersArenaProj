@@ -1,0 +1,907 @@
+/**
+ * One-shot generator for dsaPlaceholderEnrichments.json
+ * Run: node scripts/build-dsa-placeholder-enrichments.mjs
+ */
+import fs from "fs";
+import path from "path";
+import { fileURLToPath } from "url";
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const outPath = path.join(__dirname, "../src/lib/dsaPlaceholderEnrichments.json");
+
+/** @type {Record<string, { description: string, descriptionNotes?: string[], constraints: string[], tests: { args: unknown[], js: string, py: string, java: string }[] }>} */
+const E = {
+  "last-stone-weight": {
+    description:
+      "You have a collection of stones, each with an integer weight. Each turn, pick the two heaviest stones and smash them together. If they are equal, both are destroyed; if not, the heavier stone's weight is reduced by the lighter stone's weight and the result stays in the pile. Return the weight of the last remaining stone, or 0 if none remain.",
+    constraints: [
+      "1 <= stones.length <= 30",
+      "1 <= stones[i] <= 1000",
+    ],
+    tests: [
+      { args: [[2, 7, 4, 1, 8, 1]], js: "1", py: "1", java: "1" },
+      { args: [[1]], js: "1", py: "1", java: "1" },
+      { args: [[2, 2]], js: "0", py: "0", java: "0" },
+    ],
+  },
+  "single-number": {
+    description:
+      "Given a non-empty array of integers nums, every element appears twice except for one. Find that single one. You must implement a solution with linear runtime complexity and use only constant extra space.",
+    constraints: [
+      "1 <= nums.length <= 3 * 10^4",
+      "-3 * 10^4 <= nums[i] <= 3 * 10^4",
+      "Each element appears twice except for one which appears once.",
+    ],
+    tests: [
+      { args: [[2, 2, 1]], js: "1", py: "1", java: "1" },
+      { args: [[4, 1, 2, 1, 2]], js: "4", py: "4", java: "4" },
+      { args: [[1]], js: "1", py: "1", java: "1" },
+    ],
+  },
+  "happy-number": {
+    description:
+      "Write an algorithm to determine if a number n is happy. A happy number is defined by: replace the number by the sum of the squares of its digits, and repeat until the number equals 1 (happy) or loops endlessly in a cycle which does not include 1 (not happy).",
+    constraints: ["1 <= n <= 2^31 - 1"],
+    tests: [
+      { args: [19], js: "true", py: "True", java: "true" },
+      { args: [2], js: "false", py: "False", java: "false" },
+      { args: [7], js: "true", py: "True", java: "true" },
+    ],
+  },
+  "multiply-strings": {
+    description:
+      "Given two non-negative integers num1 and num2 represented as strings, return the product of num1 and num2, also represented as a string. You must not use any built-in BigInteger library or convert the inputs to integer directly.",
+    constraints: [
+      "1 <= num1.length, num2.length <= 200",
+      "num1 and num2 consist of digits only.",
+      "Both num1 and num2 do not contain any leading zero, except the string \"0\" itself.",
+    ],
+    tests: [
+      { args: ["2", "3"], js: "6", py: "6", java: "6" },
+      { args: ["123", "456"], js: "56088", py: "56088", java: "56088" },
+      { args: ["0", "9999"], js: "0", py: "0", java: "0" },
+    ],
+  },
+  "powx-n": {
+    description:
+      "Implement pow(x, n), which calculates x raised to the power n (i.e., x^n).",
+    constraints: [
+      "-100.0 < x < 100.0",
+      "-2^31 <= n <= 2^31 - 1",
+      "n is an integer.",
+      "-10^4 <= x^n <= 10^4",
+    ],
+    tests: [
+      { args: [2.0, 10], js: "1024", py: "1024.0", java: "1024.0" },
+      { args: [2.1, 3], js: "9.261", py: "9.261", java: "9.261" },
+      { args: [2.0, -2], js: "0.25", py: "0.25", java: "0.25" },
+    ],
+  },
+  "plus-one": {
+    description:
+      "You are given a large integer represented as an integer array digits, where each digits[i] is the ith digit of the integer. Increment the large integer by one and return the resulting array of digits.",
+    constraints: [
+      "1 <= digits.length <= 100",
+      "0 <= digits[i] <= 9",
+      "digits does not contain leading zeros.",
+    ],
+    tests: [
+      { args: [[1, 2, 3]], js: "[1,2,4]", py: "[1, 2, 4]", java: "[1, 2, 4]" },
+      { args: [[9]], js: "[1,0]", py: "[1, 0]", java: "[1, 0]" },
+      { args: [[9, 9]], js: "[1,0,0]", py: "[1, 0, 0]", java: "[1, 0, 0]" },
+    ],
+  },
+  "minimum-interval-to-include-each-query": {
+    description:
+      "You are given a 2D integer array intervals where intervals[i] = [l_i, r_i] represent an inclusive interval. You are also given an integer array queries. For each query j, find the size of the smallest interval i such that l_i <= queries[j] <= r_i. If no such interval exists, store -1.",
+    constraints: [
+      "1 <= intervals.length, queries.length <= 10^5",
+      "intervals[i].length == 2",
+      "1 <= l_i <= r_i <= 10^7",
+      "1 <= queries[j] <= 10^7",
+    ],
+    tests: [
+      {
+        args: [
+          [
+            [1, 4],
+            [2, 3],
+            [3, 4],
+          ],
+          [3, 4, 5],
+        ],
+        js: "[2,1,-1]",
+        py: "[2, 1, -1]",
+        java: "[2, 1, -1]",
+      },
+    ],
+  },
+  "valid-parenthesis-string": {
+    description:
+      "Given a string s containing only '(', ')' and '*', determine if the string is valid. '*' can be treated as '(', ')' or an empty string.",
+    constraints: ["1 <= s.length <= 100", "s[i] is '(', ')' or '*'."],
+    tests: [
+      { args: ["(**)"], js: "true", py: "True", java: "true" },
+      { args: ["(*)"], js: "true", py: "True", java: "true" },
+      { args: ["(*)))"], js: "false", py: "False", java: "false" },
+    ],
+  },
+  "partition-labels": {
+    description:
+      "You are given a string s. We want to partition the string into as many parts as possible so that each letter appears in at most one part. Return a list of integers representing the size of these parts.",
+    constraints: [
+      "1 <= s.length <= 500",
+      "s consists of lowercase English letters.",
+    ],
+    tests: [
+      {
+        args: ["ababcbacadefegdehijhklij"],
+        js: "[9,7,8]",
+        py: "[9, 7, 8]",
+        java: "[9, 7, 8]",
+      },
+      { args: ["eccbbbbdec"], js: "[10]", py: "[10]", java: "[10]" },
+    ],
+  },
+  "merge-triplets-to-form-target-triplet": {
+    description:
+      "You are given a 2D integer array triplets and an integer array target. Choose a subset of triplets such that merging them coordinate-wise (max in each position) equals target. Return true if such a subset exists.",
+    constraints: [
+      "1 <= triplets.length <= 10^5",
+      "triplets[i].length == target.length == 3",
+      "0 <= a_i, b_i, c_i, x, y, z <= 1000",
+    ],
+    tests: [
+      {
+        args: [
+          [
+            [2, 5, 3],
+            [1, 8, 4],
+            [1, 7, 5],
+          ],
+          [2, 7, 5],
+        ],
+        js: "true",
+        py: "True",
+        java: "true",
+      },
+      {
+        args: [
+          [
+            [3, 4, 5],
+            [4, 5, 6],
+          ],
+          [3, 2, 5],
+        ],
+        js: "false",
+        py: "False",
+        java: "false",
+      },
+    ],
+  },
+  "hand-of-straights": {
+    description:
+      "Alice has some number of cards and she wants to rearrange the cards into groups so that each group is of size groupSize, and consists of groupSize consecutive cards. Given an integer array hand and groupSize, return true if she can rearrange the cards, or false otherwise.",
+    constraints: [
+      "1 <= hand.length <= 10^4",
+      "0 <= hand[i] <= 10^9",
+      "1 <= groupSize <= hand.length",
+    ],
+    tests: [
+      {
+        args: [[1, 2, 3, 6, 2, 3, 4, 7, 8], 3],
+        js: "true",
+        py: "True",
+        java: "true",
+      },
+      {
+        args: [[1, 2, 3, 4, 5], 4],
+        js: "false",
+        py: "False",
+        java: "false",
+      },
+    ],
+  },
+  "regular-expression-matching": {
+    description:
+      "Given an input string s and a pattern p, implement regular expression matching with support for '.' and '*' where '.' matches any single character and '*' matches zero or more of the preceding element.",
+    constraints: [
+      "1 <= s.length <= 20",
+      "1 <= p.length <= 20",
+      "s contains only lowercase English letters.",
+      "p contains only lowercase English letters, '.', and '*'.",
+      "It is guaranteed for each appearance of '*', there will be a previous valid character to match.",
+    ],
+    tests: [
+      { args: ["aa", "a"], js: "false", py: "False", java: "false" },
+      { args: ["aa", "a*"], js: "true", py: "True", java: "true" },
+      { args: ["ab", ".*"], js: "true", py: "True", java: "true" },
+    ],
+  },
+  "burst-balloons": {
+    description:
+      "You are given n balloons, indexed from 0 to n - 1. Each balloon is painted with a number on it represented by an array nums. You are asked to burst all the balloons. Return the maximum coins you can collect.",
+    constraints: [
+      "n == nums.length",
+      "1 <= n <= 300",
+      "0 <= nums[i] <= 100",
+    ],
+    tests: [
+      { args: [[3, 1, 5, 8]], js: "167", py: "167", java: "167" },
+      { args: [[1, 5]], js: "10", py: "10", java: "10" },
+    ],
+  },
+  "edit-distance": {
+    description:
+      "Given two strings word1 and word2, return the minimum number of operations required to convert word1 to word2. You have insert, delete, and replace a character.",
+    constraints: [
+      "0 <= word1.length, word2.length <= 500",
+      "word1 and word2 consist of lowercase English letters.",
+    ],
+    tests: [
+      { args: ["horse", "ros"], js: "3", py: "3", java: "3" },
+      { args: ["intention", "execution"], js: "5", py: "5", java: "5" },
+      { args: ["abc", "abc"], js: "0", py: "0", java: "0" },
+    ],
+  },
+  "distinct-subsequences": {
+    description:
+      "Given two strings s and t, return the number of distinct subsequences of s which equals t.",
+    constraints: [
+      "1 <= s.length, t.length <= 1000",
+      "s and t consist of English letters.",
+    ],
+    tests: [
+      { args: ["rabbbit", "rabbit"], js: "3", py: "3", java: "3" },
+      { args: ["babgbag", "bag"], js: "5", py: "5", java: "5" },
+    ],
+  },
+  "interleaving-string": {
+    description:
+      "Given strings s1, s2, and s3, find whether s3 is formed by an interleaving of s1 and s2.",
+    constraints: [
+      "0 <= s1.length, s2.length <= 100",
+      "0 <= s3.length <= 200",
+      "s1, s2, and s3 consist of lowercase English letters.",
+    ],
+    tests: [
+      {
+        args: ["aabcc", "dbbca", "aadbbcbcac"],
+        js: "true",
+        py: "True",
+        java: "true",
+      },
+      {
+        args: ["aabcc", "dbbca", "aadbbbaccc"],
+        js: "false",
+        py: "False",
+        java: "false",
+      },
+      { args: ["", "", ""], js: "true", py: "True", java: "true" },
+    ],
+  },
+  "target-sum": {
+    description:
+      "You are given an integer array nums and an integer target. You want to build an expression out of nums by adding a '+' or '-' before each integer in nums and then concatenate all the integers. Return the number of different expressions that evaluate to target.",
+    constraints: [
+      "1 <= nums.length <= 20",
+      "0 <= nums[i] <= 1000",
+      "0 <= sum(nums[i]) <= 1000",
+      "-1000 <= target <= 1000",
+    ],
+    tests: [
+      {
+        args: [[1, 1, 1, 1, 1], 3],
+        js: "5",
+        py: "5",
+        java: "5",
+      },
+      { args: [[1], 1], js: "1", py: "1", java: "1" },
+    ],
+  },
+  "coin-change-ii": {
+    description:
+      "You are given an integer array coins representing coins of different denominations and an integer amount representing a total amount of money. Return the number of combinations that make up that amount. If that amount cannot be made up by any combination, return 0.",
+    constraints: [
+      "1 <= coins.length <= 300",
+      "1 <= coins[i] <= 5000",
+      "All values of coins are unique.",
+      "0 <= amount <= 5000",
+    ],
+    tests: [
+      {
+        args: [5, [1, 2, 5]],
+        js: "4",
+        py: "4",
+        java: "4",
+      },
+      { args: [3, [2]], js: "0", py: "0", java: "0" },
+      { args: [10, [10]], js: "1", py: "1", java: "1" },
+    ],
+  },
+  "best-time-to-buy-and-sell-stock-with-cooldown": {
+    description:
+      "You are given an array prices where prices[i] is the price of a given stock on the ith day. Find the maximum profit you can achieve with this restriction: after you sell, you cannot buy on the next day (cooldown).",
+    constraints: [
+      "1 <= prices.length <= 5000",
+      "0 <= prices[i] <= 1000",
+    ],
+    tests: [
+      { args: [[1, 2, 3, 0, 2]], js: "3", py: "3", java: "3" },
+      { args: [[1]], js: "0", py: "0", java: "0" },
+    ],
+  },
+  "min-cost-climbing-stairs": {
+    description:
+      "You are given an integer array cost where cost[i] is the cost of ith step on a staircase. Once you pay the cost, you can either climb one or two steps. You can either start from the step with index 0, or the step with index 1. Return the minimum cost to reach the top of the floor.",
+    constraints: [
+      "2 <= cost.length <= 1000",
+      "0 <= cost[i] <= 999",
+    ],
+    tests: [
+      { args: [[10, 15, 20]], js: "15", py: "15", java: "15" },
+      {
+        args: [[1, 100, 1, 1, 1, 100, 1, 1, 100, 1]],
+        js: "6",
+        py: "6",
+        java: "6",
+      },
+    ],
+  },
+  "swim-in-rising-water": {
+    description:
+      "You are given an n x n integer matrix grid where each value grid[i][j] represents the elevation at that point (i, j). The rain starts to fall. At time t, the depth of the water everywhere is t. You can swim from a square to another 4-directionally adjacent square if both squares have elevation at most t. Return the least time until you can reach the bottom right square (n - 1, n - 1) from the top left square (0, 0).",
+    constraints: [
+      "n == grid.length",
+      "n == grid[i].length",
+      "1 <= n <= 50",
+      "0 <= grid[i][j] < n^2",
+      "Each value grid[i][j] is unique.",
+    ],
+    tests: [
+      {
+        args: [
+          [
+            [0, 2],
+            [1, 3],
+          ],
+        ],
+        js: "3",
+        py: "3",
+        java: "3",
+      },
+    ],
+  },
+  "reconstruct-itinerary": {
+    description:
+      "You are given a list of airline tickets where tickets[i] = [from_i, to_i] represent a flight from airport from_i to airport to_i. Reconstruct the itinerary in order, starting from JFK. If there are multiple valid itineraries, return the itinerary that has the smallest lexical order when read as a single string.",
+    constraints: [
+      "1 <= tickets.length <= 300",
+      "tickets[i].length == 2",
+      "from_i.length == 3",
+      "to_i.length == 3",
+      "from_i and to_i consist of uppercase English letters.",
+      "from_i != to_i",
+    ],
+    tests: [
+      {
+        args: [
+          [
+            ["MUC", "LHR"],
+            ["JFK", "MUC"],
+            ["SFO", "SJC"],
+            ["LHR", "SFO"],
+          ],
+        ],
+        js: '["JFK","MUC","LHR","SFO","SJC"]',
+        py: '["JFK", "MUC", "LHR", "SFO", "SJC"]',
+        java: '["JFK", "MUC", "LHR", "SFO", "SJC"]',
+      },
+    ],
+  },
+  "network-delay-time": {
+    description:
+      "You are given a network of n nodes, labeled from 1 to n. You are also given times, a list of travel times as directed edges times[i] = (u_i, v_i, w_i), where u_i is the source node, v_i is the target node, and w_i is the time it takes for a signal to travel from source to target. We will send a signal from a given node k. Return the minimum time it takes for all of the n nodes to receive the signal, or -1 if it is impossible for all nodes to receive the signal.",
+    constraints: [
+      "1 <= k <= n <= 100",
+      "1 <= times.length <= 6000",
+      "times[i].length == 3",
+      "1 <= u_i, v_i <= n",
+      "u_i != v_i",
+      "0 <= w_i <= 100",
+      "All pairs (u_i, v_i) are unique.",
+    ],
+    tests: [
+      {
+        args: [
+          [
+            [2, 1, 1],
+            [2, 3, 1],
+            [3, 4, 1],
+          ],
+          4,
+          2,
+        ],
+        js: "2",
+        py: "2",
+        java: "2",
+      },
+    ],
+  },
+  "redundant-connection": {
+    description:
+      "In this problem, a tree is an undirected graph that is connected and has no cycles. You are given a graph that started as a tree with n nodes labeled from 1 to n, with one additional edge added. Return an edge that can be removed so that the resulting graph is a tree of n nodes. If there are multiple answers, return the answer that occurs last in the input.",
+    constraints: [
+      "n == edges.length",
+      "3 <= n <= 1000",
+      "edges[i].length == 2",
+      "1 <= a_i, b_i <= n",
+      "a_i != b_i",
+    ],
+    tests: [
+      {
+        args: [[[1, 2], [1, 3], [2, 3]]],
+        js: "[2,3]",
+        py: "[2, 3]",
+        java: "[2, 3]",
+      },
+      {
+        args: [[[1, 2], [2, 3], [3, 4], [1, 4], [1, 5]]],
+        js: "[1,4]",
+        py: "[1, 4]",
+        java: "[1, 4]",
+      },
+    ],
+  },
+  "surrounded-regions": {
+    description:
+      "Given an m x n matrix board containing 'X' and 'O', capture all regions that are 4-directionally surrounded by 'X'. A region is captured by flipping all 'O's into 'X's in that surrounded region. Modify board in-place, then print JSON.stringify(board) (JavaScript), json.dumps(board) (Python), or Arrays.deepToString(board) (Java) so the judge can compare the final grid.",
+    constraints: [
+      "m == board.length",
+      "n == board[i].length",
+      "1 <= m, n <= 200",
+      "board[i][j] is 'X' or 'O'.",
+    ],
+    tests: [
+      {
+        args: [
+          [
+            ["X", "X", "X", "X"],
+            ["X", "O", "O", "X"],
+            ["X", "X", "O", "X"],
+            ["X", "O", "X", "X"],
+          ],
+        ],
+        js: '[["X","X","X","X"],["X","X","X","X"],["X","X","X","X"],["X","O","X","X"]]',
+        py: '[["X", "X", "X", "X"], ["X", "X", "X", "X"], ["X", "X", "X", "X"], ["X", "O", "X", "X"]]',
+        java: '[["X","X","X","X"],["X","X","X","X"],["X","X","X","X"],["X","O","X","X"]]',
+      },
+    ],
+  },
+  "walls-and-gates": {
+    description:
+      "You are given an m x n grid rooms initialized with these three possible values: -1 wall, 0 gate, INF empty room. Fill each empty room with the distance to its nearest gate. If it is impossible to reach a gate, leave INF. Mutate rooms in-place, then print JSON.stringify(rooms) (or json.dumps / deep string) for the judge.",
+    constraints: [
+      "m == rooms.length",
+      "n == rooms[i].length",
+      "1 <= m, n <= 250",
+      "rooms[i][j] is -1, 0, or 2^31 - 1.",
+    ],
+    tests: [
+      {
+        args: [
+          [
+            [2147483647, -1, 0, 2147483647],
+            [2147483647, 2147483647, 2147483647, -1],
+            [2147483647, -1, 2147483647, -1],
+            [0, -1, 2147483647, 2147483647],
+          ],
+        ],
+        js: "[[3,-1,0,1],[2,2,1,-1],[1,-1,2,-1],[0,-1,3,4]]",
+        py: "[[3, -1, 0, 1], [2, 2, 1, -1], [1, -1, 2, -1], [0, -1, 3, 4]]",
+        java: "[[3, -1, 0, 1], [2, 2, 1, -1], [1, -1, 2, -1], [0, -1, 3, 4]]",
+      },
+    ],
+  },
+  "max-area-of-island": {
+    description:
+      "You are given an m x n binary matrix grid. An island is a group of 1's connected 4-directionally. Return the maximum area of an island in grid. If there is no island, return 0.",
+    constraints: [
+      "m == grid.length",
+      "n == grid[i].length",
+      "1 <= m, n <= 50",
+      "grid[i][j] is either 0 or 1.",
+    ],
+    tests: [
+      {
+        args: [
+          [
+            [0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0],
+            [0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 1, 0, 0, 1, 1, 0, 0, 1, 0, 1, 0, 0],
+            [0, 1, 0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0],
+            [0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0],
+            [0, 0, 0, 0, 1, 1, 0, 1, 1, 1, 0, 0, 0],
+          ],
+        ],
+        js: "6",
+        py: "6",
+        java: "6",
+      },
+      {
+        args: [[[0, 0, 0, 0, 0, 0, 0, 0]]],
+        js: "0",
+        py: "0",
+        java: "0",
+      },
+    ],
+  },
+  "n-queens": {
+    description:
+      "The n-queens puzzle is the problem of placing n queens on an n x n chessboard such that no two queens attack each other. Return all distinct solutions; for this judge print the number of distinct solutions (the length of your solutions array).",
+    constraints: ["1 <= n <= 9"],
+    tests: [
+      { args: [4], js: "2", py: "2", java: "2" },
+      { args: [1], js: "1", py: "1", java: "1" },
+    ],
+  },
+  "generate-parentheses": {
+    description:
+      "Given n pairs of parentheses, write a function to generate all combinations of well-formed parentheses. Print JSON.stringify(result) sorted lexicographically (or sort before printing) so output matches the judge.",
+    constraints: ["1 <= n <= 8"],
+    tests: [
+      {
+        args: [3],
+        js: "[\"((()))\",\"(()())\",\"(())()\",\"()(())\",\"()()()\"]",
+        py: "['((()))', '(()())', '(())()', '()(())', '()()()']",
+        java: "[\"((()))\",\"(()())\",\"(())()\",\"()(())\",\"()()()\"]",
+      },
+    ],
+  },
+  "subsets-ii": {
+    description:
+      "Given an integer array nums that may contain duplicates, return all possible subsets (the power set). The solution set must not contain duplicate subsets. Sort subsets and the order of subsets to match the judge; print JSON.stringify(result).",
+    constraints: [
+      "1 <= nums.length <= 10",
+      "-10 <= nums[i] <= 10",
+    ],
+    tests: [
+      {
+        args: [[1, 2, 2]],
+        js: "[[],[1],[1,2],[1,2,2],[2],[2,2]]",
+        py: "[[], [1], [1, 2], [1, 2, 2], [2], [2, 2]]",
+        java: "[[], [1], [1, 2], [1, 2, 2], [2], [2, 2]]",
+      },
+    ],
+  },
+  "combination-sum-ii": {
+    description:
+      "Given a collection of candidate numbers candidates and a target number target, find all unique combinations in candidates where the candidate numbers sum to target. Each number in candidates may only be used once in the combination. Sort each combination and sort the list of combinations; print JSON.stringify(result).",
+    constraints: [
+      "1 <= candidates.length <= 100",
+      "1 <= candidates[i] <= 50",
+      "1 <= target <= 30",
+    ],
+    tests: [
+      {
+        args: [[10, 1, 2, 7, 6, 1, 5], 8],
+        js: "[[1,1,6],[1,2,5],[1,7],[2,6]]",
+        py: "[[1, 1, 6], [1, 2, 5], [1, 7], [2, 6]]",
+        java: "[[1, 1, 6], [1, 2, 5], [1, 7], [2, 6]]",
+      },
+    ],
+  },
+  "design-twitter": {
+    description:
+      "Design a simplified version of Twitter where users can post tweets, follow/unfollow another user, and see the 10 most recent tweets in their news feed. Implement simulateTwitter(operations, values) (or your starter function name) to run the LeetCode 355 example 1 sequence and return the array of return values in order. Print JSON.stringify(result) (JavaScript), json.dumps(result) (Python), or an equivalent compact JSON string (Java) so it matches the judge.",
+    constraints: [
+      "1 <= userId, followerId, followeeId <= 500",
+      "0 <= tweetId <= 10^4",
+      "All tweets have unique IDs.",
+      "At most 3 * 10^4 calls will be made to postTweet, getNewsFeed, follow, and unfollow.",
+    ],
+    tests: [
+      {
+        args: [
+          [
+            "Twitter",
+            "postTweet",
+            "getNewsFeed",
+            "follow",
+            "postTweet",
+            "getNewsFeed",
+          ],
+          [[], [1, 5], [1], [1, 2], [2, 6], [1]],
+        ],
+        js: "[null,null,[5],null,null,[6,5]]",
+        py: "[null,null,[5],null,null,[6,5]]",
+        java: "[null,null,[5],null,null,[6,5]]",
+      },
+    ],
+  },
+  "detect-squares": {
+    description:
+      "You are given a stream of points on the X-Y plane. Design an algorithm that adds new points and counts how many different squares (axis-aligned, non-degenerate) can be formed with a given query point as one vertex and other vertices from added points. For this simplified judge, count axis-aligned unit squares fully covered by the given distinct integer points (each point is [x, y]).",
+    constraints: [
+      "Points are distinct integer coordinates.",
+      "1 <= number of points <= 1000",
+      "0 <= x, y <= 1000",
+    ],
+    tests: [
+      {
+        args: [
+          [
+            [0, 0],
+            [1, 0],
+            [1, 1],
+            [0, 1],
+          ],
+        ],
+        js: "1",
+        py: "1",
+        java: "1",
+      },
+    ],
+  },
+  "kth-largest-element-in-an-array": {
+    description:
+      "Given an integer array nums and an integer k, return the kth largest element in the array. Note that it is the kth largest element in the sorted order, not the kth distinct element.",
+    constraints: [
+      "1 <= k <= nums.length <= 10^5",
+      "-10^4 <= nums[i] <= 10^4",
+    ],
+    tests: [
+      {
+        args: [[3, 2, 1, 5, 6, 4], 2],
+        js: "5",
+        py: "5",
+        java: "5",
+      },
+      {
+        args: [[3, 2, 3, 1, 2, 4, 5, 5, 6], 4],
+        js: "4",
+        py: "4",
+        java: "4",
+      },
+    ],
+  },
+  "kth-largest-element-in-a-stream": {
+    description:
+      "Design a class to find the kth largest element in a stream using a min-heap of size k. Implement simulateKthLargest(operations, arguments) for the sample call sequence and return the list of outputs in order (null for constructor, then integers for each add). Print JSON.stringify(result) / json.dumps(result) / compact JSON for Java.",
+    constraints: [
+      "1 <= k <= 10^4",
+      "0 <= nums.length <= 10^4",
+      "-10^4 <= nums[i] <= 10^4",
+      "-10^4 <= val <= 10^4",
+      "At most 10^4 calls will be made to add.",
+      "It is guaranteed that there will be at least k elements in the array when you search for the kth element.",
+    ],
+    tests: [
+      {
+        args: [
+          [
+            "KthLargest",
+            "add",
+            "add",
+            "add",
+            "add",
+            "add",
+          ],
+          [[3, [4, 5, 8, 2]], [3], [5], [10], [9], [4]],
+        ],
+        js: "[null,null,4,5,5,8,8]",
+        py: "[null,null,4,5,5,8,8]",
+        java: "[null,null,4,5,5,8,8]",
+      },
+    ],
+  },
+  "count-good-nodes-in-binary-tree": {
+    description:
+      "Given a binary tree root, a node X in the tree is named good if in the path from root to X there are no nodes with a value greater than X. Return the number of good nodes. Tree is given as level-order array (null for missing children), same format as other tree problems in this track.",
+    constraints: [
+      "The number of nodes in the binary tree is in the range [1, 10^4].",
+      "Each node's value is between [-10^4, 10^4].",
+    ],
+    tests: [
+      {
+        args: [[3, 3, null, 4, 2]],
+        js: "3",
+        py: "3",
+        java: "3",
+      },
+      {
+        args: [[3, 1, 4, 3, null, 1, 5]],
+        js: "4",
+        py: "4",
+        java: "4",
+      },
+    ],
+  },
+  "copy-list-with-random-pointer": {
+    description:
+      "A linked list of length n is given such that each node contains an additional random pointer. Construct a deep copy of the list. Input is the LeetCode serialization: each node is [label, random_index] where random_index is the 0-based index of the random target or null. Print JSON.stringify(serialized_copy) using the same serialization format.",
+    constraints: [
+      "0 <= n <= 1000",
+      "-10^4 <= Node.val <= 10^4",
+      "Node.random is null or is pointing to some node in the linked list.",
+    ],
+    tests: [
+      {
+        args: [[[7, null]]],
+        js: "[[7,null]]",
+        py: "[[7, None]]",
+        java: "[[7, null]]",
+      },
+      {
+        args: [[[7, null], [13, 0], [11, 4], [10, 2], [1, 0]]],
+        js: "[[7,null],[13,0],[11,4],[10,2],[1,0]]",
+        py: "[[7, None], [13, 0], [11, 4], [10, 2], [1, 0]]",
+        java: "[[7, null], [13, 0], [11, 4], [10, 2], [1, 0]]",
+      },
+    ],
+  },
+  "koko-eating-bananas": {
+    description:
+      "Koko loves to eat bananas. There are n piles of bananas; piles[i] is the number of bananas in the ith pile. Guards come back in h hours. Koko can decide her bananas-per-hour eating speed k. Each hour, she chooses a pile and eats k bananas from that pile. Return the minimum integer k such that she can finish all bananas within h hours.",
+    constraints: [
+      "1 <= piles.length <= 10^4",
+      "piles.length <= h <= 10^9",
+      "1 <= piles[i] <= 10^9",
+    ],
+    tests: [
+      {
+        args: [[3, 6, 7, 11], 8],
+        js: "4",
+        py: "4",
+        java: "4",
+      },
+      {
+        args: [[30, 11, 23, 4, 20], 5],
+        js: "30",
+        py: "30",
+        java: "30",
+      },
+    ],
+  },
+  "search-a-2d-matrix": {
+    description:
+      "Write an efficient algorithm that searches for a value target in an m x n integer matrix matrix. Integers in each row are sorted from left to right. The first integer of each row is greater than the last integer of the previous row.",
+    constraints: [
+      "m == matrix.length",
+      "n == matrix[i].length",
+      "1 <= m, n <= 100",
+      "-10^4 <= matrix[i][j], target <= 10^4",
+    ],
+    tests: [
+      {
+        args: [
+          [
+            [1, 3, 5, 7],
+            [10, 11, 16, 20],
+            [23, 30, 34, 60],
+          ],
+          3,
+        ],
+        js: "true",
+        py: "True",
+        java: "true",
+      },
+      {
+        args: [[[1]], 2],
+        js: "false",
+        py: "False",
+        java: "false",
+      },
+    ],
+  },
+  "car-fleet": {
+    description:
+      "There are n cars at given positions and speeds on a one-lane road that ends at target. A car fleet is a non-empty set of cars driving at the same position and speed; fleets never pass each other. Return the number of car fleets that will arrive at the destination.",
+    constraints: [
+      "n == position.length == speed.length",
+      "1 <= n <= 10^5",
+      "0 < position[i], speed[i], target <= 10^6",
+      "All position values are unique.",
+    ],
+    tests: [
+      {
+        args: [12, [10, 8, 0, 5, 3], [2, 4, 1, 1, 3]],
+        js: "3",
+        py: "3",
+        java: "3",
+      },
+      {
+        args: [10, [3], [3]],
+        js: "1",
+        py: "1",
+        java: "1",
+      },
+    ],
+  },
+  "3sum": {
+    description:
+      "Given an integer array nums, return all the triplets [nums[i], nums[j], nums[k]] such that i != j != k and nums[i] + nums[j] + nums[k] == 0. Notice that the solution set must not contain duplicate triplets. Sort each triplet and sort the list of triplets for deterministic output; print JSON.stringify(result) (or json.dumps) so it matches the judge.",
+    constraints: [
+      "3 <= nums.length <= 3000",
+      "-10^5 <= nums[i] <= 10^5",
+    ],
+    tests: [
+      {
+        args: [[-1, 0, 1, 2, -1, -4]],
+        js: "[[-1,-1,2],[-1,0,1]]",
+        py: "[[-1, -1, 2], [-1, 0, 1]]",
+        java: "[[-1, -1, 2], [-1, 0, 1]]",
+      },
+      {
+        args: [[0, 1, 1]],
+        js: "[]",
+        py: "[]",
+        java: "[]",
+      },
+      {
+        args: [[0, 0, 0]],
+        js: "[[0,0,0]]",
+        py: "[[0, 0, 0]]",
+        java: "[[0, 0, 0]]",
+      },
+    ],
+  },
+  "two-sum-ii-input-array-is-sorted": {
+    description:
+      "Given a 1-indexed sorted array of integers numbers and an integer target, return the 1-indexed indices of the two numbers such that they add up to target.",
+    constraints: [
+      "2 <= numbers.length <= 3 * 10^4",
+      "-1000 <= numbers[i] <= 1000",
+      "numbers is sorted in non-decreasing order.",
+      "-1000 <= target <= 1000",
+      "The tests guarantee exactly one solution.",
+    ],
+    tests: [
+      {
+        args: [[2, 7, 11, 15], 9],
+        js: "[1,2]",
+        py: "[1, 2]",
+        java: "[1, 2]",
+      },
+      {
+        args: [[2, 3, 4], 6],
+        js: "[1,3]",
+        py: "[1, 3]",
+        java: "[1, 3]",
+      },
+    ],
+  },
+};
+
+function buildJsonRecord(enrich) {
+  const out = {};
+  for (const [id, data] of Object.entries(enrich)) {
+    const tests = data.tests.map((t) => ({
+      input: `args = ${JSON.stringify(t.args)}`,
+      expectedOutput: {
+        javascript: t.js,
+        python: t.py,
+        java: t.java,
+      },
+    }));
+    const combined = {
+      javascript: tests.map((t) => t.expectedOutput.javascript).join("\n"),
+      python: tests.map((t) => t.expectedOutput.python).join("\n"),
+      java: tests.map((t) => t.expectedOutput.java).join("\n"),
+    };
+    out[id] = {
+      description: data.description,
+      descriptionNotes: data.descriptionNotes || [],
+      constraints: data.constraints,
+      publicTests: { tests, combinedExpectedOutput: combined },
+    };
+  }
+  return out;
+}
+
+const json = buildJsonRecord(E);
+fs.writeFileSync(outPath, JSON.stringify(json, null, 2), "utf8");
+console.log("Wrote", outPath, "keys:", Object.keys(json).length);

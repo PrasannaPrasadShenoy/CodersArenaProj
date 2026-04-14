@@ -1,0 +1,17 @@
+{
+  "id": "gqa",
+  "title": "Grouped Query Attention",
+  "difficulty": "Hard",
+  "track": "ml",
+  "category": "ML Attention",
+  "functionName": "GroupQueryAttention",
+  "hint": "Like MHA but fewer KV heads. W_k/W_v project to num_kv_heads * d_k dims. Use repeat_interleave to expand KV heads to match Q heads.",
+  "description": {
+    "text": "Implement grouped query attention (GQA) as in LLaMA 2: use fewer KV heads than query heads and share K/V across groups of query heads to reduce memory and compute while preserving multi-head expressiveness.",
+    "notes": []
+  },
+  "examples": [],
+  "constraints": [
+    "Use PyTorch only unless task says otherwise."
+  ]
+}

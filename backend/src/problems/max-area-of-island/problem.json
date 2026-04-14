@@ -1,0 +1,16 @@
+{
+  "id": "max-area-of-island",
+  "title": "Max Area of Island",
+  "difficulty": "Medium",
+  "track": "dsa",
+  "category": "Graphs",
+  "description": {
+    "text": "Solve Max Area of Island.",
+    "notes": [
+      "Source: https://neetcode.io/problems/max-area-of-island?list=neetcode150",
+      "Imported automatically from third-party problem datasets."
+    ]
+  },
+  "examples": [],
+  "constraints": []
+}

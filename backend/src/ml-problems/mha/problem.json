@@ -1,0 +1,17 @@
+{
+  "id": "mha",
+  "title": "Multi-Head Attention",
+  "difficulty": "Hard",
+  "track": "ml",
+  "category": "ML Attention",
+  "functionName": "MultiHeadAttention",
+  "hint": "Use nn.Linear for Q/K/V/O projections. d_k = d_model // num_heads. Reshape to (B, heads, S, d_k), SDPA per head, concat, output projection.",
+  "description": {
+    "text": "Implement multi-head self-attention as an nn.Module: project to Q, K, V, split into multiple heads, apply scaled dot-product attention per head, concatenate, and apply an output projection.",
+    "notes": []
+  },
+  "examples": [],
+  "constraints": [
+    "Use PyTorch only unless task says otherwise."
+  ]
+}

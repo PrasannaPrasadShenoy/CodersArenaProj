@@ -1,0 +1,12 @@
+{
+  "tests": [
+    {
+      "name": "Matches F.gelu",
+      "code": "\nimport torch\ntorch.manual_seed(0)\nx = torch.randn(4, 8)\nout = {fn}(x)\nref = torch.nn.functional.gelu(x)\nassert torch.allclose(out, ref, atol=1e-4), 'Does not match F.gelu'\n"
+    },
+    {
+      "name": "gelu(0) = 0",
+      "code": "\nimport torch\nout = {fn}(torch.tensor([0.0]))\nassert torch.allclose(out, torch.tensor([0.0]), atol=1e-7), f'gelu(0) = {out.item()}'\n"
+    }
+  ]
+}

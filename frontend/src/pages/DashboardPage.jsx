@@ -3,6 +3,7 @@ import { useUser } from "@clerk/clerk-react";
 import { useState } from "react";
 import { useActiveSessions, useCreateSession, useMyRecentSessions } from "../hooks/useSessions";
 import { useProblemsList } from "../hooks/useProblems";
+import { useUserProgress } from "../hooks/useUserProgress";
 
 import Navbar from "../components/Navbar";
 import WelcomeSection from "../components/WelcomeSection";
@@ -15,25 +16,67 @@ function DashboardPage() {
   const navigate = useNavigate();
   const { user } = useUser();
   const [showCreateModal, setShowCreateModal] = useState(false);
-  const [roomConfig, setRoomConfig] = useState({ problem: "", difficulty: "" });
+  const [roomConfig, setRoomConfig] = useState({
+    sessionKind: "coding",
+    discussionTopic: "",
+    problem: "",
+    problemId: "",
+    problemTrack: "dsa",
+    difficulty: "",
+  });
 
   const createSessionMutation = useCreateSession();
   const { problemsArray } = useProblemsList();
 
   const { data: activeSessionsData, isLoading: loadingActiveSessions } = useActiveSessions();
   const { data: recentSessionsData, isLoading: loadingRecentSessions } = useMyRecentSessions();
+  const { data: userProgress } = useUserProgress();
 
   const handleCreateRoom = () => {
-    if (!roomConfig.problem || !roomConfig.difficulty) return;
+    if (roomConfig.sessionKind === "discussion") {
+      const topic = (roomConfig.discussionTopic || "").trim();
+      if (topic.length < 3) return;
+      createSessionMutation.mutate(
+        { sessionType: "discussion", topic },
+        {
+          onSuccess: (data) => {
+            setShowCreateModal(false);
+            setRoomConfig({
+              sessionKind: "coding",
+              discussionTopic: "",
+              problem: "",
+              problemId: "",
+              problemTrack: "dsa",
+              difficulty: "",
+            });
+            navigate(`/session/${data.session._id}`);
+          },
+        }
+      );
+      return;
+    }
+
+    if (!roomConfig.problem || !roomConfig.problemId || !roomConfig.problemTrack || !roomConfig.difficulty)
+      return;
 
     createSessionMutation.mutate(
       {
         problem: roomConfig.problem,
+        problemId: roomConfig.problemId,
+        problemTrack: roomConfig.problemTrack,
         difficulty: roomConfig.difficulty.toLowerCase(),
       },
       {
         onSuccess: (data) => {
           setShowCreateModal(false);
+          setRoomConfig({
+            sessionKind: "coding",
+            discussionTopic: "",
+            problem: "",
+            problemId: "",
+            problemTrack: "dsa",
+            difficulty: "",
+          });
           navigate(`/session/${data.session._id}`);
         },
       }
@@ -64,7 +107,9 @@ function DashboardPage() {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             <StatsCards
               activeSessionsCount={activeSessions.length}
-              recentSessionsCount={recentSessions.length}
+              totalSessionsCount={userProgress?.totalSessions ?? 0}
+              problemsSolvedCount={userProgress?.problemsSolvedTotal ?? 0}
+              dsaPublicClearedCount={userProgress?.dsa?.publicClearedCount}
             />
             <ActiveSessions
               sessions={activeSessions}

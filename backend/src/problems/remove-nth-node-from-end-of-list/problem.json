@@ -1,0 +1,37 @@
+{
+  "id": "remove-nth-node-from-end-of-list",
+  "title": "Remove Nth Node From End of List",
+  "difficulty": "Medium",
+  "track": "dsa",
+  "category": "Linked List",
+  "description": {
+    "text": "Given the head of a linked list, remove the n<sup>th</sup> node from the end of the list and return its head.",
+    "notes": [
+      "Source: https://neetcode.io/problems/remove-node-from-end-of-linked-list?list=neetcode150",
+      "Imported automatically from third-party problem datasets."
+    ]
+  },
+  "examples": [
+    {
+      "input": "head = [1,2,3,4,5], n = 2",
+      "output": "[1,2,3,5]",
+      "explanation": ""
+    },
+    {
+      "input": "head = [1], n = 1",
+      "output": "[]",
+      "explanation": ""
+    },
+    {
+      "input": "head = [1,2], n = 1",
+      "output": "[1]",
+      "explanation": ""
+    }
+  ],
+  "constraints": [
+    "The number of nodes in the list is `sz`.",
+    "`1 <= sz <= 30`",
+    "`0 <= Node.val <= 100`",
+    "`1 <= n <= sz`"
+  ]
+}

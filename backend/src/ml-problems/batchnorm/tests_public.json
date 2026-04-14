@@ -1,0 +1,12 @@
+{
+  "tests": [
+    {
+      "name": "Training mode â€” zero mean per feature",
+      "code": "\nimport torch\nx = torch.randn(8, 4)\ngamma = torch.ones(4)\nbeta = torch.zeros(4)\nrunning_mean = torch.zeros(4)\nrunning_var = torch.ones(4)\nout = {fn}(x, gamma, beta, running_mean, running_var, training=True)\nassert out.shape == x.shape, f'Shape mismatch: {out.shape}'\ncol_means = out.mean(dim=0)\nassert torch.allclose(col_means, torch.zeros(4), atol=1e-5), f'Column means not zero: {col_means}'\n"
+    },
+    {
+      "name": "Training mode â€” numerical correctness and running stats update",
+      "code": "\nimport torch\ntorch.manual_seed(0)\nx = torch.randn(16, 8)\ngamma = torch.randn(8)\nbeta = torch.randn(8)\nrunning_mean = torch.zeros(8)\nrunning_var = torch.ones(8)\nmomentum = 0.1\nout = {fn}(x, gamma, beta, running_mean, running_var, momentum=momentum, training=True)\n\n# Reference using batch stats\nmean = x.mean(dim=0)\nvar = x.var(dim=0, unbiased=False)\nref = gamma * (x - mean) / torch.sqrt(var + 1e-5) + beta\nassert torch.allclose(out, ref, atol=1e-4), 'Value mismatch'\n\n# Running stats should have moved toward batch stats\nexpected_mean = (1 - momentum) * torch.zeros_like(mean) + momentum * mean\nexpected_var = (1 - momentum) * torch.ones_like(var) + momentum * var\nassert torch.allclose(running_mean, expected_mean, atol=1e-6), 'running_mean not updated correctly'\nassert torch.allclose(running_var, expected_var, atol=1e-6), 'running_var not updated correctly'\n"
+    }
+  ]
+}

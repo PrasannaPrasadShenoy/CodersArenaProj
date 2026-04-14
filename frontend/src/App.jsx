@@ -24,8 +24,14 @@ function App() {
     });
   }, [getToken]);
 
-  // this will get rid of the flickering effect
-  if (!isLoaded) return null;
+  if (!isLoaded) {
+    return (
+      <div className="min-h-screen bg-base-200 flex flex-col items-center justify-center gap-4">
+        <span className="loading loading-spinner loading-lg text-primary" aria-busy="true" aria-label="Loading" />
+        <p className="text-base-content/70 text-sm">Signing you in…</p>
+      </div>
+    );
+  }
 
   return (
     <>

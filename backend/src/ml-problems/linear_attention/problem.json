@@ -1,0 +1,17 @@
+{
+  "id": "linear_attention",
+  "title": "Linear Self-Attention",
+  "difficulty": "Hard",
+  "track": "ml",
+  "category": "ML Attention",
+  "functionName": "linear_attention",
+  "hint": "Feature map: phi(x) = elu(x) + 1. Compute phi(Q) @ (phi(K)^T @ V) instead of softmax(Q @ K^T) @ V. Normalize by phi(Q) @ sum(phi(K)).",
+  "description": {
+    "text": "Implement linear self-attention via a kernel/feature map φ: rewrite attention as φ(Q)(φ(K)^T V) so you avoid forming the full N×N attention matrix—useful for long sequences when φ is chosen appropriately.",
+    "notes": []
+  },
+  "examples": [],
+  "constraints": [
+    "Use PyTorch only unless task says otherwise."
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "id": "word-break",
+  "title": "Word Break",
+  "difficulty": "Medium",
+  "track": "dsa",
+  "category": "1-D Dynamic Programming",
+  "description": {
+    "text": "Given a string s and a dictionary of strings wordDict, return true if s can be segmented into a space-separated sequence of one or more dictionary words.\n\nNote that the same word in the dictionary may be reused multiple times in the segmentation.",
+    "notes": [
+      "Source: https://neetcode.io/problems/word-break?list=neetcode150",
+      "Imported automatically from third-party problem datasets."
+    ]
+  },
+  "examples": [
+    {
+      "input": "s = \"leetcode\", wordDict = [\"leet\",\"code\"]",
+      "output": "true",
+      "explanation": "Return true because \"leetcode\" can be segmented as \"leet code\"."
+    },
+    {
+      "input": "s = \"applepenapple\", wordDict = [\"apple\",\"pen\"]",
+      "output": "true",
+      "explanation": "Return true because \"applepenapple\" can be segmented as \"apple pen apple\"."
+    },
+    {
+      "input": "s = \"catsandog\", wordDict = [\"cats\",\"dog\",\"sand\",\"and\",\"cat\"]",
+      "output": "false",
+      "explanation": ""
+    }
+  ],
+  "constraints": [
+    "`1 <= s.length <= 300`",
+    "`1 <= wordDict.length <= 1000`",
+    "`1 <= wordDict[i].length <= 20`",
+    "`s` and `wordDict[i]` consist of only lowercase English letters.",
+    "All the strings of `wordDict` are **unique**."
+  ]
+}

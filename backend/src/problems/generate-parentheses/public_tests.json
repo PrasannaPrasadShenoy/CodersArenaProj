@@ -1,0 +1,17 @@
+{
+  "tests": [
+    {
+      "input": "args = [[]]",
+      "expectedOutput": {
+        "javascript": "null",
+        "python": "None",
+        "java": "null"
+      }
+    }
+  ],
+  "combinedExpectedOutput": {
+    "javascript": "null",
+    "python": "None",
+    "java": "null"
+  }
+}

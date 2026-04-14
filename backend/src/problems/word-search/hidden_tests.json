@@ -1,0 +1,76 @@
+{
+  "tests": [
+    {
+      "input": "args = [[[\"A\"]],\"A\"]",
+      "expectedOutput": {
+        "javascript": "true",
+        "python": "True",
+        "java": "true"
+      }
+    },
+    {
+      "input": "args = [[[\"A\"]],\"B\"]",
+      "expectedOutput": {
+        "javascript": "false",
+        "python": "False",
+        "java": "false"
+      }
+    },
+    {
+      "input": "args = [[[\"A\",\"B\"],[\"C\",\"D\"]],\"ACDB\"]",
+      "expectedOutput": {
+        "javascript": "true",
+        "python": "True",
+        "java": "true"
+      }
+    },
+    {
+      "input": "args = [[[\"A\",\"B\"],[\"C\",\"D\"]],\"ABDC\"]",
+      "expectedOutput": {
+        "javascript": "true",
+        "python": "True",
+        "java": "true"
+      }
+    },
+    {
+      "input": "args = [[[\"A\",\"B\"],[\"C\",\"D\"]],\"ABCD\"]",
+      "expectedOutput": {
+        "javascript": "false",
+        "python": "False",
+        "java": "false"
+      }
+    },
+    {
+      "input": "args = [[[\"C\",\"A\",\"A\"],[\"A\",\"A\",\"A\"],[\"B\",\"C\",\"D\"]],\"AAB\"]",
+      "expectedOutput": {
+        "javascript": "true",
+        "python": "True",
+        "java": "true"
+      }
+    },
+    {
+      "input": "args = [[[\"A\",\"B\",\"C\",\"E\"],[\"S\",\"F\",\"C\",\"S\"],[\"A\",\"D\",\"E\",\"E\"]],\"ABCESEEEFS\"]",
+      "expectedOutput": {
+        "javascript": "false",
+        "python": "False",
+        "java": "false"
+      }
+    },
+    {
+      "input": "args = [[[\"A\",\"A\",\"A\",\"A\",\"A\",\"A\"],[\"A\",\"A\",\"A\",\"A\",\"A\",\"A\"],[\"A\",\"A\",\"A\",\"A\",\"A\",\"A\"],[\"A\",\"A\",\"A\",\"A\",\"A\",\"A\"],[\"A\",\"A\",\"A\",\"A\",\"A\",\"A\"],[\"A\",\"A\",\"A\",\"A\",\"A\",\"A\"]],\"AAAAAAAAAAAAAAB\"]",
+      "expectedOutput": {
+        "javascript": "false",
+        "python": "False",
+        "java": "false"
+      }
+    },
+    {
+      "input": "args = [[[\"A\",\"B\",\"C\",\"E\"],[\"S\",\"F\",\"C\",\"S\"],[\"A\",\"D\",\"E\",\"E\"]],\"SFCS\"]",
+      "expectedOutput": {
+        "javascript": "true",
+        "python": "True",
+        "java": "true"
+      }
+    }
+  ]
+}

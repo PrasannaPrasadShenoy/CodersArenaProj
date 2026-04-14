@@ -1,0 +1,16 @@
+{
+  "tests": [
+    {
+      "name": "Large window equals full attention",
+      "code": "\nimport torch, math\ntorch.manual_seed(0)\nB, S, D = 2, 6, 8\nQ = torch.randn(B, S, D)\nK = torch.randn(B, S, D)\nV = torch.randn(B, S, D)\nout_win = {fn}(Q, K, V, window_size=S)\nd_k = K.size(-1)\nscores = torch.bmm(Q, K.transpose(1, 2)) / math.sqrt(d_k)\nref = torch.bmm(torch.softmax(scores, dim=-1), V)\nassert torch.allclose(out_win, ref, atol=1e-5), 'Large window should equal full attention'\n"
+    },
+    {
+      "name": "Distant tokens don't affect output",
+      "code": "\nimport torch\ntorch.manual_seed(0)\nB, S, D = 1, 10, 8\nQ = torch.randn(B, S, D)\nK = torch.randn(B, S, D)\nV = torch.randn(B, S, D)\nout1 = {fn}(Q, K, V, window_size=1)\nK2, V2 = K.clone(), V.clone()\nK2[:, 5:] = torch.randn(B, 5, D)\nV2[:, 5:] = torch.randn(B, 5, D)\nout2 = {fn}(Q, K2, V2, window_size=1)\nassert torch.allclose(out1[:, 0], out2[:, 0], atol=1e-5), 'Distant tokens should not affect output'\n"
+    },
+    {
+      "name": "Gradient flow",
+      "code": "\nimport torch\nQ = torch.randn(2, 4, 8, requires_grad=True)\nK = torch.randn(2, 4, 8, requires_grad=True)\nV = torch.randn(2, 4, 8, requires_grad=True)\n{fn}(Q, K, V, window_size=1).sum().backward()\nassert Q.grad is not None, 'Q.grad is None'\n"
+    }
+  ]
+}

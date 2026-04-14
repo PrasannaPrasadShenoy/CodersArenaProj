@@ -1,0 +1,33 @@
+{
+  "tests": [
+    {
+      "input": "args = [[\"WordDictionary\",\"addWord\",\"addWord\",\"addWord\",\"search\",\"search\",\"search\",\"search\"],[[],[\"bad\"],[\"dad\"],[\"mad\"],[\"pad\"],[\"bad\"],[\".ad\"],[\"b..\"]]]",
+      "expectedOutput": {
+        "javascript": "[null,null,null,null,false,true,true,true]",
+        "python": "[None, None, None, None, False, True, True, True]",
+        "java": "[null, null, null, null, false, true, true, true]"
+      }
+    },
+    {
+      "input": "args = [[\"WordDictionary\",\"addWord\",\"search\",\"search\",\"search\"],[[],[\"a\"],[\"a\"],[\".\"],[\"aa\"]]]",
+      "expectedOutput": {
+        "javascript": "[null,null,true,true,false]",
+        "python": "[None, None, True, True, False]",
+        "java": "[null, null, true, true, false]"
+      }
+    },
+    {
+      "input": "args = [[\"WordDictionary\",\"addWord\",\"addWord\",\"search\",\"search\",\"search\"],[[],[\"at\"],[\"and\"],[\"an\"],[\".at\"],[\"an.\"]]]",
+      "expectedOutput": {
+        "javascript": "[null,null,null,false,false,true]",
+        "python": "[None, None, None, False, False, True]",
+        "java": "[null, null, null, false, false, true]"
+      }
+    }
+  ],
+  "combinedExpectedOutput": {
+    "javascript": "[null,null,null,null,false,true,true,true]\n[null,null,true,true,false]\n[null,null,null,false,false,true]",
+    "python": "[None, None, None, None, False, True, True, True]\n[None, None, True, True, False]\n[None, None, None, False, False, True]",
+    "java": "[null, null, null, null, false, true, true, true]\n[null, null, true, true, false]\n[null, null, null, false, false, true]"
+  }
+}

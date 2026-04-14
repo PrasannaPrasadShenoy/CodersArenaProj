@@ -341,6 +341,12 @@ print(maxArea([1,1]))  # Expected: 1`,
   },
 };
 
+for (const problem of Object.values(PROBLEMS)) {
+  if (!problem.track) {
+    problem.track = "dsa";
+  }
+}
+
 export const LANGUAGE_CONFIG = {
   javascript: {
     name: "JavaScript",

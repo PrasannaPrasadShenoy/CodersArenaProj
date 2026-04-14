@@ -1,0 +1,33 @@
+{
+  "tests": [
+    {
+      "input": "args = [\"leetcode\",[\"leet\",\"code\"]]",
+      "expectedOutput": {
+        "javascript": "true",
+        "python": "True",
+        "java": "true"
+      }
+    },
+    {
+      "input": "args = [\"applepenapple\",[\"apple\",\"pen\"]]",
+      "expectedOutput": {
+        "javascript": "true",
+        "python": "True",
+        "java": "true"
+      }
+    },
+    {
+      "input": "args = [\"catsandog\",[\"cats\",\"dog\",\"sand\",\"and\",\"cat\"]]",
+      "expectedOutput": {
+        "javascript": "false",
+        "python": "False",
+        "java": "false"
+      }
+    }
+  ],
+  "combinedExpectedOutput": {
+    "javascript": "true\ntrue\nfalse",
+    "python": "True\nTrue\nFalse",
+    "java": "true\ntrue\nfalse"
+  }
+}

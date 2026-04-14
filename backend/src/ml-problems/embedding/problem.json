@@ -1,0 +1,25 @@
+{
+  "id": "embedding",
+  "title": "Embedding Layer",
+  "difficulty": "Easy",
+  "track": "ml",
+  "category": "ML Fundamentals",
+  "functionName": "MyEmbedding",
+  "hint": "Store a weight matrix of shape (num_embeddings, embedding_dim) as nn.Parameter. Forward = weight[indices].",
+  "description": {
+    "text": "Implement an embedding lookup table: map integer token indices to rows of a learnable weight matrix.",
+    "notes": []
+  },
+  "examples": [
+    {
+      "input": "num_embeddings=10, embedding_dim=4; indices = tensor([1, 3, 1])",
+      "output": "Shape (3, 4): three rows taken from the weight table.",
+      "explanation": "Same index repeats the same embedding vector."
+    }
+  ],
+  "constraints": [
+    "weight shape (num_embeddings, embedding_dim), requires_grad True.",
+    "Forward selects rows by indices (any shape of indices supported like nn.Embedding).",
+    "Do not use nn.Embedding."
+  ]
+}

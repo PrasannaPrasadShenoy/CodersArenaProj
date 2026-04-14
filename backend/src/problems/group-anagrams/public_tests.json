@@ -1,0 +1,33 @@
+{
+  "tests": [
+    {
+      "input": "args = [[\"eat\",\"tea\",\"tan\",\"ate\",\"nat\",\"bat\"]]",
+      "expectedOutput": {
+        "javascript": "[[\"bat\"],[\"nat\",\"tan\"],[\"ate\",\"eat\",\"tea\"]]",
+        "python": "[[\"bat\"], [\"nat\", \"tan\"], [\"ate\", \"eat\", \"tea\"]]",
+        "java": "[[\"bat\"], [\"nat\", \"tan\"], [\"ate\", \"eat\", \"tea\"]]"
+      }
+    },
+    {
+      "input": "args = [[\"\"]]",
+      "expectedOutput": {
+        "javascript": "[[\"\"]]",
+        "python": "[[\"\"]]",
+        "java": "[[\"\"]]"
+      }
+    },
+    {
+      "input": "args = [[\"a\"]]",
+      "expectedOutput": {
+        "javascript": "[[\"a\"]]",
+        "python": "[[\"a\"]]",
+        "java": "[[\"a\"]]"
+      }
+    }
+  ],
+  "combinedExpectedOutput": {
+    "javascript": "[[\"bat\"],[\"nat\",\"tan\"],[\"ate\",\"eat\",\"tea\"]]\n[[\"\"]]\n[[\"a\"]]",
+    "python": "[[\"bat\"], [\"nat\", \"tan\"], [\"ate\", \"eat\", \"tea\"]]\n[[\"\"]]\n[[\"a\"]]",
+    "java": "[[\"bat\"], [\"nat\", \"tan\"], [\"ate\", \"eat\", \"tea\"]]\n[[\"\"]]\n[[\"a\"]]"
+  }
+}

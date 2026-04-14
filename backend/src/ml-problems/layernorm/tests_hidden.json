@@ -1,0 +1,8 @@
+{
+  "tests": [
+    {
+      "name": "Gradient flow",
+      "code": "\nimport torch\nx = torch.randn(2, 8, requires_grad=True)\ngamma = torch.ones(8, requires_grad=True)\nbeta = torch.zeros(8, requires_grad=True)\nout = {fn}(x, gamma, beta)\nout.sum().backward()\nassert x.grad is not None, 'x.grad is None'\nassert gamma.grad is not None, 'gamma.grad is None'\n"
+    }
+  ]
+}

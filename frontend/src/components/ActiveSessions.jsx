@@ -62,13 +62,18 @@ function ActiveSessions({ sessions, isLoading, isUserInSession }) {
                       ) : (
                         <div className="flex items-center gap-2 mb-2">
                           <h3 className="font-bold text-lg truncate">{session.problem}</h3>
+                          <span className="badge badge-sm badge-outline uppercase">
+                            {session.problemTrack || "dsa"}
+                          </span>
                           <span
                             className={`badge badge-sm ${getDifficultyBadgeClass(
                               session.difficulty
                             )}`}
                           >
-                            {session.difficulty.slice(0, 1).toUpperCase() +
-                              session.difficulty.slice(1)}
+                            {session.difficulty
+                              ? session.difficulty.slice(0, 1).toUpperCase() +
+                                session.difficulty.slice(1)
+                              : "—"}
                           </span>
                         </div>
                       )}

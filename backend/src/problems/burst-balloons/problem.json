@@ -1,0 +1,16 @@
+{
+  "id": "burst-balloons",
+  "title": "Burst Balloons",
+  "difficulty": "Hard",
+  "track": "dsa",
+  "category": "2-D Dynamic Programming",
+  "description": {
+    "text": "Solve Burst Balloons.",
+    "notes": [
+      "Source: https://neetcode.io/problems/burst-balloons?list=neetcode150",
+      "Imported automatically from third-party problem datasets."
+    ]
+  },
+  "examples": [],
+  "constraints": []
+}

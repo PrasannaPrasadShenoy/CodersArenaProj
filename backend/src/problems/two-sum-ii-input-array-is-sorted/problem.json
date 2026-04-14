@@ -1,0 +1,16 @@
+{
+  "id": "two-sum-ii-input-array-is-sorted",
+  "title": "Two Sum II Input Array Is Sorted",
+  "difficulty": "Medium",
+  "track": "dsa",
+  "category": "Two Pointers",
+  "description": {
+    "text": "Solve Two Sum II Input Array Is Sorted.",
+    "notes": [
+      "Source: https://neetcode.io/problems/two-integer-sum-ii?list=neetcode150",
+      "Imported automatically from third-party problem datasets."
+    ]
+  },
+  "examples": [],
+  "constraints": []
+}

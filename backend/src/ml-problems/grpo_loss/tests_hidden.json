@@ -1,0 +1,12 @@
+{
+  "tests": [
+    {
+      "name": "Gradient flows to logps only",
+      "code": "\nimport torch\nlogps = torch.randn(4, requires_grad=True)\nrewards = torch.randn(4, requires_grad=True)\ngroup_ids = torch.tensor([0, 0, 1, 1])\nloss = {fn}(logps, rewards, group_ids)\nloss.backward()\nassert logps.grad is not None and rewards.grad is None, 'Gradients should flow only through logps'\n"
+    },
+    {
+      "name": "Group-wise normalization",
+      "code": "\nimport torch\nlogps = torch.zeros(4, requires_grad=True)\nrewards = torch.tensor([0.0, 1.0, 10.0, 11.0])\ngroup_ids = torch.tensor([0, 0, 1, 1])\nloss = {fn}(logps, rewards, group_ids)\nloss.backward()\n# Since each group has rewards [0,1] and [10,11], the normalized advantages\n# should be identical across groups, leading to identical gradients per position.\nassert torch.allclose(logps.grad[:2], logps.grad[2:]), 'Groups should be treated independently but symmetrically'\n"
+    }
+  ]
+}

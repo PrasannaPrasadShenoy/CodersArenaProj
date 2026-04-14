@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router";
 import Navbar from "../components/Navbar";
 
@@ -6,11 +6,8 @@ import { Panel, PanelGroup, PanelResizeHandle } from "react-resizable-panels";
 import ProblemDescription from "../components/ProblemDescription";
 import OutputPanel from "../components/OutputPanel";
 import CodeEditorPanel from "../components/CodeEditorPanel";
-import { executeCode } from "../lib/piston";
 import { useProblem, useProblemsList } from "../hooks/useProblems";
-
-import toast from "react-hot-toast";
-import confetti from "canvas-confetti";
+import { useCodingProblemActions } from "../hooks/useCodingProblemActions";
 
 const DEFAULT_PROBLEM_ID = "two-sum";
 
@@ -20,101 +17,36 @@ function ProblemPage() {
   const currentProblemId = (id && id.trim()) || DEFAULT_PROBLEM_ID;
 
   const { problem: currentProblem, isLoading: loadingProblem } = useProblem(currentProblemId);
-  const { problemsArray: allProblems } = useProblemsList();
-  const [selectedLanguage, setSelectedLanguage] = useState("javascript");
-  const [code, setCode] = useState("// Loading...");
-  const [output, setOutput] = useState(null);
-  const [isRunning, setIsRunning] = useState(false);
+  const currentTrack = currentProblem?.track || "dsa";
+  const { problemsArray: allProblems } = useProblemsList(currentTrack);
 
-  // redirect if problem not found (after load)
+  const {
+    selectedLanguage,
+    code,
+    setCode,
+    output,
+    handleLanguageChange,
+    handleRunCode,
+    handleDsaSubmit,
+    isPrimaryExecuting,
+    isDsaSubmitting,
+    primaryActionLabel,
+    primaryRunningLabel,
+    showDsaSubmit,
+  } = useCodingProblemActions({
+    problemId: currentProblemId,
+    problemData: currentProblem,
+    confettiStyle: "wide",
+  });
+
   useEffect(() => {
     if (!loadingProblem && currentProblemId && !currentProblem) {
       navigate("/problems", { replace: true });
     }
   }, [loadingProblem, currentProblemId, currentProblem, navigate]);
 
-  // set code when problem loads or language changes
-  useEffect(() => {
-    if (currentProblem?.starterCode?.[selectedLanguage]) {
-      setCode(currentProblem.starterCode[selectedLanguage]);
-      setOutput(null);
-    }
-  }, [currentProblem, selectedLanguage]);
-
-  const handleLanguageChange = (e) => {
-    const newLang = e.target.value;
-    setSelectedLanguage(newLang);
-    setCode(currentProblem?.starterCode?.[newLang] ?? "");
-    setOutput(null);
-  };
-
   const handleProblemChange = (newProblemId) => {
-    setOutput(null);
     navigate(`/problem/${newProblemId}`);
-  };
-
-  const triggerConfetti = () => {
-    confetti({
-      particleCount: 80,
-      spread: 250,
-      origin: { x: 0.2, y: 0.6 },
-    });
-
-    confetti({
-      particleCount: 80,
-      spread: 250,
-      origin: { x: 0.8, y: 0.6 },
-    });
-  };
-
-  const normalizeOutput = (output) => {
-    // normalize output for comparison (trim whitespace, handle different spacing)
-    return output
-      .trim()
-      .split("\n")
-      .map((line) =>
-        line
-          .trim()
-          // remove spaces after [ and before ]
-          .replace(/\[\s+/g, "[")
-          .replace(/\s+\]/g, "]")
-          // normalize spaces around commas to single space after comma
-          .replace(/\s*,\s*/g, ",")
-      )
-      .filter((line) => line.length > 0)
-      .join("\n");
-  };
-
-  const checkIfTestsPassed = (actualOutput, expectedOutput) => {
-    const normalizedActual = normalizeOutput(actualOutput);
-    const normalizedExpected = normalizeOutput(expectedOutput);
-
-    return normalizedActual == normalizedExpected;
-  };
-
-  const handleRunCode = async () => {
-    setIsRunning(true);
-    setOutput(null);
-
-    const result = await executeCode(selectedLanguage, code);
-    setOutput(result);
-    setIsRunning(false);
-
-    // check if code executed successfully and matches expected output
-
-    if (result.success) {
-      const expectedOutput = currentProblem.expectedOutput[selectedLanguage];
-      const testsPassed = checkIfTestsPassed(result.output, expectedOutput);
-
-      if (testsPassed) {
-        triggerConfetti();
-        toast.success("All tests passed! Great job!");
-      } else {
-        toast.error("Tests failed. Check your output!");
-      }
-    } else {
-      toast.error(result.error || "Code execution failed!");
-    }
   };
 
   if (loadingProblem || !currentProblem) {
@@ -135,7 +67,6 @@ function ProblemPage() {
 
       <div className="flex-1">
         <PanelGroup direction="horizontal">
-          {/* left panel- problem desc */}
           <Panel defaultSize={40} minSize={30}>
             <ProblemDescription
               problem={currentProblem}
@@ -147,27 +78,37 @@ function ProblemPage() {
 
           <PanelResizeHandle className="w-2 bg-base-300 hover:bg-primary transition-colors cursor-col-resize" />
 
-          {/* right panel- code editor & output */}
           <Panel defaultSize={60} minSize={30}>
             <PanelGroup direction="vertical">
-              {/* Top panel - Code editor */}
               <Panel defaultSize={70} minSize={30}>
                 <CodeEditorPanel
                   selectedLanguage={selectedLanguage}
                   code={code}
-                  isRunning={isRunning}
+                  isRunning={isPrimaryExecuting}
                   onLanguageChange={handleLanguageChange}
                   onCodeChange={setCode}
                   onRunCode={handleRunCode}
+                  languageOptions={currentTrack === "ml" ? ["python"] : undefined}
+                  disableLanguageSelect={currentTrack === "ml"}
+                  actionLabel={primaryActionLabel}
+                  runningLabel={primaryRunningLabel}
+                  secondaryActionLabel={showDsaSubmit ? "Submit all tests" : undefined}
+                  onSecondaryAction={showDsaSubmit ? handleDsaSubmit : undefined}
+                  isSecondaryRunning={isDsaSubmitting}
                 />
               </Panel>
 
               <PanelResizeHandle className="h-2 bg-base-300 hover:bg-primary transition-colors cursor-row-resize" />
 
-              {/* Bottom panel - Output Panel*/}
-
               <Panel defaultSize={30} minSize={30}>
-                <OutputPanel output={output} />
+                <OutputPanel
+                  output={output}
+                  emptyStateText={
+                    currentTrack === "ml"
+                      ? 'Click "Submit" to run ML tests here...'
+                      : 'Run Code runs public tests (same engine as submit); Submit includes hidden tests...'
+                  }
+                />
               </Panel>
             </PanelGroup>
           </Panel>

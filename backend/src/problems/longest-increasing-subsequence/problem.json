@@ -1,0 +1,35 @@
+{
+  "id": "longest-increasing-subsequence",
+  "title": "Longest Increasing Subsequence",
+  "difficulty": "Medium",
+  "track": "dsa",
+  "category": "1-D Dynamic Programming",
+  "description": {
+    "text": "Given an integer array nums, return the length of the longest strictly increasing subsequence.",
+    "notes": [
+      "Source: https://neetcode.io/problems/longest-increasing-subsequence?list=neetcode150",
+      "Imported automatically from third-party problem datasets."
+    ]
+  },
+  "examples": [
+    {
+      "input": "nums = [10,9,2,5,3,7,101,18]",
+      "output": "4",
+      "explanation": ""
+    },
+    {
+      "input": "nums = [0,1,0,3,2,3]",
+      "output": "4",
+      "explanation": ""
+    },
+    {
+      "input": "nums = [7,7,7,7,7,7,7]",
+      "output": "1",
+      "explanation": ""
+    }
+  ],
+  "constraints": [
+    "`1 <= nums.length <= 2500`",
+    "`-10^4 <= nums[i] <= 10^4`"
+  ]
+}

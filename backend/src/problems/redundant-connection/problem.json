@@ -1,0 +1,16 @@
+{
+  "id": "redundant-connection",
+  "title": "Redundant Connection",
+  "difficulty": "Medium",
+  "track": "dsa",
+  "category": "Graphs",
+  "description": {
+    "text": "Solve Redundant Connection.",
+    "notes": [
+      "Source: https://neetcode.io/problems/redundant-connection?list=neetcode150",
+      "Imported automatically from third-party problem datasets."
+    ]
+  },
+  "examples": [],
+  "constraints": []
+}

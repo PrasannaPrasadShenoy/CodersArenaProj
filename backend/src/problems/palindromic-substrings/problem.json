@@ -1,0 +1,30 @@
+{
+  "id": "palindromic-substrings",
+  "title": "Palindromic Substrings",
+  "difficulty": "Medium",
+  "track": "dsa",
+  "category": "1-D Dynamic Programming",
+  "description": {
+    "text": "Given a string s, return the number of palindromic substrings in it.\n\nA string is a palindrome when it reads the same backward as forward.\n\nA substring is a contiguous sequence of characters within the string.",
+    "notes": [
+      "Source: https://neetcode.io/problems/palindromic-substrings?list=neetcode150",
+      "Imported automatically from third-party problem datasets."
+    ]
+  },
+  "examples": [
+    {
+      "input": "s = \"abc\"",
+      "output": "3",
+      "explanation": ""
+    },
+    {
+      "input": "s = \"aaa\"",
+      "output": "6",
+      "explanation": ""
+    }
+  ],
+  "constraints": [
+    "1 <= s.length <= 1000",
+    "s consists of lowercase English letters."
+  ]
+}

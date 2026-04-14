@@ -1,0 +1,34 @@
+{
+  "id": "number-of-1-bits",
+  "title": "Number of 1 Bits",
+  "difficulty": "Easy",
+  "track": "dsa",
+  "category": "Bit Manipulation",
+  "description": {
+    "text": "Given a positive integer n, write a function that returns the number of set bits in its binary representation (also known as the Hamming weight).",
+    "notes": [
+      "Source: https://neetcode.io/problems/number-of-one-bits?list=neetcode150",
+      "Imported automatically from third-party problem datasets."
+    ]
+  },
+  "examples": [
+    {
+      "input": "n = 11",
+      "output": "3",
+      "explanation": ""
+    },
+    {
+      "input": "n = 128",
+      "output": "1",
+      "explanation": ""
+    },
+    {
+      "input": "n = 2147483645",
+      "output": "30",
+      "explanation": ""
+    }
+  ],
+  "constraints": [
+    "1 <= n <= 2^31 - 1"
+  ]
+}

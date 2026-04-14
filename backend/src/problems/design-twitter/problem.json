@@ -1,0 +1,16 @@
+{
+  "id": "design-twitter",
+  "title": "Design Twitter",
+  "difficulty": "Medium",
+  "track": "dsa",
+  "category": "Heap / Priority Queue",
+  "description": {
+    "text": "Solve Design Twitter.",
+    "notes": [
+      "Source: https://neetcode.io/problems/design-twitter-feed?list=neetcode150",
+      "Imported automatically from third-party problem datasets."
+    ]
+  },
+  "examples": [],
+  "constraints": []
+}

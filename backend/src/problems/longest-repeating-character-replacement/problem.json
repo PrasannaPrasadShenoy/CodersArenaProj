@@ -1,0 +1,31 @@
+{
+  "id": "longest-repeating-character-replacement",
+  "title": "Longest Repeating Character Replacement",
+  "difficulty": "Medium",
+  "track": "dsa",
+  "category": "Sliding Window",
+  "description": {
+    "text": "You are given a string s and an integer k. You can choose any character of the string and change it to any other uppercase English character. You can perform this operation at most k times.\n\nReturn the length of the longest substring containing the same letter you can get after performing the above operations.",
+    "notes": [
+      "Source: https://neetcode.io/problems/longest-repeating-substring-with-replacement?list=neetcode150",
+      "Imported automatically from third-party problem datasets."
+    ]
+  },
+  "examples": [
+    {
+      "input": "s = \"ABAB\", k = 2",
+      "output": "4",
+      "explanation": ""
+    },
+    {
+      "input": "s = \"AABABBA\", k = 1",
+      "output": "4",
+      "explanation": ""
+    }
+  ],
+  "constraints": [
+    "1 <= s.length <= 10^5",
+    "s consists of only uppercase English letters.",
+    "0 <= k <= s.length"
+  ]
+}

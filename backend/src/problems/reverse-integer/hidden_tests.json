@@ -1,0 +1,140 @@
+{
+  "tests": [
+    {
+      "input": "args = [0]",
+      "expectedOutput": {
+        "javascript": "0",
+        "python": "0",
+        "java": "0"
+      }
+    },
+    {
+      "input": "args = [1]",
+      "expectedOutput": {
+        "javascript": "1",
+        "python": "1",
+        "java": "1"
+      }
+    },
+    {
+      "input": "args = [-1]",
+      "expectedOutput": {
+        "javascript": "-1",
+        "python": "-1",
+        "java": "-1"
+      }
+    },
+    {
+      "input": "args = [10]",
+      "expectedOutput": {
+        "javascript": "1",
+        "python": "1",
+        "java": "1"
+      }
+    },
+    {
+      "input": "args = [-10]",
+      "expectedOutput": {
+        "javascript": "-1",
+        "python": "-1",
+        "java": "-1"
+      }
+    },
+    {
+      "input": "args = [100]",
+      "expectedOutput": {
+        "javascript": "1",
+        "python": "1",
+        "java": "1"
+      }
+    },
+    {
+      "input": "args = [-100]",
+      "expectedOutput": {
+        "javascript": "-1",
+        "python": "-1",
+        "java": "-1"
+      }
+    },
+    {
+      "input": "args = [1534236469]",
+      "expectedOutput": {
+        "javascript": "0",
+        "python": "0",
+        "java": "0"
+      }
+    },
+    {
+      "input": "args = [-1534236469]",
+      "expectedOutput": {
+        "javascript": "0",
+        "python": "0",
+        "java": "0"
+      }
+    },
+    {
+      "input": "args = [2147483647]",
+      "expectedOutput": {
+        "javascript": "0",
+        "python": "0",
+        "java": "0"
+      }
+    },
+    {
+      "input": "args = [-2147483648]",
+      "expectedOutput": {
+        "javascript": "0",
+        "python": "0",
+        "java": "0"
+      }
+    },
+    {
+      "input": "args = [1463847412]",
+      "expectedOutput": {
+        "javascript": "2147483641",
+        "python": "2147483641",
+        "java": "2147483641"
+      }
+    },
+    {
+      "input": "args = [-1463847412]",
+      "expectedOutput": {
+        "javascript": "-2147483641",
+        "python": "-2147483641",
+        "java": "-2147483641"
+      }
+    },
+    {
+      "input": "args = [123456789]",
+      "expectedOutput": {
+        "javascript": "987654321",
+        "python": "987654321",
+        "java": "987654321"
+      }
+    },
+    {
+      "input": "args = [-123456789]",
+      "expectedOutput": {
+        "javascript": "-987654321",
+        "python": "-987654321",
+        "java": "-987654321"
+      }
+    },
+    {
+      "input": "args = [1000000003]",
+      "expectedOutput": {
+        "javascript": "0",
+        "python": "0",
+        "java": "0"
+      }
+    },
+    {
+      "input": "args = [-1000000003]",
+      "expectedOutput": {
+        "javascript": "0",
+        "python": "0",
+        "java": "0"
+      }
+    }
+  ]
+}

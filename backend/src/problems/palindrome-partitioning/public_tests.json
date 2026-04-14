@@ -1,0 +1,33 @@
+{
+  "tests": [
+    {
+      "input": "args = [\"aab\"]",
+      "expectedOutput": {
+        "javascript": "[[\"a\",\"a\",\"b\"],[\"aa\",\"b\"]]",
+        "python": "[[\"a\", \"a\", \"b\"], [\"aa\", \"b\"]]",
+        "java": "[[\"a\", \"a\", \"b\"], [\"aa\", \"b\"]]"
+      }
+    },
+    {
+      "input": "args = [\"a\"]",
+      "expectedOutput": {
+        "javascript": "[[\"a\"]]",
+        "python": "[[\"a\"]]",
+        "java": "[[\"a\"]]"
+      }
+    },
+    {
+      "input": "args = [\"ab\"]",
+      "expectedOutput": {
+        "javascript": "[[\"a\",\"b\"]]",
+        "python": "[[\"a\", \"b\"]]",
+        "java": "[[\"a\", \"b\"]]"
+      }
+    }
+  ],
+  "combinedExpectedOutput": {
+    "javascript": "[[\"a\",\"a\",\"b\"],[\"aa\",\"b\"]]\n[[\"a\"]]\n[[\"a\",\"b\"]]",
+    "python": "[[\"a\", \"a\", \"b\"], [\"aa\", \"b\"]]\n[[\"a\"]]\n[[\"a\", \"b\"]]",
+    "java": "[[\"a\", \"a\", \"b\"], [\"aa\", \"b\"]]\n[[\"a\"]]\n[[\"a\", \"b\"]]"
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "id": "merge-k-sorted-lists",
+  "title": "Merge k Sorted Lists",
+  "difficulty": "Hard",
+  "track": "dsa",
+  "category": "Linked List",
+  "description": {
+    "text": "You are given an array of k linked-lists lists, each linked-list is sorted in ascending order.\n\n*Merge all the linked-lists into one sorted linked-list and return it.*",
+    "notes": [
+      "Source: https://neetcode.io/problems/merge-k-sorted-linked-lists?list=neetcode150",
+      "Imported automatically from third-party problem datasets."
+    ]
+  },
+  "examples": [
+    {
+      "input": "lists = [[1,4,5],[1,3,4],[2,6]]",
+      "output": "[1,1,2,3,4,4,5,6]",
+      "explanation": "The linked-lists are:"
+    },
+    {
+      "input": "lists = []",
+      "output": "[]",
+      "explanation": ""
+    },
+    {
+      "input": "lists = [[]]",
+      "output": "[]",
+      "explanation": ""
+    }
+  ],
+  "constraints": [
+    "`k == lists.length`",
+    "`0 <= k <= 10^4`",
+    "`0 <= lists[i].length <= 500`",
+    "`-10^4 <= lists[i][j] <= 10^4`",
+    "`lists[i]` is sorted in ascending order.",
+    "The sum of `lists[i].length` will not exceed `10^4`."
+  ]
+}

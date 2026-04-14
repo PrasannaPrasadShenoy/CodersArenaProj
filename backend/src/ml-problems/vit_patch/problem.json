@@ -1,0 +1,17 @@
+{
+  "id": "vit_patch",
+  "title": "ViT Patch Embedding",
+  "difficulty": "Medium",
+  "track": "ml",
+  "category": "TorchCode",
+  "functionName": "PatchEmbedding",
+  "hint": "Reshape image into patches: (B, C, H, W) -> (B, num_patches, C*P*P). Then project with nn.Linear(C*P*P, embed_dim). num_patches = (img_size/patch_size)^2.",
+  "description": {
+    "text": "Implement PatchEmbedding using PyTorch primitives.",
+    "notes": []
+  },
+  "examples": [],
+  "constraints": [
+    "Use PyTorch only unless task says otherwise."
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "tests": [
+    {
+      "input": "args = [1,2,3,null,null,4]",
+      "expectedOutput": {
+        "javascript": "5",
+        "python": "5",
+        "java": "5"
+      }
+    },
+    {
+      "input": "args = []",
+      "expectedOutput": {
+        "python": "None",
+        "java": "null"
+      }
+    },
+    {
+      "input": "args = []",
+      "expectedOutput": {
+        "javascript": "1",
+        "python": "1",
+        "java": "1"
+      }
+    }
+  ],
+  "combinedExpectedOutput": {
+    "javascript": "5\n\n1",
+    "python": "5\nNone\n1",
+    "java": "5\nnull\n1"
+  }
+}

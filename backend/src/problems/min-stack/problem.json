@@ -1,0 +1,20 @@
+{
+  "id": "min-stack",
+  "title": "Min Stack",
+  "difficulty": "Medium",
+  "track": "dsa",
+  "category": "Stack",
+  "description": {
+    "text": "Design a stack that supports push, pop, top, and retrieving the minimum element in constant time.\n\nImplement the MinStack class:\n\n- MinStack() initializes the stack object.\n- void push(int val) pushes the element val onto the stack.\n- void pop() removes the element on the top of the stack.\n- int top() gets the top element of the stack.\n- int getMin() retrieves the minimum element in the stack.\n\nYou must implement a solution with O(1) time complexity for each function.",
+    "notes": [
+      "Source: https://neetcode.io/problems/minimum-stack?list=neetcode150",
+      "Imported automatically from third-party problem datasets."
+    ]
+  },
+  "examples": [],
+  "constraints": [
+    "`-2^31 <= val <= 2^31 - 1`",
+    "Methods `pop`, `top` and `getMin` operations will always be called on **non-empty** stacks.",
+    "At most `3 * 10^4` calls will be made to `push`, `pop`, `top`, and `getMin`."
+  ]
+}

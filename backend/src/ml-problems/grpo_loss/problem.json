@@ -1,0 +1,17 @@
+{
+  "id": "grpo_loss",
+  "title": "GRPO (Group Relative Policy Optimization) Loss",
+  "difficulty": "Hard",
+  "track": "ml",
+  "category": "TorchCode",
+  "functionName": "grpo_loss",
+  "hint": "Per group, normalize rewards: A_i = (r_i - mean_g) / (std_g + eps). Detach A_i from graph, then return -mean(A_i * logps).",
+  "description": {
+    "text": "Implement grpo_loss using PyTorch primitives.",
+    "notes": []
+  },
+  "examples": [],
+  "constraints": [
+    "Use PyTorch only unless task says otherwise."
+  ]
+}

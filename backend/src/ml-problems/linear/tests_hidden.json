@@ -1,0 +1,8 @@
+{
+  "tests": [
+    {
+      "name": "Gradient flow",
+      "code": "\nimport torch\nlayer = {fn}(8, 4)\nx = torch.randn(2, 8)\ny = layer.forward(x)\ny.sum().backward()\nassert layer.weight.grad is not None, 'weight.grad is None'\nassert layer.bias.grad is not None, 'bias.grad is None'\n"
+    }
+  ]
+}

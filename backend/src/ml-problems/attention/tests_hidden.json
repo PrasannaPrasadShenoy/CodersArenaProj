@@ -1,0 +1,12 @@
+{
+  "tests": [
+    {
+      "name": "Gradient check",
+      "code": "\nimport torch, math\ntorch.manual_seed(42)\nQ = torch.randn(2, 4, 8, requires_grad=True)\nK = torch.randn(2, 4, 8, requires_grad=True)\nV = torch.randn(2, 4, 8, requires_grad=True)\nout = {fn}(Q, K, V)\nout.sum().backward()\nassert Q.grad is not None, 'Q.grad is None'\nassert K.grad is not None, 'K.grad is None'\nassert V.grad is not None, 'V.grad is None'\n"
+    },
+    {
+      "name": "Cross-attention (seq_q != seq_k)",
+      "code": "\nimport torch\nQ = torch.randn(1, 3, 16)\nK = torch.randn(1, 5, 16)\nV = torch.randn(1, 5, 32)\nout = {fn}(Q, K, V)\nassert out.shape == (1, 3, 32), f'Cross-attention shape: {out.shape}'\n"
+    }
+  ]
+}

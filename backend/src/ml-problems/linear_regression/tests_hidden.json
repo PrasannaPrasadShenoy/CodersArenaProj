@@ -1,0 +1,20 @@
+{
+  "tests": [
+    {
+      "name": "Gradient descent converges",
+      "code": "\nimport torch\ntorch.manual_seed(42)\ntrue_w = torch.tensor([2.0, -1.0, 0.5])\ntrue_b = 3.0\nX = torch.randn(100, 3)\ny = X @ true_w + true_b\nmodel = {fn}()\nw, b = model.gradient_descent(X, y, lr=0.05, steps=2000)\nassert torch.allclose(w, true_w, atol=0.1), f'GD w: {w} vs true: {true_w}'\nassert abs(b.item() - true_b) < 0.1, f'GD b: {b.item():.4f} vs true: {true_b}'\n"
+    },
+    {
+      "name": "nn.Linear approach works",
+      "code": "\nimport torch\ntorch.manual_seed(42)\ntrue_w = torch.tensor([2.0, -1.0, 0.5])\ntrue_b = 3.0\nX = torch.randn(100, 3)\ny = X @ true_w + true_b\nmodel = {fn}()\nw, b = model.nn_linear(X, y, lr=0.05, steps=2000)\nassert torch.allclose(w, true_w, atol=0.1), f'nn w: {w} vs true: {true_w}'\nassert abs(b.item() - true_b) < 0.1, f'nn b: {b.item():.4f} vs true: {true_b}'\n"
+    },
+    {
+      "name": "All three methods agree",
+      "code": "\nimport torch\ntorch.manual_seed(0)\nX = torch.randn(200, 2)\ntrue_w = torch.tensor([1.5, -2.0])\ny = X @ true_w + 1.0 + torch.randn(200) * 0.1\nmodel = {fn}()\nw_cf, b_cf = model.closed_form(X, y)\nw_gd, b_gd = model.gradient_descent(X, y, lr=0.05, steps=3000)\nw_nn, b_nn = model.nn_linear(X, y, lr=0.05, steps=3000)\nassert torch.allclose(w_cf, w_gd, atol=0.15), f'CF vs GD: max diff {(w_cf - w_gd).abs().max():.4f}'\nassert torch.allclose(w_cf, w_nn, atol=0.15), f'CF vs NN: max diff {(w_cf - w_nn).abs().max():.4f}'\nassert abs(b_cf.item() - b_gd.item()) < 0.15, f'Bias CF vs GD: {b_cf.item():.4f} vs {b_gd.item():.4f}'\nassert abs(b_cf.item() - b_nn.item()) < 0.15, f'Bias CF vs NN: {b_cf.item():.4f} vs {b_nn.item():.4f}'\n"
+    },
+    {
+      "name": "Closed-form uses no autograd",
+      "code": "\nimport torch\nX = torch.randn(30, 2)\ny = X @ torch.tensor([1.0, 2.0]) + 0.5\nmodel = {fn}()\nw, b = model.closed_form(X, y)\nassert not w.requires_grad, 'Closed-form w should not require grad'\n"
+    }
+  ]
+}

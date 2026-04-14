@@ -1,0 +1,76 @@
+{
+  "tests": [
+    {
+      "input": "args = [\"aa\"]",
+      "expectedOutput": {
+        "javascript": "[[\"a\",\"a\"],[\"aa\"]]",
+        "python": "[[\"a\", \"a\"], [\"aa\"]]",
+        "java": "[[\"a\", \"a\"], [\"aa\"]]"
+      }
+    },
+    {
+      "input": "args = [\"abc\"]",
+      "expectedOutput": {
+        "javascript": "[[\"a\",\"b\",\"c\"]]",
+        "python": "[[\"a\", \"b\", \"c\"]]",
+        "java": "[[\"a\", \"b\", \"c\"]]"
+      }
+    },
+    {
+      "input": "args = [\"aba\"]",
+      "expectedOutput": {
+        "javascript": "[[\"a\",\"b\",\"a\"],[\"aba\"]]",
+        "python": "[[\"a\", \"b\", \"a\"], [\"aba\"]]",
+        "java": "[[\"a\", \"b\", \"a\"], [\"aba\"]]"
+      }
+    },
+    {
+      "input": "args = [\"aaa\"]",
+      "expectedOutput": {
+        "javascript": "[[\"a\",\"a\",\"a\"],[\"a\",\"aa\"],[\"aa\",\"a\"],[\"aaa\"]]",
+        "python": "[[\"a\", \"a\", \"a\"], [\"a\", \"aa\"], [\"aa\", \"a\"], [\"aaa\"]]",
+        "java": "[[\"a\", \"a\", \"a\"], [\"a\", \"aa\"], [\"aa\", \"a\"], [\"aaa\"]]"
+      }
+    },
+    {
+      "input": "args = [\"abba\"]",
+      "expectedOutput": {
+        "javascript": "[[\"a\",\"b\",\"b\",\"a\"],[\"a\",\"bb\",\"a\"],[\"abba\"]]",
+        "python": "[[\"a\", \"b\", \"b\", \"a\"], [\"a\", \"bb\", \"a\"], [\"abba\"]]",
+        "java": "[[\"a\", \"b\", \"b\", \"a\"], [\"a\", \"bb\", \"a\"], [\"abba\"]]"
+      }
+    },
+    {
+      "input": "args = [\"zz\"]",
+      "expectedOutput": {
+        "javascript": "[[\"z\",\"z\"],[\"zz\"]]",
+        "python": "[[\"z\", \"z\"], [\"zz\"]]",
+        "java": "[[\"z\", \"z\"], [\"zz\"]]"
+      }
+    },
+    {
+      "input": "args = [\"efe\"]",
+      "expectedOutput": {
+        "javascript": "[[\"e\",\"f\",\"e\"],[\"efe\"]]",
+        "python": "[[\"e\", \"f\", \"e\"], [\"efe\"]]",
+        "java": "[[\"e\", \"f\", \"e\"], [\"efe\"]]"
+      }
+    },
+    {
+      "input": "args = [\"xyx\"]",
+      "expectedOutput": {
+        "javascript": "[[\"x\",\"y\",\"x\"],[\"xyx\"]]",
+        "python": "[[\"x\", \"y\", \"x\"], [\"xyx\"]]",
+        "java": "[[\"x\", \"y\", \"x\"], [\"xyx\"]]"
+      }
+    },
+    {
+      "input": "args = [\"noon\"]",
+      "expectedOutput": {
+        "javascript": "[[\"n\",\"o\",\"o\",\"n\"],[\"n\",\"oo\",\"n\"],[\"noon\"]]",
+        "python": "[[\"n\", \"o\", \"o\", \"n\"], [\"n\", \"oo\", \"n\"], [\"noon\"]]",
+        "java": "[[\"n\", \"o\", \"o\", \"n\"], [\"n\", \"oo\", \"n\"], [\"noon\"]]"
+      }
+    }
+  ]
+}

@@ -1,0 +1,140 @@
+{
+  "tests": [
+    {
+      "input": "args = [[1]]",
+      "expectedOutput": {
+        "javascript": "1",
+        "python": "1",
+        "java": "1"
+      }
+    },
+    {
+      "input": "args = [[1,2]]",
+      "expectedOutput": {
+        "javascript": "2",
+        "python": "2",
+        "java": "2"
+      }
+    },
+    {
+      "input": "args = [[2,1,1,2]]",
+      "expectedOutput": {
+        "javascript": "3",
+        "python": "3",
+        "java": "3"
+      }
+    },
+    {
+      "input": "args = [[1,2,3,4,5]]",
+      "expectedOutput": {
+        "javascript": "8",
+        "python": "8",
+        "java": "8"
+      }
+    },
+    {
+      "input": "args = [[2,3,2,3,2]]",
+      "expectedOutput": {
+        "javascript": "6",
+        "python": "6",
+        "java": "6"
+      }
+    },
+    {
+      "input": "args = [[1,2,1,1]]",
+      "expectedOutput": {
+        "javascript": "3",
+        "python": "3",
+        "java": "3"
+      }
+    },
+    {
+      "input": "args = [[2,1,1,1]]",
+      "expectedOutput": {
+        "javascript": "3",
+        "python": "3",
+        "java": "3"
+      }
+    },
+    {
+      "input": "args = [[1,2,3,4,5,1,2,3,4,5]]",
+      "expectedOutput": {
+        "javascript": "16",
+        "python": "16",
+        "java": "16"
+      }
+    },
+    {
+      "input": "args = [[0]]",
+      "expectedOutput": {
+        "javascript": "0",
+        "python": "0",
+        "java": "0"
+      }
+    },
+    {
+      "input": "args = [[0,0]]",
+      "expectedOutput": {
+        "javascript": "0",
+        "python": "0",
+        "java": "0"
+      }
+    },
+    {
+      "input": "args = [[1,0,0,1]]",
+      "expectedOutput": {
+        "javascript": "1",
+        "python": "1",
+        "java": "1"
+      }
+    },
+    {
+      "input": "args = [[2,7,9,3,1]]",
+      "expectedOutput": {
+        "javascript": "11",
+        "python": "11",
+        "java": "11"
+      }
+    },
+    {
+      "input": "args = [[1,2,3,1,2,3]]",
+      "expectedOutput": {
+        "javascript": "6",
+        "python": "6",
+        "java": "6"
+      }
+    },
+    {
+      "input": "args = [[2,1,1,2,1,1]]",
+      "expectedOutput": {
+        "javascript": "4",
+        "python": "4",
+        "java": "4"
+      }
+    },
+    {
+      "input": "args = [[1,2,3,4,5,6,7,8,9,10]]",
+      "expectedOutput": {
+        "javascript": "30",
+        "python": "30",
+        "java": "30"
+      }
+    },
+    {
+      "input": "args = [[100,1,1,100]]",
+      "expectedOutput": {
+        "javascript": "101",
+        "python": "101",
+        "java": "101"
+      }
+    },
+    {
+      "input": "args = [[1,100,1,1,100]]",
+      "expectedOutput": {
+        "javascript": "200",
+        "python": "200",
+        "java": "200"
+      }
+    }
+  ]
+}

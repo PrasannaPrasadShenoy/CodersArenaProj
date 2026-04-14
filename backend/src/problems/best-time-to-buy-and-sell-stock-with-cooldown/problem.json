@@ -1,0 +1,16 @@
+{
+  "id": "best-time-to-buy-and-sell-stock-with-cooldown",
+  "title": "Best Time to Buy And Sell Stock With Cooldown",
+  "difficulty": "Medium",
+  "track": "dsa",
+  "category": "2-D Dynamic Programming",
+  "description": {
+    "text": "Solve Best Time to Buy And Sell Stock With Cooldown.",
+    "notes": [
+      "Source: https://neetcode.io/problems/buy-and-sell-crypto-with-cooldown?list=neetcode150",
+      "Imported automatically from third-party problem datasets."
+    ]
+  },
+  "examples": [],
+  "constraints": []
+}

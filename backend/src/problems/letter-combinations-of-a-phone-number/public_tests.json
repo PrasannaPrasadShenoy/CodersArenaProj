@@ -1,0 +1,33 @@
+{
+  "tests": [
+    {
+      "input": "args = [\"23\"]",
+      "expectedOutput": {
+        "javascript": "[\"ad\",\"ae\",\"af\",\"bd\",\"be\",\"bf\",\"cd\",\"ce\",\"cf\"]",
+        "python": "[\"ad\", \"ae\", \"af\", \"bd\", \"be\", \"bf\", \"cd\", \"ce\", \"cf\"]",
+        "java": "[\"ad\", \"ae\", \"af\", \"bd\", \"be\", \"bf\", \"cd\", \"ce\", \"cf\"]"
+      }
+    },
+    {
+      "input": "args = [\"\"]",
+      "expectedOutput": {
+        "javascript": "[]",
+        "python": "[]",
+        "java": "[]"
+      }
+    },
+    {
+      "input": "args = [\"2\"]",
+      "expectedOutput": {
+        "javascript": "[\"a\",\"b\",\"c\"]",
+        "python": "[\"a\", \"b\", \"c\"]",
+        "java": "[\"a\", \"b\", \"c\"]"
+      }
+    }
+  ],
+  "combinedExpectedOutput": {
+    "javascript": "[\"ad\",\"ae\",\"af\",\"bd\",\"be\",\"bf\",\"cd\",\"ce\",\"cf\"]\n[]\n[\"a\",\"b\",\"c\"]",
+    "python": "[\"ad\", \"ae\", \"af\", \"bd\", \"be\", \"bf\", \"cd\", \"ce\", \"cf\"]\n[]\n[\"a\", \"b\", \"c\"]",
+    "java": "[\"ad\", \"ae\", \"af\", \"bd\", \"be\", \"bf\", \"cd\", \"ce\", \"cf\"]\n[]\n[\"a\", \"b\", \"c\"]"
+  }
+}

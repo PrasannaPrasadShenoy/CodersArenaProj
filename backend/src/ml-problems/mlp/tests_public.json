@@ -1,0 +1,12 @@
+{
+  "tests": [
+    {
+      "name": "Parameter shapes",
+      "code": "\nimport torch, torch.nn as nn\nmlp = {fn}(d_model=64, d_ff=128)\nassert isinstance(mlp, nn.Module), 'Must inherit from nn.Module'\nassert hasattr(mlp, 'gate_proj'), 'Need self.gate_proj'\nassert hasattr(mlp, 'up_proj'), 'Need self.up_proj'\nassert hasattr(mlp, 'down_proj'), 'Need self.down_proj'\nassert mlp.gate_proj.weight.shape == (128, 64), f'gate_proj shape: {mlp.gate_proj.weight.shape}'\nassert mlp.up_proj.weight.shape == (128, 64), f'up_proj shape: {mlp.up_proj.weight.shape}'\nassert mlp.down_proj.weight.shape == (64, 128), f'down_proj shape: {mlp.down_proj.weight.shape}'\n"
+    },
+    {
+      "name": "Forward output shape",
+      "code": "\nimport torch\nmlp = {fn}(d_model=32, d_ff=64)\nx = torch.randn(2, 8, 32)\nout = mlp(x)\nassert out.shape == (2, 8, 32), f'Output shape: {out.shape}'\n"
+    }
+  ]
+}

@@ -1,0 +1,100 @@
+{
+  "tests": [
+    {
+      "input": "args = [1,10]",
+      "expectedOutput": {
+        "javascript": "1",
+        "python": "1",
+        "java": "1"
+      }
+    },
+    {
+      "input": "args = [10,1]",
+      "expectedOutput": {
+        "javascript": "1",
+        "python": "1",
+        "java": "1"
+      }
+    },
+    {
+      "input": "args = [2,2]",
+      "expectedOutput": {
+        "javascript": "2",
+        "python": "2",
+        "java": "2"
+      }
+    },
+    {
+      "input": "args = [3,3]",
+      "expectedOutput": {
+        "javascript": "6",
+        "python": "6",
+        "java": "6"
+      }
+    },
+    {
+      "input": "args = [4,4]",
+      "expectedOutput": {
+        "javascript": "20",
+        "python": "20",
+        "java": "20"
+      }
+    },
+    {
+      "input": "args = [5,5]",
+      "expectedOutput": {
+        "javascript": "70",
+        "python": "70",
+        "java": "70"
+      }
+    },
+    {
+      "input": "args = [2,3]",
+      "expectedOutput": {
+        "javascript": "3",
+        "python": "3",
+        "java": "3"
+      }
+    },
+    {
+      "input": "args = [3,4]",
+      "expectedOutput": {
+        "javascript": "10",
+        "python": "10",
+        "java": "10"
+      }
+    },
+    {
+      "input": "args = [4,5]",
+      "expectedOutput": {
+        "javascript": "35",
+        "python": "35",
+        "java": "35"
+      }
+    },
+    {
+      "input": "args = [6,3]",
+      "expectedOutput": {
+        "javascript": "21",
+        "python": "21",
+        "java": "21"
+      }
+    },
+    {
+      "input": "args = [7,3]",
+      "expectedOutput": {
+        "javascript": "28",
+        "python": "28",
+        "java": "28"
+      }
+    },
+    {
+      "input": "args = [10,10]",
+      "expectedOutput": {
+        "javascript": "48620",
+        "python": "48620",
+        "java": "48620"
+      }
+    }
+  ]
+}

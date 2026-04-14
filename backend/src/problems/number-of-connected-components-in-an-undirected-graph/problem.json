@@ -1,0 +1,34 @@
+{
+  "id": "number-of-connected-components-in-an-undirected-graph",
+  "title": "Number of Connected Components in an Undirected Graph",
+  "difficulty": "Medium",
+  "track": "dsa",
+  "category": "Graphs",
+  "description": {
+    "text": "Given n nodes labeled from 0 to n - 1 and a list of undirected edges (each edge is a pair of nodes), write a function to find the number of connected components in an undirected graph.",
+    "notes": [
+      "Source: https://neetcode.io/problems/count-connected-components?list=neetcode150",
+      "Imported automatically from third-party problem datasets."
+    ]
+  },
+  "examples": [
+    {
+      "input": "n = 5 and edges = [[0, 1], [1, 2], [3, 4]]",
+      "output": "2",
+      "explanation": ""
+    },
+    {
+      "input": "n = 5 and edges = [[0, 1], [1, 2], [2, 3], [3, 4]]",
+      "output": "1",
+      "explanation": ""
+    }
+  ],
+  "constraints": [
+    "1 <= n <= 2000",
+    "1 <= edges.length <= 5000",
+    "edges[i].length == 2",
+    "0 <= ai, bi < n",
+    "ai != bi",
+    "There are no repeated edges."
+  ]
+}

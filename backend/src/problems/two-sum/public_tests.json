@@ -1,7 +1,7 @@
 {
   "tests": [
     {
-      "input": "nums = [2,7,11,15], target = 9",
+      "input": "args = [[2,7,11,15],9]",
       "expectedOutput": {
         "javascript": "[0,1]",
         "python": "[0, 1]",
@@ -9,7 +9,7 @@
       }
     },
     {
-      "input": "nums = [3,2,4], target = 6",
+      "input": "args = [[3,2,4],6]",
       "expectedOutput": {
         "javascript": "[1,2]",
         "python": "[1, 2]",
@@ -17,7 +17,7 @@
       }
     },
     {
-      "input": "nums = [3,3], target = 6",
+      "input": "args = [[3,3],6]",
       "expectedOutput": {
         "javascript": "[0,1]",
         "python": "[0, 1]",

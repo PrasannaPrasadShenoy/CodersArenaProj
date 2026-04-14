@@ -1,0 +1,30 @@
+{
+  "id": "house-robber",
+  "title": "House Robber",
+  "difficulty": "Medium",
+  "track": "dsa",
+  "category": "1-D Dynamic Programming",
+  "description": {
+    "text": "You are a professional robber planning to rob houses along a street. Each house has a certain amount of money stashed, the only constraint stopping you from robbing each of them is that adjacent houses have security systems connected and it will automatically contact the police if two adjacent houses were broken into on the same night.\n\nGiven an integer array nums representing the amount of money of each house, return *the maximum amount of money you can rob tonight without alerting the police*.",
+    "notes": [
+      "Source: https://neetcode.io/problems/house-robber?list=neetcode150",
+      "Imported automatically from third-party problem datasets."
+    ]
+  },
+  "examples": [
+    {
+      "input": "nums = [1,2,3,1]",
+      "output": "4",
+      "explanation": ""
+    },
+    {
+      "input": "nums = [2,7,9,3,1]",
+      "output": "12",
+      "explanation": ""
+    }
+  ],
+  "constraints": [
+    "`1 <= nums.length <= 100`",
+    "`0 <= nums[i] <= 400`"
+  ]
+}

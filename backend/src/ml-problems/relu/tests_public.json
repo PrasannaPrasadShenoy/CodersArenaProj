@@ -1,0 +1,12 @@
+{
+  "tests": [
+    {
+      "name": "Basic values",
+      "code": "\nimport torch\nx = torch.tensor([-2., -1., 0., 1., 2.])\nout = {fn}(x)\nexpected = torch.tensor([0., 0., 0., 1., 2.])\nassert out.shape == expected.shape, f'Shape mismatch: {out.shape} vs {expected.shape}'\nassert torch.allclose(out, expected), f'Wrong Answer: {out} vs {expected}'\n"
+    },
+    {
+      "name": "2-D tensor",
+      "code": "\nimport torch\nx = torch.randn(4, 8)\nout = {fn}(x)\nassert out.shape == x.shape, f'Shape mismatch on 2-D input'\nassert (out >= 0).all(), 'ReLU output must be non-negative'\nassert torch.allclose(out, x.clamp(min=0)), 'Value mismatch on random input'\n"
+    }
+  ]
+}

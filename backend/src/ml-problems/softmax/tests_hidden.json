@@ -1,0 +1,8 @@
+{
+  "tests": [
+    {
+      "name": "Numerical stability",
+      "code": "\nimport torch\nx = torch.tensor([1000., 1001., 1002.])\nout = {fn}(x, dim=-1)\nassert not torch.isnan(out).any(), 'NaN in output â€” not numerically stable'\nassert not torch.isinf(out).any(), 'Inf in output â€” not numerically stable'\nexpected = torch.softmax(x, dim=-1)\nassert torch.allclose(out, expected, atol=1e-5), 'Values differ on large input'\n"
+    }
+  ]
+}

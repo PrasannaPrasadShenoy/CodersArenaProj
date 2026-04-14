@@ -1,0 +1,31 @@
+{
+  "id": "jump-game-ii",
+  "title": "Jump Game II",
+  "difficulty": "Medium",
+  "track": "dsa",
+  "category": "Greedy",
+  "description": {
+    "text": "You are given a 0-indexed array of integers nums of length n. You are initially positioned at index 0.\n\nEach element nums[i] represents the maximum length of a forward jump from index i. In other words, if you are at index i, you can jump to any index (i + j) where:\n\n- 0 <= j <= nums[i] and\n- i + j < n\n\nReturn the minimum number of jumps to reach index n - 1. The test cases are generated such that you can reach index n - 1.",
+    "notes": [
+      "Source: https://neetcode.io/problems/jump-game-ii?list=neetcode150",
+      "Imported automatically from third-party problem datasets."
+    ]
+  },
+  "examples": [
+    {
+      "input": "nums = [2,3,1,1,4]",
+      "output": "2",
+      "explanation": ""
+    },
+    {
+      "input": "nums = [2,3,0,1,4]",
+      "output": "2",
+      "explanation": ""
+    }
+  ],
+  "constraints": [
+    "`1 <= nums.length <= 10^4`",
+    "`0 <= nums[i] <= 1000`",
+    "It's guaranteed that you can reach `nums[n - 1]`"
+  ]
+}

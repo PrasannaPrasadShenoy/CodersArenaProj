@@ -1,0 +1,76 @@
+{
+  "tests": [
+    {
+      "input": "args = [[\"TimeMap\",\"set\",\"get\",\"get\"],[[],[\"key\",\"value\",5],[\"key\",3],[\"key\",7]]]",
+      "expectedOutput": {
+        "javascript": "[null,null,\"\",\"value\"]",
+        "python": "[None, None, \"\", \"value\"]",
+        "java": "[null, null, \"\", \"value\"]"
+      }
+    },
+    {
+      "input": "args = [[\"TimeMap\",\"set\",\"set\",\"get\",\"get\",\"get\"],[[],[\"x\",\"v1\",1],[\"x\",\"v2\",2],[\"x\",1],[\"x\",2],[\"x\",3]]]",
+      "expectedOutput": {
+        "javascript": "[null,null,null,\"v1\",\"v2\",\"v2\"]",
+        "python": "[None, None, None, \"v1\", \"v2\", \"v2\"]",
+        "java": "[null, null, null, \"v1\", \"v2\", \"v2\"]"
+      }
+    },
+    {
+      "input": "args = [[\"TimeMap\",\"set\",\"set\",\"set\",\"get\",\"get\",\"get\"],[[],[\"k\",\"a\",10],[\"k\",\"b\",20],[\"k\",\"c\",30],[\"k\",15],[\"k\",25],[\"k\",35]]]",
+      "expectedOutput": {
+        "javascript": "[null,null,null,null,\"a\",\"b\",\"c\"]",
+        "python": "[None, None, None, None, \"a\", \"b\", \"c\"]",
+        "java": "[null, null, null, null, \"a\", \"b\", \"c\"]"
+      }
+    },
+    {
+      "input": "args = [[\"TimeMap\",\"set\",\"set\",\"get\",\"get\"],[[],[\"key1\",\"val1\",1],[\"key2\",\"val2\",2],[\"key1\",1],[\"key2\",2]]]",
+      "expectedOutput": {
+        "javascript": "[null,null,null,\"val1\",\"val2\"]",
+        "python": "[None, None, None, \"val1\", \"val2\"]",
+        "java": "[null, null, null, \"val1\", \"val2\"]"
+      }
+    },
+    {
+      "input": "args = [[\"TimeMap\",\"set\",\"set\",\"set\",\"get\",\"get\",\"get\"],[[],[\"a\",\"x\",1],[\"b\",\"y\",2],[\"c\",\"z\",3],[\"a\",1],[\"b\",2],[\"c\",3]]]",
+      "expectedOutput": {
+        "javascript": "[null,null,null,null,\"x\",\"y\",\"z\"]",
+        "python": "[None, None, None, None, \"x\", \"y\", \"z\"]",
+        "java": "[null, null, null, null, \"x\", \"y\", \"z\"]"
+      }
+    },
+    {
+      "input": "args = [[\"TimeMap\",\"set\",\"get\",\"set\",\"get\",\"set\",\"get\"],[[],[\"test\",\"first\",1],[\"test\",1],[\"test\",\"second\",100],[\"test\",50],[\"test\",\"third\",1000],[\"test\",500]]]",
+      "expectedOutput": {
+        "javascript": "[null,null,\"first\",null,\"first\",null,\"second\"]",
+        "python": "[None, None, \"first\", None, \"first\", None, \"second\"]",
+        "java": "[null, null, \"first\", null, \"first\", null, \"second\"]"
+      }
+    },
+    {
+      "input": "args = [[\"TimeMap\",\"set\",\"set\",\"set\",\"set\",\"get\"],[[],[\"data\",\"v1\",1],[\"data\",\"v2\",10],[\"data\",\"v3\",100],[\"data\",\"v4\",1000],[\"data\",555]]]",
+      "expectedOutput": {
+        "javascript": "[null,null,null,null,null,\"v3\"]",
+        "python": "[None, None, None, None, None, \"v3\"]",
+        "java": "[null, null, null, null, null, \"v3\"]"
+      }
+    },
+    {
+      "input": "args = [[\"TimeMap\",\"set\",\"get\",\"get\",\"get\"],[[],[\"single\",\"value\",42],[\"single\",1],[\"single\",42],[\"single\",100]]]",
+      "expectedOutput": {
+        "javascript": "[null,null,\"\",\"value\",\"value\"]",
+        "python": "[None, None, \"\", \"value\", \"value\"]",
+        "java": "[null, null, \"\", \"value\", \"value\"]"
+      }
+    },
+    {
+      "input": "args = [[\"TimeMap\",\"set\",\"set\",\"get\",\"get\",\"get\",\"get\"],[[],[\"boundary\",\"min\",1],[\"boundary\",\"max\",10000000],[\"boundary\",0],[\"boundary\",1],[\"boundary\",5000000],[\"boundary\",10000000]]]",
+      "expectedOutput": {
+        "javascript": "[null,null,null,\"\",\"min\",\"min\",\"max\"]",
+        "python": "[None, None, None, \"\", \"min\", \"min\", \"max\"]",
+        "java": "[null, null, null, \"\", \"min\", \"min\", \"max\"]"
+      }
+    }
+  ]
+}

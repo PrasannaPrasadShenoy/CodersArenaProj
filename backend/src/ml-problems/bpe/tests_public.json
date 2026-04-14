@@ -1,0 +1,12 @@
+{
+  "tests": [
+    {
+      "name": "Correct number of merges",
+      "code": "\nbpe = {fn}()\nbpe.train(['low', 'low', 'low', 'lower', 'newest', 'widest'], num_merges=5)\nassert len(bpe.merges) == 5, f'Expected 5 merges, got {len(bpe.merges)}'\n"
+    },
+    {
+      "name": "Most frequent pair merged first",
+      "code": "\nbpe = {fn}()\nbpe.train(['aaa', 'aaa', 'aaa', 'bbb'], num_merges=1)\nassert bpe.merges[0] == ('a', 'a'), f'First merge: {bpe.merges[0]}'\n"
+    }
+  ]
+}

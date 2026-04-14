@@ -1,0 +1,35 @@
+{
+  "id": "longest-common-subsequence",
+  "title": "Longest Common Subsequence",
+  "difficulty": "Medium",
+  "track": "dsa",
+  "category": "2-D Dynamic Programming",
+  "description": {
+    "text": "Given two strings text1 and text2, return *the length of their longest common subsequence. *If there is no common subsequence, return 0.\n\nA subsequence of a string is a new string generated from the original string with some characters (can be none) deleted without changing the relative order of the remaining characters.\n\n- For example, \"ace\" is a subsequence of \"abcde\".\n\nA common subsequence of two strings is a subsequence that is common to both strings.",
+    "notes": [
+      "Source: https://neetcode.io/problems/longest-common-subsequence?list=neetcode150",
+      "Imported automatically from third-party problem datasets."
+    ]
+  },
+  "examples": [
+    {
+      "input": "text1 = \"abcde\", text2 = \"ace\"",
+      "output": "3",
+      "explanation": ""
+    },
+    {
+      "input": "text1 = \"abc\", text2 = \"abc\"",
+      "output": "3",
+      "explanation": ""
+    },
+    {
+      "input": "text1 = \"abc\", text2 = \"def\"",
+      "output": "0",
+      "explanation": ""
+    }
+  ],
+  "constraints": [
+    "1 <= text1.length, text2.length <= 1000",
+    "text1 and text2 consist of only lowercase English characters."
+  ]
+}

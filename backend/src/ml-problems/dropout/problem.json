@@ -1,0 +1,25 @@
+{
+  "id": "dropout",
+  "title": "Implement Dropout",
+  "difficulty": "Easy",
+  "track": "ml",
+  "category": "ML Fundamentals",
+  "functionName": "MyDropout",
+  "hint": "During training: randomly zero elements with probability p, scale survivors by 1/(1-p). During eval: identity. Use torch.rand_like and compare with p.",
+  "description": {
+    "text": "Implement dropout regularization as an nn.Module. During training, randomly zero elements with probability p and scale survivors by 1/(1-p). During eval, return the input unchanged.",
+    "notes": []
+  },
+  "examples": [
+    {
+      "input": "Training, p=0.5, x = ones(4)",
+      "output": "Roughly half zeros, remaining entries scaled by 2.0 (deterministic masks vary by run).",
+      "explanation": "Scaling keeps expected value equal to the identity when p > 0."
+    }
+  ],
+  "constraints": [
+    "training mode: Bernoulli mask with keep probability (1 - p), scale by 1/(1-p).",
+    "eval mode: identity (no scaling, no masking).",
+    "Do not use nn.Dropout or F.dropout."
+  ]
+}

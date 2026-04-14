@@ -1,0 +1,12 @@
+{
+  "tests": [
+    {
+      "name": "Mean approximately 0",
+      "code": "\nimport torch\ntorch.manual_seed(0)\nw = torch.empty(256, 512)\n{fn}(w)\nassert abs(w.mean().item()) < 0.02, f'Mean too far from 0: {w.mean().item():.4f}'\n"
+    },
+    {
+      "name": "Std matches sqrt(2/fan_in)",
+      "code": "\nimport torch, math\ntorch.manual_seed(0)\nfan_in = 1024\nw = torch.empty(256, fan_in)\n{fn}(w)\nexpected = math.sqrt(2.0 / fan_in)\nassert abs(w.std().item() - expected) < 0.005, f'Std {w.std().item():.4f} vs expected {expected:.4f}'\n"
+    }
+  ]
+}

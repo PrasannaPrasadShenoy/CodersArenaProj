@@ -1,0 +1,33 @@
+{
+  "tests": [
+    {
+      "input": "args = [[\"LRUCache\",\"put\",\"put\",\"get\",\"put\",\"get\",\"put\",\"get\",\"get\",\"get\"],[[2],[1,1],[2,2],[1],[3,3],[2],[4,4],[1],[3],[4]]]",
+      "expectedOutput": {
+        "javascript": "[null,null,null,1,null,-1,null,-1,3,4]",
+        "python": "[None, None, None, 1, None, -1, None, -1, 3, 4]",
+        "java": "[null, null, null, 1, null, -1, null, -1, 3, 4]"
+      }
+    },
+    {
+      "input": "args = [[\"LRUCache\",\"get\",\"put\",\"get\",\"put\",\"put\",\"get\",\"get\"],[[2],[2],[2,6],[1],[1,5],[1,2],[1],[2]]]",
+      "expectedOutput": {
+        "javascript": "[null,-1,null,-1,null,null,2,6]",
+        "python": "[None, -1, None, -1, None, None, 2, 6]",
+        "java": "[null, -1, null, -1, null, null, 2, 6]"
+      }
+    },
+    {
+      "input": "args = [[\"LRUCache\",\"put\",\"get\",\"put\",\"get\",\"get\"],[[1],[2,1],[2],[3,2],[2],[3]]]",
+      "expectedOutput": {
+        "javascript": "[null,null,1,null,-1,2]",
+        "python": "[None, None, 1, None, -1, 2]",
+        "java": "[null, null, 1, null, -1, 2]"
+      }
+    }
+  ],
+  "combinedExpectedOutput": {
+    "javascript": "[null,null,null,1,null,-1,null,-1,3,4]\n[null,-1,null,-1,null,null,2,6]\n[null,null,1,null,-1,2]",
+    "python": "[None, None, None, 1, None, -1, None, -1, 3, 4]\n[None, -1, None, -1, None, None, 2, 6]\n[None, None, 1, None, -1, 2]",
+    "java": "[null, null, null, 1, null, -1, null, -1, 3, 4]\n[null, -1, null, -1, null, null, 2, 6]\n[null, null, 1, null, -1, 2]"
+  }
+}

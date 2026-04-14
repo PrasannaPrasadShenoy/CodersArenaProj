@@ -1,0 +1,17 @@
+{
+  "id": "speculative_decoding",
+  "title": "Speculative Decoding",
+  "difficulty": "Hard",
+  "track": "ml",
+  "category": "TorchCode",
+  "functionName": "speculative_decode",
+  "hint": "For each draft token i: accept with prob min(1, p_target[i,token]/p_draft[i,token]). If rejected, sample from max(0, p_target - p_draft) normalized. Return list of accepted tokens (may include one resampled).",
+  "description": {
+    "text": "Implement speculative_decode using PyTorch primitives.",
+    "notes": []
+  },
+  "examples": [],
+  "constraints": [
+    "Use PyTorch only unless task says otherwise."
+  ]
+}

@@ -1,0 +1,124 @@
+{
+  "tests": [
+    {
+      "input": "args = [[\"z\",\"z\"]]",
+      "expectedOutput": {
+        "javascript": "\"z\"",
+        "python": "\"z\"",
+        "java": "\"z\""
+      }
+    },
+    {
+      "input": "args = [[\"abc\",\"ab\"]]",
+      "expectedOutput": {
+        "javascript": "\"\"",
+        "python": "\"\"",
+        "java": "\"\""
+      }
+    },
+    {
+      "input": "args = [[\"ab\",\"adc\"]]",
+      "expectedOutput": {
+        "javascript": "\"abdc\"",
+        "python": "\"abdc\"",
+        "java": "\"abdc\""
+      }
+    },
+    {
+      "input": "args = [[\"ac\",\"ab\",\"zc\",\"zb\"]]",
+      "expectedOutput": {
+        "javascript": "\"acbz\"",
+        "python": "\"acbz\"",
+        "java": "\"acbz\""
+      }
+    },
+    {
+      "input": "args = [[\"z\"]]",
+      "expectedOutput": {
+        "javascript": "\"z\"",
+        "python": "\"z\"",
+        "java": "\"z\""
+      }
+    },
+    {
+      "input": "args = [[\"za\",\"zb\",\"ca\",\"cb\"]]",
+      "expectedOutput": {
+        "javascript": "\"zcab\"",
+        "python": "\"zcab\"",
+        "java": "\"zcab\""
+      }
+    },
+    {
+      "input": "args = [[\"zy\",\"zx\"]]",
+      "expectedOutput": {
+        "javascript": "\"zyx\"",
+        "python": "\"zyx\"",
+        "java": "\"zyx\""
+      }
+    },
+    {
+      "input": "args = [[\"a\",\"b\",\"ca\",\"cc\"]]",
+      "expectedOutput": {
+        "javascript": "\"abc\"",
+        "python": "\"abc\"",
+        "java": "\"abc\""
+      }
+    },
+    {
+      "input": "args = [[\"abc\",\"bcd\",\"cde\"]]",
+      "expectedOutput": {
+        "javascript": "\"abcde\"",
+        "python": "\"abcde\"",
+        "java": "\"abcde\""
+      }
+    },
+    {
+      "input": "args = [[\"a\",\"aa\"]]",
+      "expectedOutput": {
+        "javascript": "\"a\"",
+        "python": "\"a\"",
+        "java": "\"a\""
+      }
+    },
+    {
+      "input": "args = [[\"ab\",\"abc\"]]",
+      "expectedOutput": {
+        "javascript": "\"abc\"",
+        "python": "\"abc\"",
+        "java": "\"abc\""
+      }
+    },
+    {
+      "input": "args = [[\"abc\",\"ab\"]]",
+      "expectedOutput": {
+        "javascript": "\"\"",
+        "python": "\"\"",
+        "java": "\"\""
+      }
+    },
+    {
+      "input": "args = [[\"a\",\"b\",\"c\",\"d\"]]",
+      "expectedOutput": {
+        "javascript": "\"abcd\"",
+        "python": "\"abcd\"",
+        "java": "\"abcd\""
+      }
+    },
+    {
+      "input": "args = [[\"d\",\"c\",\"b\",\"a\"]]",
+      "expectedOutput": {
+        "javascript": "\"dcba\"",
+        "python": "\"dcba\"",
+        "java": "\"dcba\""
+      }
+    },
+    {
+      "input": "args = [[\"ac\",\"ab\",\"b\"]]",
+      "expectedOutput": {
+        "javascript": "\"acb\"",
+        "python": "\"acb\"",
+        "java": "\"acb\""
+      }
+    }
+  ]
+}

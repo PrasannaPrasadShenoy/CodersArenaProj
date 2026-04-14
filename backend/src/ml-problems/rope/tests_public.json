@@ -1,0 +1,12 @@
+{
+  "tests": [
+    {
+      "name": "Output shapes",
+      "code": "\nimport torch\nq = torch.randn(2, 8, 64)\nk = torch.randn(2, 8, 64)\nq_rot, k_rot = {fn}(q, k)\nassert q_rot.shape == q.shape, f'Q shape: {q_rot.shape}'\nassert k_rot.shape == k.shape, f'K shape: {k_rot.shape}'\n"
+    },
+    {
+      "name": "Preserves norm",
+      "code": "\nimport torch\ntorch.manual_seed(0)\nq = torch.randn(1, 16, 32)\nk = torch.randn(1, 16, 32)\nq_rot, k_rot = {fn}(q, k)\nassert torch.allclose(q.norm(dim=-1), q_rot.norm(dim=-1), atol=1e-4), 'RoPE should preserve norms'\n"
+    }
+  ]
+}

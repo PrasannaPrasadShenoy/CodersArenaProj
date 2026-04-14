@@ -1,0 +1,12 @@
+{
+  "tests": [
+    {
+      "name": "Shape and basic behavior",
+      "code": "\nimport torch\nx = torch.randn(2, 3, 8)\ngamma = torch.ones(8)\nbeta = torch.zeros(8)\nout = {fn}(x, gamma, beta)\nassert out.shape == x.shape, f'Shape mismatch: {out.shape}'\nref = torch.nn.functional.layer_norm(x, [8], gamma, beta)\nassert torch.allclose(out, ref, atol=1e-4), 'Value mismatch vs F.layer_norm'\n"
+    },
+    {
+      "name": "With learned parameters",
+      "code": "\nimport torch\nx = torch.randn(4, 16)\ngamma = torch.randn(16)\nbeta = torch.randn(16)\nout = {fn}(x, gamma, beta)\nref = torch.nn.functional.layer_norm(x, [16], gamma, beta)\nassert torch.allclose(out, ref, atol=1e-4), 'Value mismatch with non-trivial gamma/beta'\n"
+    }
+  ]
+}

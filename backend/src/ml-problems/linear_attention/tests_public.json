@@ -1,0 +1,12 @@
+{
+  "tests": [
+    {
+      "name": "Output shape",
+      "code": "\nimport torch\nout = {fn}(torch.randn(2, 8, 16), torch.randn(2, 8, 16), torch.randn(2, 8, 32))\nassert out.shape == (2, 8, 32), f'Shape mismatch: {out.shape}'\n"
+    },
+    {
+      "name": "No NaN or Inf",
+      "code": "\nimport torch\ntorch.manual_seed(0)\nout = {fn}(torch.randn(2, 16, 8), torch.randn(2, 16, 8), torch.randn(2, 16, 8))\nassert not torch.isnan(out).any(), 'NaN in output'\nassert not torch.isinf(out).any(), 'Inf in output'\n"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "id": "hand-of-straights",
+  "title": "Hand of Straights",
+  "difficulty": "Medium",
+  "track": "dsa",
+  "category": "Greedy",
+  "description": {
+    "text": "Solve Hand of Straights.",
+    "notes": [
+      "Source: https://neetcode.io/problems/hand-of-straights?list=neetcode150",
+      "Imported automatically from third-party problem datasets."
+    ]
+  },
+  "examples": [],
+  "constraints": []
+}

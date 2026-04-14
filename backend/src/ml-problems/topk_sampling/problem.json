@@ -1,0 +1,17 @@
+{
+  "id": "topk_sampling",
+  "title": "Top-k / Top-p Sampling",
+  "difficulty": "Medium",
+  "track": "ml",
+  "category": "TorchCode",
+  "functionName": "sample_top_k_top_p",
+  "hint": "Apply temperature first. For top-k: set logits below the k-th largest to -inf. For top-p: sort, compute cumsum of probs, mask where cumsum > p. Then sample from softmax.",
+  "description": {
+    "text": "Implement sample_top_k_top_p using PyTorch primitives.",
+    "notes": []
+  },
+  "examples": [],
+  "constraints": [
+    "Use PyTorch only unless task says otherwise."
+  ]
+}

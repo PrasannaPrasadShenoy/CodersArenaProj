@@ -1,0 +1,12 @@
+{
+  "tests": [
+    {
+      "name": "Clips to max_norm",
+      "code": "\nimport torch\np1 = torch.randn(10, requires_grad=True)\np2 = torch.randn(10, requires_grad=True)\n(p1 * 10).sum().backward()\n(p2 * 10).sum().backward()\n{fn}([p1, p2], max_norm=1.0)\nnew_norm = torch.sqrt(p1.grad.norm()**2 + p2.grad.norm()**2).item()\nassert new_norm <= 1.0 + 1e-5, f'Clipped norm {new_norm:.4f} > 1.0'\n"
+    },
+    {
+      "name": "Returns original norm",
+      "code": "\nimport torch\np = torch.randn(10, requires_grad=True)\n(p * 3).sum().backward()\nexpected = p.grad.norm().item()\nreturned = {fn}([p], max_norm=100.0)\nassert abs(returned - expected) < 1e-4, f'Returned {returned:.4f}, expected {expected:.4f}'\n"
+    }
+  ]
+}

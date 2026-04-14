@@ -1,0 +1,25 @@
+{
+  "id": "weight_init",
+  "title": "Kaiming Initialization",
+  "difficulty": "Easy",
+  "track": "ml",
+  "category": "ML Fundamentals",
+  "functionName": "kaiming_init",
+  "hint": "For fan_in mode: std = sqrt(2 / fan_in) where fan_in = weight.shape[1]. Fill with normal(0, std). Return the tensor.",
+  "description": {
+    "text": "Implement Kaiming (He) normal initialization: fill a 2D weight matrix in-place with samples from Normal(0, std^2) where std = sqrt(2 / fan_in). fan_in is weight.shape[1] for a typical linear weight.",
+    "notes": []
+  },
+  "examples": [
+    {
+      "input": "weight shape (out_features, in_features), fan_in = in_features",
+      "output": "Entries ~ N(0, 2/fan_in); suitable default init for ReLU-style layers.",
+      "explanation": "Variance scales with fan-in so activations stay stable at init."
+    }
+  ],
+  "constraints": [
+    "Initialize in-place; return the same tensor.",
+    "std = sqrt(2 / fan_in) with fan_in = weight.shape[1] for 2D weights.",
+    "Use torch.randn scaled by std (or equivalent)."
+  ]
+}

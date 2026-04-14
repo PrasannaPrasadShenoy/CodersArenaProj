@@ -1,0 +1,25 @@
+{
+  "id": "gradient_clipping",
+  "title": "Gradient Norm Clipping",
+  "difficulty": "Easy",
+  "track": "ml",
+  "category": "ML Fundamentals",
+  "functionName": "clip_grad_norm",
+  "hint": "Total norm = sqrt(sum(p.grad.norm()^2)). If total > max_norm, scale all grads by max_norm/total. Return original total norm.",
+  "description": {
+    "text": "Implement gradient norm clipping. Compute the total L2 norm of all parameter gradients; if it exceeds max_norm, scale every grad in-place so the total norm equals max_norm. Return the original (pre-clip) total norm as a float.",
+    "notes": []
+  },
+  "examples": [
+    {
+      "input": "Two parameters with grads of norm 3 and 4; max_norm = 5",
+      "output": "Pre-clip total norm = 5; after clip, scaled down so combined norm = 5; return value 5.",
+      "explanation": "If total <= max_norm, grads are unchanged; return value is still the computed total."
+    }
+  ],
+  "constraints": [
+    "Skip parameters with grad is None.",
+    "Clip in-place on p.grad tensors.",
+    "Return the unclipped total norm (float)."
+  ]
+}

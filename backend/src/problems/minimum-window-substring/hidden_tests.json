@@ -1,0 +1,68 @@
+{
+  "tests": [
+    {
+      "input": "args = [\"ab\",\"b\"]",
+      "expectedOutput": {
+        "javascript": "\"b\"",
+        "python": "\"b\"",
+        "java": "\"b\""
+      }
+    },
+    {
+      "input": "args = [\"abc\",\"cba\"]",
+      "expectedOutput": {
+        "javascript": "\"abc\"",
+        "python": "\"abc\"",
+        "java": "\"abc\""
+      }
+    },
+    {
+      "input": "args = [\"aa\",\"aa\"]",
+      "expectedOutput": {
+        "javascript": "\"aa\"",
+        "python": "\"aa\"",
+        "java": "\"aa\""
+      }
+    },
+    {
+      "input": "args = [\"a\",\"b\"]",
+      "expectedOutput": {
+        "javascript": "\"\"",
+        "python": "\"\"",
+        "java": "\"\""
+      }
+    },
+    {
+      "input": "args = [\"ab\",\"a\"]",
+      "expectedOutput": {
+        "javascript": "\"a\"",
+        "python": "\"a\"",
+        "java": "\"a\""
+      }
+    },
+    {
+      "input": "args = [\"bba\",\"ab\"]",
+      "expectedOutput": {
+        "javascript": "\"ba\"",
+        "python": "\"ba\"",
+        "java": "\"ba\""
+      }
+    },
+    {
+      "input": "args = [\"acbbaca\",\"aba\"]",
+      "expectedOutput": {
+        "javascript": "\"baca\"",
+        "python": "\"baca\"",
+        "java": "\"baca\""
+      }
+    },
+    {
+      "input": "args = [\"cabwefgewcwaefgcf\",\"cae\"]",
+      "expectedOutput": {
+        "javascript": "\"cwae\"",
+        "python": "\"cwae\"",
+        "java": "\"cwae\""
+      }
+    }
+  ]
+}

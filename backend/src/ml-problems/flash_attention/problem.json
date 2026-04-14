@@ -1,0 +1,17 @@
+{
+  "id": "flash_attention",
+  "title": "Flash Attention (Tiled)",
+  "difficulty": "Hard",
+  "track": "ml",
+  "category": "ML Attention",
+  "functionName": "flash_attention",
+  "hint": "Process Q in blocks. For each Q-block, iterate over K/V blocks. Use online softmax: track running max and sum, rescale accumulator when max changes. output = acc / row_sum.",
+  "description": {
+    "text": "Implement memory-efficient tiled attention in pure PyTorch: process Q, K, V in blocks and use an online softmax (running max and sum) so you never materialize the full attention matrix for long sequences.",
+    "notes": []
+  },
+  "examples": [],
+  "constraints": [
+    "Use PyTorch only unless task says otherwise."
+  ]
+}

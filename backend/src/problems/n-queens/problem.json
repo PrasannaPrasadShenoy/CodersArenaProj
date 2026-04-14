@@ -1,0 +1,16 @@
+{
+  "id": "n-queens",
+  "title": "N Queens",
+  "difficulty": "Hard",
+  "track": "dsa",
+  "category": "Backtracking",
+  "description": {
+    "text": "Solve N Queens.",
+    "notes": [
+      "Source: https://neetcode.io/problems/n-queens?list=neetcode150",
+      "Imported automatically from third-party problem datasets."
+    ]
+  },
+  "examples": [],
+  "constraints": []
+}

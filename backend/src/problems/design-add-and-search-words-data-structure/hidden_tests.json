@@ -1,0 +1,84 @@
+{
+  "tests": [
+    {
+      "input": "args = [[\"WordDictionary\",\"addWord\",\"addWord\",\"search\",\"search\"],[[],[\"word\"],[\"world\"],[\"word\"],[\"wor.\"]]]",
+      "expectedOutput": {
+        "javascript": "[null,null,null,true,true]",
+        "python": "[None, None, None, True, True]",
+        "java": "[null, null, null, true, true]"
+      }
+    },
+    {
+      "input": "args = [[\"WordDictionary\",\"addWord\",\"search\",\"search\"],[[],[\"test\"],[\"test\"],[\"t..t\"]]]",
+      "expectedOutput": {
+        "javascript": "[null,null,true,true]",
+        "python": "[None, None, True, True]",
+        "java": "[null, null, true, true]"
+      }
+    },
+    {
+      "input": "args = [[\"WordDictionary\",\"addWord\",\"addWord\",\"search\",\"search\",\"search\"],[[],[\"a\"],[\"b\"],[\"a\"],[\".\"],[\"c\"]]]",
+      "expectedOutput": {
+        "javascript": "[null,null,null,true,true,false]",
+        "python": "[None, None, None, True, True, False]",
+        "java": "[null, null, null, true, true, false]"
+      }
+    },
+    {
+      "input": "args = [[\"WordDictionary\",\"addWord\",\"addWord\",\"search\",\"search\",\"search\"],[[],[\"abc\"],[\"def\"],[\"...\"],[\"a..\"],[\"..f\"]]]",
+      "expectedOutput": {
+        "javascript": "[null,null,null,true,true,true]",
+        "python": "[None, None, None, True, True, True]",
+        "java": "[null, null, null, true, true, true]"
+      }
+    },
+    {
+      "input": "args = [[\"WordDictionary\",\"addWord\",\"addWord\",\"search\",\"search\",\"search\"],[[],[\"programming\"],[\"algorithm\"],[\"prog.......\"],[\"algo.....\"],[\"........ing\"]]]",
+      "expectedOutput": {
+        "javascript": "[null,null,null,true,true,true]",
+        "python": "[None, None, None, True, True, True]",
+        "java": "[null, null, null, true, true, true]"
+      }
+    },
+    {
+      "input": "args = [[\"WordDictionary\",\"addWord\",\"addWord\",\"search\",\"search\"],[[],[\"x\"],[\"xy\"],[\".\"],[\"..\"]]]",
+      "expectedOutput": {
+        "javascript": "[null,null,null,true,true]",
+        "python": "[None, None, None, True, True]",
+        "java": "[null, null, null, true, true]"
+      }
+    },
+    {
+      "input": "args = [[\"WordDictionary\",\"addWord\",\"addWord\",\"search\",\"search\",\"search\"],[[],[\"hello\"],[\"world\"],[\"hi\"],[\"word\"],[\"......\"]]]",
+      "expectedOutput": {
+        "javascript": "[null,null,null,false,false,false]",
+        "python": "[None, None, None, False, False, False]",
+        "java": "[null, null, null, false, false, false]"
+      }
+    },
+    {
+      "input": "args = [[\"WordDictionary\",\"addWord\",\"addWord\",\"addWord\",\"search\",\"search\",\"search\",\"search\"],[[],[\"cat\"],[\"car\"],[\"card\"],[\"c..\"],[\"ca.\"],[\"c..d\"],[\".....\"]]]",
+      "expectedOutput": {
+        "javascript": "[null,null,null,null,true,true,true,false]",
+        "python": "[None, None, None, None, True, True, True, False]",
+        "java": "[null, null, null, null, true, true, true, false]"
+      }
+    },
+    {
+      "input": "args = [[\"WordDictionary\",\"addWord\",\"addWord\",\"addWord\",\"search\",\"search\",\"search\"],[[],[\"run\"],[\"runner\"],[\"running\"],[\"run\"],[\"run...\"],[\"run.....\"]]]",
+      "expectedOutput": {
+        "javascript": "[null,null,null,null,true,true,false]",
+        "python": "[None, None, None, None, True, True, False]",
+        "java": "[null, null, null, null, true, true, false]"
+      }
+    },
+    {
+      "input": "args = [[\"WordDictionary\",\"addWord\",\"addWord\",\"search\",\"search\",\"search\"],[[],[\"abc\"],[\"xyz\"],[\"...\"],[\"..\"],[\"....\"]]]",
+      "expectedOutput": {
+        "javascript": "[null,null,null,true,false,false]",
+        "python": "[None, None, None, True, False, False]",
+        "java": "[null, null, null, true, false, false]"
+      }
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "id": "climbing-stairs",
+  "title": "Climbing Stairs",
+  "difficulty": "Easy",
+  "track": "dsa",
+  "category": "1-D Dynamic Programming",
+  "description": {
+    "text": "You are climbing a staircase. It takes n steps to reach the top.\n\nEach time you can either climb 1 or 2 steps. In how many distinct ways can you climb to the top?",
+    "notes": [
+      "Source: https://neetcode.io/problems/climbing-stairs?list=neetcode150",
+      "Imported automatically from third-party problem datasets."
+    ]
+  },
+  "examples": [
+    {
+      "input": "n = 2",
+      "output": "2",
+      "explanation": "There are two ways to climb to the top."
+    },
+    {
+      "input": "n = 3",
+      "output": "3",
+      "explanation": "There are three ways to climb to the top."
+    }
+  ],
+  "constraints": [
+    "1 <= n <= 45"
+  ]
+}

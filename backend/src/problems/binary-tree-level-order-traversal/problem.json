@@ -1,0 +1,35 @@
+{
+  "id": "binary-tree-level-order-traversal",
+  "title": "Binary Tree Level Order Traversal",
+  "difficulty": "Medium",
+  "track": "dsa",
+  "category": "Trees",
+  "description": {
+    "text": "Given the root of a binary tree, return the level order traversal of its nodes' values. (i.e., from left to right, level by level).",
+    "notes": [
+      "Source: https://neetcode.io/problems/level-order-traversal-of-binary-tree?list=neetcode150",
+      "Imported automatically from third-party problem datasets."
+    ]
+  },
+  "examples": [
+    {
+      "input": "root = [3,9,20,null,null,15,7]",
+      "output": "[[3],[9,20],[15,7]]",
+      "explanation": ""
+    },
+    {
+      "input": "root = [1]",
+      "output": "[[1]]",
+      "explanation": ""
+    },
+    {
+      "input": "root = []",
+      "output": "[]",
+      "explanation": ""
+    }
+  ],
+  "constraints": [
+    "The number of nodes in the tree is in the range [0, 2000]",
+    "-1000 <= Node.val <= 1000"
+  ]
+}
