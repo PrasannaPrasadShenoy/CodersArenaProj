@@ -5,6 +5,8 @@ import HomePage from "./pages/HomePage";
 
 import { Toaster } from "react-hot-toast";
 import { setAuthTokenGetter } from "./lib/axios";
+import { setWhiteboardAuthTokenGetter } from "./lib/whiteboardSocket";
+import ErrorBoundary from "./components/ErrorBoundary";
 import DashboardPage from "./pages/DashboardPage";
 import ProblemPage from "./pages/ProblemPage";
 import ProblemsPage from "./pages/ProblemsPage";
@@ -18,10 +20,12 @@ function App() {
   const { getToken } = useAuth();
 
   useEffect(() => {
-    setAuthTokenGetter(async () => {
+    const getter = async () => {
       const token = await getToken();
       return token;
-    });
+    };
+    setAuthTokenGetter(getter);
+    setWhiteboardAuthTokenGetter(getter);
   }, [getToken]);
 
   if (!isLoaded) {
@@ -34,7 +38,7 @@ function App() {
   }
 
   return (
-    <>
+    <ErrorBoundary>
       <Routes>
         <Route path="/" element={!isSignedIn ? <HomePage /> : <Navigate to={"/dashboard"} />} />
         <Route path="/dashboard" element={isSignedIn ? <DashboardPage /> : <Navigate to={"/"} />} />
@@ -54,7 +58,7 @@ function App() {
       </Routes>
 
       <Toaster toastOptions={{ duration: 3000 }} />
-    </>
+    </ErrorBoundary>
   );
 }
 

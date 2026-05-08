@@ -32,10 +32,10 @@ async function getAccessContext(roomId, user) {
 export async function getWhiteboardSnapshot(req, res) {
   try {
     const { roomId } = req.params;
-    if (!roomId) return res.status(400).json({ message: "roomId is required" });
+    if (!roomId) return res.status(400).json({ error: "roomId is required" });
 
     const { whiteboard, allowed } = await getAccessContext(roomId, req.user);
-    if (!allowed) return res.status(403).json({ message: "Forbidden" });
+    if (!allowed) return res.status(403).json({ error: "Forbidden" });
 
     return res.status(200).json({
       roomId,
@@ -44,8 +44,8 @@ export async function getWhiteboardSnapshot(req, res) {
     });
   } catch (error) {
     console.error("Error in getWhiteboardSnapshot:", error);
-    const message = process.env.NODE_ENV === "development" ? error?.message : "Internal Server Error";
-    return res.status(500).json({ message });
+    const msg = process.env.NODE_ENV === "development" ? error?.message : "Internal Server Error";
+    return res.status(500).json({ error: msg });
   }
 }
 
@@ -53,13 +53,13 @@ export async function saveWhiteboardSnapshot(req, res) {
   try {
     const { roomId } = req.params;
     const { document } = req.body || {};
-    if (!roomId) return res.status(400).json({ message: "roomId is required" });
+    if (!roomId) return res.status(400).json({ error: "roomId is required" });
     if (!document || typeof document !== "object") {
-      return res.status(400).json({ message: "document snapshot is required" });
+      return res.status(400).json({ error: "document snapshot is required" });
     }
 
     const { linkedSession, whiteboard, allowed } = await getAccessContext(roomId, req.user);
-    if (!allowed) return res.status(403).json({ message: "Forbidden" });
+    if (!allowed) return res.status(403).json({ error: "Forbidden" });
 
     const ownerClerkId = linkedSession ? "" : whiteboard?.ownerClerkId || req.user.clerkId;
     const saved = await Whiteboard.findOneAndUpdate(
@@ -80,8 +80,8 @@ export async function saveWhiteboardSnapshot(req, res) {
     });
   } catch (error) {
     console.error("Error in saveWhiteboardSnapshot:", error);
-    const message = process.env.NODE_ENV === "development" ? error?.message : "Internal Server Error";
-    return res.status(500).json({ message });
+    const msg = process.env.NODE_ENV === "development" ? error?.message : "Internal Server Error";
+    return res.status(500).json({ error: msg });
   }
 }
 

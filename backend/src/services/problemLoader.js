@@ -23,7 +23,7 @@ const REQUIRED_FILES = [
 
 let cache = null;
 let cacheTime = 0;
-const CACHE_TTL_MS = process.env.NODE_ENV === "production" ? 60000 : 0; // 1 min in prod, no cache in dev
+const CACHE_TTL_MS = process.env.NODE_ENV === "production" ? 3_600_000 : 0;
 
 let placeholderEnrichmentsCache = null;
 function getPlaceholderEnrichments() {

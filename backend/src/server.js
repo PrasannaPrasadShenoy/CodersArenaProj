@@ -1,6 +1,7 @@
 import express from "express";
 import path from "path";
 import cors from "cors";
+import helmet from "helmet";
 import http from "http";
 import { Server as SocketIOServer } from "socket.io";
 import { clerkMiddleware } from "@clerk/express";
@@ -31,10 +32,10 @@ initWhiteboardSocket(io);
 const __dirname = path.resolve();
 
 // middleware
+app.use(helmet());
 app.use(express.json({ limit: ENV.EXECUTE_MAX_BODY_BYTES }));
-// credentials:true meaning?? => server allows a browser to include cookies on request
 app.use(cors({ origin: ENV.CLIENT_URL, credentials: true }));
-app.use(clerkMiddleware()); // this adds auth field to request object: req.auth()
+app.use(clerkMiddleware());
 
 app.use("/api/chat", chatRoutes);
 app.use("/api/sessions", sessionRoutes);

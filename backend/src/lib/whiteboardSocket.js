@@ -1,6 +1,23 @@
+import { verifyToken } from "@clerk/express";
 import Whiteboard from "../models/Whiteboard.js";
 
 export function initWhiteboardSocket(io) {
+  io.use(async (socket, next) => {
+    const token = socket.handshake.auth?.token;
+    if (!token) {
+      return next(new Error("Authentication required"));
+    }
+    try {
+      const payload = await verifyToken(token, {
+        secretKey: process.env.CLERK_SECRET_KEY,
+      });
+      socket.clerkId = payload.sub;
+      next();
+    } catch {
+      next(new Error("Invalid token"));
+    }
+  });
+
   io.on("connection", (socket) => {
     socket.on("whiteboard:join", ({ roomId }) => {
       if (!roomId || typeof roomId !== "string") return;
@@ -12,26 +29,24 @@ export function initWhiteboardSocket(io) {
       socket.leave(roomId);
     });
 
-    socket.on("whiteboard:update", async ({ roomId, document, updatedByClerkId }) => {
+    socket.on("whiteboard:update", async ({ roomId, document }) => {
       if (!roomId || typeof roomId !== "string") return;
       if (!document || typeof document !== "object") return;
 
-      // Broadcast to everyone else in the same board room.
       socket.to(roomId).emit("whiteboard:update", {
         roomId,
         document,
-        updatedByClerkId: updatedByClerkId || "",
+        updatedByClerkId: socket.clerkId,
         ts: Date.now(),
       });
 
-      // Best-effort persistence for realtime updates.
       try {
         await Whiteboard.findOneAndUpdate(
           { roomId },
           {
             $set: {
               document,
-              updatedByClerkId: updatedByClerkId || "",
+              updatedByClerkId: socket.clerkId,
               ownerClerkId: "",
             },
           },
@@ -43,4 +58,3 @@ export function initWhiteboardSocket(io) {
     });
   });
 }
-

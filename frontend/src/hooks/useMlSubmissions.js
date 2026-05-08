@@ -8,7 +8,7 @@ export function useCreateDsaSubmission() {
     mutationFn: submissionsApi.createDsaSubmission,
     onError: (error) => {
       const msg =
-        error?.response?.data?.message || error?.message || "Failed to submit DSA solution";
+        error?.response?.data?.error || error?.response?.data?.message || error?.message || "Failed to submit DSA solution";
       toast.error(msg);
     },
   });
@@ -19,7 +19,7 @@ export function useCreateMlSubmission() {
     mutationKey: ["ml", "submission", "create"],
     mutationFn: submissionsApi.createMlSubmission,
     onError: (error) => {
-      const msg = error?.response?.data?.message || error?.message || "Failed to submit ML solution";
+      const msg = error?.response?.data?.error || error?.response?.data?.message || error?.message || "Failed to submit ML solution";
       toast.error(msg);
     },
   });

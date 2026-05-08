@@ -38,7 +38,7 @@ export async function getMyProgress(req, res) {
     });
   } catch (error) {
     console.error("getMyProgress error:", error.message);
-    return res.status(500).json({ message: "Failed to load progress" });
+    return res.status(500).json({ error: "Failed to load progress" });
   }
 }
 
@@ -46,17 +46,17 @@ export async function recordDsaSolved(req, res) {
   try {
     const { problemId } = req.body;
     if (!problemId || typeof problemId !== "string") {
-      return res.status(400).json({ message: "problemId is required" });
+      return res.status(400).json({ error: "problemId is required" });
     }
     const id = problemId.trim();
     if (!id) {
-      return res.status(400).json({ message: "problemId is required" });
+      return res.status(400).json({ error: "problemId is required" });
     }
 
     try {
       loadProblem(id);
     } catch {
-      return res.status(404).json({ message: "DSA problem not found" });
+      return res.status(404).json({ error: "DSA problem not found" });
     }
 
     const key = `dsa:${id}`;
@@ -65,7 +65,7 @@ export async function recordDsaSolved(req, res) {
     return res.status(200).json({ ok: true, problemId: id });
   } catch (error) {
     console.error("recordDsaSolved error:", error.message);
-    return res.status(500).json({ message: "Failed to record solve" });
+    return res.status(500).json({ error: "Failed to record solve" });
   }
 }
 
@@ -73,17 +73,17 @@ export async function recordDsaPublicCleared(req, res) {
   try {
     const { problemId } = req.body;
     if (!problemId || typeof problemId !== "string") {
-      return res.status(400).json({ message: "problemId is required" });
+      return res.status(400).json({ error: "problemId is required" });
     }
     const id = problemId.trim();
     if (!id) {
-      return res.status(400).json({ message: "problemId is required" });
+      return res.status(400).json({ error: "problemId is required" });
     }
 
     try {
       loadProblem(id);
     } catch {
-      return res.status(404).json({ message: "DSA problem not found" });
+      return res.status(404).json({ error: "DSA problem not found" });
     }
 
     await User.findByIdAndUpdate(req.user._id, { $addToSet: { dsaPublicClearedIds: id } });
@@ -91,6 +91,6 @@ export async function recordDsaPublicCleared(req, res) {
     return res.status(200).json({ ok: true, problemId: id });
   } catch (error) {
     console.error("recordDsaPublicCleared error:", error.message);
-    return res.status(500).json({ message: "Failed to record progress" });
+    return res.status(500).json({ error: "Failed to record progress" });
   }
 }

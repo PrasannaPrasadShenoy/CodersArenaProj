@@ -2,27 +2,14 @@ import { runUserProgram } from "../lib/codeRunner.js";
 import { ENV } from "../lib/env.js";
 import { runDsaJudge } from "../services/dsaJudgeService.js";
 
-const SUPPORTED = ["javascript", "python", "java"];
-
 export async function executeCode(req, res) {
   try {
-    const { language, code, problemId, mode } = req.body;
-
-    if (!language || typeof code !== "string") {
-      return res.status(400).json({ success: false, error: "language and code are required" });
-    }
+    const { language, code, problemId, mode } = req.validated;
 
     if (code.length > ENV.EXECUTE_MAX_CODE_CHARS) {
       return res.status(400).json({
         success: false,
         error: `Code exceeds maximum length (${ENV.EXECUTE_MAX_CODE_CHARS} characters)`,
-      });
-    }
-
-    if (!SUPPORTED.includes(language)) {
-      return res.status(400).json({
-        success: false,
-        error: `Unsupported language: ${language}. Use one of: ${SUPPORTED.join(", ")}`,
       });
     }
 

@@ -50,7 +50,9 @@ export async function getProblemsList(track = "") {
       return merged;
     }
   } catch (error) {
-    void error;
+    if (error.response?.status !== 404) {
+      console.error("Failed to fetch problems list:", error.message || error);
+    }
   }
   const fallback = normalizedStaticProblems();
   if (!track) return fallback;
@@ -72,7 +74,9 @@ export async function getProblemById(id) {
       if (res.data && res.data.id) return withDefaultTrack(res.data);
     }
   } catch (error) {
-    void error;
+    if (error.response?.status !== 404) {
+      console.error("Failed to fetch problem:", error.message || error);
+    }
   }
   return STATIC_PROBLEMS[id] ? withDefaultTrack(STATIC_PROBLEMS[id]) : null;
 }

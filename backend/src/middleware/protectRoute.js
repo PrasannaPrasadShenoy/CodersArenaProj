@@ -6,11 +6,10 @@ export const protectRoute = async (req, res, next) => {
   try {
     const { userId: clerkId } = getAuth(req);
 
-    if (!clerkId) return res.status(401).json({ message: "Unauthorized - invalid token" });
+    if (!clerkId) return res.status(401).json({ error: "Unauthorized - invalid token" });
 
     let user = await User.findOne({ clerkId });
 
-    // Lazy sync: if user not in DB (e.g. Inngest webhook missed or not set up), create from Clerk
     if (!user) {
       const clerkUser = await clerkClient.users.getUser(clerkId);
       const primaryEmail = clerkUser.primaryEmailAddress ?? clerkUser.emailAddresses?.[0];
@@ -21,12 +20,18 @@ export const protectRoute = async (req, res, next) => {
       const name = [firstName, lastName].filter(Boolean).join(" ") || "User";
       const profileImage = clerkUser.imageUrl ?? "";
 
-      user = await User.create({
-        clerkId,
-        email: String(emailStr).trim() || `${clerkId}@clerk.user`,
-        name,
-        profileImage,
-      });
+      user = await User.findOneAndUpdate(
+        { clerkId },
+        {
+          $setOnInsert: {
+            clerkId,
+            email: String(emailStr).trim() || `${clerkId}@clerk.user`,
+            name,
+            profileImage,
+          },
+        },
+        { upsert: true, new: true }
+      );
 
       await upsertStreamUser({
         id: clerkId,
@@ -43,6 +48,6 @@ export const protectRoute = async (req, res, next) => {
       process.env.NODE_ENV === "development"
         ? (error.message || "Internal Server Error")
         : "Internal Server Error";
-    res.status(500).json({ message });
+    res.status(500).json({ error: message });
   }
 };

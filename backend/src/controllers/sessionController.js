@@ -10,7 +10,7 @@ export async function createSession(req, res) {
       difficulty,
       sessionType = "coding",
       topic = "",
-    } = req.body;
+    } = req.validated || req.body;
     const userId = req.user._id;
     const clerkId = req.user.clerkId;
     // Ensure the user exists in Stream Chat. This prevents join/addMembers failures
@@ -23,16 +23,16 @@ export async function createSession(req, res) {
 
     if (sessionType === "coding") {
       if (!problem || !difficulty || !problemTrack) {
-        return res.status(400).json({ message: "Problem, track, and difficulty are required" });
+        return res.status(400).json({ error: "Problem, track, and difficulty are required" });
       }
       if (!["dsa", "ml"].includes(problemTrack)) {
-        return res.status(400).json({ message: "Invalid problem track" });
+        return res.status(400).json({ error: "Invalid problem track" });
       }
     }
 
     if (sessionType === "discussion") {
       if (!topic || typeof topic !== "string" || topic.trim().length < 3) {
-        return res.status(400).json({ message: "Topic is required for discussion sessions" });
+        return res.status(400).json({ error: "Topic is required for discussion sessions" });
       }
     }
 
@@ -86,49 +86,66 @@ export async function createSession(req, res) {
     res.status(201).json({ session });
   } catch (error) {
     console.error("Error in createSession controller:", error);
-    const message =
+    const msg =
       process.env.NODE_ENV === "development"
         ? (error.message || String(error))
         : "Internal Server Error";
-    res.status(500).json({ message });
+    res.status(500).json({ error: msg });
   }
 }
 
-export async function getActiveSessions(_, res) {
+export async function getActiveSessions(req, res) {
   try {
-    const sessions = await Session.find({ status: "active" })
-      .populate("host", "name profileImage email clerkId")
-      .populate("participant", "name profileImage email clerkId")
-      .populate("participant2", "name profileImage email clerkId")
-      .sort({ createdAt: -1 })
-      .limit(20);
+    const page = Math.max(1, Number(req.query.page) || 1);
+    const limit = Math.min(50, Math.max(1, Number(req.query.limit) || 20));
+    const skip = (page - 1) * limit;
 
-    res.status(200).json({ sessions });
+    const filter = { status: "active" };
+    const [sessions, total] = await Promise.all([
+      Session.find(filter)
+        .populate("host", "name profileImage email clerkId")
+        .populate("participant", "name profileImage email clerkId")
+        .populate("participant2", "name profileImage email clerkId")
+        .sort({ createdAt: -1 })
+        .skip(skip)
+        .limit(limit),
+      Session.countDocuments(filter),
+    ]);
+
+    res.status(200).json({ sessions, pagination: { page, limit, total } });
   } catch (error) {
-    console.log("Error in getActiveSessions controller:", error.message);
-    res.status(500).json({ message: "Internal Server Error" });
+    console.error("Error in getActiveSessions controller:", error.message);
+    res.status(500).json({ error: "Internal Server Error" });
   }
 }
 
 export async function getMyRecentSessions(req, res) {
   try {
     const userId = req.user._id;
+    const page = Math.max(1, Number(req.query.page) || 1);
+    const limit = Math.min(50, Math.max(1, Number(req.query.limit) || 20));
+    const skip = (page - 1) * limit;
 
-    // get sessions where user is either host or participant
-    const sessions = await Session.find({
+    const filter = {
       status: "completed",
       $or: [{ host: userId }, { participant: userId }, { participant2: userId }],
-    })
-      .populate("host", "name profileImage email clerkId")
-      .populate("participant", "name profileImage email clerkId")
-      .populate("participant2", "name profileImage email clerkId")
-      .sort({ createdAt: -1 })
-      .limit(20);
+    };
 
-    res.status(200).json({ sessions });
+    const [sessions, total] = await Promise.all([
+      Session.find(filter)
+        .populate("host", "name profileImage email clerkId")
+        .populate("participant", "name profileImage email clerkId")
+        .populate("participant2", "name profileImage email clerkId")
+        .sort({ createdAt: -1 })
+        .skip(skip)
+        .limit(limit),
+      Session.countDocuments(filter),
+    ]);
+
+    res.status(200).json({ sessions, pagination: { page, limit, total } });
   } catch (error) {
-    console.log("Error in getMyRecentSessions controller:", error.message);
-    res.status(500).json({ message: "Internal Server Error" });
+    console.error("Error in getMyRecentSessions controller:", error.message);
+    res.status(500).json({ error: "Internal Server Error" });
   }
 }
 
@@ -141,15 +158,15 @@ export async function getSessionById(req, res) {
       .populate("participant", "name email profileImage clerkId")
       .populate("participant2", "name email profileImage clerkId");
 
-    if (!session) return res.status(404).json({ message: "Session not found" });
+    if (!session) return res.status(404).json({ error: "Session not found" });
 
     res.status(200).json({ session });
   } catch (error) {
     if (error.name === "CastError") {
-      return res.status(404).json({ message: "Session not found" });
+      return res.status(404).json({ error: "Session not found" });
     }
-    console.log("Error in getSessionById controller:", error.message);
-    res.status(500).json({ message: "Internal Server Error" });
+    console.error("Error in getSessionById controller:", error.message);
+    res.status(500).json({ error: "Internal Server Error" });
   }
 }
 
@@ -163,17 +180,17 @@ export async function joinSession(req, res) {
     try {
       session = await Session.findById(id);
     } catch (e) {
-      if (e.name === "CastError") return res.status(404).json({ message: "Session not found" });
+      if (e.name === "CastError") return res.status(404).json({ error: "Session not found" });
       throw e;
     }
-    if (!session) return res.status(404).json({ message: "Session not found" });
+    if (!session) return res.status(404).json({ error: "Session not found" });
 
     if (session.status !== "active") {
-      return res.status(400).json({ message: "Cannot join a completed session" });
+      return res.status(400).json({ error: "Cannot join a completed session" });
     }
 
     if (session.host.toString() === userId.toString()) {
-      return res.status(400).json({ message: "Host cannot join their own session as participant" });
+      return res.status(400).json({ error: "Host cannot join their own session as participant" });
     }
 
     const participants = [session.participant, session.participant2].filter(Boolean);
@@ -198,7 +215,7 @@ export async function joinSession(req, res) {
         maxAdditionalParticipants,
         existingCount: participants.length,
       });
-      return res.status(409).json({ message: "Session is full" });
+      return res.status(409).json({ error: "Session is full" });
     }
 
     if (!session.participant) {
@@ -220,11 +237,11 @@ export async function joinSession(req, res) {
     res.status(200).json({ session });
   } catch (error) {
     console.error("Error in joinSession controller:", error);
-    const message =
+    const msg =
       process.env.NODE_ENV === "development"
         ? error?.message || String(error)
         : "Internal Server Error";
-    res.status(500).json({ message });
+    res.status(500).json({ error: msg });
   }
 }
 
@@ -237,19 +254,17 @@ export async function endSession(req, res) {
     try {
       session = await Session.findById(id);
     } catch (e) {
-      if (e.name === "CastError") return res.status(404).json({ message: "Session not found" });
+      if (e.name === "CastError") return res.status(404).json({ error: "Session not found" });
       throw e;
     }
-    if (!session) return res.status(404).json({ message: "Session not found" });
+    if (!session) return res.status(404).json({ error: "Session not found" });
 
-    // check if user is the host
     if (session.host.toString() !== userId.toString()) {
-      return res.status(403).json({ message: "Only the host can end the session" });
+      return res.status(403).json({ error: "Only the host can end the session" });
     }
 
-    // check if session is already completed
     if (session.status === "completed") {
-      return res.status(400).json({ message: "Session is already completed" });
+      return res.status(400).json({ error: "Session is already completed" });
     }
 
     // delete stream video call
@@ -265,7 +280,7 @@ export async function endSession(req, res) {
 
     res.status(200).json({ session, message: "Session ended successfully" });
   } catch (error) {
-    console.log("Error in endSession controller:", error.message);
-    res.status(500).json({ message: "Internal Server Error" });
+    console.error("Error in endSession controller:", error.message);
+    res.status(500).json({ error: "Internal Server Error" });
   }
 }

@@ -1,6 +1,11 @@
 import { io } from "socket.io-client";
 
 let socket = null;
+let authTokenGetter = null;
+
+export function setWhiteboardAuthTokenGetter(getter) {
+  authTokenGetter = getter;
+}
 
 export function getWhiteboardSocket() {
   if (socket) return socket;
@@ -9,8 +14,15 @@ export function getWhiteboardSocket() {
   socket = io(apiUrl, {
     withCredentials: true,
     transports: ["websocket", "polling"],
+    auth: async (cb) => {
+      try {
+        const token = authTokenGetter ? await authTokenGetter() : null;
+        cb({ token });
+      } catch {
+        cb({ token: null });
+      }
+    },
   });
 
   return socket;
 }
-
