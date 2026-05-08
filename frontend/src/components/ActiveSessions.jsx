@@ -2,7 +2,6 @@ import {
   ArrowRightIcon,
   Code2Icon,
   CrownIcon,
-  LoaderIcon,
   MessageSquareIcon,
   SparklesIcon,
   UsersIcon,
@@ -10,6 +9,7 @@ import {
 } from "lucide-react";
 import { Link } from "react-router";
 import { getDifficultyBadgeClass } from "../lib/utils";
+import { ActiveSessionsSkeleton } from "./skeletons/DashboardSkeleton";
 
 function ActiveSessions({ sessions, isLoading, isUserInSession }) {
   return (
@@ -33,8 +33,17 @@ function ActiveSessions({ sessions, isLoading, isUserInSession }) {
         {/* LIST */}
         <div className="space-y-2.5 max-h-[420px] overflow-y-auto pr-1">
           {isLoading ? (
-            <div className="flex items-center justify-center py-20">
-              <LoaderIcon className="size-8 animate-spin text-primary" />
+            <div className="space-y-2.5">
+              {[0, 1, 2].map((i) => (
+                <div key={i} className="rounded-xl bg-base-200 p-4 flex items-center gap-4 animate-pulse">
+                  <div className="size-12 rounded-xl bg-base-300 shrink-0" />
+                  <div className="flex-1 space-y-2">
+                    <div className="h-5 bg-base-300 rounded w-3/4" />
+                    <div className="h-4 bg-base-300 rounded w-1/2" />
+                  </div>
+                  <div className="h-8 w-16 bg-base-300 rounded-lg shrink-0" />
+                </div>
+              ))}
             </div>
           ) : sessions.length > 0 ? (
             sessions.map((session) => {

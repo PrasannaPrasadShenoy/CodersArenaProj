@@ -1,5 +1,7 @@
 import { useUser } from "@clerk/clerk-react";
 import { useEffect, useMemo, useState } from "react";
+import { usePageTitle } from "../hooks/usePageTitle";
+import { CheckIcon, ClipboardIcon } from "lucide-react";
 import { useNavigate } from "react-router";
 import Navbar from "../components/Navbar";
 import TldrawWhiteboard from "../components/TldrawWhiteboard";
@@ -20,10 +22,12 @@ function ExcalidrawPage() {
   const [privateRoomId, setPrivateRoomId] = useState(null);
   const [activeRoomId, setActiveRoomId] = useState(null);
   const [joinCode, setJoinCode] = useState("");
+  const [copied, setCopied] = useState(false);
 
   const [showCreateModal, setShowCreateModal] = useState(false);
   const [topic, setTopic] = useState("");
 
+  usePageTitle("Whiteboard");
   if (!isLoaded) return null;
 
   useEffect(() => {
@@ -68,19 +72,31 @@ function ExcalidrawPage() {
         <div className="mb-3 rounded-xl border border-base-300 bg-base-100 p-3">
           <div className="flex flex-wrap items-center gap-2">
             <button
-              className="btn btn-sm btn-primary"
+              className={`btn btn-sm gap-1.5 transition-all duration-200 ${copied ? "btn-success" : "btn-primary"}`}
               onClick={async () => {
                 if (!activeRoomId) return;
                 try {
                   await navigator.clipboard.writeText(activeRoomId);
+                  setCopied(true);
                   toast.success("Invite code copied");
+                  setTimeout(() => setCopied(false), 2000);
                 } catch {
                   toast.error("Could not copy — check browser permissions");
                 }
               }}
               disabled={!activeRoomId}
             >
-              Copy invite code
+              {copied ? (
+                <>
+                  <CheckIcon className="size-3.5" />
+                  Copied!
+                </>
+              ) : (
+                <>
+                  <ClipboardIcon className="size-3.5" />
+                  Copy invite code
+                </>
+              )}
             </button>
 
             <button

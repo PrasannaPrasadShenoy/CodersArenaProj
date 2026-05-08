@@ -1,6 +1,8 @@
 import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router";
 import Navbar from "../components/Navbar";
+import { ProblemPageSkeleton } from "../components/skeletons/ProblemsPageSkeleton";
+import { usePageTitle } from "../hooks/usePageTitle";
 
 import { Panel, PanelGroup, PanelResizeHandle } from "react-resizable-panels";
 import ProblemDescription from "../components/ProblemDescription";
@@ -17,6 +19,7 @@ function ProblemPage() {
   const currentProblemId = (id && id.trim()) || DEFAULT_PROBLEM_ID;
 
   const { problem: currentProblem, isLoading: loadingProblem } = useProblem(currentProblemId);
+  usePageTitle(currentProblem?.title ?? "Problem");
   const currentTrack = currentProblem?.track || "dsa";
   const { problemsArray: allProblems } = useProblemsList(currentTrack);
 
@@ -53,9 +56,8 @@ function ProblemPage() {
     return (
       <div className="h-screen bg-base-100 flex flex-col">
         <Navbar />
-        <div className="flex-1 flex items-center justify-center">
-          <span className="loading loading-spinner loading-lg text-primary" />
-          <p className="text-base-content/60 mt-4">Loading problem...</p>
+        <div className="flex-1 overflow-hidden">
+          <ProblemPageSkeleton />
         </div>
       </div>
     );
@@ -76,7 +78,9 @@ function ProblemPage() {
             />
           </Panel>
 
-          <PanelResizeHandle className="w-2 bg-base-300 hover:bg-primary transition-colors cursor-col-resize" />
+          <PanelResizeHandle className="w-1.5 bg-base-300 hover:bg-primary transition-colors cursor-col-resize flex items-center justify-center group">
+            <div className="h-8 w-0.5 rounded-full bg-base-content/20 group-hover:bg-primary/60 transition-colors" />
+          </PanelResizeHandle>
 
           <Panel defaultSize={60} minSize={30}>
             <PanelGroup direction="vertical">
@@ -98,7 +102,9 @@ function ProblemPage() {
                 />
               </Panel>
 
-              <PanelResizeHandle className="h-2 bg-base-300 hover:bg-primary transition-colors cursor-row-resize" />
+              <PanelResizeHandle className="h-1.5 bg-base-300 hover:bg-primary transition-colors cursor-row-resize flex items-center justify-center group">
+                <div className="w-8 h-0.5 rounded-full bg-base-content/20 group-hover:bg-primary/60 transition-colors" />
+              </PanelResizeHandle>
 
               <Panel defaultSize={30} minSize={30}>
                 <OutputPanel

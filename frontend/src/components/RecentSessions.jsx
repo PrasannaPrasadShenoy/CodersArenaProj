@@ -1,4 +1,4 @@
-import { Clock, Code2, Loader, MessageSquareIcon, Trophy, Users } from "lucide-react";
+import { Clock, Code2, MessageSquareIcon, Trophy, Users } from "lucide-react";
 import { getDifficultyBadgeClass } from "../lib/utils";
 import { formatDistanceToNow } from "date-fns";
 
@@ -16,9 +16,23 @@ function RecentSessions({ sessions, isLoading }) {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {isLoading ? (
-            <div className="col-span-full flex items-center justify-center py-16">
-              <Loader className="size-8 animate-spin text-primary" />
-            </div>
+            Array.from({ length: 6 }).map((_, i) => (
+              <div key={i} className="card bg-base-200 border border-base-300 animate-pulse">
+                <div className="card-body p-4 space-y-3">
+                  <div className="flex items-start gap-3">
+                    <div className="size-11 rounded-xl bg-base-300 shrink-0" />
+                    <div className="flex-1 space-y-2">
+                      <div className="h-5 bg-base-300 rounded w-full" />
+                      <div className="h-4 bg-base-300 rounded w-2/3" />
+                    </div>
+                  </div>
+                  <div className="flex gap-3 pt-2 border-t border-base-300">
+                    <div className="h-3.5 bg-base-300 rounded w-24" />
+                    <div className="h-3.5 bg-base-300 rounded w-20" />
+                  </div>
+                </div>
+              </div>
+            ))
           ) : sessions.length > 0 ? (
             sessions.map((session) => {
               const isActive = session.status === "active";

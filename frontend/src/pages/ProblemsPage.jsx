@@ -1,6 +1,8 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router";
 import Navbar from "../components/Navbar";
+import { ProblemListSkeleton } from "../components/skeletons/ProblemsPageSkeleton";
+import { usePageTitle } from "../hooks/usePageTitle";
 
 import { useProblemsList } from "../hooks/useProblems";
 import { ChevronRightIcon, Code2Icon, SearchIcon } from "lucide-react";
@@ -32,6 +34,7 @@ function ProblemsPage() {
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
   const selectedTrack = searchParams.get("track") === "ml" ? "ml" : "dsa";
+  usePageTitle(`${selectedTrack.toUpperCase()} Problems`);
 
   const { problemsArray: problems, isLoading } = useProblemsList(selectedTrack);
   const { data: mlProgressData } = useMlProgress({ enabled: selectedTrack === "ml" });
@@ -281,9 +284,7 @@ function ProblemsPage() {
         {/* PROBLEMS LIST */}
         <div className="space-y-4">
           {isLoading ? (
-            <div className="flex justify-center py-12">
-              <span className="loading loading-spinner loading-lg text-primary" />
-            </div>
+            <ProblemListSkeleton />
           ) : filteredProblems.length === 0 ? (
             <div className="card bg-base-100 border border-base-300">
               <div className="card-body items-center text-center py-12">

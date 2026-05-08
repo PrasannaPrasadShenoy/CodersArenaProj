@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router";
 import { useUser } from "@clerk/clerk-react";
 import { useState } from "react";
+import { usePageTitle } from "../hooks/usePageTitle";
 import { useActiveSessions, useCreateSession, useMyRecentSessions } from "../hooks/useSessions";
 import { useProblemsList } from "../hooks/useProblems";
 import { useUserProgress } from "../hooks/useUserProgress";
@@ -11,8 +12,10 @@ import StatsCards from "../components/StatsCards";
 import ActiveSessions from "../components/ActiveSessions";
 import RecentSessions from "../components/RecentSessions";
 import CreateSessionModal from "../components/CreateSessionModal";
+import OnboardingBanner from "../components/OnboardingBanner";
 
 function DashboardPage() {
+  usePageTitle("Dashboard");
   const navigate = useNavigate();
   const { user } = useUser();
   const [showCreateModal, setShowCreateModal] = useState(false);
@@ -104,6 +107,7 @@ function DashboardPage() {
 
         {/* Grid layout */}
         <div className="container mx-auto px-6 pb-16">
+          <OnboardingBanner />
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             <StatsCards
               activeSessionsCount={activeSessions.length}
