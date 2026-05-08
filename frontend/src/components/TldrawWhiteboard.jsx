@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { Tldraw, getSnapshot, loadSnapshot } from "tldraw";
 import { whiteboardApi } from "../api/whiteboards";
 import { getWhiteboardSocket } from "../lib/whiteboardSocket";
+import { useTheme } from "../context/ThemeContext";
 
 function hashToHue(input) {
   let hash = 0;
@@ -23,6 +24,7 @@ function hslToHex(h, s, l) {
 }
 
 export default function TldrawWhiteboard({ roomId, user }) {
+  const { isDark } = useTheme();
   const editorRef = useRef(null);
   const lastSavedDocRef = useRef(null);
   const lastSentDocRef = useRef(null);
@@ -169,6 +171,7 @@ export default function TldrawWhiteboard({ roomId, user }) {
     <div className="tldraw__editor tldraw__canvas h-full w-full bg-base-200">
       <Tldraw
         snapshot={snapshot || undefined}
+        colorScheme={isDark ? "dark" : "light"}
         onMount={(editor) => {
           editorRef.current = editor;
           // Presence user info still used by tldraw for local user preferences/tooling.
