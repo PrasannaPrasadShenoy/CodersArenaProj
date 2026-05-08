@@ -3,7 +3,7 @@ import { Link, useNavigate, useSearchParams } from "react-router";
 import Navbar from "../components/Navbar";
 
 import { useProblemsList } from "../hooks/useProblems";
-import { ChevronRightIcon, Code2Icon, SearchIcon } from "lucide-react";
+import { ChevronRightIcon, Code2Icon, SearchIcon, TrophyIcon } from "lucide-react";
 import { getDifficultyBadgeClass } from "../lib/utils";
 import { useMlProgress } from "../hooks/useMlSubmissions";
 import { useUserProgress } from "../hooks/useUserProgress";
@@ -160,7 +160,7 @@ function ProblemsPage() {
           </p>
         </div>
 
-        <div className="tabs tabs-boxed mb-6 inline-flex">
+        <div className="tabs tabs-boxed mb-4 inline-flex">
           <button
             className={`tab ${selectedTrack === "dsa" ? "tab-active" : ""}`}
             onClick={() => setTrack("dsa")}
@@ -175,8 +175,101 @@ function ProblemsPage() {
           </button>
         </div>
 
-        {/* Search + difficulty filters */}
-        <div className="mb-6 space-y-4">
+        {/* STATS + FILTER BAR */}
+        {!isLoading && (
+          <div className="mb-5 rounded-2xl border border-base-300 bg-base-100 px-5 py-4 flex flex-wrap items-center gap-x-6 gap-y-3">
+            {/* Total */}
+            <div className="flex items-center gap-2 shrink-0">
+              <span className="text-2xl font-black text-primary tabular-nums">{problems.length}</span>
+              <span className="text-sm text-base-content/55 font-medium leading-tight">
+                total<br />{selectedTrack.toUpperCase()}
+              </span>
+            </div>
+
+            <div className="w-px h-8 bg-base-300 shrink-0 hidden sm:block" />
+
+            {/* Difficulty pills — double as filter toggles */}
+            <div className="flex items-center gap-2 flex-wrap">
+              <span className="text-xs font-semibold text-base-content/40 uppercase tracking-wide mr-1">Filter</span>
+              {[
+                { label: "Easy",   count: easyProblemsCount,   active: "bg-success text-success-content",   inactive: "bg-success/10 text-success border border-success/30" },
+                { label: "Medium", count: mediumProblemsCount, active: "bg-warning text-warning-content",   inactive: "bg-warning/10 text-warning border border-warning/30" },
+                { label: "Hard",   count: hardProblemsCount,   active: "bg-error text-error-content",     inactive: "bg-error/10 text-error border border-error/30" },
+              ].map(({ label, count, active, inactive }) => (
+                <button
+                  key={label}
+                  type="button"
+                  onClick={() => toggleDifficulty(label)}
+                  aria-pressed={difficultyOn[label]}
+                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-semibold transition-all duration-150
+                    ${difficultyOn[label] ? active : "bg-base-200 text-base-content/35 border border-base-300"}
+                  `}
+                >
+                  {label}
+                  <span className={`text-xs font-bold rounded-full px-1.5 py-0.5 leading-none
+                    ${difficultyOn[label] ? "bg-black/15" : "bg-base-300 text-base-content/40"}
+                  `}>
+                    {count}
+                  </span>
+                </button>
+              ))}
+              {!anyDifficultySelected && (
+                <span className="text-xs text-base-content/40 ml-1">all shown</span>
+              )}
+            </div>
+
+            {/* Spacer */}
+            <div className="flex-1 min-w-0" />
+
+            {/* Progress */}
+            <div className="flex items-center gap-3 shrink-0">
+              <TrophyIcon className="size-4 text-base-content/30 shrink-0" />
+              {selectedTrack === "dsa" ? (
+                <div className="text-right">
+                  <div className="flex items-baseline gap-1">
+                    <span className="text-lg font-black text-success tabular-nums">
+                      {userProgress?.dsa?.solvedCount ?? 0}
+                    </span>
+                    <span className="text-xs text-base-content/40">/ {problems.length} solved</span>
+                  </div>
+                  {(userProgress?.dsa?.publicClearedCount ?? 0) > 0 && (
+                    <div className="text-xs text-base-content/40">
+                      +{userProgress.dsa.publicClearedCount} public tests OK
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <div className="text-right">
+                  <div className="flex items-baseline gap-1">
+                    <span className="text-lg font-black text-success tabular-nums">
+                      {mlProgress?.solved || 0}
+                    </span>
+                    <span className="text-xs text-base-content/40">/ {problems.length} solved</span>
+                  </div>
+                  {(mlProgress?.attempted || 0) > 0 && (
+                    <div className="text-xs text-base-content/40">
+                      {mlProgress.attempted} attempted
+                    </div>
+                  )}
+                </div>
+              )}
+              {/* Progress bar */}
+              <div className="w-20 h-2 rounded-full bg-base-300 overflow-hidden hidden md:block">
+                <div
+                  className="h-full rounded-full bg-success transition-all duration-500"
+                  style={{
+                    width: problems.length > 0
+                      ? `${Math.min(100, ((selectedTrack === "dsa" ? (userProgress?.dsa?.solvedCount ?? 0) : (mlProgress?.solved || 0)) / problems.length) * 100)}%`
+                      : "0%"
+                  }}
+                />
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Search */}
+        <div className="mb-5 space-y-3">
           <div className="relative" ref={searchWrapRef}>
             <label className="sr-only" htmlFor="problems-search">
               Search problems
@@ -238,40 +331,12 @@ function ProblemsPage() {
             )}
           </div>
 
-          <div className="flex flex-wrap items-center gap-2">
-            <span className="text-sm font-medium text-base-content/70 mr-1">Difficulty:</span>
-            {DIFFICULTIES.map((d) => (
-              <button
-                key={d}
-                type="button"
-                onClick={() => toggleDifficulty(d)}
-                className={`btn btn-sm rounded-full border-0 ${
-                  difficultyOn[d]
-                    ? d === "Easy"
-                      ? "bg-success/20 text-success hover:bg-success/30"
-                      : d === "Medium"
-                        ? "bg-warning/20 text-warning hover:bg-warning/30"
-                        : "bg-error/20 text-error hover:bg-error/30"
-                    : "btn-ghost opacity-50 hover:opacity-80"
-                }`}
-                aria-pressed={difficultyOn[d]}
-              >
-                {d}
-              </button>
-            ))}
-            {!anyDifficultySelected && (
-              <span className="text-xs text-base-content/50">(all difficulties shown)</span>
-            )}
-          </div>
-
           {!isLoading && (
-            <p className="text-sm text-base-content/60">
-              Showing <span className="font-semibold text-base-content">{filteredProblems.length}</span>
+            <p className="text-sm text-base-content/55">
+              Showing{" "}
+              <span className="font-semibold text-base-content">{filteredProblems.length}</span>
               {filteredProblems.length !== problems.length && (
-                <>
-                  {" "}
-                  of <span className="font-semibold text-base-content">{problems.length}</span>
-                </>
+                <> of <span className="font-semibold text-base-content">{problems.length}</span></>
               )}{" "}
               {selectedTrack.toUpperCase()} problems
             </p>
@@ -349,54 +414,6 @@ function ProblemsPage() {
           )}
         </div>
 
-        {/* STATS FOOTER */}
-        <div className="mt-12 card bg-base-100 shadow-lg">
-          <div className="card-body">
-            <div className="stats stats-vertical lg:stats-horizontal">
-              <div className="stat">
-                <div className="stat-title">Total {selectedTrack.toUpperCase()} Problems</div>
-                <div className="stat-value text-primary">{problems.length}</div>
-              </div>
-
-              <div className="stat">
-                <div className="stat-title">Easy</div>
-                <div className="stat-value text-success">{easyProblemsCount}</div>
-              </div>
-              <div className="stat">
-                <div className="stat-title">Medium</div>
-                <div className="stat-value text-warning">{mediumProblemsCount}</div>
-              </div>
-              <div className="stat">
-                <div className="stat-title">Hard</div>
-                <div className="stat-value text-error">{hardProblemsCount}</div>
-              </div>
-              {selectedTrack === "dsa" && (
-                <>
-                  <div className="stat">
-                    <div className="stat-title">Fully solved (all tests)</div>
-                    <div className="stat-value text-success">{userProgress?.dsa?.solvedCount ?? 0}</div>
-                  </div>
-                  <div className="stat">
-                    <div className="stat-title">Public tests cleared</div>
-                    <div className="stat-value text-warning">{userProgress?.dsa?.publicClearedCount ?? 0}</div>
-                  </div>
-                </>
-              )}
-              {selectedTrack === "ml" && (
-                <>
-                  <div className="stat">
-                    <div className="stat-title">Solved</div>
-                    <div className="stat-value text-success">{mlProgress?.solved || 0}</div>
-                  </div>
-                  <div className="stat">
-                    <div className="stat-title">Attempted</div>
-                    <div className="stat-value text-info">{mlProgress?.attempted || 0}</div>
-                  </div>
-                </>
-              )}
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   );
