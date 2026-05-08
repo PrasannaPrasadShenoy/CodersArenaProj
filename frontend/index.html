@@ -5,6 +5,13 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>NeuroHire</title>
+    <script>
+      // Apply saved theme before first paint to prevent flash
+      (function () {
+        var saved = localStorage.getItem("neurohire-theme");
+        if (saved) document.documentElement.setAttribute("data-theme", saved);
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>

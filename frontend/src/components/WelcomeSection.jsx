@@ -1,35 +1,34 @@
 import { useUser } from "@clerk/clerk-react";
-import { ArrowRightIcon, SparklesIcon, ZapIcon } from "lucide-react";
+import { ArrowRightIcon, PlusIcon, SparklesIcon } from "lucide-react";
 
 function WelcomeSection({ onCreateSession }) {
   const { user } = useUser();
 
   return (
-    <div className="relative overflow-hidden">
-      <div className="relative max-w-7xl mx-auto px-6 py-16">
-        <div className="flex items-center justify-between">
-          <div>
-            <div className="flex items-center gap-3 mb-4">
-              <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center">
-                <SparklesIcon className="w-6 h-6 text-white" />
-              </div>
-              <h1 className="text-5xl font-black bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
+    <div className="relative overflow-hidden bg-mesh border-b border-base-content/8">
+      <div className="max-w-7xl mx-auto px-6 py-12">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6">
+          {/* LEFT */}
+          <div className="flex items-center gap-4 animate-fade-up">
+            <div className="size-14 rounded-2xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center shadow-lg shrink-0">
+              <SparklesIcon className="size-7 text-white" />
+            </div>
+            <div>
+              <h1 className="text-3xl lg:text-4xl font-black bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent leading-tight">
                 Welcome back, {user?.firstName || "there"}!
               </h1>
+              <p className="text-base-content/55 mt-0.5">Ready to level up your coding skills today?</p>
             </div>
-            <p className="text-xl text-base-content/60 ml-16">
-              Ready to level up your coding skills?
-            </p>
           </div>
+
+          {/* CREATE SESSION BUTTON */}
           <button
             onClick={onCreateSession}
-            className="group px-8 py-4 bg-gradient-to-r from-primary to-secondary rounded-2xl transition-all duration-200 hover:opacity-90"
+            className="group btn btn-primary btn-lg gap-2 rounded-2xl shadow-lg hover:shadow-primary/30 hover:-translate-y-0.5 transition-all duration-200 shrink-0 animate-fade-up delay-100"
           >
-            <div className="flex items-center gap-3 text-white font-bold text-lg">
-              <ZapIcon className="w-6 h-6" />
-              <span>Create Session</span>
-              <ArrowRightIcon className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-            </div>
+            <PlusIcon className="size-5" />
+            <span>New Session</span>
+            <ArrowRightIcon className="size-4 group-hover:translate-x-0.5 transition-transform" />
           </button>
         </div>
       </div>

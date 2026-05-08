@@ -3,10 +3,77 @@
   themes: all;
 }
 
-/* Add cursor pointer to buttons by default - this is coming from tailwind docs */
 @layer base {
   button:not(:disabled),
   [role="button"]:not(:disabled) {
     cursor: pointer;
+  }
+
+  /* Smooth theme transitions */
+  html {
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: oklch(var(--bc) / 0.2);
+    border-radius: 999px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: oklch(var(--bc) / 0.35);
+  }
+}
+
+@layer utilities {
+  /* Fade-up entrance animation */
+  .animate-fade-up {
+    animation: fadeUp 0.5s ease both;
+  }
+  @keyframes fadeUp {
+    from {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Staggered delay helpers */
+  .delay-100 { animation-delay: 100ms; }
+  .delay-200 { animation-delay: 200ms; }
+  .delay-300 { animation-delay: 300ms; }
+  .delay-400 { animation-delay: 400ms; }
+
+  /* Subtle glass card effect */
+  .glass-card {
+    background: oklch(var(--b1) / 0.7);
+    backdrop-filter: blur(12px);
+    border: 1px solid oklch(var(--bc) / 0.08);
+  }
+
+  /* Mesh gradient background */
+  .bg-mesh {
+    background-image:
+      radial-gradient(at 20% 20%, oklch(var(--p) / 0.12) 0px, transparent 50%),
+      radial-gradient(at 80% 80%, oklch(var(--s) / 0.10) 0px, transparent 50%),
+      radial-gradient(at 50% 0%, oklch(var(--a) / 0.08) 0px, transparent 50%);
+  }
+
+  /* Pulse dot for live indicators */
+  .pulse-dot {
+    animation: pulseDot 2s ease-in-out infinite;
+  }
+  @keyframes pulseDot {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.6; transform: scale(1.3); }
   }
 }

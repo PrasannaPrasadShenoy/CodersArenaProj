@@ -3,57 +3,90 @@ import {
   ArrowRightIcon,
   CheckIcon,
   Code2Icon,
+  MoonIcon,
   SparklesIcon,
+  SunIcon,
   UsersIcon,
   VideoIcon,
   ZapIcon,
 } from "lucide-react";
 import { SignInButton } from "@clerk/clerk-react";
+import { useTheme } from "../context/ThemeContext";
+
+const FEATURES = [
+  {
+    icon: VideoIcon,
+    title: "HD Video Call",
+    desc: "Crystal-clear video and audio so nothing gets lost in translation during live interviews.",
+    color: "text-primary",
+    bg: "bg-primary/10",
+  },
+  {
+    icon: Code2Icon,
+    title: "Live Code Editor",
+    desc: "Collaborate in real-time with syntax highlighting and support for 10+ languages.",
+    color: "text-secondary",
+    bg: "bg-secondary/10",
+  },
+  {
+    icon: UsersIcon,
+    title: "Easy Collaboration",
+    desc: "Share screens, discuss solutions, and learn from each other — all in one place.",
+    color: "text-accent",
+    bg: "bg-accent/10",
+  },
+];
 
 function HomePage() {
-  return (
-    <div className="bg-gradient-to-br from-base-100 via-base-200 to-base-300">
-      {/* NAVBAR */}
-      <nav className="bg-base-100/80 backdrop-blur-md border-b border-primary/20 sticky top-0 z-50 shadow-lg">
-        <div className="max-w-7xl mx-auto p-4 flex items-center justify-between">
-          {/* LOGO */}
-          <Link
-            to={"/"}
-            className="flex items-center gap-3 hover:scale-105 transition-transform duration-200"
-          >
-            <div className="size-10 rounded-xl bg-gradient-to-br from-primary via-secondary to-accent flex items-center justify-center shadow-lg">
-              <SparklesIcon className="size-6 text-white" />
-            </div>
+  const { isDark, toggleTheme } = useTheme();
 
-            <div className="flex flex-col">
-              <span className="font-black text-xl bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent font-mono tracking-wider">
+  return (
+    <div className="min-h-screen bg-base-100 bg-mesh">
+      {/* NAVBAR */}
+      <nav className="bg-base-100/80 backdrop-blur-md border-b border-base-content/10 sticky top-0 z-50">
+        <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+          <Link to="/" className="flex items-center gap-3 hover:scale-105 transition-transform duration-200">
+            <div className="size-9 rounded-xl bg-gradient-to-br from-primary via-secondary to-accent flex items-center justify-center shadow-md">
+              <SparklesIcon className="size-5 text-white" />
+            </div>
+            <div className="flex flex-col leading-none">
+              <span className="font-black text-lg bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent font-mono tracking-wider">
                 NeuroHire
               </span>
-              <span className="text-xs text-base-content/60 font-medium -mt-1">Code Together</span>
+              <span className="text-[10px] text-base-content/50 font-medium">Code Together</span>
             </div>
           </Link>
 
-          {/* AUTH BTN */}
-          <SignInButton mode="modal">
-            <button className="group px-6 py-3 bg-gradient-to-r from-primary to-secondary rounded-xl text-white font-semibold text-sm shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105 flex items-center gap-2">
-              <span>Get Started</span>
-              <ArrowRightIcon className="size-4 group-hover:translate-x-0.5 transition-transform" />
+          <div className="flex items-center gap-2">
+            <button
+              onClick={toggleTheme}
+              className="p-2 rounded-lg hover:bg-base-200 text-base-content/60 hover:text-base-content transition-all duration-200"
+              aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
+            >
+              {isDark ? <SunIcon className="size-4" /> : <MoonIcon className="size-4" />}
             </button>
-          </SignInButton>
+
+            <SignInButton mode="modal">
+              <button className="btn btn-primary btn-sm gap-2 rounded-xl">
+                Get Started
+                <ArrowRightIcon className="size-3.5" />
+              </button>
+            </SignInButton>
+          </div>
         </div>
       </nav>
 
-      {/* HERO SECTION */}
-      <div className="max-w-7xl mx-auto px-4 py-20">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* LEFT CONTENT */}
-          <div className="space-y-8">
-            <div className="badge badge-primary badge-lg">
-              <ZapIcon className="size-4" />
+      {/* HERO */}
+      <section className="max-w-7xl mx-auto px-4 pt-20 pb-24">
+        <div className="grid lg:grid-cols-2 gap-16 items-center">
+          {/* LEFT */}
+          <div className="space-y-7 animate-fade-up">
+            <div className="badge badge-primary badge-lg gap-2 rounded-full px-4">
+              <ZapIcon className="size-3.5" />
               Real-time Collaboration
             </div>
 
-            <h1 className="text-5xl lg:text-7xl font-black leading-tight">
+            <h1 className="text-5xl lg:text-6xl font-black leading-[1.1] tracking-tight">
               <span className="bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
                 Code Together,
               </span>
@@ -61,121 +94,114 @@ function HomePage() {
               <span className="text-base-content">Learn Together</span>
             </h1>
 
-            <p className="text-xl text-base-content/70 leading-relaxed max-w-xl">
+            <p className="text-lg text-base-content/65 leading-relaxed max-w-lg">
               The ultimate platform for collaborative coding interviews and pair programming.
               Connect face-to-face, code in real-time, and ace your technical interviews.
             </p>
 
             {/* FEATURE PILLS */}
-            <div className="flex flex-wrap gap-3">
-              <div className="badge badge-lg badge-outline">
-                <CheckIcon className="size-4 text-success" />
-                Live Video Chat
-              </div>
-              <div className="badge badge-lg badge-outline">
-                <CheckIcon className="size-4 text-success" />
-                Code Editor
-              </div>
-              <div className="badge badge-lg badge-outline">
-                <CheckIcon className="size-4 text-success" />
-                Multi-Language
-              </div>
+            <div className="flex flex-wrap gap-2.5">
+              {["Live Video Chat", "Code Editor", "Multi-Language", "Whiteboard"].map((f) => (
+                <div key={f} className="badge badge-outline gap-1.5 px-3 py-3">
+                  <CheckIcon className="size-3.5 text-success" />
+                  {f}
+                </div>
+              ))}
             </div>
 
-            {/* CTA Buttons */}
-            <div className="flex flex-wrap gap-4">
+            {/* CTA */}
+            <div className="flex flex-wrap gap-3 pt-1">
               <SignInButton mode="modal">
-                <button className="btn btn-primary btn-lg">
+                <button className="btn btn-primary btn-lg gap-2 rounded-xl shadow-lg hover:shadow-primary/30 hover:-translate-y-0.5 transition-all duration-200">
                   Start Coding Now
                   <ArrowRightIcon className="size-5" />
                 </button>
               </SignInButton>
 
-              <a href="#features" className="btn btn-outline btn-lg">
+              <a href="#features" className="btn btn-outline btn-lg gap-2 rounded-xl">
                 <VideoIcon className="size-5" />
-                Explore features
+                Explore Features
               </a>
             </div>
 
             {/* STATS */}
-            <div className="stats stats-vertical lg:stats-horizontal bg-base-100 shadow-lg">
-              <div className="stat">
-                <div className="stat-value text-primary">10K+</div>
-                <div className="stat-title">Active Users</div>
+            <div className="stats bg-base-200/60 border border-base-content/10 rounded-2xl shadow-sm">
+              <div className="stat py-4 px-6">
+                <div className="stat-value text-2xl text-primary font-black">10K+</div>
+                <div className="stat-title text-xs">Active Users</div>
               </div>
-              <div className="stat">
-                <div className="stat-value text-secondary">50K+</div>
-                <div className="stat-title">Sessions</div>
+              <div className="stat py-4 px-6">
+                <div className="stat-value text-2xl text-secondary font-black">50K+</div>
+                <div className="stat-title text-xs">Sessions</div>
               </div>
-              <div className="stat">
-                <div className="stat-value text-accent">99.9%</div>
-                <div className="stat-title">Uptime</div>
+              <div className="stat py-4 px-6">
+                <div className="stat-value text-2xl text-accent font-black">99.9%</div>
+                <div className="stat-title text-xs">Uptime</div>
               </div>
             </div>
           </div>
 
           {/* RIGHT IMAGE */}
-          <img
-            src="/hero.png"
-            alt="NeuroHire platform"
-            className="w-full h-auto rounded-3xl shadow-2xl border-4 border-base-100 hover:scale-105 transition-transform duration-500"
-          />
-        </div>
-      </div>
-
-      {/* FEATURES SECTION */}
-      <div id="features" className="max-w-7xl mx-auto px-4 py-20 scroll-mt-24">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold mb-4">
-            Everything You Need to <span className="text-primary font-mono">Succeed</span>
-          </h2>
-          <p className="text-lg text-base-content/70 max-w-2xl mx-auto">
-            Powerful features designed to make your coding interviews seamless and productive
-          </p>
-        </div>
-
-        {/* FEATURES GRID */}
-        <div className="grid md:grid-cols-3 gap-8">
-          {/* Feature 1 */}
-          <div className="card bg-base-100 shadow-xl">
-            <div className="card-body items-center text-center">
-              <div className="size-16 bg-primary/10 rounded-2xl flex items-center justify-center mb-4">
-                <VideoIcon className="size-8 text-primary" />
-              </div>
-              <h3 className="card-title">HD Video Call</h3>
-              <p className="text-base-content/70">
-                Crystal clear video and audio for seamless communication during interviews
-              </p>
-            </div>
-          </div>
-
-          {/* Feature 2 */}
-          <div className="card bg-base-100 shadow-xl">
-            <div className="card-body items-center text-center">
-              <div className="size-16 bg-primary/10 rounded-2xl flex items-center justify-center mb-4">
-                <Code2Icon className="size-8 text-primary" />
-              </div>
-              <h3 className="card-title">Live Code Editor</h3>
-              <p className="text-base-content/70">
-                Collaborate in real-time with syntax highlighting and multiple language support
-              </p>
-            </div>
-          </div>
-
-          {/* Feature 3 */}
-          <div className="card bg-base-100 shadow-xl">
-            <div className="card-body items-center text-center">
-              <div className="size-16 bg-primary/10 rounded-2xl flex items-center justify-center mb-4">
-                <UsersIcon className="size-8 text-primary" />
-              </div>
-              <h3 className="card-title">Easy Collaboration</h3>
-              <p className="text-base-content/70">
-                Share your screen, discuss solutions, and learn from each other in real-time
-              </p>
-            </div>
+          <div className="animate-fade-up delay-200 relative">
+            <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-secondary/10 to-accent/20 rounded-3xl blur-3xl -z-10 scale-95" />
+            <img
+              src="/hero.png"
+              alt="NeuroHire platform screenshot"
+              className="w-full h-auto rounded-3xl shadow-2xl border border-base-content/10 hover:scale-[1.02] transition-transform duration-500"
+            />
           </div>
         </div>
-      </div>
+      </section>
+
+      {/* FEATURES */}
+      <section id="features" className="bg-base-200/50 border-y border-base-content/8 scroll-mt-20">
+        <div className="max-w-7xl mx-auto px-4 py-20">
+          <div className="text-center mb-14 animate-fade-up">
+            <h2 className="text-3xl lg:text-4xl font-black mb-3">
+              Everything You Need to{" "}
+              <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent font-mono">
+                Succeed
+              </span>
+            </h2>
+            <p className="text-base-content/60 max-w-xl mx-auto">
+              Powerful features designed to make coding interviews seamless and productive.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-6">
+            {FEATURES.map((f, i) => (
+              <div
+                key={f.title}
+                className={`card bg-base-100 border border-base-content/8 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300 animate-fade-up delay-${(i + 1) * 100}`}
+              >
+                <div className="card-body items-center text-center gap-4">
+                  <div className={`size-14 ${f.bg} rounded-2xl flex items-center justify-center`}>
+                    <f.icon className={`size-7 ${f.color}`} />
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-lg mb-1">{f.title}</h3>
+                    <p className="text-base-content/60 text-sm leading-relaxed">{f.desc}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* FOOTER CTA */}
+      <section className="max-w-7xl mx-auto px-4 py-20 text-center animate-fade-up">
+        <h2 className="text-3xl font-black mb-4">Ready to level up your interviews?</h2>
+        <p className="text-base-content/60 mb-8 max-w-md mx-auto">
+          Join thousands of developers who already use NeuroHire to practice and prepare.
+        </p>
+        <SignInButton mode="modal">
+          <button className="btn btn-primary btn-lg gap-2 rounded-xl shadow-lg hover:shadow-primary/30 hover:-translate-y-0.5 transition-all duration-200">
+            Get Started Free
+            <ArrowRightIcon className="size-5" />
+          </button>
+        </SignInButton>
+      </section>
     </div>
   );
 }
