@@ -6,6 +6,7 @@ import { ENV } from "../lib/env.js";
 import { runMlJudge } from "../services/mlJudgeService.js";
 import { computeMlProgressForUser } from "../lib/mlProgress.js";
 import { runDsaJudge } from "../services/dsaJudgeService.js";
+import { checkPyTorchAvailable } from "../services/mlJudgeService.js";
 
 async function runMlFallbackAsync(submission) {
   try {
@@ -118,6 +119,14 @@ export async function createMlSubmission(req, res) {
     if (ENV.ENABLE_ML_TRACK !== "1") {
       return res.status(404).json({ error: "ML track is disabled" });
     }
+
+    const pytorch = checkPyTorchAvailable();
+    if (!pytorch.available) {
+      return res.status(503).json({
+        error: "ML judging is currently unavailable — the server environment is missing a required dependency (PyTorch). Please contact the administrator.",
+      });
+    }
+
     const { problemId, language, code } = req.validated || req.body;
 
     const mlProblem = loadMlProblem(problemId, { legacy: true });

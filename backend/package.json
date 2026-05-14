@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "nodemon src/server.js",
     "start": "node src/server.js",
-    "test": "node --test test/*.mjs"
+    "test": "node --test test/*.mjs",
+    "setup-ml": "python3 -m venv .venv && .venv/bin/python3 -m pip install -U pip && .venv/bin/python3 -m pip install -r requirements-ml.txt"
   },
   "type": "module",
   "keywords": [],

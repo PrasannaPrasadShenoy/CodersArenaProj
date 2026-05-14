@@ -9,6 +9,7 @@ import { clerkMiddleware } from "@clerk/express";
 import { ENV } from "./lib/env.js";
 import { connectDB } from "./lib/db.js";
 import { initWhiteboardSocket } from "./lib/whiteboardSocket.js";
+import { checkPyTorchAvailable } from "./services/mlJudgeService.js";
 
 import inngestRouter from "./routes/inngest.js";
 import chatRoutes from "./routes/chatRoutes.js";
@@ -71,6 +72,19 @@ const startServer = async () => {
         console.warn(dbError?.message || dbError);
       } else {
         throw dbError;
+      }
+    }
+
+    if (ENV.ENABLE_ML_TRACK === "1") {
+      const pytorch = checkPyTorchAvailable();
+      if (pytorch.available) {
+        console.log(`✅ PyTorch ${pytorch.version} detected — ML track is ready`);
+      } else {
+        console.warn(
+          "⚠️  ML track is enabled but PyTorch is NOT installed. ML submissions will fail.\n" +
+          `   Detail: ${pytorch.detail}\n` +
+          "   Fix: from the backend folder run `npm run setup-ml` (creates .venv + torch), or `pip install torch` in a venv, or set ENABLE_ML_TRACK=0"
+        );
       }
     }
 

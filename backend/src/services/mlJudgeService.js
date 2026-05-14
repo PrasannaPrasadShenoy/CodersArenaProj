@@ -2,14 +2,43 @@ import { spawnSync } from "child_process";
 import fs from "fs";
 import os from "os";
 import path from "path";
+import { fileURLToPath } from "url";
 import { loadMlProblem } from "./mlProblemLoader.js";
 
 const DEFAULT_TIMEOUT_MS = 20000;
 const MAX_OUTPUT_BYTES = 1024 * 1024; // 1MB
 
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
+function getBackendRootDir() {
+  return path.resolve(__dirname, "..", "..");
+}
+
+/** Prefer project venv (`backend/.venv`) when present — avoids PEP 668 system pip restrictions. */
+function resolveVenvPythonExecutable() {
+  const root = getBackendRootDir();
+  if (process.platform === "win32") {
+    const winPy = path.join(root, ".venv", "Scripts", "python.exe");
+    return fs.existsSync(winPy) ? winPy : null;
+  }
+  const py3 = path.join(root, ".venv", "bin", "python3");
+  if (fs.existsSync(py3)) return py3;
+  const py = path.join(root, ".venv", "bin", "python");
+  return fs.existsSync(py) ? py : null;
+}
+
 let cachedPythonCommand = null;
 function getPythonCommand() {
   if (cachedPythonCommand) return cachedPythonCommand;
+
+  const venvPy = resolveVenvPythonExecutable();
+  if (venvPy) {
+    const ok = spawnSync(venvPy, ["--version"], { encoding: "utf8", windowsHide: true });
+    if (ok.status === 0) {
+      cachedPythonCommand = venvPy;
+      return cachedPythonCommand;
+    }
+  }
 
   const python3Check = spawnSync("python3", ["--version"], { encoding: "utf8", windowsHide: true });
   if (python3Check.status === 0) {
@@ -20,6 +49,28 @@ function getPythonCommand() {
   const pythonCheck = spawnSync("python", ["--version"], { encoding: "utf8", windowsHide: true });
   cachedPythonCommand = pythonCheck.status === 0 ? "python" : "python3";
   return cachedPythonCommand;
+}
+
+let _pytorchStatus = null;
+
+export function checkPyTorchAvailable() {
+  if (_pytorchStatus !== null) return _pytorchStatus;
+
+  const pythonCmd = getPythonCommand();
+  const probe = spawnSync(pythonCmd, ["-c", "import torch; print(torch.__version__)"], {
+    encoding: "utf8",
+    timeout: 15000,
+    windowsHide: true,
+  });
+
+  if (probe.status === 0 && probe.stdout?.trim()) {
+    _pytorchStatus = { available: true, version: probe.stdout.trim() };
+  } else {
+    const detail = probe.stderr?.trim() || probe.error?.message || "unknown error";
+    _pytorchStatus = { available: false, detail };
+  }
+
+  return _pytorchStatus;
 }
 
 function cleanupRunDir(runDir) {

@@ -1,3 +1,4 @@
 node_modules
+backend/.venv
 .env
 .DS_Store

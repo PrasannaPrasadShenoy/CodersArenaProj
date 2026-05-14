@@ -1,0 +1,4 @@
+# Used by ML problem judging (mlJudgeService.py subprocess).
+# Install: python3 -m pip install -r requirements-ml.txt
+# Or:      npm run setup-ml --prefix backend
+torch>=2.2,<3
