@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { getProblemsList, getProblemById } from "../api/problems";
+import { getProblemsList, getProblemById, getProblemStats, getBatchProblemStats } from "../api/problems";
 
 const PROBLEMS_LIST_KEY = (track) => ["problems", "list", track || "all"];
 const PROBLEM_KEY = (id) => ["problems", "detail", id];
@@ -59,4 +59,25 @@ export function useProblem(id) {
     error: query.error,
     refetch: query.refetch,
   };
+}
+
+export function useProblemStats(id, track = "dsa") {
+  const query = useQuery({
+    queryKey: ["problems", "stats", id, track],
+    queryFn: () => getProblemStats(id, track),
+    enabled: !!id,
+    staleTime: 60 * 1000,
+  });
+
+  return { stats: query.data ?? null, isLoading: query.isLoading };
+}
+
+export function useBatchProblemStats(track = "dsa") {
+  const query = useQuery({
+    queryKey: ["problems", "stats", "batch", track],
+    queryFn: () => getBatchProblemStats(track),
+    staleTime: 60 * 1000,
+  });
+
+  return { statsMap: query.data ?? {}, isLoading: query.isLoading };
 }

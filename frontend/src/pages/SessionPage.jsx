@@ -7,7 +7,7 @@ import { useCodingProblemActions } from "../hooks/useCodingProblemActions";
 import Navbar from "../components/Navbar";
 import { Panel, PanelGroup, PanelResizeHandle } from "react-resizable-panels";
 import { getDifficultyBadgeClass } from "../lib/utils";
-import { Loader2Icon, LogOutIcon, PhoneOffIcon } from "lucide-react";
+import { Loader2Icon, LogOutIcon, PhoneOffIcon, WifiOffIcon } from "lucide-react";
 import CodeEditorPanel from "../components/CodeEditorPanel";
 import OutputPanel from "../components/OutputPanel";
 import ProblemDescription from "../components/ProblemDescription";
@@ -45,6 +45,7 @@ function SessionPage() {
     isInitializingCall,
     streamClient,
     streamConnectFailed,
+    isReconnecting,
     retryStreamConnect,
   } = useStreamClient(session, loadingSession, isHost, isParticipant);
 
@@ -67,6 +68,7 @@ function SessionPage() {
     handleDsaSubmit,
     isPrimaryExecuting,
     isDsaSubmitting,
+    executionStartTime,
     primaryActionLabel,
     primaryRunningLabel,
     showDsaSubmit,
@@ -343,6 +345,10 @@ function SessionPage() {
                     <Panel defaultSize={30} minSize={15}>
                       <OutputPanel
                         output={output}
+                        isExecuting={isPrimaryExecuting}
+                        isSubmitting={isDsaSubmitting}
+                        executionStartTime={executionStartTime}
+                        language={currentTrack === "ml" ? "ml" : selectedLanguage}
                         emptyStateText={
                           currentTrack === "ml"
                             ? 'Click "Submit" to run ML tests here...'
@@ -361,7 +367,17 @@ function SessionPage() {
           {/* RIGHT PANEL - VIDEO CALLS & CHAT */}
           <Panel defaultSize={50} minSize={30}>
             <div className="h-full bg-base-200 p-4 overflow-auto">
-              {isInitializingCall ? (
+              {isReconnecting ? (
+                <div className="h-full flex items-center justify-center">
+                  <div className="text-center">
+                    <WifiOffIcon className="w-12 h-12 mx-auto text-warning mb-4 animate-pulse" />
+                    <p className="text-lg font-medium">Reconnecting...</p>
+                    <p className="text-sm text-base-content/60 mt-1">
+                      Connection lost. Attempting to rejoin automatically.
+                    </p>
+                  </div>
+                </div>
+              ) : isInitializingCall ? (
                 <div className="h-full flex items-center justify-center">
                   <div className="text-center">
                     <Loader2Icon className="w-12 h-12 mx-auto animate-spin text-primary mb-4" />

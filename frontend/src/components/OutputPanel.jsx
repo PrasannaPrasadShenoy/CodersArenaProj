@@ -1,5 +1,15 @@
-function OutputPanel({ output, emptyStateText = 'Click "Run Code" to see the output here...' }) {
+import ExecutionProgress from "./ExecutionProgress";
+
+function OutputPanel({
+  output,
+  emptyStateText = 'Click "Run Code" to see the output here...',
+  isExecuting = false,
+  isSubmitting = false,
+  executionStartTime = null,
+  language = "javascript",
+}) {
   const hasJudgeResults = Array.isArray(output?.testResults);
+  const showProgress = (isExecuting || isSubmitting) && executionStartTime;
 
   return (
     <div className="h-full bg-base-100 flex flex-col">
@@ -7,7 +17,13 @@ function OutputPanel({ output, emptyStateText = 'Click "Run Code" to see the out
         Output
       </div>
       <div className="flex-1 overflow-auto p-4">
-        {output === null ? (
+        {showProgress ? (
+          <ExecutionProgress
+            language={language}
+            isSubmit={isSubmitting}
+            startTime={executionStartTime}
+          />
+        ) : output === null ? (
           <p className="text-base-content/50 text-sm">{emptyStateText}</p>
         ) : hasJudgeResults ? (
           <div className="space-y-3">

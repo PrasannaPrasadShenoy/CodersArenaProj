@@ -30,6 +30,7 @@ export function useCodingProblemActions({ problemId, problemData, confettiStyle 
   const [code, setCode] = useState("");
   const [output, setOutput] = useState(null);
   const [isRunning, setIsRunning] = useState(false);
+  const [executionStartTime, setExecutionStartTime] = useState(null);
   const [latestSubmissionId, setLatestSubmissionId] = useState("");
   const notifiedSubmissionStatus = useRef("");
 
@@ -146,6 +147,7 @@ export function useCodingProblemActions({ problemId, problemData, confettiStyle 
 
     setIsRunning(true);
     setOutput(null);
+    setExecutionStartTime(Date.now());
 
     const execOpts =
       problemId && String(problemId).trim()
@@ -154,6 +156,7 @@ export function useCodingProblemActions({ problemId, problemData, confettiStyle 
 
     const result = await executeCode(selectedLanguage, code, execOpts);
     setIsRunning(false);
+    setExecutionStartTime(null);
 
     if (result.mode === "dsa_public") {
       setOutput({
@@ -213,6 +216,7 @@ export function useCodingProblemActions({ problemId, problemData, confettiStyle 
 
   const handleDsaSubmit = useCallback(async () => {
     if (currentTrack !== "dsa" || !problemId) return;
+    setExecutionStartTime(Date.now());
     try {
       const res = await createDsaSubmission.mutateAsync({
         problemId,
@@ -239,6 +243,8 @@ export function useCodingProblemActions({ problemId, problemData, confettiStyle 
       }
     } catch {
       /* useCreateDsaSubmission shows toast */
+    } finally {
+      setExecutionStartTime(null);
     }
   }, [currentTrack, problemId, selectedLanguage, code, createDsaSubmission, queryClient, fireConfetti]);
 
@@ -260,6 +266,7 @@ export function useCodingProblemActions({ problemId, problemData, confettiStyle 
     handleDsaSubmit,
     isPrimaryExecuting,
     isDsaSubmitting: createDsaSubmission.isPending,
+    executionStartTime,
     primaryActionLabel: currentTrack === "ml" ? "Submit" : "Run Code",
     primaryRunningLabel: currentTrack === "ml" ? "Submitting..." : "Running...",
     showDsaSubmit: currentTrack === "dsa",

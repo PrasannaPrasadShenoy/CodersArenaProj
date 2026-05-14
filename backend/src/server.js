@@ -19,6 +19,7 @@ import problemRoutes from "./api/problems.js";
 import whiteboardRoutes from "./routes/whiteboardRoutes.js";
 import submissionRoutes from "./routes/submissionRoutes.js";
 import progressRoutes from "./routes/progressRoutes.js";
+import adminRoutes from "./routes/adminRoutes.js";
 
 const app = express();
 const server = http.createServer(app);
@@ -45,6 +46,7 @@ app.use("/api/problems", problemRoutes);
 app.use("/api/whiteboards", whiteboardRoutes);
 app.use("/api/submissions", submissionRoutes);
 app.use("/api/progress", progressRoutes);
+app.use("/api/admin", adminRoutes);
 app.use("/api/inngest", inngestRouter);
 
 app.get("/health", (req, res) => {

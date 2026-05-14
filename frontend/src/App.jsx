@@ -14,6 +14,7 @@ import ExcalidrawPage from "./pages/ExcalidrawPage";
 import ExcalidrawSessionsPage from "./pages/ExcalidrawSessionsPage";
 import ExcalidrawSessionBoardPage from "./pages/ExcalidrawSessionBoardPage";
 import SessionPage from "./pages/SessionPage";
+import AdminPage from "./pages/AdminPage";
 
 function App() {
   const { isSignedIn, isLoaded } = useUser();
@@ -55,6 +56,7 @@ function App() {
           element={isSignedIn ? <ExcalidrawSessionBoardPage /> : <Navigate to={"/"} />}
         />
         <Route path="/session/:id" element={isSignedIn ? <SessionPage /> : <Navigate to={"/"} />} />
+        <Route path="/admin" element={isSignedIn ? <AdminPage /> : <Navigate to={"/"} />} />
       </Routes>
 
       <Toaster toastOptions={{ duration: 3000 }} />

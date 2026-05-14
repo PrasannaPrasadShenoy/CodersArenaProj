@@ -67,6 +67,32 @@ export async function getProblemsList(track = "") {
  * Fetch full problem by id (legacy shape including starterCode and expectedOutput).
  * Falls back to static PROBLEMS[id] on 404 or API error.
  */
+export async function getProblemStats(id, track = "dsa") {
+  try {
+    if (API_URL && id) {
+      const res = await axiosInstance.get(
+        `/problems/${encodeURIComponent(id)}/stats?track=${track}`
+      );
+      return res.data || null;
+    }
+  } catch {
+    return null;
+  }
+  return null;
+}
+
+export async function getBatchProblemStats(track = "dsa") {
+  try {
+    if (API_URL) {
+      const res = await axiosInstance.get(`/problems/stats/batch?track=${track}`);
+      return res.data || {};
+    }
+  } catch {
+    return {};
+  }
+  return {};
+}
+
 export async function getProblemById(id) {
   try {
     if (API_URL && id) {

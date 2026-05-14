@@ -1,6 +1,10 @@
 export function normalizeDsaOutput(output) {
-  return output
-    .trim()
+  if (output == null || output === undefined) return "";
+  let s = String(output).replace(/\r\n/g, "\n").trim();
+  if (s.startsWith("[") && s.endsWith("]") && s.includes("\n")) {
+    s = s.replace(/\n/g, " ");
+  }
+  return s
     .split("\n")
     .map((line) =>
       line

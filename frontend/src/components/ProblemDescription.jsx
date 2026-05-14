@@ -1,4 +1,6 @@
 import { getDifficultyBadgeClass } from "../lib/utils";
+import { useProblemStats } from "../hooks/useProblems";
+import { BarChart3Icon, ClockIcon, TrophyIcon, UsersIcon } from "lucide-react";
 
 /**
  * @param {object} props
@@ -17,6 +19,7 @@ function ProblemDescription({
   const isMl = currentTrack === "ml";
   const sameTrackProblems = allProblems.filter((p) => (p.track || "dsa") === currentTrack);
   const descriptionNotes = isMl ? [] : (problem.description?.notes ?? []);
+  const { stats } = useProblemStats(currentProblemId, currentTrack);
 
   const defaultHeader = (
     <div className="p-6 bg-base-100 border-b border-base-300">
@@ -116,6 +119,46 @@ function ProblemDescription({
             ))}
           </ul>
         </div>
+        )}
+
+        {stats && stats.totalSubmissions > 0 && (
+          <div className="bg-base-100 rounded-xl shadow-sm p-5 border border-base-300">
+            <h2 className="text-xl font-bold mb-4 text-base-content">Community Stats</h2>
+            <div className="grid grid-cols-2 gap-3">
+              {stats.solveRate != null && (
+                <div className="flex items-center gap-2 p-3 bg-base-200 rounded-lg">
+                  <TrophyIcon className="size-5 text-success shrink-0" />
+                  <div>
+                    <p className="text-lg font-bold text-base-content">{stats.solveRate}%</p>
+                    <p className="text-xs text-base-content/60">Solve rate</p>
+                  </div>
+                </div>
+              )}
+              <div className="flex items-center gap-2 p-3 bg-base-200 rounded-lg">
+                <BarChart3Icon className="size-5 text-primary shrink-0" />
+                <div>
+                  <p className="text-lg font-bold text-base-content">{stats.totalSubmissions}</p>
+                  <p className="text-xs text-base-content/60">Submissions</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-2 p-3 bg-base-200 rounded-lg">
+                <UsersIcon className="size-5 text-info shrink-0" />
+                <div>
+                  <p className="text-lg font-bold text-base-content">{stats.totalAttemptedUsers}</p>
+                  <p className="text-xs text-base-content/60">Users attempted</p>
+                </div>
+              </div>
+              {stats.avgRuntimeMs != null && (
+                <div className="flex items-center gap-2 p-3 bg-base-200 rounded-lg">
+                  <ClockIcon className="size-5 text-warning shrink-0" />
+                  <div>
+                    <p className="text-lg font-bold text-base-content">{stats.avgRuntimeMs} ms</p>
+                    <p className="text-xs text-base-content/60">Avg runtime</p>
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
         )}
       </div>
     </div>

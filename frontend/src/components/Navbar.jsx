@@ -1,12 +1,14 @@
 import { Link, useLocation } from "react-router";
-import { BookOpenIcon, LayoutDashboardIcon, SparklesIcon } from "lucide-react";
+import { BookOpenIcon, LayoutDashboardIcon, ShieldIcon, SparklesIcon } from "lucide-react";
 import { UserButton } from "@clerk/clerk-react";
+import { useIsAdmin } from "../hooks/useAdmin";
 
 function Navbar() {
   const location = useLocation();
   const isActive = (path) => location.pathname === path;
   const isExcalidrawSection =
     location.pathname === "/excalidraw" || location.pathname.startsWith("/excalidraw/");
+  const { isAdmin } = useIsAdmin();
 
   return (
     <nav className="bg-base-100/80 backdrop-blur-md border-b border-primary/20 sticky top-0 z-50 shadow-lg">
@@ -82,6 +84,24 @@ function Navbar() {
               <span className="font-medium hidden sm:inline">Dashboard</span>
             </div>
           </Link>
+
+          {isAdmin && (
+            <Link
+              to="/admin"
+              className={`px-4 py-2.5 rounded-lg transition-all duration-200
+                ${
+                  isActive("/admin")
+                    ? "bg-primary text-primary-content"
+                    : "hover:bg-base-200 text-base-content/70 hover:text-base-content"
+                }
+                `}
+            >
+              <div className="flex items-center gap-x-2.5">
+                <ShieldIcon className="size-4" />
+                <span className="font-medium hidden sm:inline">Admin</span>
+              </div>
+            </Link>
+          )}
 
           <div className="ml-4 mt-2">
             <UserButton />

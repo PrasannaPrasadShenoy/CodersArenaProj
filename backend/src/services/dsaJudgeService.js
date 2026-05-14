@@ -8,8 +8,12 @@ import { runUserProgram } from "../lib/codeRunner.js";
 
 function normalizeDsaOutput(output) {
   if (output == null) return "";
-  return String(output)
-    .trim()
+  let s = String(output).replace(/\r\n/g, "\n").trim();
+  // Node's console.log can break large arrays across lines (util.inspect).
+  if (s.startsWith("[") && s.endsWith("]") && s.includes("\n")) {
+    s = s.replace(/\n/g, " ");
+  }
+  return s
     .split("\n")
     .map((line) =>
       line
@@ -53,15 +57,10 @@ function stripPySamples(code) {
   return code.slice(0, i).trim();
 }
 
-function buildJsInvoke(fnName, parsed, problemId) {
+function buildJsInvoke(fnName, parsed) {
   const jsArgStr = parsed.map((a) => JSON.stringify(a)).join(", ");
-  const op0 = parsed[0]?.[0];
-  const wrapJson =
-    typeof op0 === "string" && (op0 === "Twitter" || op0 === "KthLargest");
-  if (wrapJson) {
-    return `console.log(JSON.stringify(${fnName}(${jsArgStr})));`;
-  }
-  return `console.log(${fnName}(${jsArgStr}));`;
+  // JSON.stringify avoids Node's multi-line util.inspect for large arrays (e.g. sliding-window-maximum).
+  return `console.log(JSON.stringify(${fnName}(${jsArgStr})));`;
 }
 
 function buildPyInvoke(fnName, parsed) {
@@ -77,19 +76,96 @@ function buildPyInvoke(fnName, parsed) {
 
 function buildJavaInvoke(fnName, parsed) {
   const javaArgStr = parsed.map(javaSampleExpr).join(", ");
-  return `System.out.println(${fnName}(${javaArgStr}));`;
+  // Plain println on primitive arrays yields "[I@…"; match expected "[1, 2]" style.
+  return `{
+    Object __dsa = ${fnName}(${javaArgStr});
+    if (__dsa instanceof int[]) {
+      System.out.println(java.util.Arrays.toString((int[]) __dsa));
+    } else if (__dsa instanceof long[]) {
+      System.out.println(java.util.Arrays.toString((long[]) __dsa));
+    } else if (__dsa instanceof double[]) {
+      System.out.println(java.util.Arrays.toString((double[]) __dsa));
+    } else if (__dsa instanceof byte[]) {
+      System.out.println(java.util.Arrays.toString((byte[]) __dsa));
+    } else if (__dsa instanceof short[]) {
+      System.out.println(java.util.Arrays.toString((short[]) __dsa));
+    } else if (__dsa instanceof char[]) {
+      System.out.println(java.util.Arrays.toString((char[]) __dsa));
+    } else if (__dsa instanceof float[]) {
+      System.out.println(java.util.Arrays.toString((float[]) __dsa));
+    } else if (__dsa instanceof boolean[]) {
+      System.out.println(java.util.Arrays.toString((boolean[]) __dsa));
+    } else if (__dsa instanceof int[][]) {
+      System.out.println(java.util.Arrays.deepToString((int[][]) __dsa));
+    } else if (__dsa instanceof Integer[]) {
+      System.out.println(java.util.Arrays.toString((Integer[]) __dsa));
+    } else {
+      System.out.println(__dsa);
+    }
+  }`;
 }
 
+/**
+ * Replace the entire `main` method body with a single judge invoke line.
+ * Regex-based replacement failed when users added multiple sample prints or used different
+ * indentation, so every test run re-executed all samples and stdout looked like one concatenated blob.
+ */
 function assembleJavaUserCode(javaCode, invokeLine) {
-  const line = invokeLine;
-  let out = javaCode.replace(
-    /public static void main\(String\[] args\) \{[\s\S]*?\n  \}/m,
-    `public static void main(String[] args) {\n    ${line}\n  }`
-  );
-  if (out === javaCode && javaCode.includes("// Add local tests here.")) {
-    out = javaCode.replace("// Add local tests here.", line);
+  const mainRe =
+    /(^|\n)(\s*)public\s+static\s+void\s+main\s*\(\s*String\s*\[\s*\]\s*args\s*\)\s*\{/;
+  const m = javaCode.match(mainRe);
+  if (!m) {
+    if (javaCode.includes("// Add local tests here.")) {
+      return javaCode.replace("// Add local tests here.", invokeLine);
+    }
+    return javaCode;
   }
-  return out;
+
+  const braceOpen = m.index + m[0].length - 1;
+  const methodIndent = m[2];
+  const bodyIndent = `${methodIndent}  `;
+
+  let depth = 0;
+  for (let i = braceOpen; i < javaCode.length; i++) {
+    const ch = javaCode[i];
+    if (ch === '"' || ch === "'") {
+      const quote = ch;
+      let j = i + 1;
+      let closed = false;
+      for (; j < javaCode.length; j++) {
+        const cj = javaCode[j];
+        if (cj === "\\") {
+          j++;
+          continue;
+        }
+        if (cj === quote) {
+          i = j;
+          closed = true;
+          break;
+        }
+      }
+      if (!closed) {
+        i = javaCode.length - 1;
+      }
+      continue;
+    }
+    if (ch === "{") depth++;
+    else if (ch === "}") {
+      depth--;
+      if (depth === 0) {
+        return (
+          javaCode.slice(0, braceOpen + 1) +
+          `\n${bodyIndent}${invokeLine}\n${methodIndent}` +
+          javaCode.slice(i)
+        );
+      }
+    }
+  }
+
+  if (javaCode.includes("// Add local tests here.")) {
+    return javaCode.replace("// Add local tests here.", invokeLine);
+  }
+  return javaCode;
 }
 
 function assembleProgram(language, code, invokeLine) {
@@ -213,7 +289,7 @@ export function runDsaJudge({ problemId, language, code, publicOnly = false }) {
     }
 
     let invokeLine;
-    if (language === "javascript") invokeLine = buildJsInvoke(fnName, parsed, problemId);
+    if (language === "javascript") invokeLine = buildJsInvoke(fnName, parsed);
     else if (language === "python") invokeLine = buildPyInvoke(fnName, parsed);
     else invokeLine = buildJavaInvoke(fnName, parsed);
 

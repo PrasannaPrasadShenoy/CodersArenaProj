@@ -2,7 +2,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router";
 import Navbar from "../components/Navbar";
 
-import { useProblemsList } from "../hooks/useProblems";
+import { useProblemsList, useBatchProblemStats } from "../hooks/useProblems";
 import { ChevronRightIcon, Code2Icon, SearchIcon } from "lucide-react";
 import { getDifficultyBadgeClass } from "../lib/utils";
 import { useMlProgress } from "../hooks/useMlSubmissions";
@@ -34,6 +34,7 @@ function ProblemsPage() {
   const selectedTrack = searchParams.get("track") === "ml" ? "ml" : "dsa";
 
   const { problemsArray: problems, isLoading } = useProblemsList(selectedTrack);
+  const { statsMap } = useBatchProblemStats(selectedTrack);
   const { data: mlProgressData } = useMlProgress({ enabled: selectedTrack === "ml" });
   const mlProgress = mlProgressData?.progress;
   const { data: userProgress } = useUserProgress();
@@ -335,6 +336,17 @@ function ProblemsPage() {
                     <p className="text-base-content/80 mb-3">
                       {problem.description?.text ?? ""}
                     </p>
+                    {statsMap[problem.id] && (
+                      <div className="flex items-center gap-4 text-xs text-base-content/60">
+                        {statsMap[problem.id].solveRate != null && (
+                          <span>Solve rate: <span className="font-semibold text-base-content/80">{statsMap[problem.id].solveRate}%</span></span>
+                        )}
+                        <span>Submissions: <span className="font-semibold text-base-content/80">{statsMap[problem.id].totalSubmissions}</span></span>
+                        {statsMap[problem.id].avgRuntimeMs != null && (
+                          <span>Avg: <span className="font-semibold text-base-content/80">{statsMap[problem.id].avgRuntimeMs} ms</span></span>
+                        )}
+                      </div>
+                    )}
                   </div>
                   {/* RIGHT SIDE */}
 

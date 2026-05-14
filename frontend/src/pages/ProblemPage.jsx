@@ -30,6 +30,7 @@ function ProblemPage() {
     handleDsaSubmit,
     isPrimaryExecuting,
     isDsaSubmitting,
+    executionStartTime,
     primaryActionLabel,
     primaryRunningLabel,
     showDsaSubmit,
@@ -103,6 +104,10 @@ function ProblemPage() {
               <Panel defaultSize={30} minSize={30}>
                 <OutputPanel
                   output={output}
+                  isExecuting={isPrimaryExecuting}
+                  isSubmitting={isDsaSubmitting}
+                  executionStartTime={executionStartTime}
+                  language={currentTrack === "ml" ? "ml" : selectedLanguage}
                   emptyStateText={
                     currentTrack === "ml"
                       ? 'Click "Submit" to run ML tests here...'
