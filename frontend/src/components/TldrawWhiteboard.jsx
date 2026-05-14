@@ -24,12 +24,19 @@ function hslToHex(h, s, l) {
 
 export default function TldrawWhiteboard({ roomId, user }) {
   const editorRef = useRef(null);
+  const roomIdRef = useRef(roomId);
+  const userRef = useRef(user);
+  const broadcastRafRef = useRef(0);
+  const removeDocumentListenRef = useRef(null);
   const lastSavedDocRef = useRef(null);
   const lastSentDocRef = useRef(null);
   const applyingRemoteRef = useRef(false);
   const [snapshot, setSnapshot] = useState(null);
   const [loading, setLoading] = useState(true);
   const [loadError, setLoadError] = useState("");
+
+  roomIdRef.current = roomId;
+  userRef.current = user;
 
   const userInfo = useMemo(() => {
     if (!user) return undefined;
@@ -99,6 +106,11 @@ export default function TldrawWhiteboard({ roomId, user }) {
   useEffect(() => {
     if (!roomId) return;
     const socket = getWhiteboardSocket();
+
+    const joinRoom = () => {
+      socket.emit("whiteboard:join", { roomId });
+    };
+
     const handleRemoteUpdate = ({ roomId: incomingRoomId, document }) => {
       if (incomingRoomId !== roomId) return;
       const editor = editorRef.current;
@@ -118,35 +130,48 @@ export default function TldrawWhiteboard({ roomId, user }) {
       }, 50);
     };
 
-    socket.emit("whiteboard:join", { roomId });
+    joinRoom();
+    socket.on("connect", joinRoom);
     socket.on("whiteboard:update", handleRemoteUpdate);
 
     return () => {
+      socket.off("connect", joinRoom);
       socket.off("whiteboard:update", handleRemoteUpdate);
       socket.emit("whiteboard:leave", { roomId });
     };
   }, [roomId]);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      const editor = editorRef.current;
-      if (!editor || !roomId || applyingRemoteRef.current) return;
-      const doc = getSnapshot(editor.store)?.document;
-      if (!doc) return;
-      const serialized = JSON.stringify(doc);
-      if (serialized === lastSentDocRef.current) return;
-      lastSentDocRef.current = serialized;
+    if (!loading && !loadError) return;
+    if (broadcastRafRef.current) {
+      cancelAnimationFrame(broadcastRafRef.current);
+      broadcastRafRef.current = 0;
+    }
+    removeDocumentListenRef.current?.();
+    removeDocumentListenRef.current = null;
+    editorRef.current = null;
+  }, [loading, loadError]);
 
-      const socket = getWhiteboardSocket();
-      socket.emit("whiteboard:update", {
-        roomId,
-        document: doc,
-        updatedByClerkId: user?.id || "",
-      });
-    }, 800);
+  useEffect(() => {
+    if (loading || loadError) return;
+    const editor = editorRef.current;
+    if (!editor || !userInfo?.name) return;
+    editor.user.updateUserPreferences({
+      name: userInfo.name,
+      color: userInfo.color,
+    });
+  }, [userInfo, loading, loadError]);
 
-    return () => clearInterval(interval);
-  }, [roomId, user?.id]);
+  useEffect(() => {
+    return () => {
+      if (broadcastRafRef.current) {
+        cancelAnimationFrame(broadcastRafRef.current);
+        broadcastRafRef.current = 0;
+      }
+      removeDocumentListenRef.current?.();
+      removeDocumentListenRef.current = null;
+    };
+  }, []);
 
   if (loading) {
     return (
@@ -168,10 +193,44 @@ export default function TldrawWhiteboard({ roomId, user }) {
   return (
     <div className="tldraw__editor tldraw__canvas h-full w-full bg-base-200">
       <Tldraw
+        key={roomId}
         snapshot={snapshot || undefined}
         onMount={(editor) => {
           editorRef.current = editor;
-          // Presence user info still used by tldraw for local user preferences/tooling.
+          removeDocumentListenRef.current?.();
+          removeDocumentListenRef.current = null;
+
+          const scheduleBroadcast = () => {
+            if (applyingRemoteRef.current) return;
+            if (broadcastRafRef.current) return;
+            broadcastRafRef.current = requestAnimationFrame(() => {
+              broadcastRafRef.current = 0;
+              const rid = roomIdRef.current;
+              const ed = editorRef.current;
+              if (!ed || !rid || applyingRemoteRef.current) return;
+              let doc;
+              try {
+                doc = getSnapshot(ed.store)?.document;
+              } catch {
+                return;
+              }
+              if (!doc) return;
+              const serialized = JSON.stringify(doc);
+              if (serialized === lastSentDocRef.current) return;
+              lastSentDocRef.current = serialized;
+              getWhiteboardSocket().emit("whiteboard:update", {
+                roomId: rid,
+                document: doc,
+                updatedByClerkId: userRef.current?.id || "",
+              });
+            });
+          };
+
+          removeDocumentListenRef.current = editor.store.listen(scheduleBroadcast, {
+            source: "user",
+            scope: "document",
+          });
+
           if (userInfo?.name) {
             editor.user.updateUserPreferences({
               name: userInfo.name,

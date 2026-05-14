@@ -1,4 +1,5 @@
 import { io } from "socket.io-client";
+import { getSocketBaseUrl } from "./backendBaseUrl";
 
 let socket = null;
 let authTokenGetter = null;
@@ -10,8 +11,8 @@ export function setWhiteboardAuthTokenGetter(getter) {
 export function getWhiteboardSocket() {
   if (socket) return socket;
 
-  const apiUrl = import.meta.env.VITE_API_URL || window.location.origin;
-  socket = io(apiUrl, {
+  const url = getSocketBaseUrl();
+  socket = io(url, {
     withCredentials: true,
     transports: ["websocket", "polling"],
     auth: async (cb) => {

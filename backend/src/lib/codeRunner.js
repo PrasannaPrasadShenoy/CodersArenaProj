@@ -89,7 +89,68 @@ function cleanupRunDir(dir) {
   } catch (_) {}
 }
 
+/** Resolve real JDK binaries — avoids macOS `/usr/bin/javac` stub when Node has a stripped PATH (IDE terminals). */
+let _javaCmdCache = null;
+function tryJavaPair(binDir) {
+  const jc = path.join(binDir, "javac");
+  const j = path.join(binDir, "java");
+  if (fs.existsSync(jc) && fs.existsSync(j)) return { javac: jc, java: j };
+  return null;
+}
+function getJavaCommands() {
+  if (_javaCmdCache) return _javaCmdCache;
+
+  const envHome = process.env.JAVA_HOME;
+  if (envHome) {
+    const p = tryJavaPair(path.join(envHome, "bin"));
+    if (p) {
+      _javaCmdCache = p;
+      return p;
+    }
+  }
+
+  if (process.platform === "darwin") {
+    const brewRoots = [
+      "/opt/homebrew/opt/openjdk@21/bin",
+      "/opt/homebrew/opt/openjdk@17/bin",
+      "/opt/homebrew/opt/openjdk/bin",
+      "/usr/local/opt/openjdk@21/bin",
+      "/usr/local/opt/openjdk@17/bin",
+      "/usr/local/opt/openjdk/bin",
+    ];
+    for (const binDir of brewRoots) {
+      const p = tryJavaPair(binDir);
+      if (p) {
+        _javaCmdCache = p;
+        return p;
+      }
+    }
+
+    try {
+      const vmRoot = "/Library/Java/JavaVirtualMachines";
+      if (fs.existsSync(vmRoot)) {
+        const jdkDirs = fs
+          .readdirSync(vmRoot)
+          .filter((d) => d.endsWith(".jdk") || d.endsWith(".jre"))
+          .sort()
+          .reverse();
+        for (const d of jdkDirs) {
+          const p = tryJavaPair(path.join(vmRoot, d, "Contents/Home/bin"));
+          if (p) {
+            _javaCmdCache = p;
+            return p;
+          }
+        }
+      }
+    } catch (_) {}
+  }
+
+  _javaCmdCache = { javac: "javac", java: "java" };
+  return _javaCmdCache;
+}
+
 export function runJava(code) {
+  const { javac: javacCmd, java: javaCmd } = getJavaCommands();
   const tmpDir = os.tmpdir();
   const runId = `run_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`;
   const runDir = path.join(tmpDir, runId);
@@ -97,12 +158,13 @@ export function runJava(code) {
   const javaPath = path.join(runDir, "Solution.java");
   try {
     fs.writeFileSync(javaPath, code, "utf8");
-    const compile = spawnSync("javac", ["Solution.java"], {
+    const compile = spawnSync(javacCmd, ["Solution.java"], {
       timeout: 10000,
       maxBuffer: MAX_OUTPUT_BYTES,
       encoding: "utf8",
       cwd: runDir,
       windowsHide: true,
+      shell: false,
     });
     if (compile.status !== 0) {
       cleanupRunDir(runDir);
@@ -111,12 +173,13 @@ export function runJava(code) {
         error: (compile.stderr || "").trim() || "Compilation failed",
       };
     }
-    const runResult = spawnSync("java", ["Solution"], {
+    const runResult = spawnSync(javaCmd, ["Solution"], {
       timeout: EXECUTE_TIMEOUT_MS,
       maxBuffer: MAX_OUTPUT_BYTES,
       encoding: "utf8",
       cwd: runDir,
       windowsHide: true,
+      shell: false,
     });
     cleanupRunDir(runDir);
     const stdout = (runResult.stdout || "").trim();
