@@ -9,6 +9,7 @@ import { clerkMiddleware } from "@clerk/express";
 import { ENV } from "./lib/env.js";
 import { connectDB } from "./lib/db.js";
 import { initWhiteboardSocket } from "./lib/whiteboardSocket.js";
+import { initSessionCodeSocket } from "./lib/sessionCodeSocket.js";
 import { checkPyTorchAvailable } from "./services/mlJudgeService.js";
 
 import inngestRouter from "./routes/inngest.js";
@@ -30,6 +31,7 @@ const io = new SocketIOServer(server, {
   },
 });
 initWhiteboardSocket(io);
+initSessionCodeSocket(io);
 
 const __dirname = path.resolve();
 

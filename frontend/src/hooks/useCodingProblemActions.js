@@ -22,9 +22,21 @@ function triggerConfettiSmall() {
 
 /**
  * Shared DSA run (public examples) + DSA submit (all tests) + ML submit/poll for Problem and Session pages.
- * @param {{ problemId: string; problemData: object | null | undefined; confettiStyle?: "wide" | "small" }} opts
+ * @param {{
+ *   problemId: string;
+ *   problemData: object | null | undefined;
+ *   confettiStyle?: "wide" | "small";
+ *   suppressStarterHydration?: boolean;
+ *   collaborativeCodePickerRef?: React.MutableRefObject<(() => string) | null | undefined>;
+ * }} opts
  */
-export function useCodingProblemActions({ problemId, problemData, confettiStyle = "wide" }) {
+export function useCodingProblemActions({
+  problemId,
+  problemData,
+  confettiStyle = "wide",
+  suppressStarterHydration = false,
+  collaborativeCodePickerRef,
+}) {
   const currentTrack = problemData?.track || "dsa";
   const [selectedLanguage, setSelectedLanguage] = useState("javascript");
   const [code, setCode] = useState("");
@@ -48,11 +60,24 @@ export function useCodingProblemActions({ problemId, problemData, confettiStyle 
   }, [problemId]);
 
   useEffect(() => {
+    if (suppressStarterHydration) return;
     if (problemData?.starterCode?.[selectedLanguage]) {
       setCode(problemData.starterCode[selectedLanguage]);
       setOutput(null);
     }
-  }, [problemData, selectedLanguage]);
+  }, [problemData, selectedLanguage, suppressStarterHydration]);
+
+  /** Live session CRDT buffer when `collaborativeCodePickerRef` is wired; otherwise local React state. */
+  const pickExecutableCode = useCallback(() => {
+    if (
+      suppressStarterHydration &&
+      collaborativeCodePickerRef &&
+      typeof collaborativeCodePickerRef.current === "function"
+    ) {
+      return collaborativeCodePickerRef.current();
+    }
+    return code;
+  }, [suppressStarterHydration, collaborativeCodePickerRef, code]);
 
   useEffect(() => {
     if (currentTrack === "ml") {
@@ -119,7 +144,7 @@ export function useCodingProblemActions({ problemId, problemData, confettiStyle 
       try {
         const submissionRes = await createMlSubmission.mutateAsync({
           problemId,
-          code,
+          code: pickExecutableCode(),
         });
         const submissionId = submissionRes?.submission?.id;
         if (submissionId) {
@@ -154,7 +179,7 @@ export function useCodingProblemActions({ problemId, problemData, confettiStyle 
         ? { problemId: String(problemId).trim(), mode: "dsa_public" }
         : {};
 
-    const result = await executeCode(selectedLanguage, code, execOpts);
+    const result = await executeCode(selectedLanguage, pickExecutableCode(), execOpts);
     setIsRunning(false);
     setExecutionStartTime(null);
 
@@ -206,7 +231,7 @@ export function useCodingProblemActions({ problemId, problemData, confettiStyle 
   }, [
     currentTrack,
     problemId,
-    code,
+    pickExecutableCode,
     selectedLanguage,
     problemData,
     createMlSubmission,
@@ -221,7 +246,7 @@ export function useCodingProblemActions({ problemId, problemData, confettiStyle 
       const res = await createDsaSubmission.mutateAsync({
         problemId,
         language: selectedLanguage,
-        code,
+        code: pickExecutableCode(),
       });
       const sub = res?.submission;
       if (sub) {
@@ -246,7 +271,15 @@ export function useCodingProblemActions({ problemId, problemData, confettiStyle 
     } finally {
       setExecutionStartTime(null);
     }
-  }, [currentTrack, problemId, selectedLanguage, code, createDsaSubmission, queryClient, fireConfetti]);
+  }, [
+    currentTrack,
+    problemId,
+    selectedLanguage,
+    pickExecutableCode,
+    createDsaSubmission,
+    queryClient,
+    fireConfetti,
+  ]);
 
   const isPrimaryExecuting =
     currentTrack === "ml"
@@ -257,6 +290,7 @@ export function useCodingProblemActions({ problemId, problemData, confettiStyle 
 
   return {
     selectedLanguage,
+    setSelectedLanguage,
     code,
     setCode,
     output,

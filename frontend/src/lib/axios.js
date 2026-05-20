@@ -17,7 +17,9 @@ axiosInstance.interceptors.request.use(async (config) => {
     try {
       const token = await authTokenGetter();
       if (token) config.headers.Authorization = `Bearer ${token}`;
-    } catch (_) {}
+    } catch {
+      /* no token — request proceeds unauthenticated */
+    }
   }
   return config;
 });

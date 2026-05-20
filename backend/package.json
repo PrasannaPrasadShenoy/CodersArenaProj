@@ -25,6 +25,7 @@
     "mongoose": "^8.19.1",
     "socket.io": "^4.8.3",
     "stream-chat": "^9.24.0",
+    "yjs": "^13.6.30",
     "zod": "^4.4.3"
   },
   "devDependencies": {

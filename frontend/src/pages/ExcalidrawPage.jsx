@@ -24,8 +24,6 @@ function ExcalidrawPage() {
   const [showCreateModal, setShowCreateModal] = useState(false);
   const [topic, setTopic] = useState("");
 
-  if (!isLoaded) return null;
-
   useEffect(() => {
     if (!privateRoomStorageKey) return;
 
@@ -43,6 +41,8 @@ function ExcalidrawPage() {
     setPrivateRoomId(newRoomId);
     setActiveRoomId(newRoomId);
   }, [privateRoomStorageKey]);
+
+  if (!isLoaded) return null;
 
   const handleCreateRoom = () => {
     createSessionMutation.mutate(

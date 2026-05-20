@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Tldraw, getSnapshot, loadSnapshot } from "tldraw";
 import { whiteboardApi } from "../api/whiteboards";
 import { getWhiteboardSocket } from "../lib/whiteboardSocket";
@@ -80,7 +80,7 @@ export default function TldrawWhiteboard({ roomId, user }) {
     };
   }, [roomId]);
 
-  const persistNow = async () => {
+  const persistNow = useCallback(async () => {
     try {
       const editor = editorRef.current;
       if (!editor || !roomId) return;
@@ -90,8 +90,10 @@ export default function TldrawWhiteboard({ roomId, user }) {
       if (serialized === lastSavedDocRef.current) return;
       await whiteboardApi.saveSnapshot(roomId, snap.document);
       lastSavedDocRef.current = serialized;
-    } catch (_) {}
-  };
+    } catch {
+      /* ignore persistence errors */
+    }
+  }, [roomId]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -101,7 +103,7 @@ export default function TldrawWhiteboard({ roomId, user }) {
       clearInterval(interval);
       void persistNow();
     };
-  }, [roomId]);
+  }, [persistNow]);
 
   useEffect(() => {
     if (!roomId) return;

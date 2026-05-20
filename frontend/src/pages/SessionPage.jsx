@@ -1,5 +1,5 @@
 import { useUser } from "@clerk/clerk-react";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useNavigate, useParams } from "react-router";
 import { useEndSession, useJoinSession, useSessionById } from "../hooks/useSessions";
 import { useProblemsList, useProblem } from "../hooks/useProblems";
@@ -16,6 +16,7 @@ import useStreamClient from "../hooks/useStreamClient";
 import { StreamCall, StreamVideo } from "@stream-io/video-react-sdk";
 import VideoCallUI from "../components/VideoCallUI";
 import TldrawWhiteboard from "../components/TldrawWhiteboard";
+import { useSessionCodeCollaboration } from "../hooks/useSessionCodeCollaboration";
 
 function SessionPage() {
   const navigate = useNavigate();
@@ -58,8 +59,17 @@ function SessionPage() {
   const { problem: problemData } = useProblem(problemIdByTitle || "");
   const currentTrack = problemData?.track || sessionTrack || "dsa";
 
+  const collaborateCoding =
+    !isDiscussion &&
+    session?.sessionType === "coding" &&
+    session?.status === "active" &&
+    (isHost || isParticipant);
+
+  const collaborativeCodePickerRef = useRef(/** @type {(() => string) | null} */ (null));
+
   const {
     selectedLanguage,
+    setSelectedLanguage,
     code,
     setCode,
     output,
@@ -76,7 +86,19 @@ function SessionPage() {
     problemId: problemIdByTitle || "",
     problemData,
     confettiStyle: "small",
+    suppressStarterHydration: collaborateCoding,
+    collaborativeCodePickerRef,
   });
+
+  const { sockReady, mountCollaborativeEditor, wrapLanguageChange } = useSessionCodeCollaboration({
+    sessionId: id,
+    enabled: collaborateCoding && Boolean(id),
+    problemData,
+    setSelectedLanguage,
+    collaborativeCodePickerRef,
+  });
+
+  const editorLanguageChangeHandler = collaborateCoding ? wrapLanguageChange(handleLanguageChange) : handleLanguageChange;
 
   const handleJoin = () => {
     if (!session || !user) return;
@@ -323,21 +345,35 @@ function SessionPage() {
                 <Panel defaultSize={50} minSize={20}>
                   <PanelGroup direction="vertical">
                     <Panel defaultSize={70} minSize={30}>
-                      <CodeEditorPanel
-                        selectedLanguage={selectedLanguage}
-                        code={code}
-                        isRunning={isPrimaryExecuting}
-                        onLanguageChange={handleLanguageChange}
-                        onCodeChange={(value) => setCode(value)}
-                        onRunCode={handleRunCode}
-                        languageOptions={currentTrack === "ml" ? ["python"] : undefined}
-                        disableLanguageSelect={currentTrack === "ml"}
-                        actionLabel={primaryActionLabel}
-                        runningLabel={primaryRunningLabel}
-                        secondaryActionLabel={showDsaSubmit ? "Submit all tests" : undefined}
-                        onSecondaryAction={showDsaSubmit ? handleDsaSubmit : undefined}
-                        isSecondaryRunning={isDsaSubmitting}
-                      />
+                      {collaborateCoding && !sockReady ? (
+                        <div className="h-full bg-base-300 flex flex-col items-center justify-center gap-3 text-center px-6">
+                          <Loader2Icon className="size-10 animate-spin text-primary" aria-hidden />
+                          <p className="text-base-content font-medium">Connecting shared editor…</p>
+                          <p className="text-sm text-base-content/60 max-w-sm">
+                            Code syncs in real time for everyone in this session (Yjs over your existing Socket.IO
+                            connection).
+                          </p>
+                        </div>
+                      ) : (
+                        <CodeEditorPanel
+                          selectedLanguage={selectedLanguage}
+                          code={code}
+                          isRunning={isPrimaryExecuting}
+                          onLanguageChange={editorLanguageChangeHandler}
+                          onCodeChange={(value) => setCode(value ?? "")}
+                          onRunCode={handleRunCode}
+                          languageOptions={currentTrack === "ml" ? ["python"] : undefined}
+                          disableLanguageSelect={currentTrack === "ml"}
+                          actionLabel={primaryActionLabel}
+                          runningLabel={primaryRunningLabel}
+                          secondaryActionLabel={showDsaSubmit ? "Submit all tests" : undefined}
+                          onSecondaryAction={showDsaSubmit ? handleDsaSubmit : undefined}
+                          isSecondaryRunning={isDsaSubmitting}
+                          collaborative={collaborateCoding && sockReady}
+                          onCollaborativeMount={mountCollaborativeEditor}
+                          editorPath={id ? `session-${id}` : "session"}
+                        />
+                      )}
                     </Panel>
 
                     <PanelResizeHandle className="h-2 bg-base-300 hover:bg-primary transition-colors cursor-row-resize" />

@@ -17,8 +17,20 @@ function CodeEditorPanel({
   secondaryRunningLabel = "Submitting...",
   onSecondaryAction,
   isSecondaryRunning = false,
+  /** Yjs collaborative buffer; Monaco is driven by MonacoBinding — not React `value`. */
+  collaborative = false,
+  onCollaborativeMount,
+  editorPath = "default",
 }) {
   const options = languageOptions || Object.keys(LANGUAGE_CONFIG);
+
+  const editorOptions = {
+    fontSize: 16,
+    lineNumbers: "on",
+    scrollBeyondLastLine: false,
+    automaticLayout: true,
+    minimap: { enabled: false },
+  };
 
   return (
     <div className="h-full bg-base-300 flex flex-col">
@@ -83,20 +95,27 @@ function CodeEditorPanel({
       </div>
 
       <div className="flex-1">
-        <Editor
-          height={"100%"}
-          language={LANGUAGE_CONFIG[selectedLanguage].monacoLang}
-          value={code}
-          onChange={onCodeChange}
-          theme="vs-dark"
-          options={{
-            fontSize: 16,
-            lineNumbers: "on",
-            scrollBeyondLastLine: false,
-            automaticLayout: true,
-            minimap: { enabled: false },
-          }}
-        />
+        {collaborative ? (
+          <Editor
+            key={editorPath}
+            height="100%"
+            path={`collab://${editorPath}`}
+            theme="vs-dark"
+            language={LANGUAGE_CONFIG[selectedLanguage].monacoLang}
+            defaultValue="\n"
+            options={editorOptions}
+            onMount={(editor) => onCollaborativeMount?.(editor)}
+          />
+        ) : (
+          <Editor
+            height={"100%"}
+            language={LANGUAGE_CONFIG[selectedLanguage].monacoLang}
+            value={code}
+            onChange={onCodeChange}
+            theme="vs-dark"
+            options={editorOptions}
+          />
+        )}
       </div>
     </div>
   );
